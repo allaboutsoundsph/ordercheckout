@@ -218,7 +218,7 @@ Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
       let place = places[Math.floor(Math.random() * places.length)];
 
       let popup = document.createElement("div");
-      popup.innerHTML = `🛒 ${name} from ${place} just ordered`;
+      popup.innerHTML = `🛒 <b style="color:#ee4d2d;">${name} from ${place}</b> just ordered`;
       popup.style.position = "fixed";
       popup.style.left = "15px";
       popup.style.bottom = "90px";
@@ -333,6 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html> 
+
 
 
 
