@@ -87,7 +87,17 @@
 
         <input type="text" name="name" id="name" placeholder="Full Name (First & Last)"pattern="^[A-Za-z]+(\s[A-Za-z]+)+$"title="Please enter your full name (First and Last name)" required>
         <input type="tel" name="phone" id="phone" placeholder="09XXXXXXXXX"pattern="^(09|\+639)\d{9}$"title="Enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX)" required>
-        <textarea name="address" id="address" placeholder="House No., Street, Brgy., Municipality/City, Province" required></textarea>
+        <label style="font-weight:bold;">Complete Address</label>
+<div style="background:#fff8e6; color:#b26a00; padding:8px; border-radius:6px; font-size:13px; margin-bottom:6px;">
+Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
+</div>
+
+<textarea 
+  name="address" 
+  id="address" 
+  placeholder="Example: Purok 3, Brgy. San Jose, Jaro, Iloilo City, Iloilo"
+  required></textarea>
+
         <input type="text" name="landmark" id="landmark" placeholder="Nearest Landmark" required>
 
         <select name="payment" required>
@@ -214,6 +224,7 @@ Product: 500GB HDD COD`;
 
 </body>
 </html> 
+
 
 
 
