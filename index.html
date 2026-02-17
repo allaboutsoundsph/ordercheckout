@@ -169,28 +169,30 @@
     }, 1000);
 
     // After submit → track purchase + open Messenger with order details
-    document.getElementById('orderForm').addEventListener('submit', function(e){
-      // Facebook Purchase Event
-      
-      e.preventDefault();
+document.getElementById('orderForm').addEventListener('submit', function(e){
+  e.preventDefault();
 
-      let name = document.getElementById('name').value;
-      let phone = document.getElementById('phone').value;
-      let address = document.getElementById('address').value;
-      let landmark = document.getElementById('landmark').value;
+  let name = document.getElementById('name').value;
+  let phone = document.getElementById('phone').value;
+  let address = document.getElementById('address').value;
+  let landmark = document.getElementById('landmark').value;
 
-      let msg = `New Order:%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}%0ALandmark: ${landmark}%0AProduct: 500GB HDD COD`;
+  let msg = `New Order:
+Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Landmark: ${landmark}
+Product: 500GB HDD COD`;
 
-      document.getElementById('successMsg').style.display = 'block';
+  let encodedMsg = encodeURIComponent(msg);
 
-      // Send email via FormSubmit
-      this.submit();
+  // Show success message
+  document.getElementById('successMsg').style.display = 'block';
 
-      // Open Messenger after 3 seconds
-      setTimeout(()=>{
-        window.open("https://m.me/100653523033389?text=" + msg, '_blank');
-      },2000);
-    });
+  // Redirect to Messenger
+  window.location.href = "https://m.me/100653523033389?text=" + encodedMsg;
+});
+
   </script>
   <!-- Floating Messenger Bubble -->
   <a href="https://m.me/100653523033389" target="_blank" 
@@ -200,6 +202,7 @@
 
 </body>
 </html> 
+
 
 
 
