@@ -42,6 +42,44 @@ header p {
     .countdown {font-weight:bold; color:#ee4d2d;}
     .messenger-btn {display:block; text-align:center; background:#0084ff; color:white; padding:12px; border-radius:8px; font-weight:bold; text-decoration:none; margin-top:8px;}
     footer {text-align:center; padding:15px; font-size:0.75rem; color:#777;}
+    .review-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius:10px;
+}
+
+.review-track {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.review-track img {
+  width: 100%;
+  flex-shrink: 0;
+  border-radius:10px;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 22px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.prev { left: 8px; }
+.next { right: 8px; }
+
+.nav:active {
+  background: rgba(0,0,0,0.7);
+}
   </style>
 </head>
 <body>
@@ -80,28 +118,28 @@ header p {
 
 
     <div class="card">
-      <h3>⭐ Ratings & Reviews</h3>
-      <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="34.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
+  <h3>⭐ Ratings & Reviews</h3>
 
-       <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="35.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
+  <div class="review-carousel">
+    <button class="nav prev" onclick="moveReview(-1)">‹</button>
 
-       <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="36.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-       <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="37.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-       <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="30.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-      
-      <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="29.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-      <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="28.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
+    <div class="review-track" id="reviewTrack">
+      <img src="34.png" loading="lazy">
+      <img src="35.png" loading="lazy">
+      <img src="36.png" loading="lazy">
+      <img src="37.png" loading="lazy">
+      <img src="30.png" loading="lazy">
+      <img src="29.png" loading="lazy">
+      <img src="28.png" loading="lazy">
     </div>
+
+    <button class="nav next" onclick="moveReview(1)">›</button>
+  </div>
+
+  <p style="text-align:center;font-size:13px;color:#555;margin-top:6px;">
+    Swipe to see more customer feedback
+  </p>
+</div>
 
     <div class="card">
       <h3>Delivery Estimate</h3>
@@ -250,6 +288,40 @@ Product: 500GB HDD COD`;
   document.getElementById('successMsg').style.display = 'block';
   window.location.href = "https://m.me/100653523033389?text=" + encodedMsg;
 });
+// ===== Review Carousel =====
+let reviewIndex = 0;
+
+function moveReview(direction) {
+  const track = document.getElementById("reviewTrack");
+  if (!track) return; // safety if section not loaded
+
+  const total = track.children.length;
+
+  reviewIndex += direction;
+
+  if (reviewIndex < 0) reviewIndex = total - 1;
+  if (reviewIndex >= total) reviewIndex = 0;
+
+  track.style.transform = `translateX(-${reviewIndex * 100}%)`;
+}
+
+// Swipe support (mobile)
+let startX = 0;
+
+document.addEventListener("DOMContentLoaded", function () {
+  const track = document.getElementById("reviewTrack");
+  if (!track) return;
+
+  track.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+  });
+
+  track.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) moveReview(1);
+    if (endX - startX > 50) moveReview(-1);
+  });
+});
 
 
   </script>
@@ -261,6 +333,7 @@ Product: 500GB HDD COD`;
 
 </body>
 </html> 
+
 
 
 
