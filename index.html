@@ -86,7 +86,14 @@
         <input type="hidden" name="_next" value="https://www.facebook.com/allaboutsoundsphmain">
 
         <input type="text" name="name" id="name" placeholder="Full Name" required>
-        <input type="tel" name="phone" id="phone" placeholder="Mobile Number" required>
+        <input 
+  type="tel" 
+  name="phone" 
+  id="phone" 
+  placeholder="09XXXXXXXXX"
+  pattern="^(09|\+639)\d{9}$"
+  title="Enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX)"
+  required>
         <textarea name="address" id="address" placeholder="Complete Address" required></textarea>
         <input type="text" name="landmark" id="landmark" placeholder="Nearest Landmark" required>
 
@@ -172,8 +179,17 @@
 document.getElementById('orderForm').addEventListener('submit', function(e){
   e.preventDefault();
 
-  let name = document.getElementById('name').value;
   let phone = document.getElementById('phone').value;
+
+  // PH mobile validation
+  let phPattern = /^(09|\+639)\d{9}$/;
+
+  if (!phPattern.test(phone)) {
+    alert("Please enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX).");
+    return;
+  }
+
+  let name = document.getElementById('name').value;
   let address = document.getElementById('address').value;
   let landmark = document.getElementById('landmark').value;
 
@@ -186,10 +202,8 @@ Product: 500GB HDD COD`;
 
   let encodedMsg = encodeURIComponent(msg);
 
-  // Show success message
   document.getElementById('successMsg').style.display = 'block';
 
-  // Redirect to Messenger
   window.location.href = "https://m.me/100653523033389?text=" + encodedMsg;
 });
 
@@ -202,6 +216,7 @@ Product: 500GB HDD COD`;
 
 </body>
 </html> 
+
 
 
 
