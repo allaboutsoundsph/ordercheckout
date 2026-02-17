@@ -172,17 +172,22 @@
 document.getElementById('orderForm').addEventListener('submit', function(e){
   e.preventDefault();
 
+  let name = document.getElementById('name').value.trim();
   let phone = document.getElementById('phone').value;
 
-  // PH mobile validation
-  let phPattern = /^(09|\+639)\d{9}$/;
-
-  if (!phPattern.test(phone)) {
-    alert("Please enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX).");
+  // Full name must contain space
+  if (!name.includes(" ")) {
+    alert("Please enter your full name (First and Last name).");
     return;
   }
 
-  let name = document.getElementById('name').value;
+  // PH mobile validation
+  let phPattern = /^(09|\+639)\d{9}$/;
+  if (!phPattern.test(phone)) {
+    alert("Please enter a valid Philippine mobile number.");
+    return;
+  }
+
   let address = document.getElementById('address').value;
   let landmark = document.getElementById('landmark').value;
 
@@ -196,9 +201,9 @@ Product: 500GB HDD COD`;
   let encodedMsg = encodeURIComponent(msg);
 
   document.getElementById('successMsg').style.display = 'block';
-
   window.location.href = "https://m.me/100653523033389?text=" + encodedMsg;
 });
+
 
   </script>
   <!-- Floating Messenger Bubble -->
@@ -209,6 +214,7 @@ Product: 500GB HDD COD`;
 
 </body>
 </html> 
+
 
 
 
