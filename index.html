@@ -286,8 +286,16 @@ Product: 500GB HDD COD`;
   let encodedMsg = encodeURIComponent(msg);
 
   document.getElementById('successMsg').style.display = 'block';
+
+// Send order to Gmail (FormSubmit)
+this.submit();
+
+// Open Messenger after 1.5 seconds
+setTimeout(() => {
   window.location.href = "https://m.me/100653523033389?text=" + encodedMsg;
+}, 1500);
 });
+
 // ===== Review Carousel =====
 let reviewIndex = 0;
 
@@ -333,6 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html> 
+
 
 
 
