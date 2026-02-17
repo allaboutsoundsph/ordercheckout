@@ -158,8 +158,7 @@ header p {
       <form id="orderForm" action="https://formsubmit.co/solenjerllyn04@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="New HDD Order!">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://www.facebook.com/allaboutsoundsphmain">
-
+        <input type="hidden" name="_next" value="https://m.me/100653523033389">
         <input type="text" name="name" id="name" placeholder="Full Name (First & Last)"pattern="^[A-Za-z]+(\s[A-Za-z]+)+$"title="Please enter your full name (First and Last name)" required>
         <input type="tel" name="phone" id="phone" placeholder="09XXXXXXXXX"pattern="^(09|\+639)\d{9}$"title="Enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX)" required>
         <label style="font-weight:bold;">Complete Address</label>
@@ -253,49 +252,6 @@ Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
       document.getElementById('timer').innerText = `${h}:${m}:${s}`;
     }, 1000);
 
-    // After submit → track purchase + open Messenger with order details
-document.getElementById('orderForm').addEventListener('submit', function(e){
-  e.preventDefault();
-
-  let name = document.getElementById('name').value.trim();
-  let phone = document.getElementById('phone').value;
-
-  // Full name must contain space
-  if (!name.includes(" ")) {
-    alert("Please enter your full name (First and Last name).");
-    return;
-  }
-
-  // PH mobile validation
-  let phPattern = /^(09|\+639)\d{9}$/;
-  if (!phPattern.test(phone)) {
-    alert("Please enter a valid Philippine mobile number.");
-    return;
-  }
-
-  let address = document.getElementById('address').value;
-  let landmark = document.getElementById('landmark').value;
-
-  let msg = `New Order:
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-Landmark: ${landmark}
-Product: 500GB HDD COD`;
-
-  let encodedMsg = encodeURIComponent(msg);
-
-  document.getElementById('successMsg').style.display = 'block';
-
-// Send order to Gmail (FormSubmit)
-this.submit();
-
-// Open Messenger after 1.5 seconds
-setTimeout(() => {
-  window.location.href = "https://m.me/100653523033389?text=" + encodedMsg;
-}, 1500);
-});
-
 // ===== Review Carousel =====
 let reviewIndex = 0;
 
@@ -341,6 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html> 
+
 
 
 
