@@ -42,7 +42,6 @@ p { color: #555; font-size: 14px; }
 
 <script>
 window.onload = function() {
-  // Get form data from URL
   const params = new URLSearchParams(window.location.search);
 
   const name = params.get("name") || "";
@@ -59,16 +58,13 @@ Product: 500GB HDD COD`;
 
   const encodedMsg = encodeURIComponent(message);
 
-  // Auto redirect after 4 seconds
+  // Redirect to Messenger
   setTimeout(function(){
     window.location.href = "https://m.me/100653523033389?text=" + encodedMsg;
-  }, 4000);
-
-  // Set button link
-  document.getElementById("msgBtn").href =
-    "https://m.me/100653523033389?text=" + encodedMsg;
+  }, 3000);
 };
 </script>
+
 
 </head>
 <body>
@@ -85,3 +81,4 @@ Product: 500GB HDD COD`;
 
 </body>
 </html>
+
