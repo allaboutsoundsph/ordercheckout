@@ -279,8 +279,10 @@ required>
 <option value="156600000">Sulu</option>
 <option value="157000000">Tawi-Tawi</option>
 <option value="157100000">Basilan</option>
+</select>
 
 <select id="city" required></select>
+
 <select id="barangay" required></select>
 
 <input type="text" id="street" placeholder="House / Purok / Street" required>
@@ -471,11 +473,40 @@ provinceSelect.addEventListener("change", function () {
 
   let url;
 
-  // NCR
-  if (code === "130000000") {
-    url = `https://psgc.gitlab.io/api/regions/${code}/cities/`;
-  } 
-  // Other provinces
+// ===== NCR (Full list – reliable) =====
+if (code === "130000000") {
+  const ncrCities = [
+    {code:"133900000",name:"Manila"},
+    {code:"137400000",name:"Quezon City"},
+    {code:"137500000",name:"Caloocan"},
+    {code:"137600000",name:"Las Piñas"},
+    {code:"137700000",name:"Makati"},
+    {code:"137800000",name:"Malabon"},
+    {code:"137900000",name:"Mandaluyong"},
+    {code:"138000000",name:"Marikina"},
+    {code:"138100000",name:"Muntinlupa"},
+    {code:"138200000",name:"Navotas"},
+    {code:"138300000",name:"Parañaque"},
+    {code:"138400000",name:"Pasay"},
+    {code:"138500000",name:"Pasig"},
+    {code:"138600000",name:"San Juan"},
+    {code:"138700000",name:"Taguig"},
+    {code:"138800000",name:"Valenzuela"},
+    {code:"137401000",name:"Pateros"}
+  ];
+
+  citySelect.innerHTML = '<option value="">Select City / Municipality</option>';
+
+  ncrCities.forEach(city => {
+    let opt = document.createElement("option");
+    opt.value = city.code;
+    opt.textContent = city.name;
+    citySelect.appendChild(opt);
+  });
+
+  return; // important: stop API call
+}
+
   else {
     url = `https://psgc.gitlab.io/api/provinces/${code}/cities-municipalities/`;
   }
@@ -541,6 +572,7 @@ provinceSelect.addEventListener("change", function () {
 
 </body>
 </html> 
+
 
 
 
