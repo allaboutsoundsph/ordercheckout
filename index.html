@@ -280,20 +280,13 @@ required>
 <option value="157000000">Tawi-Tawi</option>
 <option value="157100000">Basilan</option>
 
-</select>
-
-<select id="city" required>
-<option value="">Select City / Municipality</option>
-</select>
-
-<select id="barangay" required>
-<option value="">Select Barangay</option>
-</select>
+<select id="province" required></select>
+<select id="city" required></select>
+<select id="barangay" required></select>
 
 <input type="text" id="street" placeholder="House / Purok / Street" required>
 
-<textarea name="address" id="address" readonly required></textarea>
-
+<textarea 
 name="address" 
 id="address"
 placeholder="Full address will appear here"
@@ -470,7 +463,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const addressField = document.getElementById("address");
 
   // Province → Cities
-  provinceSelect.addEventListener("change", function () {
+provinceSelect.addEventListener("change", function () {
   const code = this.value;
   if (!code) return;
 
@@ -504,8 +497,6 @@ document.addEventListener("DOMContentLoaded", function () {
       citySelect.innerHTML = '<option>Failed to load cities</option>';
     });
 });
-
-  });
 
   // City → Barangays
   citySelect.addEventListener("change", function () {
@@ -549,6 +540,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html> 
+
 
 
 
