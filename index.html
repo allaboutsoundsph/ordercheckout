@@ -293,6 +293,11 @@ if(reviewIndex>=total)reviewIndex=0;
 track.style.transform=`translateX(-${reviewIndex*100}%)`;
 }
 
+// Auto-slide reviews every 3 seconds
+setInterval(function(){
+    moveReview(1);
+}, 3000);
+
 // Form → Messenger
 document.getElementById("orderForm").addEventListener("submit", function(e){
 e.preventDefault();
@@ -331,6 +336,7 @@ fetch(form.action, {
 
 </body>
 </html>
+
 
 
 
