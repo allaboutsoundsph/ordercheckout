@@ -249,28 +249,41 @@ track.style.transform=`translateX(-${reviewIndex*100}%)`;
 }
 
 // Form → Messenger
-document.getElementById("orderForm").addEventListener("submit",function(e){
+document.getElementById("orderForm").addEventListener("submit", function(e){
 e.preventDefault();
 
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let addr=document.getElementById("address").value;
-let landmark=document.getElementById("landmark").value;
+let form = this;
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let addr = document.getElementById("address").value;
+let landmark = document.getElementById("landmark").value;
 
-let msg=`New Order:
+let msg = `New Order:
 Name: ${name}
 Phone: ${phone}
 Address: ${addr}
 Landmark: ${landmark}
 Product: 500GB HDD COD`;
 
-fetch(this.action,{method:"POST",body:new FormData(this)});
-
-setTimeout(()=>{
-window.open("https://m.me/allaboutsoundsphmain?text="+encodeURIComponent(msg),"_blank");
-},800);
+// Send to Gmail first
+fetch(form.action, {
+  method: "POST",
+  body: new FormData(form)
+})
+.then(function(){
+  // After email is successfully sent → open Messenger
+  window.open(
+    "https://m.me/allaboutsoundsphmain?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
+})
+.catch(function(){
+  alert("Order saved but email failed. Please check connection.");
 });
+});
+
 </script>
 
 </body>
 </html>
+
