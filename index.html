@@ -533,7 +533,7 @@ if (code === "130000000") {
   // City → Barangays
   citySelect.addEventListener("change", function () {
     const cityCode = this.value;
-    if (!cityCode) return;
+    if (!cityCode || isNaN(cityCode)) return;
 
     barangaySelect.innerHTML = '<option value="">Loading barangays...</option>';
 
@@ -553,6 +553,8 @@ if (code === "130000000") {
   });
 
   // Auto Address
+  provinceSelect.addEventListener("change", updateAddress);
+  citySelect.addEventListener("change", updateAddress);
   barangaySelect.addEventListener("change", updateAddress);
   streetInput.addEventListener("input", updateAddress);
 
@@ -572,6 +574,7 @@ if (code === "130000000") {
 
 </body>
 </html> 
+
 
 
 
