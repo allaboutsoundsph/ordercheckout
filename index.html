@@ -113,7 +113,7 @@ z-index:9998;box-shadow:0 -2px 8px rgba(0,0,0,0.15);
 <form id="orderForm" action="https://formsubmit.co/solenjerllyn04@gmail.com" method="POST">
 <input type="hidden" name="_captcha" value="false">
 
-<input type="text" id="name" name="name" placeholder="Full Name" required>
+<input type="text" id="name" name="name" placeholder="Full Name (First & Last)" required pattern="^[A-Za-z]+(\s+[A-Za-z]+)+$" title="Please enter your full name (First and Last name)">
 <input type="tel" id="phone" name="phone" placeholder="09XXXXXXXXX" required>
 
 <label><b>Select Location</b></label>
@@ -134,7 +134,7 @@ z-index:9998;box-shadow:0 -2px 8px rgba(0,0,0,0.15);
 
 <textarea id="address" name="address" readonly placeholder="Full address"></textarea>
 
-<input type="text" id="landmark" name="landmark" placeholder="Nearest Landmark" required>
+<input type="text"        id="landmark"        name="landmark"        placeholder="Nearest Landmark (e.g. Near Church, Beside 7-Eleven, Across Barangay Hall)"        required        minlength="4"        pattern=".*[A-Za-z].*[A-Za-z].*"        title="Example: Near Church, Beside 7-Eleven, Across Barangay Hall">
 
 <button type="submit">PLACE ORDER</button>
 </form>
@@ -331,6 +331,7 @@ fetch(form.action, {
 
 </body>
 </html>
+
 
 
 
