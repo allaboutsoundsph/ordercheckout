@@ -201,61 +201,54 @@ Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
       
     }
 <script>
-    // Buyer counter
-    let count = 18;
-    setInterval(() => {
-      count += Math.floor(Math.random() * 2);
-      document.getElementById('buyerCount').innerText = count;
-    }, 5000);
+// ===== Buyer counter =====
+let count = 18;
+setInterval(() => {
+  count += Math.floor(Math.random() * 2);
+  document.getElementById('buyerCount').innerText = count;
+}, 5000);
 
+// ===== Fake recent order popup =====
+const names = ["Maria", "John", "Kevin", "Angel", "Mark", "Jessa", "Carlo", "Anne", "Rico", "Joy", "Marcus", "Jason"];
+const places = ["Cebu", "Davao", "Iloilo", "Manila", "Bacolod", "Cagayan", "Tacloban", "Bohol", "Samar", "Makati"];
 
-    // Fake recent order popup
-    const names = ["Maria", "John", "Kevin", "Angel", "Mark", "Jessa", "Carlo", "Anne", "Rico", "Joy", "Marcus", "Jason"];
-    const places = ["Cebu", "Davao", "Iloilo", "Manila", "Bacolod", "Cagayan", "Tacloban", "Bohol", "Samar", "Makati"];
+function showFakeOrder() {
+  let name = names[Math.floor(Math.random() * names.length)];
+  let place = places[Math.floor(Math.random() * places.length)];
 
-    function showFakeOrder() {
-      let name = names[Math.floor(Math.random() * names.length)];
-      let place = places[Math.floor(Math.random() * places.length)];
+  let popup = document.createElement("div");
+  popup.innerHTML = `🛒 <b style="color:#ee4d2d;">${name} from ${place}</b> just ordered`;
+  popup.style.position = "fixed";
+  popup.style.left = "15px";
+  popup.style.bottom = "90px";
+  popup.style.background = "white";
+  popup.style.padding = "10px 14px";
+  popup.style.borderRadius = "8px";
+  popup.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+  popup.style.fontSize = "14px";
+  popup.style.zIndex = "9999";
 
-      let popup = document.createElement("div");
-      popup.innerHTML = `🛒 <b style="color:#ee4d2d;">${name} from ${place}</b> just ordered`;
-      popup.style.position = "fixed";
-      popup.style.left = "15px";
-      popup.style.bottom = "90px";
-      popup.style.background = "white";
-      popup.style.padding = "10px 14px";
-      popup.style.borderRadius = "8px";
-      popup.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
-      popup.style.fontSize = "14px";
-      popup.style.zIndex = "9999";
+  document.body.appendChild(popup);
+  setTimeout(() => popup.remove(), 4000);
+}
+setInterval(showFakeOrder, 12000);
 
-      document.body.appendChild(popup);
+// ===== Slots =====
+let slots = Math.floor(Math.random() * 3) + 3;
+document.getElementById('slots').innerText = slots;
 
-      setTimeout(() => {
-        popup.remove();
-      }, 4000);
-    }
-
-    // Show popup every 12 seconds
-    setInterval(showFakeOrder, 12000);
-
-    // Daily slot reset (scarcity reset every page load)
-    let slots = Math.floor(Math.random() * 3) + 3; // 3–5 slots
-    document.getElementById('slots').innerText = slots;
-
-    // Countdown timer (6 hours)
-    let seconds = 21600;
-    setInterval(() => {
-      seconds--;
-      let h = String(Math.floor(seconds/3600)).padStart(2,'0');
-      let m = String(Math.floor((seconds%3600)/60)).padStart(2,'0');
-      let s = String(seconds%60).padStart(2,'0');
-      document.getElementById('timer').innerText = `${h}:${m}:${s}`;
-    }, 1000);
+// ===== Countdown =====
+let seconds = 21600;
+setInterval(() => {
+  seconds--;
+  let h = String(Math.floor(seconds/3600)).padStart(2,'0');
+  let m = String(Math.floor((seconds%3600)/60)).padStart(2,'0');
+  let s = String(seconds%60).padStart(2,'0');
+  document.getElementById('timer').innerText = `${h}:${m}:${s}`;
+}, 1000);
 
 // ===== Review Carousel =====
 let reviewIndex = 0;
-
 function moveReview(direction) {
   const track = document.getElementById("reviewTrack");
   if (!track) return;
@@ -271,7 +264,6 @@ function moveReview(direction) {
 
 // Swipe support
 let startX = 0;
-
 document.addEventListener("DOMContentLoaded", function () {
   const track = document.getElementById("reviewTrack");
   if (!track) return;
@@ -287,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// ===== ORDER FORM → MESSENGER =====
+// ===== ORDER FORM → Messenger =====
 document.getElementById("orderForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -305,7 +297,7 @@ Address: ${address}
 Landmark: ${landmark}
 Product: 500GB HDD COD`;
 
-let encoded = encodeURIComponent(message);
+  let encoded = encodeURIComponent(message);
 
   // Send email
   fetch(form.action, {
@@ -316,7 +308,7 @@ let encoded = encodeURIComponent(message);
 
   document.getElementById("successMsg").style.display = "block";
 
-  setTimeout(function() {
+  setTimeout(() => {
     window.open(
       "https://m.me/allaboutsoundsphmain?text=" + encoded,
       "_blank"
@@ -324,6 +316,7 @@ let encoded = encodeURIComponent(message);
   }, 800);
 });
 </script>
+
 
   <!-- Floating Messenger Bubble -->
   <a href="https://m.me/allaboutsoundsphmain" target="_blank" 
@@ -333,4 +326,5 @@ let encoded = encodeURIComponent(message);
 
 </body>
 </html> 
+
 
