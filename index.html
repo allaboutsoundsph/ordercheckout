@@ -167,17 +167,27 @@ title="Please enter your full name (First and Last)"
 required>
 
         <input type="tel" name="phone" id="phone" placeholder="09XXXXXXXXX"pattern="^(09|\+639)\d{9}$"title="Enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX)" required>
-        <label style="font-weight:bold;">Complete Address</label>
-<div style="background:#fff8e6; color:#b26a00; padding:8px; border-radius:6px; font-size:13px; margin-bottom:6px;">
-Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
-</div>
+        <label style="font-weight:bold;">Select Location</label>
+
+<select id="province" required>
+  <option value="">Select Province</option>
+</select>
+
+<select id="city" required>
+  <option value="">Select City / Municipality</option>
+</select>
+
+<select id="barangay" required>
+  <option value="">Select Barangay</option>
+</select>
+
+<input type="text" id="street" placeholder="House / Purok / Street" required>
 
 <textarea 
 name="address" 
 id="address"
-placeholder="Example: Purok 3, Brgy. San Jose, Jaro, Iloilo City"
-pattern=".*\s+.*"
-title="Please enter a complete address"
+placeholder="Full address will appear here"
+readonly
 required></textarea>
 
         <input type="text" name="landmark" id="landmark"
@@ -333,9 +343,54 @@ Product: 500GB HDD COD`;
      style="position:fixed;right:15px;bottom:90px;background:#0084ff;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 4px 10px rgba(0,0,0,0.2);z-index:9999;">
      💬
   </a>
+<script src="https://cdn.jsdelivr.net/npm/ph-address-selector@1.0.5/ph-address-selector.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const provinceSelect = document.getElementById("province");
+  const citySelect = document.getElementById("city");
+  const barangaySelect = document.getElementById("barangay");
+  const streetInput = document.getElementById("street");
+  const addressField = document.getElementById("address");
+
+  // Load Provinces
+  PhAddressSelector.loadProvinces(provinceSelect);
+
+  // When province changes
+  provinceSelect.addEventListener("change", function () {
+    citySelect.innerHTML = '<option value="">Loading...</option>';
+    barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+    PhAddressSelector.loadCities(this.value, citySelect);
+    updateAddress();
+  });
+
+  // When city changes
+  citySelect.addEventListener("change", function () {
+    barangaySelect.innerHTML = '<option value="">Loading...</option>';
+    PhAddressSelector.loadBarangays(this.value, barangaySelect);
+    updateAddress();
+  });
+
+  // When barangay changes
+  barangaySelect.addEventListener("change", updateAddress);
+  streetInput.addEventListener("input", updateAddress);
+
+  function updateAddress() {
+    const street = streetInput.value;
+    const brgy = barangaySelect.options[barangaySelect.selectedIndex]?.text || "";
+    const city = citySelect.options[citySelect.selectedIndex]?.text || "";
+    const province = provinceSelect.options[provinceSelect.selectedIndex]?.text || "";
+
+    addressField.value = `${street}, ${brgy}, ${city}, ${province}`;
+  }
+
+});
+</script>
 
 </body>
 </html> 
+
 
 
 
