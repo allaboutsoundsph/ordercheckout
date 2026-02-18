@@ -95,14 +95,7 @@ z-index:9998;box-shadow:0 -2px 8px rgba(0,0,0,0.15);
 <label><b>Select Location</b></label>
 
 <select id="province" required>
-<option value="">Select Province</option>
-<option value="130000000">Metro Manila (NCR)</option>
-<option value="063000000" selected>Iloilo</option>
-<option value="060400000">Aklan</option>
-<option value="060600000">Antique</option>
-<option value="061900000">Capiz</option>
-<option value="064500000">Negros Occidental</option>
-<option value="067900000">Guimaras</option>
+<option value="">Loading provinces...</option>
 </select>
 
 <select id="city" required>
@@ -155,10 +148,38 @@ const brgy=document.getElementById("barangay");
 const street=document.getElementById("street");
 const address=document.getElementById("address");
 
-province.value="063000000";
-loadCities("063000000");
+// ===== LOAD ALL PROVINCES =====
+fetch("https://psgc.gitlab.io/api/provinces/")
+.then(res => res.json())
+.then(data => {
+    province.innerHTML = '<option value="">Select Province</option>';
 
-province.addEventListener("change",()=>loadCities(province.value));
+    // Sort provinces alphabetically
+    data.sort((a,b)=>a.name.localeCompare(b.name));
+
+    // Add NCR first
+    let ncr = document.createElement("option");
+    ncr.value = "130000000";
+    ncr.textContent = "Metro Manila (NCR)";
+    province.appendChild(ncr);
+
+    // Add all provinces
+    data.forEach(p => {
+        let opt = document.createElement("option");
+        opt.value = p.code;
+        opt.textContent = p.name;
+        province.appendChild(opt);
+    });
+})
+.catch(()=>{
+    province.innerHTML = '<option value="">Failed to load provinces</option>';
+});
+
+// When province changes → load cities
+province.addEventListener("change", function(){
+    loadCities(this.value);
+});
+
 
 function loadCities(code){
 city.innerHTML="<option>Loading...</option>";
@@ -286,4 +307,5 @@ fetch(form.action, {
 
 </body>
 </html>
+
 
