@@ -114,7 +114,7 @@ z-index:9998;box-shadow:0 -2px 8px rgba(0,0,0,0.15);
 <input type="hidden" name="_captcha" value="false">
 
 <input type="text" id="name" name="name" placeholder="Full Name (First & Last)" required pattern="^[A-Za-z]+(\s+[A-Za-z]+)+$" title="Please enter your full name (First and Last name)">
-<input type="tel" id="phone" name="phone" placeholder="09XXXXXXXXX" required>
+<input type="tel"        id="phone"        name="phone"        placeholder="09XXXXXXXXX"        required        pattern="^09\d{9}$"        maxlength="11"        inputmode="numeric"        title="Enter a valid Philippine mobile number (11 digits starting with 09)">
 
 <label><b>Select Location</b></label>
 
@@ -331,6 +331,7 @@ fetch(form.action, {
 
 </body>
 </html>
+
 
 
 
