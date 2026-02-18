@@ -1,265 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>500GB External HDD – Official Store</title>
-  <style>
-    body {font-family: Arial, sans-serif; margin:0; background:#f5f5f5;}
-    header {
-  background:#ee4d2d;
-  color:white;
-  padding:4px 6px;     /* thinner top/bottom */
-  text-align:center;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>500GB External HDD – Official Store</title>
 
-header h1 {
-  margin:0;
-  font-size:0.95rem;
-  line-height:1.1;
-}
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5;}
+header{background:#ee4d2d;color:#fff;text-align:center;padding:8px;}
+header h1{margin:0;font-size:1rem;}
+header p{margin:0;font-size:0.75rem;}
 
-header p {
-  margin:0;            /* removes extra space */
-  font-size:0.7rem;
-  line-height:1.1;
-}
+.container{max-width:650px;margin:auto;padding:12px;}
+.card{background:#fff;padding:15px;border-radius:10px;
+box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px;}
 
-    .container {max-width:650px; margin:auto; padding:12px;}
-    .card {background:white; padding:15px; border-radius:10px; box-shadow:0 1px 4px rgba(0,0,0,0.08); margin-bottom:12px;}
-    .product-img {width:100%; border-radius:10px; margin-bottom:10px;}
-    .gallery img {width:100%; border-radius:10px; margin-bottom:8px;}
-    .price {font-size:1.8rem; font-weight:bold; color:#ee4d2d;}
-    .old-price {text-decoration:line-through; color:#999; font-size:0.95rem;}
-    .badge {display:inline-block; background:#ffece8; color:#ee4d2d; padding:5px 10px; border-radius:6px; font-size:0.8rem; font-weight:bold; margin-bottom:8px;}
-    .urgent {background:#fff1f0; color:#ee4d2d; padding:10px; border-radius:6px; font-weight:bold; margin-bottom:8px;}
-    form {display:grid; gap:10px;}
-    input, textarea, select {padding:12px; border:1px solid #ddd; border-radius:6px; font-size:14px;}
-    button {background:#ee4d2d; color:white; border:none; padding:15px; border-radius:8px; font-size:1rem; font-weight:bold; cursor:pointer;}
-    button:hover {background:#d84324;}
-    .buyers {font-size:0.85rem; color:#555;}
-    .countdown {font-weight:bold; color:#ee4d2d;}
-    .messenger-btn {display:block; text-align:center; background:#0084ff; color:white; padding:12px; border-radius:8px; font-weight:bold; text-decoration:none; margin-top:8px;}
-    footer {text-align:center; padding:15px; font-size:0.75rem; color:#777;}
-  </style>
+.product-img{width:100%;border-radius:10px;margin-bottom:10px;}
+.price{font-size:1.8rem;font-weight:bold;color:#ee4d2d;}
+.old-price{text-decoration:line-through;color:#999;font-size:0.95rem;}
+.badge{background:#ffece8;color:#ee4d2d;padding:5px 10px;border-radius:6px;font-size:0.8rem;font-weight:bold;}
+.urgent{background:#fff1f0;color:#ee4d2d;padding:10px;border-radius:6px;font-weight:bold;margin-top:8px;}
+.buyers{font-size:0.85rem;color:#555;}
+
+form{display:grid;gap:10px;}
+input,textarea,select{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;}
+button{background:#ee4d2d;color:#fff;border:none;padding:15px;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
+
+.messenger-btn{display:block;text-align:center;background:#0084ff;color:#fff;padding:12px;border-radius:8px;font-weight:bold;text-decoration:none;}
+
+.review-carousel{position:relative;overflow:hidden;border-radius:10px;}
+.review-track{display:flex;transition:transform 0.3s ease;}
+.review-track img{width:100%;flex-shrink:0;border-radius:10px;}
+.nav{position:absolute;top:50%;transform:translateY(-50%);
+background:rgba(0,0,0,0.5);color:#fff;border:none;font-size:22px;
+width:36px;height:36px;border-radius:50%;cursor:pointer;}
+.prev{left:8px;} .next{right:8px;}
+
+footer{text-align:center;padding:15px;font-size:0.75rem;color:#777;}
+
+.sticky-order{
+position:fixed;bottom:0;left:0;width:100%;
+background:#ee4d2d;color:#fff;text-align:center;
+padding:14px;font-size:16px;font-weight:bold;
+z-index:9998;box-shadow:0 -2px 8px rgba(0,0,0,0.15);
+}
+@media(min-width:768px){.sticky-order{display:none;}}
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>500GB External HDD</h1>
-    <p>60,000+ Songs | Plug & Play</p>
-  </header>
 
-  <div class="container">
+<header>
+<h1>500GB External HDD</h1>
+<p>60,000+ Songs | Plug & Play</p>
+</header>
 
-    <div class="card">
-      <span class="badge">Official Store • Best Seller</span>
-      <img class="product-img" src="new feb-Cover.jpg" alt="External HDD">
-      <h2>500GB External HDD – Complete DJ Music</h2>
-      <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
-      <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
-      <p><b>📍 Iloilo Based Seller</b></p>
-      <div class="urgent">⚠️ Only <span id="slots">5</span> slots left today!</div>
-      <p class="countdown">Sale ends in: <span id="timer">06:00:00</span></p>
-    </div>
+<div class="container">
 
-    <div class="card gallery">
-  <h3>Product Videos</h3>
+<div class="card">
+<span class="badge">Official Store • Best Seller</span>
+<img class="product-img" src="new feb-Cover.jpg" alt="">
+<h2>Complete DJ Music Collection</h2>
+<div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
+<p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
+<p><b>📍 Iloilo Based Seller</b></p>
+<div class="urgent">⚠️ Only <span id="slots">5</span> slots left today!</div>
+<p class="buyers">⚡ <span id="buyerCount">18</span> people checking out</p>
+<p>Sale ends in: <b id="timer">06:00:00</b></p>
+</div>
 
-  <video controls playsinline style="width:100%; border-radius:10px; margin-bottom:10px;">
-    <source src="2.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+<div class="card">
+<h3>⭐ Customer Reviews</h3>
+<div class="review-carousel">
+<button class="nav prev" onclick="moveReview(-1)">‹</button>
+<div class="review-track" id="reviewTrack">
+<img src="34.png">
+<img src="35.png">
+<img src="36.png">
+<img src="37.png">
+</div>
+<button class="nav next" onclick="moveReview(1)">›</button>
+</div>
+</div>
 
-  <video controls playsinline style="width:100%; border-radius:10px;">
-    <source src="1.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+<div class="card">
+<h3>Checkout</h3>
+
+<form id="orderForm" action="https://formsubmit.co/solenjerllyn04@gmail.com" method="POST">
+<input type="hidden" name="_captcha" value="false">
+
+<input type="text" id="name" name="name" placeholder="Full Name" required>
+<input type="tel" id="phone" name="phone" placeholder="09XXXXXXXXX" required>
+
+<label><b>Select Location</b></label>
+
+<select id="province" required>
+<option value="">Select Province</option>
+<option value="130000000">Metro Manila (NCR)</option>
+<option value="063000000" selected>Iloilo</option>
+<option value="060400000">Aklan</option>
+<option value="060600000">Antique</option>
+<option value="061900000">Capiz</option>
+<option value="064500000">Negros Occidental</option>
+<option value="067900000">Guimaras</option>
+</select>
+
+<select id="city" required>
+<option value="">Select City / Municipality</option>
+</select>
+
+<select id="barangay" required>
+<option value="">Select Barangay</option>
+</select>
+
+<input type="text" id="street" placeholder="House / Purok / Street" required>
+
+<textarea id="address" name="address" readonly placeholder="Full address"></textarea>
+
+<input type="text" id="landmark" name="landmark" placeholder="Nearest Landmark" required>
+
+<button type="submit">PLACE ORDER</button>
+</form>
+
+<a class="messenger-btn" href="https://m.me/allaboutsoundsphmain" target="_blank">
+Order via Messenger
+</a>
+</div>
 
 </div>
 
+<footer>© 2026 All About Sounds PH</footer>
 
-    <div class="card">
-      <h3>⭐ Ratings & Reviews</h3>
-      <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="34.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-       <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="35.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-       <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="36.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-       <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="37.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-       <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="30.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-      
-      <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="29.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-      <p>⭐⭐⭐⭐⭐ Legit check! Trusted seller</p>
-      <img src="28.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
-    </div>
-
-    <div class="card">
-      <h3>Delivery Estimate</h3>
-      <ul>
-        <li>3–5 Days Luzon</li>
-        <li>2–3 Days Visayas</li>
-        <li>4–8 Days Mindanao</li>
-      </ul>
-      <p><b>DTI & BIR Registered Seller</b></p>
-    </div>
-
-    <div class="card">
-      <h3>Checkout</h3>
-      <p class="buyers">⚡ <b id="buyerCount">18</b> people are checking out</p>
-
-      <form id="orderForm" action="https://formsubmit.co/solenjerllyn04@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="New HDD Order!">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://www.facebook.com/allaboutsoundsphmain">
-
-        <input type="text" name="name" id="name" placeholder="Full Name (First & Last)"pattern="^[A-Za-z]+(\s[A-Za-z]+)+$"title="Please enter your full name (First and Last name)" required>
-        <input type="tel" name="phone" id="phone" placeholder="09XXXXXXXXX"pattern="^(09|\+639)\d{9}$"title="Enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX)" required>
-        <label style="font-weight:bold;">Complete Address</label>
-<div style="background:#fff8e6; color:#b26a00; padding:8px; border-radius:6px; font-size:13px; margin-bottom:6px;">
-Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
+<div class="sticky-order" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">
+PLACE ORDER – COD
 </div>
 
-<textarea 
-  name="address" 
-  id="address" 
-  placeholder="Example: Purok 3, Brgy. San Jose, Jaro, Iloilo City"
-  required></textarea>
+<script>
+// ===== OFFLINE ILOILO =====
+const iloiloCities=[
+"Ajuy","Alimodian","Anilao","Badiangan","Balasan","Banate","Barotac Nuevo",
+"Barotac Viejo","Batad","Bingawan","Cabatuan","Calinog","Carles","Concepcion",
+"Dingle","Dueñas","Dumangas","Estancia","Guimbal","Igbaras","Iloilo City",
+"Janiuay","Lambunao","Leganes","Lemery","Leon","Maasin","Miagao","Mina",
+"New Lucena","Oton","Passi City","Pavia","Pototan","San Dionisio",
+"San Enrique","San Joaquin","San Miguel","San Rafael","Santa Barbara",
+"Sara","Tigbauan","Tubungan","Zarraga"
+];
 
-        <input type="text" name="landmark" id="landmark" placeholder="Nearest Landmark" required>
+document.addEventListener("DOMContentLoaded",function(){
 
-        <select name="payment" required>
-          <option>Cash on Delivery (COD)</option>
-        </select>
+const province=document.getElementById("province");
+const city=document.getElementById("city");
+const brgy=document.getElementById("barangay");
+const street=document.getElementById("street");
+const address=document.getElementById("address");
 
-        <button type="submit">PLACE ORDER</button>
-      </form>
+province.value="063000000";
+loadCities("063000000");
 
-      <p id="successMsg" style="display:none; color:green; font-weight:bold; margin-top:10px;">
-        Order received! Opening Messenger...
-      </p>
+province.addEventListener("change",()=>loadCities(province.value));
 
-      <a class="messenger-btn" href="https://m.me/100653523033389" target="_blank">Order via Messenger</a>
-    </div>
-  </div>
+function loadCities(code){
+city.innerHTML="<option>Loading...</option>";
+brgy.innerHTML="<option>Select Barangay</option>";
 
+if(code==="063000000"){
+city.innerHTML='<option value="">Select City / Municipality</option>';
+iloiloCities.sort().forEach(name=>{
+let o=document.createElement("option");
+o.value=name;
+o.textContent=name;
+city.appendChild(o);
+});
+return;
+}
 
-  <footer style="margin-bottom:20px;text-align:center;padding:15px;font-size:0.75rem;color:#777;">
-    © 2026 All About Sounds PH
-  </footer>
+let url=code==="130000000"
+?"https://psgc.gitlab.io/api/regions/130000000/cities-municipalities/"
+:`https://psgc.gitlab.io/api/provinces/${code}/cities-municipalities/`;
 
-  <script>
-    // Add to Cart tracking when user clicks BUY NOW
-    function trackAddToCart() {
-      
-    }
+fetch(url)
+.then(r=>r.json())
+.then(data=>{
+city.innerHTML='<option value="">Select City / Municipality</option>';
+data.forEach(c=>{
+let o=document.createElement("option");
+o.value=c.code;
+o.textContent=c.name;
+city.appendChild(o);
+});
+});
+}
 
-    // Buyer counter
-    let count = 18;
-    setInterval(() => {
-      count += Math.floor(Math.random() * 2);
-      document.getElementById('buyerCount').innerText = count;
-    }, 5000);
+city.addEventListener("change",function(){
+if(isNaN(this.value)) return;
 
+brgy.innerHTML="<option>Loading barangays...</option>";
+fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
+.then(r=>r.json())
+.then(data=>{
+brgy.innerHTML='<option value="">Select Barangay</option>';
+data.forEach(b=>{
+let o=document.createElement("option");
+o.value=b.name;
+o.textContent=b.name;
+brgy.appendChild(o);
+});
+});
+});
 
-    // Fake recent order popup
-    const names = ["Maria", "John", "Kevin", "Angel", "Mark", "Jessa", "Carlo", "Anne", "Rico", "Joy"];
-    const places = ["Cebu", "Davao", "Iloilo", "Manila", "Bacolod", "Cagayan", "Tacloban", "Bohol"];
+function updateAddress(){
+address.value=`${street.value}, ${brgy.value}, ${city.options[city.selectedIndex].text}, ${province.options[province.selectedIndex].text}`;
+}
+street.addEventListener("input",updateAddress);
+brgy.addEventListener("change",updateAddress);
 
-    function showFakeOrder() {
-      let name = names[Math.floor(Math.random() * names.length)];
-      let place = places[Math.floor(Math.random() * places.length)];
+});
 
-      let popup = document.createElement("div");
-      popup.innerHTML = `🛒 ${name} from ${place} just ordered`;
-      popup.style.position = "fixed";
-      popup.style.left = "15px";
-      popup.style.bottom = "90px";
-      popup.style.background = "white";
-      popup.style.padding = "10px 14px";
-      popup.style.borderRadius = "8px";
-      popup.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
-      popup.style.fontSize = "14px";
-      popup.style.zIndex = "9999";
+// Buyer counter
+let buyers=18;
+setInterval(()=>{
+buyers+=Math.floor(Math.random()*2);
+document.getElementById("buyerCount").innerText=buyers;
+},5000);
 
-      document.body.appendChild(popup);
+// Slots
+document.getElementById("slots").innerText=Math.floor(Math.random()*3)+3;
 
-      setTimeout(() => {
-        popup.remove();
-      }, 4000);
-    }
+// Countdown
+let seconds=21600;
+setInterval(()=>{
+seconds--;
+let h=String(Math.floor(seconds/3600)).padStart(2,'0');
+let m=String(Math.floor((seconds%3600)/60)).padStart(2,'0');
+let s=String(seconds%60).padStart(2,'0');
+document.getElementById("timer").innerText=`${h}:${m}:${s}`;
+},1000);
 
-    // Show popup every 12 seconds
-    setInterval(showFakeOrder, 12000);
+// Review carousel
+let reviewIndex=0;
+function moveReview(d){
+const track=document.getElementById("reviewTrack");
+const total=track.children.length;
+reviewIndex+=d;
+if(reviewIndex<0)reviewIndex=total-1;
+if(reviewIndex>=total)reviewIndex=0;
+track.style.transform=`translateX(-${reviewIndex*100}%)`;
+}
 
-    // Daily slot reset (scarcity reset every page load)
-    let slots = Math.floor(Math.random() * 3) + 3; // 3–5 slots
-    document.getElementById('slots').innerText = slots;
+// Form → Messenger
+document.getElementById("orderForm").addEventListener("submit",function(e){
+e.preventDefault();
 
-    // Countdown timer (6 hours)
-    let seconds = 21600;
-    setInterval(() => {
-      seconds--;
-      let h = String(Math.floor(seconds/3600)).padStart(2,'0');
-      let m = String(Math.floor((seconds%3600)/60)).padStart(2,'0');
-      let s = String(seconds%60).padStart(2,'0');
-      document.getElementById('timer').innerText = `${h}:${m}:${s}`;
-    }, 1000);
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let addr=document.getElementById("address").value;
+let landmark=document.getElementById("landmark").value;
 
-    // After submit → track purchase + open Messenger with order details
-document.getElementById('orderForm').addEventListener('submit', function(e){
-  e.preventDefault();
-
-  let name = document.getElementById('name').value.trim();
-  let phone = document.getElementById('phone').value;
-
-  // Full name must contain space
-  if (!name.includes(" ")) {
-    alert("Please enter your full name (First and Last name).");
-    return;
-  }
-
-  // PH mobile validation
-  let phPattern = /^(09|\+639)\d{9}$/;
-  if (!phPattern.test(phone)) {
-    alert("Please enter a valid Philippine mobile number.");
-    return;
-  }
-
-  let address = document.getElementById('address').value;
-  let landmark = document.getElementById('landmark').value;
-
-  let msg = `New Order:
+let msg=`New Order:
 Name: ${name}
 Phone: ${phone}
-Address: ${address}
+Address: ${addr}
 Landmark: ${landmark}
 Product: 500GB HDD COD`;
 
-  let encodedMsg = encodeURIComponent(msg);
+fetch(this.action,{method:"POST",body:new FormData(this)});
 
-  document.getElementById('successMsg').style.display = 'block';
-  window.location.href = "https://m.me/100653523033389?text=" + encodedMsg;
+setTimeout(()=>{
+window.open("https://m.me/allaboutsoundsphmain?text="+encodeURIComponent(msg),"_blank");
+},800);
 });
-
-
-  </script>
-  <!-- Floating Messenger Bubble -->
-  <a href="https://m.me/100653523033389" target="_blank" 
-     style="position:fixed;right:15px;bottom:90px;background:#0084ff;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 4px 10px rgba(0,0,0,0.2);z-index:9999;">
-     💬
-  </a>
+</script>
 
 </body>
-</html> 
-
-
+</html>
