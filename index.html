@@ -190,10 +190,16 @@ placeholder="Full address will appear here"
 readonly
 required></textarea>
 
-        <input type="text" name="landmark" id="landmark"
-pattern=".*\s+.*"
-title="Please enter a valid landmark"
+        <label style="font-weight:bold;">Nearest Landmark (Required)</label>
+
+<div style="background:#fff8e6; color:#b26a00; padding:8px; border-radius:6px; font-size:13px; margin-bottom:6px;">
+Helps the rider find your location faster (store, school, church, etc.)
+</div>
+
+<input type="text" name="landmark" id="landmark"
+placeholder="Example: Beside Barangay Hall / Near Jollibee"
 required>
+
 
 
         <select name="payment" required>
@@ -425,6 +431,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html> 
+
 
 
 
