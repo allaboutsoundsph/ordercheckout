@@ -319,13 +319,11 @@ Product: 500GB HDD COD`;
 fetch(form.action, {
   method: "POST",
   body: new FormData(form)
-})
-.then(function(){
-  // After email is successfully sent → open Messenger
-  window.open(
-    "https://m.me/allaboutsoundsphmain?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
+}).then(() => {
+  setTimeout(() => {
+    window.location.href =
+      "https://m.me/allaboutsoundsphmain?text=" + encodeURIComponent(message);
+  }, 500);
 })
 .catch(function(){
   alert("Order saved but email failed. Please check connection.");
@@ -336,6 +334,7 @@ fetch(form.action, {
 
 </body>
 </html>
+
 
 
 
