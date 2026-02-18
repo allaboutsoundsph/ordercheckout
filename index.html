@@ -286,9 +286,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (endX - startX > 50) moveReview(-1);
   });
 });
-});
 
-// ===== Messenger redirect after submit (PASTE HERE) =====
+// ===== Open Messenger after submit (WORKING VERSION) =====
 document.getElementById("orderForm").addEventListener("submit", function () {
 
   let name = document.getElementById("name").value;
@@ -305,13 +304,13 @@ Product: 500GB HDD COD`;
 
   let encoded = encodeURIComponent(message);
 
-  // Wait 1.5 seconds so Gmail POST finishes
-  setTimeout(function () {
-    window.location.href = "https://m.me/100653523033389?text=" + encoded;
-  }, 1500);
+  // Open Messenger in new tab immediately
+  window.open(
+    "https://m.me/100653523033389?text=" + encoded,
+    "_blank"
+  );
 
 });
-
 
   </script>
   <!-- Floating Messenger Bubble -->
@@ -322,6 +321,7 @@ Product: 500GB HDD COD`;
 
 </body>
 </html> 
+
 
 
 
