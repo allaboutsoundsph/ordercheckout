@@ -69,8 +69,25 @@ z-index:9998;box-shadow:0 -2px 8px rgba(0,0,0,0.15);
 <p>Sale ends in: <b id="timer">06:00:00</b></p>
 </div>
 
+<!-- PRODUCT VIDEOS -->
+<div class="card">
+<h3>🎥 Product Videos</h3>
+
+<video controls preload="metadata" style="width:100%; border-radius:10px; margin-bottom:10px;">
+    <source src="1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<video controls preload="metadata" style="width:100%; border-radius:10px;">
+    <source src="2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+</div>
+
 <div class="card">
 <h3>⭐ Customer Reviews</h3>
+
 <div class="review-carousel">
 <button class="nav prev" onclick="moveReview(-1)">‹</button>
 <div class="review-track" id="reviewTrack">
@@ -307,6 +324,7 @@ fetch(form.action, {
 
 </body>
 </html>
+
 
 
 
