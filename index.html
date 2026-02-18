@@ -354,25 +354,60 @@ document.addEventListener("DOMContentLoaded", function () {
   const streetInput = document.getElementById("street");
   const addressField = document.getElementById("address");
 
-  // Load Provinces
-  PhAddressSelector.loadProvinces(provinceSelect);
+  // Load provinces
+  fetch("https://psgc.gitlab.io/api/provinces/")
+    .then(res => res.json())
+    .then(provinces => {
+      provinces.sort((a,b)=>a.name.localeCompare(b.name));
+      provinces.forEach(p => {
+        let opt = document.createElement("option");
+        opt.value = p.code;
+        opt.textContent = p.name;
+        provinceSelect.appendChild(opt);
+      });
+    });
 
-  // When province changes
+  // Province → Cities
   provinceSelect.addEventListener("change", function () {
     citySelect.innerHTML = '<option value="">Loading...</option>';
     barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
-    PhAddressSelector.loadCities(this.value, citySelect);
+
+    fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
+      .then(res => res.json())
+      .then(cities => {
+        citySelect.innerHTML = '<option value="">Select City / Municipality</option>';
+        cities.sort((a,b)=>a.name.localeCompare(b.name));
+        cities.forEach(c => {
+          let opt = document.createElement("option");
+          opt.value = c.code;
+          opt.textContent = c.name;
+          citySelect.appendChild(opt);
+        });
+      });
+
     updateAddress();
   });
 
-  // When city changes
+  // City → Barangays
   citySelect.addEventListener("change", function () {
     barangaySelect.innerHTML = '<option value="">Loading...</option>';
-    PhAddressSelector.loadBarangays(this.value, barangaySelect);
+
+    fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
+      .then(res => res.json())
+      .then(brgys => {
+        barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+        brgys.sort((a,b)=>a.name.localeCompare(b.name));
+        brgys.forEach(b => {
+          let opt = document.createElement("option");
+          opt.value = b.name;
+          opt.textContent = b.name;
+          barangaySelect.appendChild(opt);
+        });
+      });
+
     updateAddress();
   });
 
-  // When barangay changes
   barangaySelect.addEventListener("change", updateAddress);
   streetInput.addEventListener("input", updateAddress);
 
@@ -388,8 +423,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+
 </body>
 </html> 
+
 
 
 
