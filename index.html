@@ -223,7 +223,7 @@ required>
 <option value="060400000">Aklan</option>
 <option value="060600000">Antique</option>
 <option value="061900000">Capiz</option>
-<option value="063000000">Iloilo</option>
+<option value="063000000" selected>Iloilo</option>
 <option value="064500000">Negros Occidental</option>
 <option value="067900000">Guimaras</option>
 
@@ -286,10 +286,7 @@ required>
 <input type="text" id="barangay" name="barangay" 
 placeholder="Barangay (type manually)" required>
 
-<input type="text" id="barangay" name="barangay" 
-placeholder="Barangay (type manually)" required>
-
-<input type="text" id="street" placeholder="House / Purok / Street" required>
+<input type="text" id="street" name="street" placeholder="House / Purok / Street" required>
 
 <textarea 
 name="address" 
@@ -399,67 +396,6 @@ function moveReview(direction) {
 // Swipe support
 let startX = 0;
 document.addEventListener("DOMContentLoaded", function () {
-  const track = document.getElementById("reviewTrack");
-  if (!track) return;
-
-  track.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  });
-
-  track.addEventListener("touchend", e => {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) moveReview(1);
-    if (endX - startX > 50) moveReview(-1);
-  });
-});
-
-// ===== ORDER FORM → Messenger =====
-document.getElementById("orderForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  let form = this;
-
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let address = document.getElementById("address").value;
-  let landmark = document.getElementById("landmark").value;
-
-  let message = `New Order:
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-Landmark: ${landmark}
-Product: 500GB HDD COD`;
-
-  let encoded = encodeURIComponent(message);
-
-  // Send email
-  fetch(form.action, {
-    method: "POST",
-    body: new FormData(form),
-    headers: { 'Accept': 'application/json' }
-  });
-
-  document.getElementById("successMsg").style.display = "block";
-
-  setTimeout(() => {
-    window.open(
-      "https://m.me/allaboutsoundsphmain?text=" + encoded,
-      "_blank"
-    );
-  }, 800);
-});
-</script>
-
-
-  <!-- Floating Messenger Bubble -->
-  <a href="https://m.me/allaboutsoundsphmain" target="_blank" 
-     style="position:fixed;right:15px;bottom:90px;background:#0084ff;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 4px 10px rgba(0,0,0,0.2);z-index:9999;">
-     💬
-  </a>
-  
-<script>
-document.addEventListener("DOMContentLoaded", function () {
 
   const provinceSelect = document.getElementById("province");
   const citySelect = document.getElementById("city");
@@ -467,53 +403,60 @@ document.addEventListener("DOMContentLoaded", function () {
   const streetInput = document.getElementById("street");
   const addressField = document.getElementById("address");
 
-  // Province → Cities
+  
+// ===== Province → Cities =====
+// ===== Province → Cities =====
 provinceSelect.addEventListener("change", function () {
   const code = this.value;
   if (!code) return;
 
+  // RESET fields
+  citySelect.innerHTML = '<option value="">Select City / Municipality</option>';
+  barangayInput.value = "";
+  streetInput.value = "";
+  addressField.value = "";
+
   citySelect.innerHTML = '<option>Loading cities...</option>';
-  barangaySelect.innerHTML = '<option>Select Barangay</option>';
 
   let url;
 
-// ===== NCR (Full list – reliable) =====
-if (code === "130000000") {
-  const ncrCities = [
-    {code:"133900000",name:"Manila"},
-    {code:"137400000",name:"Quezon City"},
-    {code:"137500000",name:"Caloocan"},
-    {code:"137600000",name:"Las Piñas"},
-    {code:"137700000",name:"Makati"},
-    {code:"137800000",name:"Malabon"},
-    {code:"137900000",name:"Mandaluyong"},
-    {code:"138000000",name:"Marikina"},
-    {code:"138100000",name:"Muntinlupa"},
-    {code:"138200000",name:"Navotas"},
-    {code:"138300000",name:"Parañaque"},
-    {code:"138400000",name:"Pasay"},
-    {code:"138500000",name:"Pasig"},
-    {code:"138600000",name:"San Juan"},
-    {code:"138700000",name:"Taguig"},
-    {code:"138800000",name:"Valenzuela"},
-    {code:"137401000",name:"Pateros"}
-  ];
+  // NCR offline list
+  if (code === "130000000") {
+    const ncrCities = [
+      {code:"133900000",name:"Manila"},
+      {code:"137400000",name:"Quezon City"},
+      {code:"137500000",name:"Caloocan"},
+      {code:"137600000",name:"Las Piñas"},
+      {code:"137700000",name:"Makati"},
+      {code:"137800000",name:"Malabon"},
+      {code:"137900000",name:"Mandaluyong"},
+      {code:"138000000",name:"Marikina"},
+      {code:"138100000",name:"Muntinlupa"},
+      {code:"138200000",name:"Navotas"},
+      {code:"138300000",name:"Parañaque"},
+      {code:"138400000",name:"Pasay"},
+      {code:"138500000",name:"Pasig"},
+      {code:"138600000",name:"San Juan"},
+      {code:"138700000",name:"Taguig"},
+      {code:"138800000",name:"Valenzuela"},
+      {code:"137401000",name:"Pateros"}
+    ];
 
-  citySelect.innerHTML = '<option value="">Select City / Municipality</option>';
+    citySelect.innerHTML = '<option value="">Select City / Municipality</option>';
 
-  ncrCities.forEach(city => {
-    let opt = document.createElement("option");
-    opt.value = city.code;
-    opt.textContent = city.name;
-    citySelect.appendChild(opt);
-  });
+    ncrCities.forEach(city => {
+      let opt = document.createElement("option");
+      opt.value = city.code;
+      opt.textContent = city.name;
+      citySelect.appendChild(opt);
+    });
 
-  return; // important: stop API call
-}
-
-  else {
-    url = `https://psgc.gitlab.io/api/provinces/${code}/cities-municipalities/`;
+    updateAddress();
+    return;
   }
+
+  // Other provinces
+  url = `https://psgc.gitlab.io/api/provinces/${code}/cities-municipalities/`;
 
   fetch(url)
     .then(res => res.json())
@@ -528,30 +471,26 @@ if (code === "130000000") {
         opt.textContent = city.name;
         citySelect.appendChild(opt);
       });
+
+      updateAddress();
     })
     .catch(() => {
-      citySelect.innerHTML = '<option>Failed to load cities</option>';
-    });
+  citySelect.innerHTML = '<option value="">Unable to load. Please refresh.</option>';
+});
 });
 
-      brgys.sort((a,b)=>a.name.localeCompare(b.name));
+// ===== AUTO LOAD AFTER LISTENER =====
+if (provinceSelect.value) {
+  provinceSelect.dispatchEvent(new Event("change"));
+}
 
-      brgys.forEach(brgy => {
-        let opt = document.createElement("option");
-        opt.value = brgy.name;
-        opt.textContent = brgy.name;
-        barangaySelect.appendChild(opt);
-      });
-    })
-    .catch(() => {
-      barangaySelect.innerHTML = '<option>Failed to load barangays</option>';
-    });
-});
+
+
+  // ===== Auto Address =====
+  citySelect.addEventListener("change", function () {
+    barangayInput.value = "";
+    updateAddress();
   });
-
-  // Auto Address
-  provinceSelect.addEventListener("change", updateAddress);
-  citySelect.addEventListener("change", updateAddress);
   barangayInput.addEventListener("input", updateAddress);
   streetInput.addEventListener("input", updateAddress);
 
@@ -565,28 +504,11 @@ if (code === "130000000") {
   }
 
 });
+
 </script>
 
 
 
 </body>
 </html> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
