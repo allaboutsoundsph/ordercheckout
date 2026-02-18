@@ -532,24 +532,34 @@ if (code === "130000000") {
 
   // City → Barangays
   citySelect.addEventListener("change", function () {
-    const cityCode = this.value;
-    if (!cityCode || isNaN(cityCode)) return;
+  const cityCode = this.value;
 
-    barangaySelect.innerHTML = '<option value="">Loading barangays...</option>';
+  // Stop if empty or not a PSGC code
+  if (!cityCode || isNaN(cityCode)) {
+    barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+    return;
+  }
 
-    fetch(`https://psgc.gitlab.io/api/cities-municipalities/${cityCode}/barangays/`)
-      .then(res => res.json())
-      .then(brgys => {
-        barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
-        brgys.sort((a,b)=>a.name.localeCompare(b.name));
+  barangaySelect.innerHTML = '<option value="">Loading barangays...</option>';
 
-        brgys.forEach(brgy => {
-          let opt = document.createElement("option");
-          opt.value = brgy.name;
-          opt.textContent = brgy.name;
-          barangaySelect.appendChild(opt);
-        });
+  fetch(`https://psgc.gitlab.io/api/cities-municipalities/${cityCode}/barangays/`)
+    .then(res => res.json())
+    .then(brgys => {
+      barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+
+      brgys.sort((a,b)=>a.name.localeCompare(b.name));
+
+      brgys.forEach(brgy => {
+        let opt = document.createElement("option");
+        opt.value = brgy.name;
+        opt.textContent = brgy.name;
+        barangaySelect.appendChild(opt);
       });
+    })
+    .catch(() => {
+      barangaySelect.innerHTML = '<option>Failed to load barangays</option>';
+    });
+});
   });
 
   // Auto Address
@@ -574,6 +584,7 @@ if (code === "130000000") {
 
 </body>
 </html> 
+
 
 
 
