@@ -281,7 +281,10 @@ required>
 <option value="157100000">Basilan</option>
 </select>
 
-<select id="city" name="city" required>
+<select id="city" name="city" required></select>
+
+<input type="text" id="barangay" name="barangay" 
+placeholder="Barangay (type manually)" required>
 
 <input type="text" id="barangay" name="barangay" 
 placeholder="Barangay (type manually)" required>
@@ -531,19 +534,6 @@ if (code === "130000000") {
     });
 });
 
-  // Stop if empty or not a PSGC code
-  if (!cityCode || isNaN(cityCode)) {
-    barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
-    return;
-  }
-
-  barangaySelect.innerHTML = '<option value="">Loading barangays...</option>';
-
-  fetch(`https://psgc.gitlab.io/api/cities-municipalities/${cityCode}/barangays/`)
-    .then(res => res.json())
-    .then(brgys => {
-      barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
-
       brgys.sort((a,b)=>a.name.localeCompare(b.name));
 
       brgys.forEach(brgy => {
@@ -581,6 +571,7 @@ if (code === "130000000") {
 
 </body>
 </html> 
+
 
 
 
