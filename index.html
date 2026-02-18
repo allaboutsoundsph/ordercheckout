@@ -286,6 +286,31 @@ document.addEventListener("DOMContentLoaded", function () {
     if (endX - startX > 50) moveReview(-1);
   });
 });
+});
+
+// ===== Messenger redirect after submit (PASTE HERE) =====
+document.getElementById("orderForm").addEventListener("submit", function () {
+
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+  let landmark = document.getElementById("landmark").value;
+
+  let message = `New Order:
+Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Landmark: ${landmark}
+Product: 500GB HDD COD`;
+
+  let encoded = encodeURIComponent(message);
+
+  // Wait 1.5 seconds so Gmail POST finishes
+  setTimeout(function () {
+    window.location.href = "https://m.me/100653523033389?text=" + encoded;
+  }, 1500);
+
+});
 
 
   </script>
@@ -297,6 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html> 
+
 
 
 
