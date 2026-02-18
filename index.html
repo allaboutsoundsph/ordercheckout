@@ -305,55 +305,11 @@ setInterval(function(){
     moveReview(1);
 }, 3000);
 
-// ===== FORM: Send to Gmail + Messenger =====
-document.getElementById("orderForm").addEventListener("submit", function(e){
-e.preventDefault();
-
-let form = this;
-
-let name = document.getElementById("name").value.trim();
-let phone = document.getElementById("phone").value.trim();
-let address = document.getElementById("address").value.trim();
-let landmark = document.getElementById("landmark").value.trim();
-
-if(!name || !phone || !address){
-    alert("Please complete your details.");
-    return;
-}
-
-// Messenger message
-let msg = `New Order:
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-Landmark: ${landmark}
-Product: 500GB HDD COD`;
-
-// Send to Gmail via FormSubmit
-fetch(form.action, {
-    method: "POST",
-    body: new FormData(form),
-    headers: { 'Accept': 'application/json' }
-})
-.then(response => {
-    if(response.ok){
-        // Open Messenger after email is sent
-        window.location.href =
-        "https://m.me/allaboutsoundsphmain?text=" + encodeURIComponent(msg);
-
-        form.reset();
-    } else {
-        alert("Failed to send order. Please try again.");
-    }
-})
-.catch(() => {
-    alert("Network error. Please check your internet.");
-});
-});
 </script>
 
 </body>
 </html>
+
 
 
 
