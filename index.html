@@ -280,7 +280,6 @@ required>
 <option value="157000000">Tawi-Tawi</option>
 <option value="157100000">Basilan</option>
 
-<select id="province" required></select>
 <select id="city" required></select>
 <select id="barangay" required></select>
 
@@ -470,12 +469,14 @@ provinceSelect.addEventListener("change", function () {
   citySelect.innerHTML = '<option>Loading cities...</option>';
   barangaySelect.innerHTML = '<option>Select Barangay</option>';
 
-  let url = "";
+  let url;
 
-  // NCR special case
+  // NCR
   if (code === "130000000") {
-    url = "https://psgc.gitlab.io/api/regions/130000000/cities-municipalities/";
-  } else {
+    url = `https://psgc.gitlab.io/api/regions/${code}/cities/`;
+  } 
+  // Other provinces
+  else {
     url = `https://psgc.gitlab.io/api/provinces/${code}/cities-municipalities/`;
   }
 
@@ -484,7 +485,7 @@ provinceSelect.addEventListener("change", function () {
     .then(cities => {
       citySelect.innerHTML = '<option value="">Select City / Municipality</option>';
 
-      cities.sort((a,b)=>a.name.localeCompare(b.name));
+      cities.sort((a, b) => a.name.localeCompare(b.name));
 
       cities.forEach(city => {
         let opt = document.createElement("option");
@@ -540,6 +541,7 @@ provinceSelect.addEventListener("change", function () {
 
 </body>
 </html> 
+
 
 
 
