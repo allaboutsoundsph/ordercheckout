@@ -219,7 +219,7 @@ required>
 <option value="054100000">Masbate</option>
 <option value="056200000">Sorsogon</option>
 
-<!-- Region VI (Visayas - your area) -->
+<!-- Region VI -->
 <option value="060400000">Aklan</option>
 <option value="060600000">Antique</option>
 <option value="061900000">Capiz</option>
@@ -282,10 +282,18 @@ required>
 
 </select>
 
+<select id="city" required>
+<option value="">Select City / Municipality</option>
+</select>
+
+<select id="barangay" required>
+<option value="">Select Barangay</option>
+</select>
 
 <input type="text" id="street" placeholder="House / Purok / Street" required>
 
-<textarea 
+<textarea name="address" id="address" readonly required></textarea>
+
 name="address" 
 id="address"
 placeholder="Full address will appear here"
@@ -461,60 +469,52 @@ document.addEventListener("DOMContentLoaded", function () {
   const streetInput = document.getElementById("street");
   const addressField = document.getElementById("address");
 
-  // Load provinces
-  fetch("https://psgc.gitlab.io/api/provinces/")
-    .then(res => res.json())
-    .then(provinces => {
-      provinces.sort((a,b)=>a.name.localeCompare(b.name));
-      provinces.forEach(p => {
-        let opt = document.createElement("option");
-        opt.value = p.code;
-        opt.textContent = p.name;
-        provinceSelect.appendChild(opt);
-      });
-    });
-
   // Province → Cities
   provinceSelect.addEventListener("change", function () {
-    citySelect.innerHTML = '<option value="">Loading...</option>';
+    const provinceCode = this.value;
+    if (!provinceCode) return;
+
+    citySelect.innerHTML = '<option value="">Loading cities...</option>';
     barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
 
-    fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
+    fetch(`https://psgc.gitlab.io/api/provinces/${provinceCode}/cities-municipalities/`)
       .then(res => res.json())
       .then(cities => {
         citySelect.innerHTML = '<option value="">Select City / Municipality</option>';
         cities.sort((a,b)=>a.name.localeCompare(b.name));
-        cities.forEach(c => {
+
+        cities.forEach(city => {
           let opt = document.createElement("option");
-          opt.value = c.code;
-          opt.textContent = c.name;
+          opt.value = city.code;
+          opt.textContent = city.name;
           citySelect.appendChild(opt);
         });
       });
-
-    updateAddress();
   });
 
   // City → Barangays
   citySelect.addEventListener("change", function () {
-    barangaySelect.innerHTML = '<option value="">Loading...</option>';
+    const cityCode = this.value;
+    if (!cityCode) return;
 
-    fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
+    barangaySelect.innerHTML = '<option value="">Loading barangays...</option>';
+
+    fetch(`https://psgc.gitlab.io/api/cities-municipalities/${cityCode}/barangays/`)
       .then(res => res.json())
       .then(brgys => {
         barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
         brgys.sort((a,b)=>a.name.localeCompare(b.name));
-        brgys.forEach(b => {
+
+        brgys.forEach(brgy => {
           let opt = document.createElement("option");
-          opt.value = b.name;
-          opt.textContent = b.name;
+          opt.value = brgy.name;
+          opt.textContent = brgy.name;
           barangaySelect.appendChild(opt);
         });
       });
-
-    updateAddress();
   });
 
+  // Auto Address
   barangaySelect.addEventListener("change", updateAddress);
   streetInput.addEventListener("input", updateAddress);
 
@@ -531,8 +531,10 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
+
 </body>
 </html> 
+
 
 
 
