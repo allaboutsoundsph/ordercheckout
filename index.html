@@ -288,10 +288,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// ===== Open Messenger after submit (WORKING VERSION) =====
-// ===== Professional Checkout Flow =====
+<script>
 document.getElementById("orderForm").addEventListener("submit", function(e) {
-  e.preventDefault(); // stop normal submit
+  e.preventDefault();
 
   let form = this;
 
@@ -309,38 +308,37 @@ Product: 500GB HDD COD`;
 
   let encoded = encodeURIComponent(message);
 
-  // Send to Gmail using FormSubmit (AJAX)
+  // Send email (FormSubmit)
   fetch(form.action, {
     method: "POST",
     body: new FormData(form),
     headers: {
       'Accept': 'application/json'
     }
-  })
-  .then(response => {
-    // Show confirmation message
-    document.getElementById("successMsg").style.display = "block";
-
-    // Redirect to Messenger after 1.5 seconds
-    setTimeout(function() {
-      window.location.href = "https://m.me/100653523033389?text=" + encoded;
-    }, 1500);
-  })
-  .catch(error => {
-    alert("Error sending order. Please try again.");
   });
+
+  // Show success message
+  document.getElementById("successMsg").style.display = "block";
+
+  // Redirect to Messenger with details
+  setTimeout(function() {
+    window.open(
+      "https://m.me/allaboutsoundsphmain?text=" + encoded,
+      "_blank"
+    );
+  }, 800);
 });
+</script>
 
-
-  </script>
   <!-- Floating Messenger Bubble -->
-  <a href="https://m.me/100653523033389" target="_blank" 
+  <a href="https://m.me/allaboutsoundsphmain" target="_blank" 
      style="position:fixed;right:15px;bottom:90px;background:#0084ff;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 4px 10px rgba(0,0,0,0.2);z-index:9999;">
      💬
   </a>
 
 </body>
 </html> 
+
 
 
 
