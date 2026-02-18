@@ -160,7 +160,12 @@ header p {
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
 
-        <input type="text" name="name" id="name" placeholder="Full Name (First & Last)"pattern="^[A-Za-z]+(\s[A-Za-z]+)+$"title="Please enter your full name (First and Last name)" required>
+        <input type="text" name="name" id="name"
+placeholder="Full Name (First & Last)"
+pattern="^[A-Za-z]{2,}\s+[A-Za-z]{2,}.*$"
+title="Please enter your full name (First and Last)"
+required>
+
         <input type="tel" name="phone" id="phone" placeholder="09XXXXXXXXX"pattern="^(09|\+639)\d{9}$"title="Enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX)" required>
         <label style="font-weight:bold;">Complete Address</label>
 <div style="background:#fff8e6; color:#b26a00; padding:8px; border-radius:6px; font-size:13px; margin-bottom:6px;">
@@ -168,12 +173,18 @@ Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
 </div>
 
 <textarea 
-  name="address" 
-  id="address" 
-  placeholder="Example: Purok 3, Brgy. San Jose, Jaro, Iloilo City"
-  required></textarea>
+name="address" 
+id="address"
+placeholder="Example: Purok 3, Brgy. San Jose, Jaro, Iloilo City"
+pattern=".*\s+.*"
+title="Please enter a complete address"
+required></textarea>
 
-        <input type="text" name="landmark" id="landmark" placeholder="Nearest Landmark" required>
+        <input type="text" name="landmark" id="landmark"
+pattern=".*\s+.*"
+title="Please enter a valid landmark"
+required>
+
 
         <select name="payment" required>
           <option>Cash on Delivery (COD)</option>
@@ -325,6 +336,7 @@ Product: 500GB HDD COD`;
 
 </body>
 </html> 
+
 
 
 
