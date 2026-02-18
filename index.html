@@ -186,7 +186,7 @@ Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
         Order received! Opening Messenger...
       </p>
 
-      <a class="messenger-btn" href="https://m.me/100653523033389" target="_blank">Order via Messenger</a>
+      <a class="messenger-btn" href="https://m.me/allaboutsoundsphmain" target="_blank">Order via Messenger</a>
     </div>
   </div>
 
@@ -200,7 +200,7 @@ Please include: <b>House/Purok, Brgy, Municipality/City, Province</b>
     function trackAddToCart() {
       
     }
-
+<script>
     // Buyer counter
     let count = 18;
     setInterval(() => {
@@ -258,10 +258,9 @@ let reviewIndex = 0;
 
 function moveReview(direction) {
   const track = document.getElementById("reviewTrack");
-  if (!track) return; // safety if section not loaded
+  if (!track) return;
 
   const total = track.children.length;
-
   reviewIndex += direction;
 
   if (reviewIndex < 0) reviewIndex = total - 1;
@@ -270,7 +269,7 @@ function moveReview(direction) {
   track.style.transform = `translateX(-${reviewIndex * 100}%)`;
 }
 
-// Swipe support (mobile)
+// Swipe support
 let startX = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -288,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-<script>
+// ===== ORDER FORM → MESSENGER =====
 document.getElementById("orderForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -306,21 +305,17 @@ Address: ${address}
 Landmark: ${landmark}
 Product: 500GB HDD COD`;
 
-  let encoded = encodeURIComponent(message);
+let encoded = encodeURIComponent(message);
 
-  // Send email (FormSubmit)
+  // Send email
   fetch(form.action, {
     method: "POST",
     body: new FormData(form),
-    headers: {
-      'Accept': 'application/json'
-    }
+    headers: { 'Accept': 'application/json' }
   });
 
-  // Show success message
   document.getElementById("successMsg").style.display = "block";
 
-  // Redirect to Messenger with details
   setTimeout(function() {
     window.open(
       "https://m.me/allaboutsoundsphmain?text=" + encoded,
@@ -338,20 +333,4 @@ Product: 500GB HDD COD`;
 
 </body>
 </html> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
