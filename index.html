@@ -453,21 +453,38 @@ const orderData = {
   price: 1500
 };
 
-try{
+try {
 
-  const response = await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(orderData)
-});
+  const response = await fetch("https://script.google.com/macros/s/AKfycbzAfeVKMPid2P82lzra9J7TE074eQGc8ptHr1EwZxZhQThH3cG9ok7Y7RkRtYnxCh_uvw/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(orderData)
+  });
 
-if (!response.ok) {
-  throw new Error("Server error");
-}
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
 
-const result = await response.json();
+  const result = await response.json();
+
+  if (!result.success) {
+    throw new Error("Server returned failure");
+  }
+
+  // Facebook Purchase Event
+  if (typeof fbq !== "undefined") {
+    fbq('track', 'Purchase', {
+      value: 1500,
+      currency: 'PHP',
+      content_name: '500GB External HDD',
+      content_category: 'External Storage',
+      content_type: 'product'
+    });
+  }
+
+  const message = `Hello! I would like to confirm my order.
 
 Name: ${name}
 Phone: ${phone}
@@ -477,14 +494,16 @@ Landmark: ${landmark}
 Product: 500GB External HDD
 Price: ₱1,500 COD`;
 
-  setTimeout(()=>{
-    window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
-  },800);
+  setTimeout(() => {
+    window.location.href =
+      `https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
+  }, 500);
 
-}catch(error){
+} catch (error) {
+
   alert("Order failed. Please try again.");
-  btn.disabled=false;
-  btn.innerText="PLACE ORDER";
+  btn.disabled = false;
+  btn.innerText = "PLACE ORDER";
 }
 
 });
@@ -493,5 +512,6 @@ Price: ₱1,500 COD`;
 
 </body>
 </html>
+
 
 
