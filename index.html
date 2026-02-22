@@ -6,7 +6,6 @@
 <title>500GB External HDD – Official Store</title>
 
 <link rel="preconnect" href="https://connect.facebook.net">
-<link rel="dns-prefetch" href="https://connect.facebook.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -14,28 +13,21 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#fdfbfb,#ebedee);color:#222;}
-header{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-header h1{font-size:1.2rem;font-weight:700}
-header p{font-size:0.8rem;opacity:0.9}
+header{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:14px;}
 .container{max-width:680px;margin:auto;padding:16px}
-.card{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);padding:20px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);margin-bottom:18px;}
+.card{background:#fff;padding:20px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);margin-bottom:18px;}
 .product-img{width:100%;border-radius:16px;margin-bottom:15px;}
-.badge{background:#ffece8;color:#ee4d2d;padding:6px 12px;border-radius:30px;font-size:0.75rem;font-weight:600;display:inline-block;margin-bottom:10px;}
 .price{font-size:2rem;font-weight:800;color:#ee4d2d;margin:5px 0;}
 .old-price{text-decoration:line-through;color:#888;font-size:1rem;margin-left:8px;}
-.urgent{background:#fff1f0;padding:10px;border-radius:8px;margin-top:10px;font-weight:600;color:#ee4d2d;}
-.buyers{font-size:0.85rem;margin-top:6px;color:#555;}
-.timer{margin-top:6px;font-weight:600;}
 form{display:grid;gap:12px;margin-top:10px;}
-input,textarea{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:14px;transition:0.2s;}
-input:focus,textarea:focus{border-color:#ee4d2d;outline:none;box-shadow:0 0 0 3px rgba(238,77,45,0.15);}
-button{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:0.2s;box-shadow:0 6px 18px rgba(238,77,45,0.3);}
-button:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(238,77,45,0.4);}
+input,textarea{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:14px;}
+button{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;}
 button:disabled{opacity:0.7;cursor:not-allowed;}
 footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
-.sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;animation:pulse 2s infinite;cursor:pointer;}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+.sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
 @media(min-width:768px){.sticky-order{display:none}}
+
+/* REVIEW SLIDER */
 .review-slider{position:relative;overflow:hidden;border-radius:16px}
 .review-wrapper{display:flex;transition:transform 0.5s ease}
 .review-slide{min-width:100%}
@@ -45,11 +37,7 @@ footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .next-btn{right:10px}
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-(function(){ emailjs.init("l6ROHGUHO5o828SRA"); })();
-</script>
-
+<!-- Facebook Pixel -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -57,12 +45,13 @@ if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
 s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
 (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
 fbq('init','631653776133164');
 fbq('track','PageView');
 fbq('track','ViewContent');
 </script>
-</head>
 
+</head>
 <body>
 
 <header>
@@ -73,21 +62,19 @@ fbq('track','ViewContent');
 <div class="container">
 
 <div class="card">
-<span class="badge">Official Store • Best Seller</span>
 <img class="product-img" src="new feb-Cover.jpg" loading="lazy">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p><b>📍 Iloilo Based Seller</b></p>
-<div class="urgent">⚠️ Only <span id="slots"></span> slots left today!</div>
-<p class="buyers">⚡ <span id="buyerCount">18</span> people checking out</p>
-<p class="timer">Sale ends in: <span id="timer"></span></p>
 </div>
 
+<!-- CUSTOMER REVIEWS -->
 <div class="card">
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Satisfied Customers</h3>
 <div class="review-slider">
 <div class="review-wrapper" id="reviewWrapper">
+
 <div class="review-slide"><img src="review1.png" loading="lazy"></div>
 <div class="review-slide"><img src="review2.png" loading="lazy"></div>
 <div class="review-slide"><img src="review3.png" loading="lazy"></div>
@@ -99,7 +86,9 @@ fbq('track','ViewContent');
 <div class="review-slide"><img src="review9.png" loading="lazy"></div>
 <div class="review-slide"><img src="review10.png" loading="lazy"></div>
 <div class="review-slide"><img src="review11.png" loading="lazy"></div>
+
 </div>
+
 <button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
 <button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
 </div>
@@ -118,48 +107,19 @@ fbq('track','ViewContent');
 
 </div>
 
-<div class="sticky-order" onclick="scrollToOrder()">
+<div class="sticky-order" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">
 🔥 ORDER NOW – ₱1,500
 </div>
 
 <footer>© 2026 All About Sounds PH</footer>
 
 <script>
-function scrollToOrder(){
-document.getElementById("orderForm").scrollIntoView({behavior:"smooth"});
-}
-
-let slots=Math.floor(Math.random()*8)+5;
-document.getElementById("slots").innerText=slots;
-
-let buyerCount=18;
-const buyerEl=document.getElementById("buyerCount");
-setInterval(()=>{
-buyerCount+=Math.random()>0.5?1:-1;
-if(buyerCount<15)buyerCount=15;
-if(buyerCount>25)buyerCount=25;
-buyerEl.innerText=buyerCount;
-},3000);
-
-function updateCountdown(){
-const now=new Date();
-const midnight=new Date();
-midnight.setHours(24,0,0,0);
-let diff=midnight-now;
-if(diff<=0){midnight.setDate(midnight.getDate()+1);diff=midnight-now;}
-const h=String(Math.floor(diff/1000/60/60)).padStart(2,'0');
-const m=String(Math.floor((diff/1000/60)%60)).padStart(2,'0');
-const s=String(Math.floor((diff/1000)%60)).padStart(2,'0');
-document.getElementById("timer").innerText=`${h}:${m}:${s}`;
-}
-updateCountdown();
-setInterval(updateCountdown,1000);
-
+/* REVIEW SLIDER */
 let index=0;
 const wrapper=document.getElementById("reviewWrapper");
-const total=wrapper?wrapper.children.length:0;
+const total=wrapper.children.length;
+
 function moveSlide(dir){
-if(!wrapper)return;
 index+=dir;
 if(index<0)index=total-1;
 if(index>=total)index=0;
@@ -167,7 +127,8 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-function showError(msg){alert(msg);}
+/* GOOGLE SHEET SUBMISSION */
+const SHEET_URL="https://script.google.com/macros/s/AKfycby7hD2sSypAddNzOsAieGw72EpjDOsxmRzkU-pLL_LieaxniziQS-Iw_HvfgYTWJhBT/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
@@ -177,24 +138,23 @@ const phone=this.phone.value.trim();
 const address=this.address.value.trim();
 const landmark=this.landmark.value.trim();
 
-if(name.length<3)return showError("Please enter your full name");
-if(!/^09\d{9}$/.test(phone))return showError("Enter valid Philippine mobile number (09XXXXXXXXX)");
-if(address.length<10)return showError("Please enter complete address");
+if(name.length<3)return alert("Please enter full name");
+if(!/^09\d{9}$/.test(phone))return alert("Enter valid Philippine mobile number");
+if(address.length<10)return alert("Please enter complete address");
 
-if(typeof fbq!=="undefined"){
 fbq('track','AddToCart',{value:1500,currency:'PHP'});
-}
 
 btn.disabled=true;
-btn.innerText="Processing Order...";
+btn.innerText="Processing...";
 
-emailjs.send("service_ujsvyrg","template_41wfyof",{
-name,phone,address,landmark
-}).then(function(){
-
-if(typeof fbq!=="undefined"){
+fetch(SHEET_URL,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({name,phone,address,landmark})
+})
+.then(res=>res.json())
+.then(()=>{
 fbq('track','Purchase',{value:1500,currency:'PHP'});
-}
 
 const message=`Hello! I would like to confirm my order.
 
@@ -206,12 +166,10 @@ Landmark: ${landmark}
 Product: 500GB External HDD
 Price: ₱1,500 COD`;
 
-setTimeout(()=>{
 window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
-},800);
-
-},function(){
-showError("Order failed. Please try again.");
+})
+.catch(()=>{
+alert("Submission failed. Please try again.");
 btn.disabled=false;
 btn.innerText="PLACE ORDER";
 });
