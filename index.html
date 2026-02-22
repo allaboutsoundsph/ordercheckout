@@ -1,183 +1,285 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>500GB External HDD – Official Store</title>
 
-// =======================
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5;}
+header{background:#ee4d2d;color:#fff;text-align:center;padding:8px;}
+header h1{margin:0;font-size:1rem;}
+header p{margin:0;font-size:0.75rem;}
+
+.container{max-width:650px;margin:auto;padding:12px;}
+.card{background:#fff;padding:15px;border-radius:10px;
+box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px;}
+
+.product-img{width:100%;border-radius:10px;margin-bottom:10px;}
+.price{font-size:1.8rem;font-weight:bold;color:#ee4d2d;}
+.old-price{text-decoration:line-through;color:#999;font-size:0.95rem;}
+.badge{background:#ffece8;color:#ee4d2d;padding:5px 10px;border-radius:6px;font-size:0.8rem;font-weight:bold;}
+.urgent{background:#fff1f0;color:#ee4d2d;padding:10px;border-radius:6px;font-weight:bold;margin-top:8px;}
+.buyers{font-size:0.85rem;color:#555;}
+
+form{display:grid;gap:10px;}
+input,textarea,select{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;}
+button{background:#ee4d2d;color:#fff;border:none;padding:15px;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
+
+.messenger-btn{display:block;text-align:center;background:#0084ff;color:#fff;padding:12px;border-radius:8px;font-weight:bold;text-decoration:none;}
+
+.review-carousel{position:relative;overflow:hidden;border-radius:10px;}
+.review-track{display:flex;transition:transform 0.4s ease;}
+.review-track img{width:100%;flex-shrink:0;border-radius:10px;}
+
+.nav{position:absolute;top:50%;transform:translateY(-50%);
+background:rgba(0,0,0,0.5);color:#fff;border:none;font-size:22px;
+width:36px;height:36px;border-radius:50%;cursor:pointer;}
+.prev{left:8px;} .next{right:8px;}
+
+footer{text-align:center;padding:15px;font-size:0.75rem;color:#777;}
+
+.sticky-order{
+position:fixed;bottom:0;left:0;width:100%;
+background:#ee4d2d;color:#fff;text-align:center;
+padding:14px;font-size:16px;font-weight:bold;
+z-index:9998;box-shadow:0 -2px 8px rgba(0,0,0,0.15);
+}
+@media(min-width:768px){.sticky-order{display:none;}}
+
+/* BUYER POPUP */
+.buyer-popup{
+position:fixed;
+bottom:90px;
+left:15px;
+background:#fff;
+padding:12px 15px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.15);
+font-size:13px;
+display:flex;
+align-items:center;
+gap:10px;
+z-index:9999;
+opacity:0;
+transform:translateY(20px);
+transition:all 0.4s ease;
+}
+.buyer-popup.show{
+opacity:1;
+transform:translateY(0);
+}
+.buyer-popup img{
+width:35px;height:35px;border-radius:50%;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>500GB External HDD</h1>
+<p>60,000+ Songs | Plug & Play</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<span class="badge">Official Store • Best Seller</span>
+<img class="product-img" src="new feb-Cover.jpg" alt="500GB HDD">
+<h2>Complete DJ Music Collection</h2>
+<div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
+<p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
+<p><b>📍 Iloilo Based Seller</b></p>
+<div class="urgent">⚠️ Only <span id="slots">5</span> slots left today!</div>
+<p class="buyers">⚡ <span id="buyerCount">18</span> people checking out</p>
+<p>Sale ends in: <b id="timer">00:00:00</b></p>
+</div>
+
+<div class="card">
+<h3>⭐ Customer Reviews</h3>
+<div class="review-carousel">
+<button class="nav prev" onclick="moveReview(-1)">‹</button>
+<div class="review-track" id="reviewTrack">
+<img src="25.png">
+<img src="27.png">
+<img src="28.png">
+<img src="29.png">
+<img src="30.png">
+</div>
+<button class="nav next" onclick="moveReview(1)">›</button>
+</div>
+</div>
+
+<div class="card">
+<h3>Checkout</h3>
+<form id="orderForm" action="https://formsubmit.co/solenjerllyn04@gmail.com" method="POST">
+
+<input type="hidden" name="_next" value="https://m.me/allaboutsoundsphmain">
+
+<input type="text" name="name" placeholder="Full Name" required>
+<input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$">
+
+<select id="province" required></select>
+<select id="city" required></select>
+<select id="barangay" required></select>
+
+<input type="text" id="street" placeholder="House / Street" required>
+<textarea id="address" name="address" readonly placeholder="Full Address"></textarea>
+
+<input type="text" name="landmark" placeholder="Nearest Landmark" required>
+
+<button type="submit">PLACE ORDER</button>
+</form>
+
+<a class="messenger-btn" href="https://m.me/allaboutsoundsphmain" target="_blank">
+Order via Messenger
+</a>
+</div>
+
+</div>
+
+<footer>© 2026 All About Sounds PH</footer>
+
+<div class="sticky-order" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">
+LIMITED STOCK – ORDER NOW (COD)
+</div>
+
+<!-- Buyer Popup -->
+<div class="buyer-popup" id="buyerPopup">
+<img src="https://i.pravatar.cc/50">
+<div>
+<strong id="buyerName"></strong><br>
+<span style="color:#555;">just ordered 500GB HDD</span>
+</div>
+</div>
+
+<script>
 // FACEBOOK PIXEL
-// =======================
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}
-(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
+(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','YOUR_PIXEL_ID');
+fbq('track','PageView');
 
-fbq('init', 'YOUR_PIXEL_ID'); 
-fbq('track', 'PageView');
-fbq('track', 'ViewContent');
-
-
-// =======================
-// DAILY AUTO RESET COUNTDOWN
-// =======================
-
-function startDailyCountdown(){
-    const timer = document.getElementById("timer");
-
-    function updateTimer(){
-        const now = new Date();
-        const midnight = new Date();
-        midnight.setHours(24,0,0,0);
-
-        const diff = midnight - now;
-
-        const h = String(Math.floor(diff/1000/60/60)).padStart(2,'0');
-        const m = String(Math.floor((diff/1000/60)%60)).padStart(2,'0');
-        const s = String(Math.floor((diff/1000)%60)).padStart(2,'0');
-
-        timer.innerText = `${h}:${m}:${s}`;
-    }
-
-    updateTimer();
-    setInterval(updateTimer,1000);
+// DAILY COUNTDOWN
+function startCountdown(){
+function update(){
+const now=new Date();
+const midnight=new Date();
+midnight.setHours(24,0,0,0);
+const diff=midnight-now;
+const h=String(Math.floor(diff/1000/60/60)).padStart(2,'0');
+const m=String(Math.floor((diff/1000/60)%60)).padStart(2,'0');
+const s=String(Math.floor((diff/1000)%60)).padStart(2,'0');
+document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 }
-startDailyCountdown();
+update();
+setInterval(update,1000);
+}
+startCountdown();
 
-
-// =======================
-// BUYER COUNTER (DYNAMIC)
-// =======================
-let buyers = Math.floor(Math.random()*10)+15;
+// Buyer Counter
+let buyers=18;
 setInterval(()=>{
-    buyers += Math.floor(Math.random()*2);
-    document.getElementById("buyerCount").innerText = buyers;
+buyers+=Math.floor(Math.random()*2);
+document.getElementById("buyerCount").innerText=buyers;
 },5000);
 
+// Slots
+document.getElementById("slots").innerText=Math.floor(Math.random()*3)+3;
 
-// =======================
-// SLOT RANDOMIZER
-// =======================
-document.getElementById("slots").innerText = Math.floor(Math.random()*3)+3;
-
-
-// =======================
-// REVIEW CAROUSEL
-// =======================
-let reviewIndex = 0;
-
+// Review Carousel
+let index=0;
 function moveReview(d){
-    const track = document.getElementById("reviewTrack");
-    const total = track.children.length;
-    reviewIndex += d;
-
-    if(reviewIndex < 0) reviewIndex = total-1;
-    if(reviewIndex >= total) reviewIndex = 0;
-
-    track.style.transform = `translateX(-${reviewIndex*100}%)`;
+const track=document.getElementById("reviewTrack");
+const total=track.children.length;
+index+=d;
+if(index<0)index=total-1;
+if(index>=total)index=0;
+track.style.transform=`translateX(-${index*100}%)`;
 }
+setInterval(()=>moveReview(1),3000);
 
-setInterval(()=>{ moveReview(1); },3000);
+// Buyer Popup
+const names=["Mark from Manila","Ana from Cebu","Carlo from Iloilo","John from QC","Maria from Davao"];
+const popup=document.getElementById("buyerPopup");
+const buyerName=document.getElementById("buyerName");
 
+function showPopup(){
+buyerName.innerText=names[Math.floor(Math.random()*names.length)];
+popup.classList.add("show");
+setTimeout(()=>popup.classList.remove("show"),4000);
+}
+setInterval(showPopup,Math.floor(Math.random()*7000)+8000);
 
-// =======================
-// ADVANCED PH ADDRESS SYSTEM
-// =======================
-
+// PH Address
 document.addEventListener("DOMContentLoaded",function(){
+const province=document.getElementById("province");
+const city=document.getElementById("city");
+const barangay=document.getElementById("barangay");
+const street=document.getElementById("street");
+const address=document.getElementById("address");
 
-const province = document.getElementById("province");
-const city = document.getElementById("city");
-const barangay = document.getElementById("barangay");
-const street = document.getElementById("street");
-const address = document.getElementById("address");
-
-// Load provinces
 fetch("https://psgc.gitlab.io/api/provinces/")
-.then(res => res.json())
-.then(data => {
-    data.sort((a,b)=>a.name.localeCompare(b.name));
-    province.innerHTML='<option value="">Select Province</option>';
-
-    let ncr=document.createElement("option");
-    ncr.value="130000000";
-    ncr.textContent="Metro Manila (NCR)";
-    province.appendChild(ncr);
-
-    data.forEach(p=>{
-        let opt=document.createElement("option");
-        opt.value=p.code;
-        opt.textContent=p.name;
-        province.appendChild(opt);
-    });
+.then(res=>res.json())
+.then(data=>{
+data.sort((a,b)=>a.name.localeCompare(b.name));
+province.innerHTML='<option>Select Province</option>';
+data.forEach(p=>{
+let o=document.createElement("option");
+o.value=p.code;
+o.textContent=p.name;
+province.appendChild(o);
+});
 });
 
-// Province change
 province.addEventListener("change",function(){
-    city.innerHTML="<option>Loading...</option>";
-    barangay.innerHTML="<option>Select Barangay</option>";
-
-    let url = this.value==="130000000"
-    ?"https://psgc.gitlab.io/api/regions/130000000/cities-municipalities/"
-    :`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`;
-
-    fetch(url)
-    .then(res=>res.json())
-    .then(data=>{
-        city.innerHTML='<option value="">Select City</option>';
-        data.forEach(c=>{
-            let opt=document.createElement("option");
-            opt.value=c.code;
-            opt.textContent=c.name;
-            city.appendChild(opt);
-        });
-    });
+fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
+.then(r=>r.json())
+.then(data=>{
+city.innerHTML='<option>Select City</option>';
+data.forEach(c=>{
+let o=document.createElement("option");
+o.value=c.code;
+o.textContent=c.name;
+city.appendChild(o);
+});
+});
 });
 
-// City change
 city.addEventListener("change",function(){
-    barangay.innerHTML="<option>Loading...</option>";
-
-    fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
-    .then(res=>res.json())
-    .then(data=>{
-        barangay.innerHTML='<option value="">Select Barangay</option>';
-        data.forEach(b=>{
-            let opt=document.createElement("option");
-            opt.value=b.name;
-            opt.textContent=b.name;
-            barangay.appendChild(opt);
-        });
-    });
+fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
+.then(r=>r.json())
+.then(data=>{
+barangay.innerHTML='<option>Select Barangay</option>';
+data.forEach(b=>{
+let o=document.createElement("option");
+o.value=b.name;
+o.textContent=b.name;
+barangay.appendChild(o);
+});
+});
 });
 
-// Auto update address
 function updateAddress(){
-    address.value = `${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text || ''}, ${province.options[province.selectedIndex]?.text || ''}`;
+address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text||''}, ${province.options[province.selectedIndex]?.text||''}`;
 }
-
 street.addEventListener("input",updateAddress);
 barangay.addEventListener("change",updateAddress);
 
-
-// =======================
-// FORM SUBMIT
-// =======================
-
-const form = document.getElementById("orderForm");
-
-form.addEventListener("focusin",()=>{
-    fbq('track','Lead');
+document.getElementById("orderForm").addEventListener("submit",function(){
+fbq('track','Purchase');
+setTimeout(()=>{
+window.location.href="https://m.me/allaboutsoundsphmain";
+},1000);
 });
-
-form.addEventListener("submit",function(){
-    fbq('track','Purchase');
-
-    setTimeout(()=>{
-        window.location.href="https://m.me/allaboutsoundsphmain";
-    },1000);
 });
-
-});
-
 </script>
+
+</body>
+</html>
