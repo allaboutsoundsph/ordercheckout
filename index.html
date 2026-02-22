@@ -117,9 +117,9 @@ fbq('track','ViewContent');
 <div class="card">
 <h3>Checkout</h3>
 <form id="orderForm">
-<input type="text" name="name" placeholder="Full Name" required autocomplete="name">
-<input type="tel" name="phone" placeholder="09XXXXXXXXX" required autocomplete="tel">
-<textarea name="address" placeholder="Complete Address" required autocomplete="street-address"></textarea>
+<input type="text" name="name" placeholder="Full Name" required>
+<input type="tel" name="phone" placeholder="09XXXXXXXXX" required>
+<textarea name="address" placeholder="Complete Address" required></textarea>
 <div class="address-guide">Include House No., Street, Barangay, City & Province</div>
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
 <input type="text" name="website" style="display:none">
@@ -203,12 +203,11 @@ setTimeout(()=>popup.classList.remove("show"),4000);
 }
 setTimeout(()=>setInterval(showSocial,15000),5000);
 
-/* GOOGLE SHEETS FIXED */
+/* GOOGLE SHEETS – FORM DATA FIX */
 const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
-
 if(this.website.value!=="")return;
 
 const btn=this.querySelector("button");
@@ -227,16 +226,21 @@ fbq('track','AddToCart',{value:1500,currency:'PHP'});
 
 btn.disabled=true;
 btn.classList.add("loading");
-btn.dataset.original=btn.innerHTML;
 btn.innerHTML="Processing...";
 
-/* CORS FIX */
+/* FORM DATA (NO PREFLIGHT EVER) */
+const formData = new FormData();
+formData.append("name", name);
+formData.append("phone", phone);
+formData.append("address", address);
+formData.append("landmark", landmark);
+
 fetch(SHEET_URL,{
 method:"POST",
 mode:"no-cors",
-body:JSON.stringify({name,phone,address,landmark})
-})
-.then(()=>{
+body: formData
+});
+
 fbq('track','Purchase',{value:1500,currency:'PHP'});
 
 const msg=`Hello! Confirm order:
@@ -249,15 +253,11 @@ Landmark: ${landmark}
 Product: 500GB HDD
 Price: ₱1,500 COD`;
 
+setTimeout(()=>{
 window.location.href=
 `https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(msg)}`;
-})
-.catch(()=>{
-alert("Network error. Please try again.");
-btn.disabled=false;
-btn.classList.remove("loading");
-btn.innerHTML="PLACE ORDER";
-});
+},800);
+
 });
 
 /* INITIATE CHECKOUT */
@@ -265,6 +265,5 @@ document.getElementById("orderForm")
 .addEventListener("focusin",()=>fbq('track','InitiateCheckout'),{once:true});
 
 </script>
-
 </body>
 </html>
