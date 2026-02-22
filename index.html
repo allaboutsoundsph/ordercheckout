@@ -39,7 +39,7 @@ footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .next-btn{right:10px}
 </style>
 
-<!-- FACEBOOK PIXEL -->
+<!-- Facebook Pixel -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -129,7 +129,7 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* GOOGLE SHEETS INTEGRATION */
+/* GOOGLE SHEETS (GITHUB SAFE VERSION) */
 const SHEET_URL="https://script.google.com/macros/s/AKfycby7hD2sSypAddNzOsAieGw72EpjDOsxmRzkU-pLL_LieaxniziQS-Iw_HvfgYTWJhBT/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
@@ -150,16 +150,17 @@ fbq('track','AddToCart',{value:1500,currency:'PHP'});
 btn.disabled=true;
 btn.innerText="Processing...";
 
+/* no-cors for GitHub Pages */
 fetch(SHEET_URL,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({name,phone,address,landmark})
+  method:"POST",
+  mode:"no-cors",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({name,phone,address,landmark})
 })
-.then(res=>res.json())
 .then(()=>{
-fbq('track','Purchase',{value:1500,currency:'PHP'});
+  fbq('track','Purchase',{value:1500,currency:'PHP'});
 
-const message=`Hello! I would like to confirm my order.
+  const message=`Hello! I would like to confirm my order.
 
 Name: ${name}
 Phone: ${phone}
@@ -169,12 +170,12 @@ Landmark: ${landmark}
 Product: 500GB External HDD
 Price: ₱1,500 COD`;
 
-window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
+  window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
 })
 .catch(()=>{
-alert("Submission failed. Please try again.");
-btn.disabled=false;
-btn.innerText="PLACE ORDER";
+  alert("Submission failed. Please try again.");
+  btn.disabled=false;
+  btn.innerText="PLACE ORDER";
 });
 });
 </script>
