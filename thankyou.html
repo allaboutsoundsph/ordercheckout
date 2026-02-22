@@ -1,20 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Successful</title>
+<title>500GB HARD DRIVE – Official Store</title>
 
 <style>
-body{font-family:Arial;background:#f5f5f5;
-display:flex;justify-content:center;align-items:center;
-height:100vh;margin:0;text-align:center;}
-.card{background:#fff;padding:40px;border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);max-width:400px;}
-button{background:#ee4d2d;color:#fff;border:none;
-padding:12px 20px;border-radius:8px;font-size:16px;cursor:pointer;}
+body{
+font-family:Arial, sans-serif;
+margin:0;
+background:#f5f5f5;
+}
+
+header{
+background:#ee4d2d;
+color:#fff;
+text-align:center;
+padding:12px;
+font-weight:bold;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:#fff;
+padding:18px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+margin-bottom:18px;
+}
+
+.product-img{
+width:100%;
+border-radius:12px;
+}
+
+.price{
+font-size:2rem;
+font-weight:bold;
+color:#ee4d2d;
+margin-top:10px;
+}
+
+.old-price{
+text-decoration:line-through;
+color:#999;
+font-size:1rem;
+}
+
+button{
+background:#ee4d2d;
+color:#fff;
+border:none;
+padding:15px;
+border-radius:8px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+width:100%;
+}
+
+select,input,textarea{
+padding:12px;
+border:1px solid #ddd;
+border-radius:6px;
+width:100%;
+margin-bottom:12px;
+font-size:14px;
+}
+
+.review-title{
+text-align:center;
+font-size:22px;
+font-weight:bold;
+margin-bottom:15px;
+color:#333;
+}
+
+/* REVIEW GRID */
+.review-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:15px;
+}
+
+.review-grid img{
+width:100%;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media(min-width:768px){
+.review-grid{
+grid-template-columns:1fr 1fr;
+}
+}
+
+.urgent{
+background:#fff1f0;
+padding:10px;
+border-radius:6px;
+color:#ee4d2d;
+font-weight:bold;
+margin-top:10px;
+}
+
+.buyers{
+font-size:13px;
+color:#666;
+margin-top:6px;
+}
+
 </style>
 
+<!-- FACEBOOK PIXEL -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -25,27 +129,126 @@ s.parentNode.insertBefore(t,s)}
 (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
 fbq('init','631653776133164');
-fbq('track','Purchase',{value:1500,currency:'PHP'});
+fbq('track','PageView');
+fbq('track','ViewContent');
 </script>
-</head>
 
+</head>
 <body>
+
+<header>
+500GB HARD DRIVE – 60,000+ SONGS READY
+</header>
+
+<div class="container">
+
+<!-- PRODUCT -->
 <div class="card">
-<h2>🎉 Order Received!</h2>
-<p>Redirecting you to Messenger...</p>
-<button onclick="goMessenger()">Open Messenger Now</button>
+<img src="new feb-Cover.jpg" class="product-img" alt="500GB Hard Drive">
+
+<div class="price">
+₱1,500 <span class="old-price">₱3,500</span>
+</div>
+
+<p>✔ Plug & Play<br>
+✔ Complete DJ Music<br>
+✔ Cash on Delivery<br>
+✔ Free Shipping</p>
+
+<div class="urgent">
+⚠ Limited Stocks Available Today
+</div>
+
+<p class="buyers">
+⚡ <span id="buyerCount">18</span> people viewing this product
+</p>
+</div>
+
+<!-- REVIEWS -->
+<div class="card">
+<div class="review-title">
+⭐⭐⭐⭐⭐ SATISFIED BUYERS
+</div>
+
+<div class="review-grid">
+
+<img src="25.png">
+<img src="27.png">
+<img src="28.png">
+<img src="29.png">
+<img src="30.png">
+<img src="31.png">
+<img src="33.png">
+<img src="34.png">
+<img src="35.png">
+<img src="36.png">
+
+</div>
+</div>
+
+<!-- ORDER FORM -->
+<div class="card">
+<h3>Place Your Order</h3>
+
+<form id="orderForm">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$">
+
+<textarea name="address" placeholder="Complete Address (Brgy, City, Province)" required></textarea>
+
+<input type="text" name="landmark" placeholder="Nearest Landmark" required>
+
+<button type="submit">PLACE ORDER NOW</button>
+
+</form>
+</div>
+
 </div>
 
 <script>
-const params=new URLSearchParams(window.location.search);
-const msg=params.get("msg");
+// Fake buyer counter
+let buyers = 18;
+setInterval(()=>{
+buyers += Math.floor(Math.random()*2);
+document.getElementById("buyerCount").innerText = buyers;
+},4000);
 
-function goMessenger(){
-if(msg){
-window.location.href=`https://m.me/allaboutsoundsphmain?text=${msg}`;
-}
-}
-setTimeout(goMessenger,3000);
+// Messenger Redirect Optimized
+document.getElementById("orderForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+const name = this.name.value.trim();
+const phone = this.phone.value.trim();
+const address = this.address.value.trim();
+const landmark = this.landmark.value.trim();
+
+const message = 
+`Hello! I would like to order:
+
+Product: 500GB HARD DRIVE (60,000+ Songs)
+Price: ₱1,500 COD
+
+Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Landmark: ${landmark}
+
+Please confirm my order. Thank you!`;
+
+const encoded = encodeURIComponent(message);
+
+// Send email
+fetch("https://formsubmit.co/solenjerllyn04@gmail.com",{
+method:"POST",
+body:new FormData(this)
+}).then(()=>{
+window.location.href = `thankyou.html?msg=${encoded}`;
+});
+
+});
 </script>
+
 </body>
 </html>
