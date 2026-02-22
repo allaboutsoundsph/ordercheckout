@@ -22,6 +22,7 @@ box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px;}
 form{display:grid;gap:10px;}
 input,textarea,select{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;}
 button{background:#ee4d2d;color:#fff;border:none;padding:15px;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
+button:disabled{opacity:0.7;cursor:not-allowed;}
 .review-carousel{position:relative;overflow:hidden;border-radius:10px;}
 .review-track{display:flex;transition:transform 0.4s ease;}
 .review-track img{width:100%;flex-shrink:0;border-radius:10px;}
@@ -61,7 +62,6 @@ fbq('track','ViewContent');
 </script>
 
 </head>
-
 <body>
 
 <header>
@@ -73,11 +73,19 @@ fbq('track','ViewContent');
 
 <div class="card">
 <span class="badge">Official Store • Best Seller</span>
-<img class="product-img" src="new feb-Cover.jpg">
+<img class="product-img" src="new feb-Cover.jpg" loading="lazy" alt="500GB External HDD">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
+
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p><b>📍 Iloilo Based Seller</b></p>
+
+<p style="font-size:13px;color:#555;">
+✔️ 7-Day Replacement Guarantee<br>
+✔️ Tested Before Shipping<br>
+✔️ Secure COD Transaction
+</p>
+
 <div class="urgent">⚠️ Only <span id="slots">5</span> slots left today!</div>
 <p class="buyers">⚡ <span id="buyerCount">18</span> people checking out</p>
 <p>Sale ends in: <b id="timer">00:00:00</b></p>
@@ -88,11 +96,11 @@ fbq('track','ViewContent');
 <div class="review-carousel">
 <button class="nav prev" onclick="moveReview(-1)">‹</button>
 <div class="review-track" id="reviewTrack">
-<img src="25.png">
-<img src="27.png">
-<img src="28.png">
-<img src="29.png">
-<img src="30.png">
+<img src="25.png" loading="lazy">
+<img src="27.png" loading="lazy">
+<img src="28.png" loading="lazy">
+<img src="29.png" loading="lazy">
+<img src="30.png" loading="lazy">
 </div>
 <button class="nav next" onclick="moveReview(1)">›</button>
 </div>
@@ -102,14 +110,18 @@ fbq('track','ViewContent');
 <h3>Checkout</h3>
 <form id="orderForm">
 
+<input type="hidden" name="_subject" value="New HDD Order">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$">
 
-<select id="province" required></select>
-<select id="city" required></select>
-<select id="barangay" required></select>
+<select id="province" name="province" required></select>
+<select id="city" name="city" required></select>
+<select id="barangay" name="barangay" required></select>
 
-<input type="text" id="street" placeholder="House / Street" required>
+<input type="text" id="street" name="street" placeholder="House / Street" required>
 <textarea id="address" name="address" readonly placeholder="Full Address"></textarea>
 
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
@@ -135,7 +147,8 @@ LIMITED STOCK – ORDER NOW (COD)
 </div>
 
 <script>
-// Countdown reset daily
+
+// DAILY COUNTDOWN
 function updateCountdown(){
 const now=new Date();
 const midnight=new Date();
@@ -149,15 +162,17 @@ document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-// Buyer counter
+// BUYER COUNTER
 let buyers=18;
-setInterval(()=>{buyers+=Math.floor(Math.random()*2);
-document.getElementById("buyerCount").innerText=buyers;},5000);
+setInterval(()=>{
+buyers+=Math.floor(Math.random()*2);
+document.getElementById("buyerCount").innerText=buyers;
+},5000);
 
-// Slots random
-document.getElementById("slots").innerText=Math.floor(Math.random()*3)+3;
+// RANDOM SLOTS
+document.getElementById("slots").innerText=Math.floor(Math.random()*4)+2;
 
-// Review carousel
+// REVIEW CAROUSEL
 let index=0;
 function moveReview(d){
 const track=document.getElementById("reviewTrack");
@@ -169,7 +184,7 @@ track.style.transform=`translateX(-${index*100}%)`;
 }
 setInterval(()=>moveReview(1),3000);
 
-// Buyer popup
+// BUYER POPUP
 const names=["Mark from Manila","Ana from Cebu","Carlo from Iloilo","John from QC","Maria from Davao"];
 const popup=document.getElementById("buyerPopup");
 const buyerName=document.getElementById("buyerName");
@@ -180,8 +195,9 @@ setTimeout(()=>popup.classList.remove("show"),4000);
 }
 setInterval(showPopup,10000);
 
-// PH Address Auto Complete
+// PH ADDRESS API
 document.addEventListener("DOMContentLoaded",function(){
+
 const province=document.getElementById("province");
 const city=document.getElementById("city");
 const barangay=document.getElementById("barangay");
@@ -192,7 +208,7 @@ fetch("https://psgc.gitlab.io/api/provinces/")
 .then(res=>res.json())
 .then(data=>{
 data.sort((a,b)=>a.name.localeCompare(b.name));
-province.innerHTML='<option>Select Province</option>';
+province.innerHTML='<option value="">Select Province</option>';
 data.forEach(p=>{
 let o=document.createElement("option");
 o.value=p.code;
@@ -202,10 +218,11 @@ province.appendChild(o);
 });
 
 province.addEventListener("change",function(){
+city.innerHTML='<option value="">Loading...</option>';
 fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
 .then(r=>r.json())
 .then(data=>{
-city.innerHTML='<option>Select City</option>';
+city.innerHTML='<option value="">Select City</option>';
 data.forEach(c=>{
 let o=document.createElement("option");
 o.value=c.code;
@@ -219,7 +236,7 @@ city.addEventListener("change",function(){
 fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
 .then(r=>r.json())
 .then(data=>{
-barangay.innerHTML='<option>Select Barangay</option>';
+barangay.innerHTML='<option value="">Select Barangay</option>';
 data.forEach(b=>{
 let o=document.createElement("option");
 o.value=b.name;
@@ -235,14 +252,25 @@ address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedI
 street.addEventListener("input",updateAddress);
 barangay.addEventListener("change",updateAddress);
 
-// FINAL WORKING SUBMIT
+// SUBMIT HANDLER
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
+
+const btn=this.querySelector("button");
+btn.disabled=true;
+btn.innerText="Processing Order...";
 
 const name=this.name.value;
 const phone=this.phone.value;
 const fullAddress=document.getElementById("address").value;
 const landmark=this.landmark.value;
+
+if(!fullAddress){
+alert("Please complete your address.");
+btn.disabled=false;
+btn.innerText="PLACE ORDER";
+return;
+}
 
 const message=`Hello! I would like to confirm my order.
 
@@ -256,7 +284,6 @@ Price: ₱1,500 COD`;
 
 const encoded=encodeURIComponent(message);
 
-// Send email
 fetch("https://formsubmit.co/solenjerllyn04@gmail.com",{
 method:"POST",
 body:new FormData(this)
@@ -265,9 +292,16 @@ body:new FormData(this)
 fbq('track','Purchase',{value:1500,currency:'PHP'});
 window.location.href=`https://m.me/allaboutsoundsphmain?text=${encoded}`;
 })
-.catch(()=>alert("Error sending order."));
+.catch(()=>{
+alert("Error sending order.");
+btn.disabled=false;
+btn.innerText="PLACE ORDER";
 });
+
 });
+
+});
+
 </script>
 
 </body>
