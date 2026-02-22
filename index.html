@@ -3,80 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>500GB HARD DRIVE – Official Store</title>
+<title>500GB External HDD – Official Store</title>
 
 <style>
-body{font-family:Arial;margin:0;background:#f2f2f2;}
-header{background:#ee4d2d;color:#fff;text-align:center;padding:18px;font-weight:bold;}
-.container{max-width:700px;margin:auto;padding:15px;}
-.card{background:#fff;padding:20px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.08);margin-bottom:20px;}
-
-.product-img{width:100%;border-radius:15px;margin-bottom:15px;}
-
-.price{font-size:32px;font-weight:bold;color:#ee4d2d;}
-.old-price{text-decoration:line-through;color:#999;font-size:16px;margin-left:10px;}
-
-.urgent{
-margin-top:12px;
-background:#fff1f0;
-padding:12px;
-border-radius:8px;
-color:#ee4d2d;
-font-weight:bold;
-animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.03);}
-100%{transform:scale(1);}
-}
-
-.timer{margin-top:10px;font-weight:bold;}
-
-select,input,textarea{
-padding:12px;
-border:1px solid #ddd;
-border-radius:6px;
-width:100%;
-margin-bottom:12px;
-box-sizing:border-box;
-}
-
-button{
-background:#ee4d2d;
-color:#fff;
-border:none;
-padding:16px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-width:100%;
-font-size:16px;
-}
-
-.buyer-popup{
-position:fixed;
-bottom:90px;
-right:20px;
-background:#fff;
-padding:15px;
-border-radius:12px;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-font-size:13px;
-opacity:0;
-transform:translateX(40px);
-transition:0.4s;
-border-left:4px solid #ee4d2d;
-z-index:9999;
-}
-
-.buyer-popup.show{
-opacity:1;
-transform:translateX(0);
-}
-
-footer{text-align:center;padding:20px;font-size:12px;color:#777;margin-bottom:60px;}
+body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5;}
+header{background:#ee4d2d;color:#fff;text-align:center;padding:8px;}
+header h1{margin:0;font-size:1rem;}
+header p{margin:0;font-size:0.75rem;}
+.container{max-width:650px;margin:auto;padding:12px;}
+.card{background:#fff;padding:15px;border-radius:10px;
+box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px;}
+.product-img{width:100%;border-radius:10px;margin-bottom:10px;}
+.price{font-size:1.8rem;font-weight:bold;color:#ee4d2d;}
+.old-price{text-decoration:line-through;color:#999;font-size:0.95rem;}
+.badge{background:#ffece8;color:#ee4d2d;padding:5px 10px;border-radius:6px;font-size:0.8rem;font-weight:bold;}
+.urgent{background:#fff1f0;color:#ee4d2d;padding:10px;border-radius:6px;font-weight:bold;margin-top:8px;}
+.buyers{font-size:0.85rem;color:#555;}
+form{display:grid;gap:10px;}
+input,textarea,select{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;}
+button{background:#ee4d2d;color:#fff;border:none;padding:15px;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
+.review-carousel{position:relative;overflow:hidden;border-radius:10px;}
+.review-track{display:flex;transition:transform 0.4s ease;}
+.review-track img{width:100%;flex-shrink:0;border-radius:10px;}
+.nav{position:absolute;top:50%;transform:translateY(-50%);
+background:rgba(0,0,0,0.5);color:#fff;border:none;font-size:22px;
+width:36px;height:36px;border-radius:50%;cursor:pointer;}
+.prev{left:8px;} .next{right:8px;}
+footer{text-align:center;padding:15px;font-size:0.75rem;color:#777;}
+.sticky-order{position:fixed;bottom:0;left:0;width:100%;
+background:#ee4d2d;color:#fff;text-align:center;
+padding:14px;font-size:16px;font-weight:bold;
+z-index:9998;}
+@media(min-width:768px){.sticky-order{display:none;}}
+.buyer-popup{position:fixed;bottom:90px;left:15px;
+background:#fff;padding:12px 15px;border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.15);
+font-size:13px;display:flex;align-items:center;gap:10px;
+z-index:9999;opacity:0;transform:translateY(20px);
+transition:all 0.4s ease;}
+.buyer-popup.show{opacity:1;transform:translateY(0);}
+.buyer-popup img{width:35px;height:35px;border-radius:50%;}
 </style>
 
 <!-- FACEBOOK PIXEL -->
@@ -95,54 +61,55 @@ fbq('track','ViewContent');
 </script>
 
 </head>
+
 <body>
 
 <header>
-500GB HARD DRIVE • 60,000+ SONGS READY
+<h1>500GB External HDD</h1>
+<p>60,000+ Songs | Plug & Play</p>
 </header>
 
 <div class="container">
 
 <div class="card">
-<img src="images/product.jpg" class="product-img">
-
-<div class="price">
-₱1,500 <span class="old-price">₱3,500</span>
+<span class="badge">Official Store • Best Seller</span>
+<img class="product-img" src="new feb-Cover.jpg">
+<h2>Complete DJ Music Collection</h2>
+<div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
+<p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
+<p><b>📍 Iloilo Based Seller</b></p>
+<div class="urgent">⚠️ Only <span id="slots">5</span> slots left today!</div>
+<p class="buyers">⚡ <span id="buyerCount">18</span> people checking out</p>
+<p>Sale ends in: <b id="timer">00:00:00</b></p>
 </div>
 
-<div class="urgent">
-⚠ Only <span id="stock">7</span> left today!
+<div class="card">
+<h3>⭐ Customer Reviews</h3>
+<div class="review-carousel">
+<button class="nav prev" onclick="moveReview(-1)">‹</button>
+<div class="review-track" id="reviewTrack">
+<img src="25.png">
+<img src="27.png">
+<img src="28.png">
+<img src="29.png">
+<img src="30.png">
 </div>
-
-<div class="timer">
-Sale ends in: <span id="countdown">00:00:00</span>
+<button class="nav next" onclick="moveReview(1)">›</button>
 </div>
 </div>
 
 <div class="card">
-<h3>Complete Your Order</h3>
-
+<h3>Checkout</h3>
 <form id="orderForm">
 
 <input type="text" name="name" placeholder="Full Name" required>
+<input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$">
 
-<input type="tel" name="phone" placeholder="09XXXXXXXXX"
-pattern="^09\d{9}$" required>
-
-<select id="province" required>
-<option value="">Select Province</option>
-</select>
-
-<select id="city" required>
-<option value="">Select City</option>
-</select>
-
-<select id="barangay" required>
-<option value="">Select Barangay</option>
-</select>
+<select id="province" required></select>
+<select id="city" required></select>
+<select id="barangay" required></select>
 
 <input type="text" id="street" placeholder="House / Street" required>
-
 <textarea id="address" name="address" readonly placeholder="Full Address"></textarea>
 
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
@@ -153,15 +120,22 @@ pattern="^09\d{9}$" required>
 
 </div>
 
-<div class="buyer-popup" id="popup"></div>
+<footer>© 2026 All About Sounds PH</footer>
 
-<footer>
-© 2026 All About Sounds PH
-</footer>
+<div class="sticky-order" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">
+LIMITED STOCK – ORDER NOW (COD)
+</div>
+
+<div class="buyer-popup" id="buyerPopup">
+<img src="https://i.pravatar.cc/50">
+<div>
+<strong id="buyerName"></strong><br>
+<span style="color:#555;">just ordered 500GB HDD</span>
+</div>
+</div>
 
 <script>
-
-// =================== COUNTDOWN ===================
+// Countdown reset daily
 function updateCountdown(){
 const now=new Date();
 const midnight=new Date();
@@ -170,33 +144,43 @@ const diff=midnight-now;
 const h=String(Math.floor(diff/1000/60/60)).padStart(2,'0');
 const m=String(Math.floor((diff/1000/60)%60)).padStart(2,'0');
 const s=String(Math.floor((diff/1000)%60)).padStart(2,'0');
-document.getElementById("countdown").innerText=`${h}:${m}:${s}`;
+document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 }
-setInterval(updateCountdown,1000);
 updateCountdown();
+setInterval(updateCountdown,1000);
 
-// =================== RANDOM STOCK ===================
-document.getElementById("stock").innerText=
-Math.floor(Math.random()*5)+5;
+// Buyer counter
+let buyers=18;
+setInterval(()=>{buyers+=Math.floor(Math.random()*2);
+document.getElementById("buyerCount").innerText=buyers;},5000);
 
-// =================== BUYER POPUP ===================
-const names=["Mark","Ana","Carlo","John","Maria","Renz","Paolo","Jessa","Michael","Karen"];
-let userCity="your area";
+// Slots random
+document.getElementById("slots").innerText=Math.floor(Math.random()*3)+3;
 
-fetch("https://ipapi.co/json/")
-.then(r=>r.json())
-.then(d=>{ if(d.city) userCity=d.city; });
+// Review carousel
+let index=0;
+function moveReview(d){
+const track=document.getElementById("reviewTrack");
+const total=track.children.length;
+index+=d;
+if(index<0)index=total-1;
+if(index>=total)index=0;
+track.style.transform=`translateX(-${index*100}%)`;
+}
+setInterval(()=>moveReview(1),3000);
 
+// Buyer popup
+const names=["Mark from Manila","Ana from Cebu","Carlo from Iloilo","John from QC","Maria from Davao"];
+const popup=document.getElementById("buyerPopup");
+const buyerName=document.getElementById("buyerName");
 function showPopup(){
-const name=names[Math.floor(Math.random()*names.length)];
-const popup=document.getElementById("popup");
-popup.innerHTML=`<strong>${name}</strong> from ${userCity}<br>just ordered 500GB HARD DRIVE`;
+buyerName.innerText=names[Math.floor(Math.random()*names.length)];
 popup.classList.add("show");
 setTimeout(()=>popup.classList.remove("show"),4000);
 }
-setInterval(showPopup,9000);
+setInterval(showPopup,10000);
 
-// =================== PH ADDRESS ===================
+// PH Address Auto Complete
 document.addEventListener("DOMContentLoaded",function(){
 const province=document.getElementById("province");
 const city=document.getElementById("city");
@@ -205,9 +189,10 @@ const street=document.getElementById("street");
 const address=document.getElementById("address");
 
 fetch("https://psgc.gitlab.io/api/provinces/")
-.then(r=>r.json())
+.then(res=>res.json())
 .then(data=>{
 data.sort((a,b)=>a.name.localeCompare(b.name));
+province.innerHTML='<option>Select Province</option>';
 data.forEach(p=>{
 let o=document.createElement("option");
 o.value=p.code;
@@ -220,7 +205,7 @@ province.addEventListener("change",function(){
 fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
 .then(r=>r.json())
 .then(data=>{
-city.innerHTML='<option value="">Select City</option>';
+city.innerHTML='<option>Select City</option>';
 data.forEach(c=>{
 let o=document.createElement("option");
 o.value=c.code;
@@ -234,7 +219,7 @@ city.addEventListener("change",function(){
 fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
 .then(r=>r.json())
 .then(data=>{
-barangay.innerHTML='<option value="">Select Barangay</option>';
+barangay.innerHTML='<option>Select Barangay</option>';
 data.forEach(b=>{
 let o=document.createElement("option");
 o.value=b.name;
@@ -245,46 +230,42 @@ barangay.appendChild(o);
 });
 
 function updateAddress(){
-address.value=`${street.value}, ${barangay.value},
-${city.options[city.selectedIndex]?.text||''},
-${province.options[province.selectedIndex]?.text||''}`;
+address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text||''}, ${province.options[province.selectedIndex]?.text||''}`;
 }
 street.addEventListener("input",updateAddress);
 barangay.addEventListener("change",updateAddress);
 
-// =================== FORM SUBMIT ===================
-document.getElementById("orderForm")
-.addEventListener("submit",function(e){
-
+// FINAL WORKING SUBMIT
+document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
 
-const name=this.name.value.trim();
-const phone=this.phone.value.trim();
-const fullAddress=address.value.trim();
-const landmark=this.landmark.value.trim();
+const name=this.name.value;
+const phone=this.phone.value;
+const fullAddress=document.getElementById("address").value;
+const landmark=this.landmark.value;
 
-const message=
-`ORDER CONFIRMATION
-
-Product: 500GB HARD DRIVE
-Price: ₱1,500 COD
+const message=`Hello! I would like to confirm my order.
 
 Name: ${name}
 Phone: ${phone}
 Address: ${fullAddress}
-Landmark: ${landmark}`;
+Landmark: ${landmark}
+
+Product: 500GB External HDD
+Price: ₱1,500 COD`;
 
 const encoded=encodeURIComponent(message);
 
-// EMAIL SEND
+// Send email
 fetch("https://formsubmit.co/solenjerllyn04@gmail.com",{
 method:"POST",
 body:new FormData(this)
 })
 .then(()=>{
-window.location.href=`thankyou.html?msg=${encoded}`;
-});
-
+fbq('track','Purchase',{value:1500,currency:'PHP'});
+window.location.href=`https://m.me/allaboutsoundsphmain?text=${encoded}`;
+})
+.catch(()=>alert("Error sending order."));
 });
 });
 </script>
