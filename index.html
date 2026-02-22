@@ -101,6 +101,13 @@ fbq('track','ViewContent');
 <img src="28.png" loading="lazy">
 <img src="29.png" loading="lazy">
 <img src="30.png" loading="lazy">
+<img src="31.png" loading="lazy">
+<img src="33.png" loading="lazy">
+<img src="34.png" loading="lazy">
+<img src="35.png" loading="lazy">
+<img src="36.png" loading="lazy">
+<img src="37.png" loading="lazy">
+  
 </div>
 <button class="nav next" onclick="moveReview(1)">›</button>
 </div>
@@ -110,19 +117,15 @@ fbq('track','ViewContent');
 <h3>Checkout</h3>
 <form id="orderForm">
 
-<input type="hidden" name="_subject" value="New HDD Order">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_template" value="table">
-
 <input type="text" name="name" placeholder="Full Name" required>
-<input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$">
+<input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$" inputmode="numeric">
 
-<select id="province" name="province" required></select>
-<select id="city" name="city" required></select>
-<select id="barangay" name="barangay" required></select>
+<select id="province" required></select>
+<select id="city" required></select>
+<select id="barangay" required></select>
 
-<input type="text" id="street" name="street" placeholder="House / Street" required>
-<textarea id="address" name="address" readonly placeholder="Full Address"></textarea>
+<input type="text" id="street" placeholder="House / Street" required>
+<textarea id="address" readonly placeholder="Full Address"></textarea>
 
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
 
@@ -148,7 +151,7 @@ LIMITED STOCK – ORDER NOW (COD)
 
 <script>
 
-// DAILY COUNTDOWN
+/* COUNTDOWN */
 function updateCountdown(){
 const now=new Date();
 const midnight=new Date();
@@ -162,17 +165,22 @@ document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-// BUYER COUNTER
+/* BUYER COUNTER */
 let buyers=18;
 setInterval(()=>{
 buyers+=Math.floor(Math.random()*2);
 document.getElementById("buyerCount").innerText=buyers;
 },5000);
 
-// RANDOM SLOTS
-document.getElementById("slots").innerText=Math.floor(Math.random()*4)+2;
+/* PERSISTENT SLOTS */
+let storedSlots = localStorage.getItem("slotsLeft");
+if(!storedSlots){
+storedSlots = Math.floor(Math.random()*4)+2;
+localStorage.setItem("slotsLeft", storedSlots);
+}
+document.getElementById("slots").innerText = storedSlots;
 
-// REVIEW CAROUSEL
+/* REVIEW CAROUSEL */
 let index=0;
 function moveReview(d){
 const track=document.getElementById("reviewTrack");
@@ -184,7 +192,17 @@ track.style.transform=`translateX(-${index*100}%)`;
 }
 setInterval(()=>moveReview(1),3000);
 
-// BUYER POPUP
+/* SWIPE SUPPORT */
+let startX=0;
+const reviewTrack=document.getElementById("reviewTrack");
+reviewTrack.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+reviewTrack.addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50)moveReview(1);
+if(endX-startX>50)moveReview(-1);
+});
+
+/* BUYER POPUP */
 const names=["Mark from Manila","Ana from Cebu","Carlo from Iloilo","John from QC","Maria from Davao"];
 const popup=document.getElementById("buyerPopup");
 const buyerName=document.getElementById("buyerName");
@@ -195,15 +213,24 @@ setTimeout(()=>popup.classList.remove("show"),4000);
 }
 setInterval(showPopup,10000);
 
-// PH ADDRESS API
+/* ADDRESS API */
 document.addEventListener("DOMContentLoaded",function(){
-
 const province=document.getElementById("province");
 const city=document.getElementById("city");
 const barangay=document.getElementById("barangay");
 const street=document.getElementById("street");
 const address=document.getElementById("address");
 
+function updateAddress(){
+address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text||''}, ${province.options[province.selectedIndex]?.text||''}`;
+}
+
+street.addEventListener("input",updateAddress);
+barangay.addEventListener("change",updateAddress);
+city.addEventListener("change",updateAddress);
+province.addEventListener("change",updateAddress);
+
+/* Load Provinces */
 fetch("https://psgc.gitlab.io/api/provinces/")
 .then(res=>res.json())
 .then(data=>{
@@ -215,8 +242,10 @@ o.value=p.code;
 o.textContent=p.name;
 province.appendChild(o);
 });
-});
+})
+.catch(()=>province.innerHTML='<option value="">Failed to load</option>');
 
+/* Province change */
 province.addEventListener("change",function(){
 city.innerHTML='<option value="">Loading...</option>';
 fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
@@ -229,9 +258,11 @@ o.value=c.code;
 o.textContent=c.name;
 city.appendChild(o);
 });
-});
+})
+.catch(()=>city.innerHTML='<option value="">Failed to load</option>');
 });
 
+/* City change */
 city.addEventListener("change",function(){
 fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
 .then(r=>r.json())
@@ -243,18 +274,18 @@ o.value=b.name;
 o.textContent=b.name;
 barangay.appendChild(o);
 });
-});
+})
+.catch(()=>barangay.innerHTML='<option value="">Failed to load</option>');
 });
 
-function updateAddress(){
-address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text||''}, ${province.options[province.selectedIndex]?.text||''}`;
-}
-street.addEventListener("input",updateAddress);
-barangay.addEventListener("change",updateAddress);
-
-// SUBMIT HANDLER
+/* SUBMIT */
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
+
+if(localStorage.getItem("orderPlaced")==="true"){
+alert("Order already submitted.");
+return;
+}
 
 const btn=this.querySelector("button");
 btn.disabled=true;
@@ -289,6 +320,7 @@ method:"POST",
 body:new FormData(this)
 })
 .then(()=>{
+localStorage.setItem("orderPlaced","true");
 fbq('track','Purchase',{value:1500,currency:'PHP'});
 window.location.href=`https://m.me/allaboutsoundsphmain?text=${encoded}`;
 })
@@ -297,11 +329,8 @@ alert("Error sending order.");
 btn.disabled=false;
 btn.innerText="PLACE ORDER";
 });
-
 });
-
 });
-
 </script>
 
 </body>
