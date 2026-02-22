@@ -20,7 +20,7 @@ box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px;}
 .urgent{background:#fff1f0;color:#ee4d2d;padding:10px;border-radius:6px;font-weight:bold;margin-top:8px;}
 .buyers{font-size:0.85rem;color:#555;}
 form{display:grid;gap:10px;}
-input,textarea,select{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;}
+input,textarea{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;width:100%;}
 button{background:#ee4d2d;color:#fff;border:none;padding:15px;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
 button:disabled{opacity:0.7;cursor:not-allowed;}
 footer{text-align:center;padding:15px;font-size:0.75rem;color:#777;}
@@ -110,15 +110,11 @@ fbq('track','ViewContent');
 <div class="review-slider">
 <div class="review-wrapper" id="reviewWrapper">
 
-<div class="review-slide"><img src="25.png"></div>
-<div class="review-slide"><img src="27.png"></div>
-<div class="review-slide"><img src="28.png"></div>
-<div class="review-slide"><img src="29.png"></div>
-<div class="review-slide"><img src="30.png"></div>
-<div class="review-slide"><img src="31.png"></div>
-<div class="review-slide"><img src="33.png"></div>
-<div class="review-slide"><img src="34.png"></div>
-<div class="review-slide"><img src="35.png"></div>
+<div class="review-slide"><img src="review1.png"></div>
+<div class="review-slide"><img src="review2.png"></div>
+<div class="review-slide"><img src="review3.png"></div>
+<div class="review-slide"><img src="review4.png"></div>
+<div class="review-slide"><img src="review5.png"></div>
 
 </div>
 <button class="slide-btn prev-btn" onclick="moveCustomerSlide(-1)">‹</button>
@@ -126,19 +122,20 @@ fbq('track','ViewContent');
 </div>
 </div>
 
-<!-- CHECKOUT -->
+<!-- SIMPLE CHECKOUT -->
 <div class="card">
 <h3>Checkout</h3>
 <form id="orderForm">
+
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$" inputmode="numeric">
-<select id="province" required></select>
-<select id="city" required></select>
-<select id="barangay" required></select>
-<input type="text" id="street" placeholder="House / Street" required>
-<textarea id="address" readonly placeholder="Full Address"></textarea>
+
+<textarea name="address" placeholder="Complete Address (House No, Street, Barangay, City, Province)" required></textarea>
+
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
+
 <button type="submit">PLACE ORDER</button>
+
 </form>
 </div>
 
@@ -186,8 +183,8 @@ localStorage.setItem("slotsLeft",storedSlots);
 document.getElementById("slots").innerText=storedSlots;
 
 /* BUYER POPUP */
-const names=["Mark","Ana","Carlo","John","Maria","Paolo"];
-const cities=["Manila","Quezon City","Cebu","Davao","Taguig"];
+const names=["Mark","Ana","Carlo","John","Maria"];
+const cities=["Manila","Quezon City","Cebu","Davao"];
 const popup=document.getElementById("buyerPopup");
 const buyerText=document.getElementById("buyerText");
 function showPopup(){
@@ -210,22 +207,10 @@ if(customerIndex>=totalSlides)customerIndex=0;
 reviewWrapper.style.transform=`translateX(-${customerIndex*100}%)`;
 }
 setInterval(()=>moveCustomerSlide(1),4000);
-let startX=0;
-reviewWrapper.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-reviewWrapper.addEventListener("touchend",e=>{
-let endX=e.changedTouches[0].clientX;
-if(startX-endX>50)moveCustomerSlide(1);
-if(endX-startX>50)moveCustomerSlide(-1);
-});
 
-/* FORM SUBMIT WITH FB PURCHASE */
+/* FORM SUBMIT */
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
-
-if(localStorage.getItem("orderPlaced")==="true"){
-alert("Order already submitted.");
-return;
-}
 
 const btn=this.querySelector("button");
 btn.disabled=true;
@@ -233,42 +218,30 @@ btn.innerText="Processing Order...";
 
 const name=this.name.value.trim();
 const phone=this.phone.value.trim();
+const address=this.address.value.trim();
 const landmark=this.landmark.value.trim();
-const fullAddress=document.getElementById("address").value.trim();
-
-if(!fullAddress){
-alert("Please complete your address.");
-btn.disabled=false;
-btn.innerText="PLACE ORDER";
-return;
-}
 
 const message=`Hello! I would like to confirm my order.
 
 Name: ${name}
 Phone: ${phone}
-Address: ${fullAddress}
+Address: ${address}
 Landmark: ${landmark}
 
 Product: 500GB External HDD
 Price: ₱1,500 COD`;
 
-const encodedMessage=encodeURIComponent(message);
+const encoded=encodeURIComponent(message);
 
-/* FIRE PURCHASE EVENT */
 if(typeof fbq!=="undefined"){
 fbq('track','Purchase',{
 value:1500,
-currency:'PHP',
-content_name:'500GB External HDD',
-content_type:'product'
+currency:'PHP'
 });
 }
 
-localStorage.setItem("orderPlaced","true");
-
 setTimeout(()=>{
-window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodedMessage}`;
+window.location.href=`https://m.me/allaboutsoundsphmain?text=${encoded}`;
 },800);
 
 });
