@@ -36,6 +36,7 @@ background:#ee4d2d;color:#fff;text-align:center;
 padding:14px;font-size:16px;font-weight:bold;
 z-index:9998;}
 @media(min-width:768px){.sticky-order{display:none;}}
+
 .buyer-popup{position:fixed;bottom:90px;left:15px;
 background:#fff;padding:12px 15px;border-radius:10px;
 box-shadow:0 4px 15px rgba(0,0,0,0.15);
@@ -44,6 +45,18 @@ z-index:9999;opacity:0;transform:translateY(20px);
 transition:all 0.4s ease;}
 .buyer-popup.show{opacity:1;transform:translateY(0);}
 .buyer-popup img{width:35px;height:35px;border-radius:50%;}
+
+.spinner{
+  width:16px;
+  height:16px;
+  border:2px solid #fff;
+  border-top:2px solid transparent;
+  border-radius:50%;
+  animation:spin 0.6s linear infinite;
+}
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
 </style>
 
 <!-- FACEBOOK PIXEL -->
@@ -86,47 +99,22 @@ fbq('track','ViewContent');
 ✔️ Secure COD Transaction
 </p>
 
-<div class="urgent">⚠️ Only <span id="slots">5</span> slots left today!</div>
+<div class="urgent">⚠️ Only <span id="slots"></span> slots left today!</div>
 <p class="buyers">⚡ <span id="buyerCount">18</span> people checking out</p>
 <p>Sale ends in: <b id="timer">00:00:00</b></p>
-</div>
-
-<div class="card">
-<h3>⭐ Customer Reviews</h3>
-<div class="review-carousel">
-<button class="nav prev" onclick="moveReview(-1)">‹</button>
-<div class="review-track" id="reviewTrack">
-<img src="25.png" loading="lazy">
-<img src="27.png" loading="lazy">
-<img src="28.png" loading="lazy">
-<img src="29.png" loading="lazy">
-<img src="30.png" loading="lazy">
-<img src="31.png" loading="lazy">
-<img src="33.png" loading="lazy">
-<img src="34.png" loading="lazy">
-<img src="35.png" loading="lazy">
-<img src="36.png" loading="lazy">
-<img src="37.png" loading="lazy">
-  
-</div>
-<button class="nav next" onclick="moveReview(1)">›</button>
-</div>
 </div>
 
 <div class="card">
 <h3>Checkout</h3>
 <form id="orderForm">
 
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$" inputmode="numeric">
 
-<select id="province" required></select>
-<select id="city" required></select>
-<select id="barangay" required></select>
-
-<input type="text" id="street" placeholder="House / Street" required>
-<textarea id="address" readonly placeholder="Full Address"></textarea>
-
+<input type="text" name="address" id="address" placeholder="Full Address" required>
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
 
 <button type="submit">PLACE ORDER</button>
@@ -141,36 +129,32 @@ fbq('track','ViewContent');
 LIMITED STOCK – ORDER NOW (COD)
 </div>
 
-<div class="buyer-popup" id="buyerPopup">
-<img src="https://i.pravatar.cc/50">
-<div>
-<strong id="buyerName"></strong><br>
-<span style="color:#555;">just ordered 500GB HDD</span>
-</div>
-</div>
-
 <script>
 
-/* COUNTDOWN */
+/* COUNTDOWN FIXED */
 function updateCountdown(){
-const now=new Date();
-const midnight=new Date();
-midnight.setHours(24,0,0,0);
-const diff=midnight-now;
-const h=String(Math.floor(diff/1000/60/60)).padStart(2,'0');
-const m=String(Math.floor((diff/1000/60)%60)).padStart(2,'0');
-const s=String(Math.floor((diff/1000)%60)).padStart(2,'0');
-document.getElementById("timer").innerText=`${h}:${m}:${s}`;
+  const now = new Date();
+  const midnight = new Date(now);
+  midnight.setDate(now.getDate() + 1);
+  midnight.setHours(0,0,0,0);
+  const diff = midnight - now;
+
+  const h = String(Math.floor(diff / 1000 / 60 / 60)).padStart(2,'0');
+  const m = String(Math.floor((diff / 1000 / 60) % 60)).padStart(2,'0');
+  const s = String(Math.floor((diff / 1000) % 60)).padStart(2,'0');
+  document.getElementById("timer").innerText = `${h}:${m}:${s}`;
 }
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-/* BUYER COUNTER */
+/* REALISTIC BUYER COUNTER */
 let buyers=18;
 setInterval(()=>{
-buyers+=Math.floor(Math.random()*2);
+buyers += Math.floor(Math.random()*3) - 1;
+if(buyers < 12) buyers = 12;
+if(buyers > 35) buyers = 35;
 document.getElementById("buyerCount").innerText=buyers;
-},5000);
+},4000);
 
 /* PERSISTENT SLOTS */
 let storedSlots = localStorage.getItem("slotsLeft");
@@ -179,104 +163,6 @@ storedSlots = Math.floor(Math.random()*4)+2;
 localStorage.setItem("slotsLeft", storedSlots);
 }
 document.getElementById("slots").innerText = storedSlots;
-
-/* REVIEW CAROUSEL */
-let index=0;
-function moveReview(d){
-const track=document.getElementById("reviewTrack");
-const total=track.children.length;
-index+=d;
-if(index<0)index=total-1;
-if(index>=total)index=0;
-track.style.transform=`translateX(-${index*100}%)`;
-}
-setInterval(()=>moveReview(1),3000);
-
-/* SWIPE SUPPORT */
-let startX=0;
-const reviewTrack=document.getElementById("reviewTrack");
-reviewTrack.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-reviewTrack.addEventListener("touchend",e=>{
-let endX=e.changedTouches[0].clientX;
-if(startX-endX>50)moveReview(1);
-if(endX-startX>50)moveReview(-1);
-});
-
-/* BUYER POPUP */
-const names=["Mark from Manila","Ana from Cebu","Carlo from Iloilo","John from QC","Maria from Davao"];
-const popup=document.getElementById("buyerPopup");
-const buyerName=document.getElementById("buyerName");
-function showPopup(){
-buyerName.innerText=names[Math.floor(Math.random()*names.length)];
-popup.classList.add("show");
-setTimeout(()=>popup.classList.remove("show"),4000);
-}
-setInterval(showPopup,10000);
-
-/* ADDRESS API */
-document.addEventListener("DOMContentLoaded",function(){
-const province=document.getElementById("province");
-const city=document.getElementById("city");
-const barangay=document.getElementById("barangay");
-const street=document.getElementById("street");
-const address=document.getElementById("address");
-
-function updateAddress(){
-address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text||''}, ${province.options[province.selectedIndex]?.text||''}`;
-}
-
-street.addEventListener("input",updateAddress);
-barangay.addEventListener("change",updateAddress);
-city.addEventListener("change",updateAddress);
-province.addEventListener("change",updateAddress);
-
-/* Load Provinces */
-fetch("https://psgc.gitlab.io/api/provinces/")
-.then(res=>res.json())
-.then(data=>{
-data.sort((a,b)=>a.name.localeCompare(b.name));
-province.innerHTML='<option value="">Select Province</option>';
-data.forEach(p=>{
-let o=document.createElement("option");
-o.value=p.code;
-o.textContent=p.name;
-province.appendChild(o);
-});
-})
-.catch(()=>province.innerHTML='<option value="">Failed to load</option>');
-
-/* Province change */
-province.addEventListener("change",function(){
-city.innerHTML='<option value="">Loading...</option>';
-fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
-.then(r=>r.json())
-.then(data=>{
-city.innerHTML='<option value="">Select City</option>';
-data.forEach(c=>{
-let o=document.createElement("option");
-o.value=c.code;
-o.textContent=c.name;
-city.appendChild(o);
-});
-})
-.catch(()=>city.innerHTML='<option value="">Failed to load</option>');
-});
-
-/* City change */
-city.addEventListener("change",function(){
-fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
-.then(r=>r.json())
-.then(data=>{
-barangay.innerHTML='<option value="">Select Barangay</option>';
-data.forEach(b=>{
-let o=document.createElement("option");
-o.value=b.name;
-o.textContent=b.name;
-barangay.appendChild(o);
-});
-})
-.catch(()=>barangay.innerHTML='<option value="">Failed to load</option>');
-});
 
 /* SUBMIT */
 document.getElementById("orderForm").addEventListener("submit",function(e){
@@ -287,21 +173,20 @@ alert("Order already submitted.");
 return;
 }
 
+fbq('track','InitiateCheckout');
+
 const btn=this.querySelector("button");
 btn.disabled=true;
-btn.innerText="Processing Order...";
+btn.innerHTML=`
+<span style="display:flex;align-items:center;justify-content:center;gap:8px;">
+<span class="spinner"></span>
+Processing Order...
+</span>`;
 
 const name=this.name.value;
 const phone=this.phone.value;
-const fullAddress=document.getElementById("address").value;
+const fullAddress=this.address.value;
 const landmark=this.landmark.value;
-
-if(!fullAddress){
-alert("Please complete your address.");
-btn.disabled=false;
-btn.innerText="PLACE ORDER";
-return;
-}
 
 const message=`Hello! I would like to confirm my order.
 
@@ -315,20 +200,27 @@ Price: ₱1,500 COD`;
 
 const encoded=encodeURIComponent(message);
 
-fetch("https://formsubmit.co/solenjerllyn04@gmail.com",{
+fetch("https://formsubmit.co/ajax/YOUR_EMAIL_HERE",{
 method:"POST",
 body:new FormData(this)
 })
 .then(()=>{
 localStorage.setItem("orderPlaced","true");
+
+let currentSlots=parseInt(localStorage.getItem("slotsLeft"))||5;
+if(currentSlots>1){
+currentSlots--;
+localStorage.setItem("slotsLeft",currentSlots);
+}
+
 fbq('track','Purchase',{value:1500,currency:'PHP'});
+
 window.location.href=`https://m.me/allaboutsoundsphmain?text=${encoded}`;
 })
 .catch(()=>{
 alert("Error sending order.");
 btn.disabled=false;
 btn.innerText="PLACE ORDER";
-});
 });
 });
 </script>
