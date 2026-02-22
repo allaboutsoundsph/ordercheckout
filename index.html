@@ -297,6 +297,52 @@ city.appendChild(o);
 });
 });
 
+  /* FORM SUBMIT → MESSENGER REDIRECT */
+document.getElementById("orderForm").addEventListener("submit", function(e){
+e.preventDefault();
+
+if(localStorage.getItem("orderPlaced")==="true"){
+alert("Order already submitted.");
+return;
+}
+
+const btn = this.querySelector("button");
+btn.disabled = true;
+btn.innerText = "Processing Order...";
+
+const name = this.name.value.trim();
+const phone = this.phone.value.trim();
+const landmark = this.landmark.value.trim();
+const fullAddress = document.getElementById("address").value.trim();
+
+if(!fullAddress){
+alert("Please complete your address.");
+btn.disabled = false;
+btn.innerText = "PLACE ORDER";
+return;
+}
+
+const message = 
+`Hello! I would like to confirm my order.
+
+Name: ${name}
+Phone: ${phone}
+Address: ${fullAddress}
+Landmark: ${landmark}
+
+Product: 500GB External HDD
+Price: ₱1,500 COD`;
+
+const encodedMessage = encodeURIComponent(message);
+
+/* 🔥 IMPORTANT: Replace with your correct page username */
+const messengerURL = `https://m.me/allaboutsoundsphmain?text=${encodedMessage}`;
+
+localStorage.setItem("orderPlaced","true");
+
+window.location.href = messengerURL;
+});
+  
 city.addEventListener("change",function(){
 fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
 .then(r=>r.json())
@@ -315,3 +361,4 @@ barangay.appendChild(o);
 
 </body>
 </html>
+
