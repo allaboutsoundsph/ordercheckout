@@ -36,19 +36,16 @@ footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
 @media(min-width:768px){.sticky-order{display:none}}
 
-/* REVIEW SLIDER */
 .review-slider{position:relative;overflow:hidden;border-radius:16px}
-.review-wrapper{display:flex;transition:transform 0.5s ease}
+.review-wrapper{display:flex;transition:transform 0.5s ease;will-change:transform;}
 .review-slide{min-width:100%}
 .review-slide img{width:100%;border-radius:16px}
 .slide-btn{position:absolute;top:50%;transform:translateY(-50%);
 background:rgba(0,0,0,0.5);color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;}
 .prev-btn{left:10px}.next-btn{right:10px}
 
-/* Address guide */
 .address-guide{background:#fff5f2;border-left:4px solid #ee4d2d;padding:10px;border-radius:8px;font-size:13px;color:#555;margin-top:6px}
 
-/* Social Proof */
 .social-proof{position:fixed;bottom:90px;left:15px;background:#fff;
 box-shadow:0 10px 25px rgba(0,0,0,0.15);padding:12px;border-radius:12px;
 font-size:13px;opacity:0;transform:translateY(20px);transition:0.4s;
@@ -72,8 +69,8 @@ fbq('init','631653776133164');
 fbq('track','PageView');
 fbq('track','ViewContent');
 </script>
-
 </head>
+
 <body>
 
 <header>
@@ -89,46 +86,43 @@ fbq('track','ViewContent');
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
 
-<div class="viewer-counter">👀 <span id="viewerCount">5</span> people viewing now</div>
+<div class="viewer-counter">👀 <span id="viewerCount">6</span> people viewing now</div>
 <div class="stock-counter">📦 Only <span id="stockCount">27</span> left in stock</div>
 
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p><b>📍 Iloilo Based Seller</b></p>
 </div>
 
-<!-- REVIEW SLIDER -->
 <div class="card">
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Satisfied Customers</h3>
 <div class="review-slider">
 <div class="review-wrapper" id="reviewWrapper">
-<div class="review-slide"><img src="review1.png"></div>
-<div class="review-slide"><img src="review2.png"></div>
-<div class="review-slide"><img src="review3.png"></div>
-<div class="review-slide"><img src="review4.png"></div>
-<div class="review-slide"><img src="review5.png"></div>
-<div class="review-slide"><img src="review6.png"></div>
-<div class="review-slide"><img src="review7.png"></div>
-<div class="review-slide"><img src="review8.png"></div>
-<div class="review-slide"><img src="review9.png"></div>
-<div class="review-slide"><img src="review10.png"></div>
-<div class="review-slide"><img src="review11.png"></div>
+<div class="review-slide"><img src="review1.png" loading="lazy"></div>
+<div class="review-slide"><img src="review2.png" loading="lazy"></div>
+<div class="review-slide"><img src="review3.png" loading="lazy"></div>
+<div class="review-slide"><img src="review4.png" loading="lazy"></div>
+<div class="review-slide"><img src="review5.png" loading="lazy"></div>
+<div class="review-slide"><img src="review6.png" loading="lazy"></div>
+<div class="review-slide"><img src="review7.png" loading="lazy"></div>
+<div class="review-slide"><img src="review8.png" loading="lazy"></div>
+<div class="review-slide"><img src="review9.png" loading="lazy"></div>
+<div class="review-slide"><img src="review10.png" loading="lazy"></div>
+<div class="review-slide"><img src="review11.png" loading="lazy"></div>
 </div>
 <button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
 <button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
 </div>
 </div>
 
-<!-- CHECKOUT -->
 <div class="card">
 <h3>Checkout</h3>
 <form id="orderForm">
-<input type="text" name="name" placeholder="Full Name" required>
-<input type="tel" name="phone" placeholder="09XXXXXXXXX" required>
-<textarea name="address" placeholder="Complete Address" required></textarea>
-<div class="address-guide">
-Include House No., Street, Barangay, City & Province
-</div>
+<input type="text" name="name" placeholder="Full Name" required autocomplete="name">
+<input type="tel" name="phone" placeholder="09XXXXXXXXX" required autocomplete="tel">
+<textarea name="address" placeholder="Complete Address" required autocomplete="street-address"></textarea>
+<div class="address-guide">Include House No., Street, Barangay, City & Province</div>
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
+<input type="text" name="website" style="display:none">
 <button type="submit">PLACE ORDER</button>
 </form>
 </div>
@@ -140,7 +134,6 @@ Include House No., Street, Barangay, City & Province
 </div>
 
 <footer>© 2026 All About Sounds PH</footer>
-
 <div class="social-proof" id="socialProof"></div>
 
 <audio id="notifSound" preload="auto">
@@ -149,7 +142,7 @@ Include House No., Street, Barangay, City & Province
 
 <script>
 
-/* REVIEW SLIDER */
+/* SLIDER */
 let index=0;
 const wrapper=document.getElementById("reviewWrapper");
 const total=wrapper.children.length;
@@ -161,35 +154,45 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* COUNTDOWN */
-let time=900;
+/* COUNTDOWN AUTO RESET */
+function startCountdown(duration){
+let time=duration;
 setInterval(()=>{
 let m=Math.floor(time/60);
 let s=time%60;
 document.getElementById("countdown").innerText=
 `🔥 Promo ends in ${m}:${s<10?'0':''}${s}`;
-if(time>0)time--;
+time--;
+if(time<0)time=duration;
 },1000);
+}
+startCountdown(900);
 
-/* VIEWERS */
+/* VIEWERS NATURAL */
+let viewers=6;
 setInterval(()=>{
-document.getElementById("viewerCount").innerText=
-Math.floor(Math.random()*8)+3;
+viewers+=Math.floor(Math.random()*3-1);
+viewers=Math.max(3,Math.min(viewers,12));
+document.getElementById("viewerCount").innerText=viewers;
 },5000);
 
 /* STOCK */
 let stock=27;
 setInterval(()=>{
-if(stock>7){
+if(stock>8){
 stock--;
 document.getElementById("stockCount").innerText=stock;
 }
-},15000);
+},20000);
 
-/* SOCIAL POPUP */
+/* SOCIAL PROOF RANDOM */
 const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P."];
 const cities=["Manila","Cebu","Davao","Iloilo","Bacolod"];
 const times=["just now","1 minute ago","3 minutes ago"];
+
+function randomInterval(min,max){
+return Math.floor(Math.random()*(max-min))+min;
+}
 
 function showSocial(){
 const popup=document.getElementById("socialProof");
@@ -202,19 +205,21 @@ popup.classList.add("show");
 sound.play().catch(()=>{});
 setTimeout(()=>popup.classList.remove("show"),4000);
 }
-setTimeout(()=>{showSocial();setInterval(showSocial,10000)},5000);
 
-/* PHONE FORMAT */
-document.querySelector("input[name='phone']")
-.addEventListener("input",function(){
-this.value=this.value.replace(/\D/g,'').slice(0,11);
-});
+function scheduleSocial(){
+showSocial();
+setTimeout(scheduleSocial,randomInterval(8000,18000));
+}
+setTimeout(scheduleSocial,5000);
 
 /* GOOGLE SHEETS */
-const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec;
+const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
+
+if(this.website.value!=="")return;
+
 const btn=this.querySelector("button");
 if(btn.disabled)return;
 
@@ -231,14 +236,15 @@ fbq('track','AddToCart',{value:1500,currency:'PHP'});
 
 btn.disabled=true;
 btn.classList.add("loading");
-btn.innerText="Processing...";
+btn.dataset.original=btn.innerHTML;
+btn.innerHTML="Processing...";
 
 fetch(SHEET_URL,{
 method:"POST",
-mode:"no-cors",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({name,phone,address,landmark})
 })
+.then(res=>res.json())
 .then(()=>{
 fbq('track','Purchase',{value:1500,currency:'PHP'});
 
@@ -254,6 +260,12 @@ Price: ₱1,500 COD`;
 
 window.location.href=
 `https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(msg)}`;
+})
+.catch(()=>{
+alert("Network error. Please try again.");
+btn.disabled=false;
+btn.classList.remove("loading");
+btn.innerHTML="PLACE ORDER";
 });
 });
 
@@ -265,6 +277,3 @@ document.getElementById("orderForm")
 
 </body>
 </html>
-
-
-
