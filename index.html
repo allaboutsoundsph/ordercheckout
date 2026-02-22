@@ -22,7 +22,6 @@ box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px;}
 form{display:grid;gap:10px;}
 input,textarea,select{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;}
 button{background:#ee4d2d;color:#fff;border:none;padding:15px;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
-.messenger-btn{display:block;text-align:center;background:#0084ff;color:#fff;padding:12px;border-radius:8px;font-weight:bold;text-decoration:none;}
 .review-carousel{position:relative;overflow:hidden;border-radius:10px;}
 .review-track{display:flex;transition:transform 0.4s ease;}
 .review-track img{width:100%;flex-shrink:0;border-radius:10px;}
@@ -34,7 +33,7 @@ footer{text-align:center;padding:15px;font-size:0.75rem;color:#777;}
 .sticky-order{position:fixed;bottom:0;left:0;width:100%;
 background:#ee4d2d;color:#fff;text-align:center;
 padding:14px;font-size:16px;font-weight:bold;
-z-index:9998;box-shadow:0 -2px 8px rgba(0,0,0,0.15);}
+z-index:9998;}
 @media(min-width:768px){.sticky-order{display:none;}}
 .buyer-popup{position:fixed;bottom:90px;left:15px;
 background:#fff;padding:12px 15px;border-radius:10px;
@@ -61,11 +60,6 @@ fbq('track','PageView');
 fbq('track','ViewContent');
 </script>
 
-<noscript>
-<img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=631653776133164&ev=PageView&noscript=1"/>
-</noscript>
-
 </head>
 
 <body>
@@ -79,7 +73,7 @@ src="https://www.facebook.com/tr?id=631653776133164&ev=PageView&noscript=1"/>
 
 <div class="card">
 <span class="badge">Official Store • Best Seller</span>
-<img class="product-img" src="new feb-Cover.jpg" alt="">
+<img class="product-img" src="new feb-Cover.jpg">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
@@ -122,10 +116,6 @@ src="https://www.facebook.com/tr?id=631653776133164&ev=PageView&noscript=1"/>
 
 <button type="submit">PLACE ORDER</button>
 </form>
-
-<a class="messenger-btn" href="https://m.me/allaboutsoundsphmain" target="_blank">
-Order via Messenger
-</a>
 </div>
 
 </div>
@@ -145,7 +135,7 @@ LIMITED STOCK – ORDER NOW (COD)
 </div>
 
 <script>
-// DAILY COUNTDOWN
+// Countdown reset daily
 function updateCountdown(){
 const now=new Date();
 const midnight=new Date();
@@ -161,12 +151,10 @@ setInterval(updateCountdown,1000);
 
 // Buyer counter
 let buyers=18;
-setInterval(()=>{
-buyers+=Math.floor(Math.random()*2);
-document.getElementById("buyerCount").innerText=buyers;
-},5000);
+setInterval(()=>{buyers+=Math.floor(Math.random()*2);
+document.getElementById("buyerCount").innerText=buyers;},5000);
 
-// Slots
+// Slots random
 document.getElementById("slots").innerText=Math.floor(Math.random()*3)+3;
 
 // Review carousel
@@ -192,7 +180,7 @@ setTimeout(()=>popup.classList.remove("show"),4000);
 }
 setInterval(showPopup,10000);
 
-// PH Address System
+// PH Address Auto Complete
 document.addEventListener("DOMContentLoaded",function(){
 const province=document.getElementById("province");
 const city=document.getElementById("city");
@@ -214,7 +202,6 @@ province.appendChild(o);
 });
 
 province.addEventListener("change",function(){
-fetch(`https://formsubmit.co/solenjerllyn04@gmail.com`);
 fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
 .then(r=>r.json())
 .then(data=>{
@@ -248,26 +235,37 @@ address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedI
 street.addEventListener("input",updateAddress);
 barangay.addEventListener("change",updateAddress);
 
-// FORM SUBMIT
+// FINAL WORKING SUBMIT
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
 
-const formData=new FormData(this);
+const name=this.name.value;
+const phone=this.phone.value;
+const fullAddress=document.getElementById("address").value;
+const landmark=this.landmark.value;
 
+const message=`Hello! I would like to confirm my order.
+
+Name: ${name}
+Phone: ${phone}
+Address: ${fullAddress}
+Landmark: ${landmark}
+
+Product: 500GB External HDD
+Price: ₱1,500 COD`;
+
+const encoded=encodeURIComponent(message);
+
+// Send email
 fetch("https://formsubmit.co/solenjerllyn04@gmail.com",{
 method:"POST",
-body:formData
+body:new FormData(this)
 })
 .then(()=>{
 fbq('track','Purchase',{value:1500,currency:'PHP'});
-alert("Order sent! Redirecting to Messenger...");
-setTimeout(()=>{
-window.location.href="https://m.me/allaboutsoundsphmain";
-},1000);
+window.location.href=`https://m.me/allaboutsoundsphmain?text=${encoded}`;
 })
-.catch(()=>{
-alert("Error sending order.");
-});
+.catch(()=>alert("Error sending order."));
 });
 });
 </script>
