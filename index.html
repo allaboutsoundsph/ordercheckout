@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>500GB External HDD – Official Store</title>
 
+<meta name="theme-color" content="#ee4d2d">
+<link rel="preload" as="image" href="new feb-Cover.jpg">
+
 <link rel="preconnect" href="https://connect.facebook.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +32,6 @@ footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
 @media(min-width:768px){.sticky-order{display:none}}
 
-/* REVIEW SLIDER */
 .review-slider{position:relative;overflow:hidden;border-radius:16px}
 .review-wrapper{display:flex;transition:transform 0.5s ease}
 .review-slide{min-width:100%}
@@ -37,9 +39,47 @@ footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .slide-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;}
 .prev-btn{left:10px}
 .next-btn{right:10px}
+
+/* Countdown */
+.countdown{background:#fff3f0;padding:12px;border-radius:10px;text-align:center;font-weight:700;color:#d84315;margin-top:10px}
+
+/* Live Popup */
+.live-popup{
+position:fixed;
+bottom:120px;
+left:20px;
+background:#fff;
+padding:12px 16px;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,0.15);
+font-size:14px;
+display:none;
+z-index:999;
+animation:fadeIn 0.5s ease;
+}
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.messenger-float{
+position:fixed;
+bottom:80px;
+right:20px;
+background:#0084ff;
+width:55px;
+height:55px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+font-size:26px;
+text-decoration:none;
+z-index:999;
+}
 </style>
 
-<!-- Facebook Pixel -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -51,8 +91,13 @@ s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
 fbq('init','631653776133164');
 fbq('track','PageView');
 fbq('track','ViewContent');
-</script>
 
+function safeFbq(){
+if(typeof fbq!=="undefined"){
+fbq.apply(null,arguments);
+}
+}
+</script>
 </head>
 <body>
 
@@ -67,30 +112,35 @@ fbq('track','ViewContent');
 <img class="product-img" src="new feb-Cover.jpg" loading="lazy">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
+
+<p style="color:#e53935;font-weight:700;">
+⚠️ Only <span id="stockCount">12</span> units left today!
+</p>
+
+<div class="countdown">
+⏳ Promo Ends In: <span id="timer"></span>
+</div>
+
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p><b>📍 Iloilo Based Seller</b></p>
 </div>
 
-<!-- CUSTOMER REVIEWS -->
 <div class="card">
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Satisfied Customers</h3>
 <div class="review-slider">
 <div class="review-wrapper" id="reviewWrapper">
-
-<div class="review-slide"><img src="review1.png" loading="lazy"></div>
-<div class="review-slide"><img src="review2.png" loading="lazy"></div>
-<div class="review-slide"><img src="review3.png" loading="lazy"></div>
-<div class="review-slide"><img src="review4.png" loading="lazy"></div>
-<div class="review-slide"><img src="review5.png" loading="lazy"></div>
-<div class="review-slide"><img src="review6.png" loading="lazy"></div>
-<div class="review-slide"><img src="review7.png" loading="lazy"></div>
-<div class="review-slide"><img src="review8.png" loading="lazy"></div>
-<div class="review-slide"><img src="review9.png" loading="lazy"></div>
-<div class="review-slide"><img src="review10.png" loading="lazy"></div>
-<div class="review-slide"><img src="review11.png" loading="lazy"></div>
-
+<div class="review-slide"><img src="review1.png"></div>
+<div class="review-slide"><img src="review2.png"></div>
+<div class="review-slide"><img src="review3.png"></div>
+<div class="review-slide"><img src="review4.png"></div>
+<div class="review-slide"><img src="review5.png"></div>
+<div class="review-slide"><img src="review6.png"></div>
+<div class="review-slide"><img src="review7.png"></div>
+<div class="review-slide"><img src="review8.png"></div>
+<div class="review-slide"><img src="review9.png"></div>
+<div class="review-slide"><img src="review10.png"></div>
+<div class="review-slide"><img src="review11.png"></div>
 </div>
-
 <button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
 <button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
 </div>
@@ -113,14 +163,17 @@ fbq('track','ViewContent');
 🔥 ORDER NOW – ₱1,500
 </div>
 
+<a href="https://m.me/allaboutsoundsphmain" class="messenger-float">💬</a>
+
+<div class="live-popup" id="livePopup"></div>
+
 <footer>© 2026 All About Sounds PH</footer>
 
 <script>
-/* REVIEW SLIDER */
+/* Slider */
 let index=0;
 const wrapper=document.getElementById("reviewWrapper");
 const total=wrapper.children.length;
-
 function moveSlide(dir){
 index+=dir;
 if(index<0)index=total-1;
@@ -129,13 +182,63 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* GOOGLE SHEETS (GITHUB SAFE VERSION) */
+/* Swipe */
+let startX=0;
+document.querySelector(".review-slider").addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+document.querySelector(".review-slider").addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50)moveSlide(1);
+if(endX-startX>50)moveSlide(-1);
+});
+
+/* Stock Counter */
+let stock=12;
+setInterval(()=>{
+if(stock>5){
+stock--;
+document.getElementById("stockCount").textContent=stock;
+}
+},15000);
+
+/* Countdown (resets daily) */
+function startTimer(){
+const end=new Date();
+end.setHours(23,59,59,999);
+function update(){
+const now=new Date();
+const diff=end-now;
+const h=Math.floor(diff/1000/60/60);
+const m=Math.floor(diff/1000/60)%60;
+const s=Math.floor(diff/1000)%60;
+document.getElementById("timer").innerText=
+`${h.toString().padStart(2,"0")}:${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+}
+setInterval(update,1000);
+}
+startTimer();
+
+/* Fake Live Orders */
+const names=["Mark","John","Michael","Carlo","Bryan","Anthony","Kevin"];
+const cities=["Cebu","Manila","Iloilo","Davao","Bacolod","Cagayan"];
+const popup=document.getElementById("livePopup");
+
+function showPopup(){
+const name=names[Math.floor(Math.random()*names.length)];
+const city=cities[Math.floor(Math.random()*cities.length)];
+popup.innerHTML=`<strong>${name}</strong> from ${city} just ordered!`;
+popup.style.display="block";
+setTimeout(()=>popup.style.display="none",4000);
+}
+setInterval(showPopup,12000);
+
+/* Google Sheet Submit */
 const SHEET_URL="https://script.google.com/macros/s/AKfycby7hD2sSypAddNzOsAieGw72EpjDOsxmRzkU-pLL_LieaxniziQS-Iw_HvfgYTWJhBT/exec";
 
-document.getElementById("orderForm").addEventListener("submit",function(e){
+document.getElementById("orderForm").addEventListener("submit",async function(e){
 e.preventDefault();
-
 const btn=this.querySelector("button");
+if(btn.disabled)return;
+
 const name=this.name.value.trim();
 const phone=this.phone.value.trim();
 const address=this.address.value.trim();
@@ -145,22 +248,22 @@ if(name.length<3)return alert("Please enter full name");
 if(!/^09\d{9}$/.test(phone))return alert("Enter valid Philippine mobile number");
 if(address.length<10)return alert("Please enter complete address");
 
-fbq('track','AddToCart',{value:1500,currency:'PHP'});
+safeFbq('track','AddToCart',{value:1500,currency:'PHP'});
 
 btn.disabled=true;
 btn.innerText="Processing...";
 
-/* no-cors for GitHub Pages */
-fetch(SHEET_URL,{
-  method:"POST",
-  mode:"no-cors",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({name,phone,address,landmark})
-})
-.then(()=>{
-  fbq('track','Purchase',{value:1500,currency:'PHP'});
+try{
+await fetch(SHEET_URL,{
+method:"POST",
+mode:"no-cors",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({name,phone,address,landmark})
+});
 
-  const message=`Hello! I would like to confirm my order.
+safeFbq('track','Purchase',{value:1500,currency:'PHP'});
+
+const message=`Hello! I would like to confirm my order.
 
 Name: ${name}
 Phone: ${phone}
@@ -170,13 +273,13 @@ Landmark: ${landmark}
 Product: 500GB External HDD
 Price: ₱1,500 COD`;
 
-  window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
-})
-.catch(()=>{
-  alert("Submission failed. Please try again.");
-  btn.disabled=false;
-  btn.innerText="PLACE ORDER";
-});
+window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
+
+}catch{
+alert("Submission failed.");
+btn.disabled=false;
+btn.innerText="PLACE ORDER";
+}
 });
 </script>
 
