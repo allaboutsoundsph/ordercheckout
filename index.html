@@ -36,28 +36,37 @@ padding:14px;font-size:16px;font-weight:bold;
 z-index:9998;}
 @media(min-width:768px){.sticky-order{display:none;}}
 
-/* ADVANCED BUYER POPUP */
+/* RIGHT SIDE POPUP */
 .buyer-popup{
 position:fixed;
 bottom:90px;
-left:15px;
+right:20px;
 background:#fff;
-padding:14px 18px;
-border-radius:12px;
-box-shadow:0 6px 20px rgba(0,0,0,0.15);
+padding:16px 20px;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.18);
 font-size:13px;
 z-index:9999;
 opacity:0;
-transform:translateY(30px);
+transform:translateX(40px);
 transition:all 0.4s ease;
-max-width:260px;
-line-height:1.4;
+max-width:280px;
+line-height:1.5;
+border-left:4px solid #ee4d2d;
 }
 .buyer-popup.show{
 opacity:1;
-transform:translateY(0);
+transform:translateX(0);
 }
 .buyer-popup strong{color:#ee4d2d;}
+@media(max-width:768px){
+.buyer-popup{
+right:10px;
+left:10px;
+bottom:100px;
+max-width:none;
+}
+}
 </style>
 
 <!-- FACEBOOK PIXEL -->
@@ -141,14 +150,18 @@ fbq('track','ViewContent');
 LIMITED STOCK – ORDER NOW (COD)
 </div>
 
-<!-- NEW POPUP -->
+<!-- POPUP -->
 <div class="buyer-popup" id="buyerPopup">
 <div id="popupContent"></div>
 </div>
 
-<script>
+<!-- SOUND -->
+<audio id="popupSound" preload="auto">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c6f9e5b6a.mp3?filename=notification-2-269292.mp3" type="audio/mpeg">
+</audio>
 
-// DAILY COUNTDOWN
+<script>
+// Countdown
 function updateCountdown(){
 const now=new Date();
 const midnight=new Date();
@@ -162,15 +175,15 @@ document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-// Buyer Counter
+// Buyer counter
 let buyers=18;
 setInterval(()=>{buyers+=Math.floor(Math.random()*2);
 document.getElementById("buyerCount").innerText=buyers;},5000);
 
-// Random Slots
+// Slots
 document.getElementById("slots").innerText=Math.floor(Math.random()*3)+3;
 
-// Review Carousel
+// Review slider
 let index=0;
 function moveReview(d){
 const track=document.getElementById("reviewTrack");
@@ -182,13 +195,18 @@ track.style.transform=`translateX(-${index*100}%)`;
 }
 setInterval(()=>moveReview(1),3000);
 
-// ADVANCED POPUPS
+// POPUP SYSTEM
 const popup=document.getElementById("buyerPopup");
 const popupContent=document.getElementById("popupContent");
+const popupSound=document.getElementById("popupSound");
 
-const names=["Mark","Ana","Carlo","John","Maria","Renz","Paolo","Jessa"];
-const cities=["Manila","Cebu","Iloilo","Davao","QC","Laguna","Bacolod","Pampanga"];
-const products=["500GB External HDD","DJ Music Collection","Complete Event Music Set"];
+const names=["Mark","Ana","Carlo","John","Maria","Renz","Paolo","Jessa","Michael","Karen"];
+
+let userCity="your area";
+
+fetch("https://ipapi.co/json/")
+.then(res=>res.json())
+.then(data=>{if(data.city){userCity=data.city;}});
 
 function randomTime(){
 const mins=Math.floor(Math.random()*5)+1;
@@ -197,22 +215,18 @@ return mins===1?"1 minute ago":mins+" minutes ago";
 
 function showPopup(){
 const n=names[Math.floor(Math.random()*names.length)];
-const c=cities[Math.floor(Math.random()*cities.length)];
-const p=products[Math.floor(Math.random()*products.length)];
-
 popupContent.innerHTML=`
-<strong>${n}</strong> from ${c}<br>
-just ordered <strong>${p}</strong><br>
+<strong>${n}</strong> from ${userCity}<br>
+just ordered <strong>500GB HARD DRIVE</strong><br>
 <span style="color:#777;font-size:12px;">${randomTime()}</span>
 `;
-
 popup.classList.add("show");
+popupSound.play().catch(()=>{});
 setTimeout(()=>popup.classList.remove("show"),4500);
 }
+setInterval(showPopup,Math.floor(Math.random()*6000)+8000);
 
-setInterval(showPopup,Math.floor(Math.random()*7000)+7000);
-
-// PH ADDRESS + FORM SUBMIT
+// PH Address + Messenger Redirect
 document.addEventListener("DOMContentLoaded",function(){
 const province=document.getElementById("province");
 const city=document.getElementById("city");
@@ -272,7 +286,7 @@ e.preventDefault();
 
 const name=this.name.value;
 const phone=this.phone.value;
-const fullAddress=document.getElementById("address").value;
+const fullAddress=address.value;
 const landmark=this.landmark.value;
 
 const message=`Hello! I would like to confirm my order.
@@ -282,7 +296,7 @@ Phone: ${phone}
 Address: ${fullAddress}
 Landmark: ${landmark}
 
-Product: 500GB External HDD
+Product: 500GB HARD DRIVE
 Price: ₱1,500 COD`;
 
 const encoded=encodeURIComponent(message);
