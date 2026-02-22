@@ -23,13 +23,6 @@ form{display:grid;gap:10px;}
 input,textarea,select{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;}
 button{background:#ee4d2d;color:#fff;border:none;padding:15px;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
 button:disabled{opacity:0.7;cursor:not-allowed;}
-.review-carousel{position:relative;overflow:hidden;border-radius:10px;}
-.review-track{display:flex;transition:transform 0.4s ease;}
-.review-track img{width:100%;flex-shrink:0;border-radius:10px;}
-.nav{position:absolute;top:50%;transform:translateY(-50%);
-background:rgba(0,0,0,0.5);color:#fff;border:none;font-size:22px;
-width:36px;height:36px;border-radius:50%;cursor:pointer;}
-.prev{left:8px;} .next{right:8px;}
 footer{text-align:center;padding:15px;font-size:0.75rem;color:#777;}
 .sticky-order{position:fixed;bottom:0;left:0;width:100%;
 background:#ee4d2d;color:#fff;text-align:center;
@@ -37,44 +30,64 @@ padding:14px;font-size:16px;font-weight:bold;
 z-index:9998;}
 @media(min-width:768px){.sticky-order{display:none;}}
 
-.buyer-popup{position:fixed;bottom:90px;left:15px;
-background:#fff;padding:12px 15px;border-radius:10px;
+/* BUYER POPUP TEXT ONLY */
+.buyer-popup{
+position:fixed;
+bottom:90px;
+left:15px;
+background:#fff;
+padding:10px 15px;
+border-radius:8px;
 box-shadow:0 4px 15px rgba(0,0,0,0.15);
-font-size:13px;display:flex;align-items:center;gap:10px;
-z-index:9999;opacity:0;transform:translateY(20px);
-transition:all 0.4s ease;}
-.buyer-popup.show{opacity:1;transform:translateY(0);}
-.buyer-popup img{width:35px;height:35px;border-radius:50%;}
+font-size:13px;
+z-index:9999;
+opacity:0;
+transform:translateY(20px);
+transition:all 0.4s ease;
+}
+.buyer-popup.show{
+opacity:1;
+transform:translateY(0);
+}
 
-.spinner{
-  width:16px;
-  height:16px;
-  border:2px solid #fff;
-  border-top:2px solid transparent;
-  border-radius:50%;
-  animation:spin 0.6s linear infinite;
+/* REVIEW SLIDER */
+.review-slider{
+position:relative;
+overflow:hidden;
+border-radius:12px;
 }
-@keyframes spin{
-  to{transform:rotate(360deg);}
+.review-wrapper{
+display:flex;
+transition:transform 0.5s ease;
 }
+.review-slide{
+min-width:100%;
+}
+.review-slide img{
+width:100%;
+border-radius:12px;
+display:block;
+}
+.slide-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,0.5);
+color:#fff;
+border:none;
+width:40px;
+height:40px;
+border-radius:50%;
+font-size:22px;
+cursor:pointer;
+z-index:5;
+}
+.prev-btn{left:10px;}
+.next-btn{right:10px;}
+.slide-btn:hover{background:rgba(0,0,0,0.7);}
 </style>
-
-<!-- FACEBOOK PIXEL -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}
-(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init','631653776133164');
-fbq('track','PageView');
-fbq('track','ViewContent');
-</script>
-
 </head>
+
 <body>
 
 <header>
@@ -84,39 +97,59 @@ fbq('track','ViewContent');
 
 <div class="container">
 
+<!-- PRODUCT CARD -->
 <div class="card">
 <span class="badge">Official Store • Best Seller</span>
-<img class="product-img" src="new feb-Cover.jpg" loading="lazy" alt="500GB External HDD">
+<img class="product-img" src="new feb-Cover.jpg" loading="lazy">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
-
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p><b>📍 Iloilo Based Seller</b></p>
 
-<p style="font-size:13px;color:#555;">
-✔️ 7-Day Replacement Guarantee<br>
-✔️ Tested Before Shipping<br>
-✔️ Secure COD Transaction
-</p>
-
-<div class="urgent">⚠️ Only <span id="slots"></span> slots left today!</div>
+<div class="urgent">⚠️ Only <span id="slots">5</span> slots left today!</div>
 <p class="buyers">⚡ <span id="buyerCount">18</span> people checking out</p>
 <p>Sale ends in: <b id="timer">00:00:00</b></p>
 </div>
 
+<!-- CUSTOMER REVIEW SLIDER -->
+<div class="card">
+<h3 style="text-align:center;">⭐ Satisfied Customers</h3>
+<div class="review-slider">
+<div class="review-wrapper" id="reviewWrapper">
+
+<div class="review-slide"><img src="25.png"></div>
+<div class="review-slide"><img src="27.png"></div>
+<div class="review-slide"><img src="28.png"></div>
+<div class="review-slide"><img src="29.png"></div>
+<div class="review-slide"><img src="30.png"></div>
+<div class="review-slide"><img src="31.png"></div>
+<div class="review-slide"><img src="33.png"></div>
+<div class="review-slide"><img src="34.png"></div>
+<div class="review-slide"><img src="35.png"></div>
+
+</div>
+
+<button class="slide-btn prev-btn" onclick="moveCustomerSlide(-1)">‹</button>
+<button class="slide-btn next-btn" onclick="moveCustomerSlide(1)">›</button>
+
+</div>
+</div>
+
+<!-- CHECKOUT -->
 <div class="card">
 <h3>Checkout</h3>
 <form id="orderForm">
-
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_template" value="table">
-
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$" inputmode="numeric">
 
-<input type="text" name="address" id="address" placeholder="Full Address" required>
-<input type="text" name="landmark" placeholder="Nearest Landmark" required>
+<select id="province" required></select>
+<select id="city" required></select>
+<select id="barangay" required></select>
 
+<input type="text" id="street" placeholder="House / Street" required>
+<textarea id="address" readonly placeholder="Full Address"></textarea>
+
+<input type="text" name="landmark" placeholder="Nearest Landmark" required>
 <button type="submit">PLACE ORDER</button>
 </form>
 </div>
@@ -129,98 +162,153 @@ fbq('track','ViewContent');
 LIMITED STOCK – ORDER NOW (COD)
 </div>
 
+<div class="buyer-popup" id="buyerPopup">
+<span id="buyerText"></span>
+</div>
+
 <script>
 
-/* COUNTDOWN FIXED */
+/* COUNTDOWN */
 function updateCountdown(){
-  const now = new Date();
-  const midnight = new Date(now);
-  midnight.setDate(now.getDate() + 1);
-  midnight.setHours(0,0,0,0);
-  const diff = midnight - now;
-
-  const h = String(Math.floor(diff / 1000 / 60 / 60)).padStart(2,'0');
-  const m = String(Math.floor((diff / 1000 / 60) % 60)).padStart(2,'0');
-  const s = String(Math.floor((diff / 1000) % 60)).padStart(2,'0');
-  document.getElementById("timer").innerText = `${h}:${m}:${s}`;
+const now=new Date();
+const midnight=new Date();
+midnight.setHours(24,0,0,0);
+const diff=midnight-now;
+const h=String(Math.floor(diff/1000/60/60)).padStart(2,'0');
+const m=String(Math.floor((diff/1000/60)%60)).padStart(2,'0');
+const s=String(Math.floor((diff/1000)%60)).padStart(2,'0');
+document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 }
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-/* REALISTIC BUYER COUNTER */
+/* BUYER COUNTER */
 let buyers=18;
 setInterval(()=>{
-buyers += Math.floor(Math.random()*3) - 1;
-if(buyers < 12) buyers = 12;
-if(buyers > 35) buyers = 35;
+buyers+=Math.floor(Math.random()*2);
 document.getElementById("buyerCount").innerText=buyers;
-},4000);
+},5000);
 
-/* PERSISTENT SLOTS */
-let storedSlots = localStorage.getItem("slotsLeft");
+/* SLOTS */
+let storedSlots=localStorage.getItem("slotsLeft");
 if(!storedSlots){
-storedSlots = Math.floor(Math.random()*4)+2;
-localStorage.setItem("slotsLeft", storedSlots);
+storedSlots=Math.floor(Math.random()*4)+2;
+localStorage.setItem("slotsLeft",storedSlots);
 }
-document.getElementById("slots").innerText = storedSlots;
+document.getElementById("slots").innerText=storedSlots;
 
-/* SUBMIT */
-document.getElementById("orderForm").addEventListener("submit",function(e){
-e.preventDefault();
+/* BUYER POPUP TEXT */
+const names=["Mark","Ana","Carlo","John","Maria","Paolo"];
+const cities=["Manila","Quezon City","Cebu","Davao","Taguig"];
+const popup=document.getElementById("buyerPopup");
+const buyerText=document.getElementById("buyerText");
 
-if(localStorage.getItem("orderPlaced")==="true"){
-alert("Order already submitted.");
+function showPopup(){
+const name=names[Math.floor(Math.random()*names.length)];
+const city=cities[Math.floor(Math.random()*cities.length)];
+buyerText.innerText=`${name} from ${city} just ordered 500GB HDD`;
+popup.classList.add("show");
+setTimeout(()=>popup.classList.remove("show"),4000);
+}
+setInterval(showPopup,10000);
+
+/* REVIEW SLIDER */
+let customerIndex=0;
+const reviewWrapper=document.getElementById("reviewWrapper");
+const totalSlides=reviewWrapper.children.length;
+
+function moveCustomerSlide(direction){
+customerIndex+=direction;
+if(customerIndex<0)customerIndex=totalSlides-1;
+if(customerIndex>=totalSlides)customerIndex=0;
+reviewWrapper.style.transform=`translateX(-${customerIndex*100}%)`;
+}
+setInterval(()=>moveCustomerSlide(1),4000);
+
+/* SWIPE */
+let startX=0;
+reviewWrapper.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+reviewWrapper.addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50)moveCustomerSlide(1);
+if(endX-startX>50)moveCustomerSlide(-1);
+});
+
+/* ADDRESS API WITH NCR */
+document.addEventListener("DOMContentLoaded",function(){
+const province=document.getElementById("province");
+const city=document.getElementById("city");
+const barangay=document.getElementById("barangay");
+const street=document.getElementById("street");
+const address=document.getElementById("address");
+
+function updateAddress(){
+address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text||''}, ${province.options[province.selectedIndex]?.text||''}`;
+}
+
+street.addEventListener("input",updateAddress);
+barangay.addEventListener("change",updateAddress);
+city.addEventListener("change",updateAddress);
+province.addEventListener("change",updateAddress);
+
+province.innerHTML='<option value="">Select Province</option>';
+province.innerHTML+=`<option value="130000000" data-type="region">NCR - National Capital Region</option>`;
+
+fetch("https://psgc.gitlab.io/api/provinces/")
+.then(res=>res.json())
+.then(data=>{
+data.sort((a,b)=>a.name.localeCompare(b.name));
+data.forEach(p=>{
+let o=document.createElement("option");
+o.value=p.code;
+o.textContent=p.name;
+province.appendChild(o);
+});
+});
+
+province.addEventListener("change",function(){
+city.innerHTML='<option value="">Loading...</option>';
+
+if(this.value==="130000000"){
+fetch(`https://psgc.gitlab.io/api/regions/130000000/cities-municipalities/`)
+.then(r=>r.json())
+.then(data=>{
+city.innerHTML='<option value="">Select City</option>';
+data.forEach(c=>{
+let o=document.createElement("option");
+o.value=c.code;
+o.textContent=c.name;
+city.appendChild(o);
+});
+});
 return;
 }
 
-fbq('track','InitiateCheckout');
+fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
+.then(r=>r.json())
+.then(data=>{
+city.innerHTML='<option value="">Select City</option>';
+data.forEach(c=>{
+let o=document.createElement("option");
+o.value=c.code;
+o.textContent=c.name;
+city.appendChild(o);
+});
+});
+});
 
-const btn=this.querySelector("button");
-btn.disabled=true;
-btn.innerHTML=`
-<span style="display:flex;align-items:center;justify-content:center;gap:8px;">
-<span class="spinner"></span>
-Processing Order...
-</span>`;
-
-const name=this.name.value;
-const phone=this.phone.value;
-const fullAddress=this.address.value;
-const landmark=this.landmark.value;
-
-const message=`Hello! I would like to confirm my order.
-
-Name: ${name}
-Phone: ${phone}
-Address: ${fullAddress}
-Landmark: ${landmark}
-
-Product: 500GB External HDD
-Price: ₱1,500 COD`;
-
-const encoded=encodeURIComponent(message);
-
-fetch("https://formsubmit.co/ajax/YOUR_EMAIL_HERE",{
-method:"POST",
-body:new FormData(this)
-})
-.then(()=>{
-localStorage.setItem("orderPlaced","true");
-
-let currentSlots=parseInt(localStorage.getItem("slotsLeft"))||5;
-if(currentSlots>1){
-currentSlots--;
-localStorage.setItem("slotsLeft",currentSlots);
-}
-
-fbq('track','Purchase',{value:1500,currency:'PHP'});
-
-window.location.href=`https://m.me/allaboutsoundsphmain?text=${encoded}`;
-})
-.catch(()=>{
-alert("Error sending order.");
-btn.disabled=false;
-btn.innerText="PLACE ORDER";
+city.addEventListener("change",function(){
+fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
+.then(r=>r.json())
+.then(data=>{
+barangay.innerHTML='<option value="">Select Barangay</option>';
+data.forEach(b=>{
+let o=document.createElement("option");
+o.value=b.name;
+o.textContent=b.name;
+barangay.appendChild(o);
+});
+});
 });
 });
 </script>
