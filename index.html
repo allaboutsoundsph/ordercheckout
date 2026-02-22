@@ -14,6 +14,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#fdfbfb,#ebedee);color:#222;}
 header{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:14px;}
+header h1{font-size:1.2rem;font-weight:700}
+header p{font-size:0.8rem;opacity:0.9}
 .container{max-width:680px;margin:auto;padding:16px}
 .card{background:#fff;padding:20px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);margin-bottom:18px;}
 .product-img{width:100%;border-radius:16px;margin-bottom:15px;}
@@ -37,7 +39,7 @@ footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .next-btn{right:10px}
 </style>
 
-<!-- Facebook Pixel -->
+<!-- FACEBOOK PIXEL -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -127,11 +129,12 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* GOOGLE SHEET SUBMISSION */
+/* GOOGLE SHEETS INTEGRATION */
 const SHEET_URL="https://script.google.com/macros/s/AKfycby7hD2sSypAddNzOsAieGw72EpjDOsxmRzkU-pLL_LieaxniziQS-Iw_HvfgYTWJhBT/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
+
 const btn=this.querySelector("button");
 const name=this.name.value.trim();
 const phone=this.phone.value.trim();
