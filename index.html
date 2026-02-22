@@ -129,11 +129,9 @@ function scrollToOrder(){
 document.getElementById("orderForm").scrollIntoView({behavior:"smooth"});
 }
 
-/* Dynamic Slots */
 let slots=Math.floor(Math.random()*8)+5;
 document.getElementById("slots").innerText=slots;
 
-/* Animated Buyer Counter */
 let buyerCount=18;
 const buyerEl=document.getElementById("buyerCount");
 setInterval(()=>{
@@ -143,7 +141,6 @@ if(buyerCount>25)buyerCount=25;
 buyerEl.innerText=buyerCount;
 },3000);
 
-/* Countdown */
 function updateCountdown(){
 const now=new Date();
 const midnight=new Date();
@@ -158,7 +155,6 @@ document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-/* Review Slider */
 let index=0;
 const wrapper=document.getElementById("reviewWrapper");
 const total=wrapper?wrapper.children.length:0;
@@ -171,7 +167,6 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* Form Validation + Pixel */
 function showError(msg){alert(msg);}
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
@@ -193,7 +188,7 @@ fbq('track','AddToCart',{value:1500,currency:'PHP'});
 btn.disabled=true;
 btn.innerText="Processing Order...";
 
-emailjs.send("service_ujsvyrg","template_6t7zylg",{
+emailjs.send("service_ujsvyrg","template_41wfyof",{
 name,phone,address,landmark
 }).then(function(){
 
