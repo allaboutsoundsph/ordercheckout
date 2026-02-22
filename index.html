@@ -3,38 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>500GB External HDD – Official Store</title>
+<title>500GB HARD DRIVE – Official Store</title>
 
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5;}
-header{background:#ee4d2d;color:#fff;text-align:center;padding:8px;}
-.container{max-width:650px;margin:auto;padding:12px;}
-.card{background:#fff;padding:15px;border-radius:10px;
-box-shadow:0 1px 4px rgba(0,0,0,0.08);margin-bottom:12px;}
-.price{font-size:1.8rem;font-weight:bold;color:#ee4d2d;}
-.old-price{text-decoration:line-through;color:#999;}
-button{background:#ee4d2d;color:#fff;border:none;padding:15px;border-radius:8px;font-weight:bold;cursor:pointer;}
-select,input,textarea{padding:12px;border:1px solid #ddd;border-radius:6px;width:100%;}
-.urgent{background:#fff1f0;color:#ee4d2d;padding:10px;border-radius:6px;font-weight:bold;margin-top:8px;}
-.buyers{font-size:0.85rem;color:#555;}
-footer{text-align:center;padding:15px;font-size:0.75rem;color:#777;}
-.sticky-order{position:fixed;bottom:0;left:0;width:100%;
-background:#ee4d2d;color:#fff;text-align:center;padding:14px;font-weight:bold;}
-@media(min-width:768px){.sticky-order{display:none;}}
-
-/* RIGHT POPUP */
-.buyer-popup{
-position:fixed;bottom:90px;right:20px;
-background:#fff;padding:16px 20px;border-radius:14px;
-box-shadow:0 10px 30px rgba(0,0,0,0.18);
-font-size:13px;z-index:9999;opacity:0;
-transform:translateX(40px);
-transition:all 0.4s ease;
-max-width:280px;
-border-left:4px solid #ee4d2d;
+body{
+font-family:Arial, sans-serif;
+margin:0;
+background:#f2f2f2;
 }
-.buyer-popup.show{opacity:1;transform:translateX(0);}
-.buyer-popup strong{color:#ee4d2d;}
+
+header{
+background:#ee4d2d;
+color:#fff;
+text-align:center;
+padding:15px;
+font-size:20px;
+font-weight:bold;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:#fff;
+padding:20px;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
+margin-bottom:20px;
+}
+
+.price{
+font-size:30px;
+font-weight:bold;
+color:#ee4d2d;
+}
+
+.old-price{
+text-decoration:line-through;
+color:#999;
+font-size:16px;
+margin-left:10px;
+}
+
+button{
+background:#ee4d2d;
+color:#fff;
+border:none;
+padding:16px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+width:100%;
+font-size:16px;
+}
+
+select,input,textarea{
+padding:12px;
+border:1px solid #ddd;
+border-radius:6px;
+width:100%;
+margin-bottom:12px;
+font-size:14px;
+box-sizing:border-box;
+}
+
+.review-section-title{
+text-align:center;
+font-size:26px;
+font-weight:bold;
+color:#ff0080;
+margin-bottom:20px;
+}
+
+.review-box{
+background:#f7f7f7;
+padding:15px;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+.review-name{
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.review-text{
+margin-bottom:10px;
+}
+
+.review-box img{
+width:100%;
+border-radius:15px;
+cursor:pointer;
+}
+
+.lightbox{
+display:none;
+position:fixed;
+z-index:9999;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+justify-content:center;
+align-items:center;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:12px;
+}
+
+.close-lightbox{
+position:absolute;
+top:25px;
+right:40px;
+color:#fff;
+font-size:40px;
+cursor:pointer;
+}
+
+footer{
+text-align:center;
+padding:20px;
+font-size:12px;
+color:#777;
+}
 </style>
 
 <!-- FACEBOOK PIXEL -->
@@ -51,193 +150,153 @@ fbq('init','631653776133164');
 fbq('track','PageView');
 fbq('track','ViewContent');
 </script>
-</head>
 
+</head>
 <body>
 
 <header>
-<h2>500GB HARD DRIVE</h2>
+500GB HARD DRIVE – 60,000+ SONGS READY
 </header>
 
 <div class="container">
 
 <div class="card">
-<div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
+<div class="price">
+₱1,500 <span class="old-price">₱3,500</span>
+</div>
 <p>FREE SHIPPING | CASH ON DELIVERY</p>
-<div class="urgent">⚠️ Only <span id="slots">5</span> left today!</div>
-<p class="buyers">⚡ <span id="buyerCount">18</span> people checking out</p>
-<p>Sale ends in: <b id="timer">00:00:00</b></p>
 </div>
 
+<!-- REVIEW SECTION -->
 <div class="card">
-<form id="orderForm">
 
-<input type="text" name="name" placeholder="Full Name" required>
-<input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$">
+<div class="review-section-title">
+⭐⭐⭐⭐⭐ SATISFIED BUYERS
+</div>
 
-<select id="province" required></select>
-<select id="city" required></select>
-<select id="barangay" required></select>
+<div class="review-box">
+<div class="review-name">Reil Bejoc</div>
+<div class="review-text">
+ORDER RECEIVED<br>
+LEGIT 💯💯
+</div>
+<img src="images/reviews/review1.png">
+</div>
 
-<input type="text" id="street" placeholder="House / Street" required>
-<textarea id="address" name="address" readonly placeholder="Full Address"></textarea>
-<input type="text" name="landmark" placeholder="Nearest Landmark" required>
+<div class="review-box">
+<div class="review-name">Christian Cebal</div>
+<div class="review-text">
+Order Received 💯<br>
+Legit ✅💯
+</div>
+<img src="images/reviews/review2.png">
+</div>
 
-<button type="submit">PLACE ORDER</button>
-</form>
+<div class="review-box">
+<div class="review-name">Resty Maga Diaz</div>
+<div class="review-text">
+Order received 101% legit original mga songs Good sounds 💯💯💯💯
+</div>
+<img src="images/reviews/review3.png">
+</div>
+
+<div class="review-box">
+<div class="review-name">Joshua Opina</div>
+<div class="review-text">
+Legit check ✔️<br>
+Trusted seller ⭐⭐⭐⭐⭐
+</div>
+<img src="images/reviews/review4.png">
+</div>
+
+<div class="review-box">
+<div class="review-name">coquilla123</div>
+<div class="review-text">
+Variation: 500GB 60,000 TRACKS<br>
+Value For Money: Super Legit<br>
+Performance: Grabe Super Legit 60,000 Music<br>
+Highly Recommended super legit my first order
+</div>
+<img src="images/reviews/review5.png">
+</div>
+
+<div class="review-box">
+<div class="review-name">Argie Labrador</div>
+<div class="review-text">
+Na received nona sir/ma'am salamat
+</div>
+<img src="images/reviews/review6.png">
+</div>
+
+<div class="review-box">
+<div class="review-name">Adrian Clark Garde</div>
+<div class="review-text">
+Na tanggap ko na po salamat
+</div>
+<img src="images/reviews/review7.png">
+</div>
+
+<div class="review-box">
+<div class="review-name">Jesmar Mondejar</div>
+<div class="review-text">
+all goods...as in all in na,, thank you po.. allabout sounds ph..<br>
+legit ❤️❤️❤️ di nku mabibitin pag may event 🔊🔊😆
+</div>
+<img src="images/reviews/review8.png">
+</div>
+
+<div class="review-box">
+<div class="review-name">Barracks Lights And Sounds</div>
+<div class="review-text">
+ang ganda nsa loob na lahat ang file salamat seller.,,
+</div>
+<img src="images/reviews/review9.png">
+</div>
+
+<div class="review-box">
+<div class="review-text">
+Salamat po dumating na ang order ko
+</div>
+<img src="images/reviews/review10.png">
 </div>
 
 </div>
 
-<footer>© 2026 All About Sounds PH</footer>
-
-<div class="sticky-order" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">
-LIMITED STOCK – ORDER NOW
 </div>
 
-<div class="buyer-popup" id="buyerPopup">
-<div id="popupContent"></div>
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+<span class="close-lightbox">&times;</span>
+<img id="lightbox-img">
 </div>
-
-<audio id="popupSound" preload="auto">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c6f9e5b6a.mp3?filename=notification-2-269292.mp3">
-</audio>
 
 <script>
-// Countdown
-function updateCountdown(){
-const now=new Date();
-const midnight=new Date();
-midnight.setHours(24,0,0,0);
-const diff=midnight-now;
-const h=String(Math.floor(diff/1000/60/60)).padStart(2,'0');
-const m=String(Math.floor((diff/1000/60)%60)).padStart(2,'0');
-const s=String(Math.floor((diff/1000)%60)).padStart(2,'0');
-document.getElementById("timer").innerText=`${h}:${m}:${s}`;
+const images = document.querySelectorAll(".review-box img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.querySelector(".close-lightbox");
+
+images.forEach(img=>{
+img.addEventListener("click",()=>{
+lightbox.style.display="flex";
+lightboxImg.src=img.src;
+});
+});
+
+closeBtn.addEventListener("click",()=>{
+lightbox.style.display="none";
+});
+
+lightbox.addEventListener("click",(e)=>{
+if(e.target!==lightboxImg){
+lightbox.style.display="none";
 }
-updateCountdown();
-setInterval(updateCountdown,1000);
-
-// Buyer count
-let buyers=18;
-setInterval(()=>{buyers+=Math.floor(Math.random()*2);
-document.getElementById("buyerCount").innerText=buyers;},5000);
-
-document.getElementById("slots").innerText=Math.floor(Math.random()*3)+3;
-
-// POPUP
-const popup=document.getElementById("buyerPopup");
-const popupContent=document.getElementById("popupContent");
-const popupSound=document.getElementById("popupSound");
-const names=["Mark","Ana","Carlo","John","Maria","Renz","Paolo","Jessa","Michael","Karen"];
-let userCity="your area";
-
-fetch("https://ipapi.co/json/").then(r=>r.json()).then(d=>{
-if(d.city){userCity=d.city;}
-});
-
-function randomTime(){
-const mins=Math.floor(Math.random()*5)+1;
-return mins===1?"1 minute ago":mins+" minutes ago";
-}
-
-function showPopup(){
-const n=names[Math.floor(Math.random()*names.length)];
-popupContent.innerHTML=`
-<strong>${n}</strong> from ${userCity}<br>
-just ordered <strong>500GB HARD DRIVE</strong><br>
-<span style="color:#777;font-size:12px;">${randomTime()}</span>
-`;
-popup.classList.add("show");
-popupSound.play().catch(()=>{});
-setTimeout(()=>popup.classList.remove("show"),4500);
-}
-setInterval(showPopup,Math.floor(Math.random()*6000)+8000);
-
-// PH Address
-document.addEventListener("DOMContentLoaded",function(){
-const province=document.getElementById("province");
-const city=document.getElementById("city");
-const barangay=document.getElementById("barangay");
-const street=document.getElementById("street");
-const address=document.getElementById("address");
-
-fetch("https://psgc.gitlab.io/api/provinces/")
-.then(r=>r.json())
-.then(data=>{
-data.sort((a,b)=>a.name.localeCompare(b.name));
-province.innerHTML='<option>Select Province</option>';
-data.forEach(p=>{
-let o=document.createElement("option");
-o.value=p.code;
-o.textContent=p.name;
-province.appendChild(o);
-});
-});
-
-province.addEventListener("change",function(){
-fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
-.then(r=>r.json())
-.then(data=>{
-city.innerHTML='<option>Select City</option>';
-data.forEach(c=>{
-let o=document.createElement("option");
-o.value=c.code;
-o.textContent=c.name;
-city.appendChild(o);
-});
-});
-});
-
-city.addEventListener("change",function(){
-fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
-.then(r=>r.json())
-.then(data=>{
-barangay.innerHTML='<option>Select Barangay</option>';
-data.forEach(b=>{
-let o=document.createElement("option");
-o.value=b.name;
-o.textContent=b.name;
-barangay.appendChild(o);
-});
-});
-});
-
-function updateAddress(){
-address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text||''}, ${province.options[province.selectedIndex]?.text||''}`;
-}
-street.addEventListener("input",updateAddress);
-barangay.addEventListener("change",updateAddress);
-
-document.getElementById("orderForm").addEventListener("submit",function(e){
-e.preventDefault();
-
-const name=this.name.value;
-const phone=this.phone.value;
-const fullAddress=address.value;
-const landmark=this.landmark.value;
-
-const message=`Hello! I would like to confirm my order.
-
-Name: ${name}
-Phone: ${phone}
-Address: ${fullAddress}
-Landmark: ${landmark}
-
-Product: 500GB HARD DRIVE
-Price: ₱1,500 COD`;
-
-const encoded=encodeURIComponent(message);
-
-fetch("https://formsubmit.co/solenjerllyn04@gmail.com",{
-method:"POST",
-body:new FormData(this)
-})
-.then(()=>{
-window.location.href=`thankyou.html?msg=${encoded}`;
-});
-});
 });
 </script>
+
+<footer>
+© 2026 All About Sounds PH
+</footer>
+
 </body>
 </html>
