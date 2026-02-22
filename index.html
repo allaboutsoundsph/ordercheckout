@@ -30,7 +30,7 @@ padding:14px;font-size:16px;font-weight:bold;
 z-index:9998;}
 @media(min-width:768px){.sticky-order{display:none;}}
 
-/* BUYER POPUP TEXT ONLY */
+/* BUYER POPUP */
 .buyer-popup{
 position:fixed;
 bottom:90px;
@@ -51,43 +51,37 @@ transform:translateY(0);
 }
 
 /* REVIEW SLIDER */
-.review-slider{
-position:relative;
-overflow:hidden;
-border-radius:12px;
-}
-.review-wrapper{
-display:flex;
-transition:transform 0.5s ease;
-}
-.review-slide{
-min-width:100%;
-}
-.review-slide img{
-width:100%;
-border-radius:12px;
-display:block;
-}
+.review-slider{position:relative;overflow:hidden;border-radius:12px;}
+.review-wrapper{display:flex;transition:transform 0.5s ease;}
+.review-slide{min-width:100%;}
+.review-slide img{width:100%;border-radius:12px;display:block;}
 .slide-btn{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-background:rgba(0,0,0,0.5);
-color:#fff;
-border:none;
-width:40px;
-height:40px;
-border-radius:50%;
-font-size:22px;
-cursor:pointer;
-z-index:5;
+position:absolute;top:50%;transform:translateY(-50%);
+background:rgba(0,0,0,0.5);color:#fff;border:none;
+width:40px;height:40px;border-radius:50%;
+font-size:22px;cursor:pointer;z-index:5;
 }
 .prev-btn{left:10px;}
 .next-btn{right:10px;}
 .slide-btn:hover{background:rgba(0,0,0,0.7);}
 </style>
-</head>
 
+<!-- FACEBOOK PIXEL -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}
+(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init','631653776133164'); 
+fbq('track','PageView');
+fbq('track','ViewContent');
+</script>
+
+</head>
 <body>
 
 <header>
@@ -97,10 +91,9 @@ z-index:5;
 
 <div class="container">
 
-<!-- PRODUCT CARD -->
 <div class="card">
 <span class="badge">Official Store • Best Seller</span>
-<img class="product-img" src="new feb-Cover.jpg" loading="lazy">
+<img class="product-img" src="new feb-Cover.jpg">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
@@ -111,7 +104,7 @@ z-index:5;
 <p>Sale ends in: <b id="timer">00:00:00</b></p>
 </div>
 
-<!-- CUSTOMER REVIEW SLIDER -->
+<!-- REVIEW SLIDER -->
 <div class="card">
 <h3 style="text-align:center;">⭐ Satisfied Customers</h3>
 <div class="review-slider">
@@ -128,10 +121,8 @@ z-index:5;
 <div class="review-slide"><img src="35.png"></div>
 
 </div>
-
 <button class="slide-btn prev-btn" onclick="moveCustomerSlide(-1)">‹</button>
 <button class="slide-btn next-btn" onclick="moveCustomerSlide(1)">›</button>
-
 </div>
 </div>
 
@@ -141,14 +132,11 @@ z-index:5;
 <form id="orderForm">
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="tel" name="phone" placeholder="09XXXXXXXXX" required pattern="^09\d{9}$" inputmode="numeric">
-
 <select id="province" required></select>
 <select id="city" required></select>
 <select id="barangay" required></select>
-
 <input type="text" id="street" placeholder="House / Street" required>
 <textarea id="address" readonly placeholder="Full Address"></textarea>
-
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
 <button type="submit">PLACE ORDER</button>
 </form>
@@ -197,12 +185,11 @@ localStorage.setItem("slotsLeft",storedSlots);
 }
 document.getElementById("slots").innerText=storedSlots;
 
-/* BUYER POPUP TEXT */
+/* BUYER POPUP */
 const names=["Mark","Ana","Carlo","John","Maria","Paolo"];
 const cities=["Manila","Quezon City","Cebu","Davao","Taguig"];
 const popup=document.getElementById("buyerPopup");
 const buyerText=document.getElementById("buyerText");
-
 function showPopup(){
 const name=names[Math.floor(Math.random()*names.length)];
 const city=cities[Math.floor(Math.random()*cities.length)];
@@ -216,7 +203,6 @@ setInterval(showPopup,10000);
 let customerIndex=0;
 const reviewWrapper=document.getElementById("reviewWrapper");
 const totalSlides=reviewWrapper.children.length;
-
 function moveCustomerSlide(direction){
 customerIndex+=direction;
 if(customerIndex<0)customerIndex=totalSlides-1;
@@ -224,8 +210,6 @@ if(customerIndex>=totalSlides)customerIndex=0;
 reviewWrapper.style.transform=`translateX(-${customerIndex*100}%)`;
 }
 setInterval(()=>moveCustomerSlide(1),4000);
-
-/* SWIPE */
 let startX=0;
 reviewWrapper.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
 reviewWrapper.addEventListener("touchend",e=>{
@@ -234,71 +218,8 @@ if(startX-endX>50)moveCustomerSlide(1);
 if(endX-startX>50)moveCustomerSlide(-1);
 });
 
-/* ADDRESS API WITH NCR */
-document.addEventListener("DOMContentLoaded",function(){
-const province=document.getElementById("province");
-const city=document.getElementById("city");
-const barangay=document.getElementById("barangay");
-const street=document.getElementById("street");
-const address=document.getElementById("address");
-
-function updateAddress(){
-address.value=`${street.value}, ${barangay.value}, ${city.options[city.selectedIndex]?.text||''}, ${province.options[province.selectedIndex]?.text||''}`;
-}
-
-street.addEventListener("input",updateAddress);
-barangay.addEventListener("change",updateAddress);
-city.addEventListener("change",updateAddress);
-province.addEventListener("change",updateAddress);
-
-province.innerHTML='<option value="">Select Province</option>';
-province.innerHTML+=`<option value="130000000" data-type="region">NCR - National Capital Region</option>`;
-
-fetch("https://psgc.gitlab.io/api/provinces/")
-.then(res=>res.json())
-.then(data=>{
-data.sort((a,b)=>a.name.localeCompare(b.name));
-data.forEach(p=>{
-let o=document.createElement("option");
-o.value=p.code;
-o.textContent=p.name;
-province.appendChild(o);
-});
-});
-
-province.addEventListener("change",function(){
-city.innerHTML='<option value="">Loading...</option>';
-
-if(this.value==="130000000"){
-fetch(`https://psgc.gitlab.io/api/regions/130000000/cities-municipalities/`)
-.then(r=>r.json())
-.then(data=>{
-city.innerHTML='<option value="">Select City</option>';
-data.forEach(c=>{
-let o=document.createElement("option");
-o.value=c.code;
-o.textContent=c.name;
-city.appendChild(o);
-});
-});
-return;
-}
-
-fetch(`https://psgc.gitlab.io/api/provinces/${this.value}/cities-municipalities/`)
-.then(r=>r.json())
-.then(data=>{
-city.innerHTML='<option value="">Select City</option>';
-data.forEach(c=>{
-let o=document.createElement("option");
-o.value=c.code;
-o.textContent=c.name;
-city.appendChild(o);
-});
-});
-});
-
-  /* FORM SUBMIT → MESSENGER REDIRECT */
-document.getElementById("orderForm").addEventListener("submit", function(e){
+/* FORM SUBMIT WITH FB PURCHASE */
+document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
 
 if(localStorage.getItem("orderPlaced")==="true"){
@@ -306,24 +227,23 @@ alert("Order already submitted.");
 return;
 }
 
-const btn = this.querySelector("button");
-btn.disabled = true;
-btn.innerText = "Processing Order...";
+const btn=this.querySelector("button");
+btn.disabled=true;
+btn.innerText="Processing Order...";
 
-const name = this.name.value.trim();
-const phone = this.phone.value.trim();
-const landmark = this.landmark.value.trim();
-const fullAddress = document.getElementById("address").value.trim();
+const name=this.name.value.trim();
+const phone=this.phone.value.trim();
+const landmark=this.landmark.value.trim();
+const fullAddress=document.getElementById("address").value.trim();
 
 if(!fullAddress){
 alert("Please complete your address.");
-btn.disabled = false;
-btn.innerText = "PLACE ORDER";
+btn.disabled=false;
+btn.innerText="PLACE ORDER";
 return;
 }
 
-const message = 
-`Hello! I would like to confirm my order.
+const message=`Hello! I would like to confirm my order.
 
 Name: ${name}
 Phone: ${phone}
@@ -333,32 +253,26 @@ Landmark: ${landmark}
 Product: 500GB External HDD
 Price: ₱1,500 COD`;
 
-const encodedMessage = encodeURIComponent(message);
+const encodedMessage=encodeURIComponent(message);
 
-/* 🔥 IMPORTANT: Replace with your correct page username */
-const messengerURL = `https://m.me/allaboutsoundsphmain?text=${encodedMessage}`;
+/* FIRE PURCHASE EVENT */
+if(typeof fbq!=="undefined"){
+fbq('track','Purchase',{
+value:1500,
+currency:'PHP',
+content_name:'500GB External HDD',
+content_type:'product'
+});
+}
 
 localStorage.setItem("orderPlaced","true");
 
-window.location.href = messengerURL;
-});
-  
-city.addEventListener("change",function(){
-fetch(`https://psgc.gitlab.io/api/cities-municipalities/${this.value}/barangays/`)
-.then(r=>r.json())
-.then(data=>{
-barangay.innerHTML='<option value="">Select Barangay</option>';
-data.forEach(b=>{
-let o=document.createElement("option");
-o.value=b.name;
-o.textContent=b.name;
-barangay.appendChild(o);
-});
-});
-});
+setTimeout(()=>{
+window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodedMessage}`;
+},800);
+
 });
 </script>
 
 </body>
 </html>
-
