@@ -154,7 +154,7 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* COUNTDOWN AUTO RESET */
+/* COUNTDOWN */
 function startCountdown(duration){
 let time=duration;
 setInterval(()=>{
@@ -168,7 +168,7 @@ if(time<0)time=duration;
 }
 startCountdown(900);
 
-/* VIEWERS NATURAL */
+/* VIEWERS */
 let viewers=6;
 setInterval(()=>{
 viewers+=Math.floor(Math.random()*3-1);
@@ -185,14 +185,10 @@ document.getElementById("stockCount").innerText=stock;
 }
 },20000);
 
-/* SOCIAL PROOF RANDOM */
+/* SOCIAL PROOF */
 const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P."];
 const cities=["Manila","Cebu","Davao","Iloilo","Bacolod"];
 const times=["just now","1 minute ago","3 minutes ago"];
-
-function randomInterval(min,max){
-return Math.floor(Math.random()*(max-min))+min;
-}
 
 function showSocial(){
 const popup=document.getElementById("socialProof");
@@ -205,14 +201,9 @@ popup.classList.add("show");
 sound.play().catch(()=>{});
 setTimeout(()=>popup.classList.remove("show"),4000);
 }
+setTimeout(()=>setInterval(showSocial,15000),5000);
 
-function scheduleSocial(){
-showSocial();
-setTimeout(scheduleSocial,randomInterval(8000,18000));
-}
-setTimeout(scheduleSocial,5000);
-
-/* GOOGLE SHEETS */
+/* GOOGLE SHEETS FIXED */
 const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
@@ -239,12 +230,12 @@ btn.classList.add("loading");
 btn.dataset.original=btn.innerHTML;
 btn.innerHTML="Processing...";
 
+/* CORS FIX */
 fetch(SHEET_URL,{
 method:"POST",
-headers:{"Content-Type":"application/json"},
+mode:"no-cors",
 body:JSON.stringify({name,phone,address,landmark})
 })
-.then(res=>res.json())
 .then(()=>{
 fbq('track','Purchase',{value:1500,currency:'PHP'});
 
@@ -277,4 +268,3 @@ document.getElementById("orderForm")
 
 </body>
 </html>
-
