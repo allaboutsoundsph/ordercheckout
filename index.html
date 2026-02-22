@@ -23,8 +23,26 @@ header p{font-size:0.8rem;opacity:0.9}
 .old-price{text-decoration:line-through;color:#888;font-size:1rem;margin-left:8px;}
 form{display:grid;gap:12px;margin-top:10px;}
 input,textarea{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:14px;}
-button{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;}
+button{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;position:relative;}
 button:disabled{opacity:0.7;cursor:not-allowed;}
+
+button.loading::after{
+content:"";
+width:18px;
+height:18px;
+border:3px solid #fff;
+border-top:3px solid transparent;
+border-radius:50%;
+position:absolute;
+right:16px;
+top:50%;
+transform:translateY(-50%);
+animation:spin 0.7s linear infinite;
+}
+@keyframes spin{
+to{transform:translateY(-50%) rotate(360deg);}
+}
+
 footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
 @media(min-width:768px){.sticky-order{display:none}}
@@ -37,6 +55,23 @@ footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .slide-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;}
 .prev-btn{left:10px}
 .next-btn{right:10px}
+
+/* ADDRESS GUIDE */
+.address-group{display:flex;flex-direction:column;gap:6px;}
+.address-guide{
+background:#fff5f2;
+border-left:4px solid #ee4d2d;
+padding:10px 12px;
+border-radius:8px;
+font-size:13px;
+color:#555;
+display:none;
+animation:fadeIn 0.3s ease;
+}
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(-5px);}
+to{opacity:1;transform:translateY(0);}
+}
 </style>
 
 <!-- Facebook Pixel -->
@@ -64,14 +99,14 @@ fbq('track','ViewContent');
 <div class="container">
 
 <div class="card">
-<img class="product-img" src="new feb-Cover.jpg" loading="lazy">
+<img class="product-img" src="new feb-Cover.jpg" loading="lazy" alt="500GB External HDD">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
+<p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p><b>📍 Iloilo Based Seller</b></p>
 </div>
 
-<!-- CUSTOMER REVIEWS -->
 <div class="card">
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Satisfied Customers</h3>
 <div class="review-slider">
@@ -90,7 +125,6 @@ fbq('track','ViewContent');
 <div class="review-slide"><img src="review11.png" loading="lazy"></div>
 
 </div>
-
 <button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
 <button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
 </div>
@@ -101,7 +135,16 @@ fbq('track','ViewContent');
 <form id="orderForm">
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="tel" name="phone" placeholder="09XXXXXXXXX" required>
-<textarea name="address" placeholder="Complete Address" required></textarea>
+
+<div class="address-group">
+<textarea name="address" placeholder="Complete Address (House No., Street, Barangay, City, Province)" required></textarea>
+<div class="address-guide" id="addressGuide">
+📌 <strong>Address Guide:</strong><br>
+House No. + Street + Barangay + City + Province<br>
+<small>Example: 123 Mabini St., Brgy. Jaro, Iloilo City, Iloilo</small>
+</div>
+</div>
+
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
 <button type="submit">PLACE ORDER</button>
 </form>
@@ -129,11 +172,49 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* GOOGLE SHEETS (GITHUB SAFE VERSION) */
+/* SWIPE SUPPORT */
+let startX=0;
+wrapper.addEventListener("touchstart",(e)=>{startX=e.touches[0].clientX;});
+wrapper.addEventListener("touchend",(e)=>{
+let endX=e.changedTouches[0].clientX;
+if(endX-startX>50)moveSlide(-1);
+if(startX-endX>50)moveSlide(1);
+});
+
+/* COUNTDOWN */
+function startCountdown(){
+let time=900;
+const el=document.getElementById("countdown");
+setInterval(()=>{
+let m=Math.floor(time/60);
+let s=time%60;
+el.innerText=`🔥 Promo ends in ${m}:${s<10?'0':''}${s}`;
+if(time>0)time--;
+},1000);
+}
+startCountdown();
+
+/* ADDRESS GUIDE SHOW */
+const addressField=document.querySelector("textarea[name='address']");
+const addressGuide=document.getElementById("addressGuide");
+
+addressField.addEventListener("focus",()=>{addressGuide.style.display="block";});
+addressField.addEventListener("blur",()=>{
+if(addressField.value.length>15)addressGuide.style.display="none";
+});
+
+/* PHONE FORMAT */
+document.querySelector("input[name='phone']").addEventListener("input",function(){
+this.value=this.value.replace(/\D/g,'').slice(0,11);
+});
+
+/* GOOGLE SHEETS */
 const SHEET_URL="https://script.google.com/macros/s/AKfycby7hD2sSypAddNzOsAieGw72EpjDOsxmRzkU-pLL_LieaxniziQS-Iw_HvfgYTWJhBT/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
+
+if(navigator.webdriver){alert("Bot detected.");return;}
 
 const btn=this.querySelector("button");
 const name=this.name.value.trim();
@@ -143,24 +224,24 @@ const landmark=this.landmark.value.trim();
 
 if(name.length<3)return alert("Please enter full name");
 if(!/^09\d{9}$/.test(phone))return alert("Enter valid Philippine mobile number");
-if(address.length<10)return alert("Please enter complete address");
+if(address.length<15 || !address.includes(","))return alert("Please enter full address with Barangay, City, and Province separated by commas.");
 
 fbq('track','AddToCart',{value:1500,currency:'PHP'});
 
 btn.disabled=true;
+btn.classList.add("loading");
 btn.innerText="Processing...";
 
-/* no-cors for GitHub Pages */
 fetch(SHEET_URL,{
-  method:"POST",
-  mode:"no-cors",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({name,phone,address,landmark})
+method:"POST",
+mode:"no-cors",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({name,phone,address,landmark})
 })
 .then(()=>{
-  fbq('track','Purchase',{value:1500,currency:'PHP'});
+fbq('track','Purchase',{value:1500,currency:'PHP'});
 
-  const message=`Hello! I would like to confirm my order.
+const message=`Hello! I would like to confirm my order.
 
 Name: ${name}
 Phone: ${phone}
@@ -170,14 +251,20 @@ Landmark: ${landmark}
 Product: 500GB External HDD
 Price: ₱1,500 COD`;
 
-  window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
+window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
 })
 .catch(()=>{
-  alert("Submission failed. Please try again.");
-  btn.disabled=false;
-  btn.innerText="PLACE ORDER";
+alert("Submission failed. Please try again.");
+btn.disabled=false;
+btn.classList.remove("loading");
+btn.innerText="PLACE ORDER";
 });
 });
+
+/* Initiate Checkout Tracking */
+document.getElementById("orderForm").addEventListener("focusin",()=>{
+fbq('track','InitiateCheckout');
+},{once:true});
 </script>
 
 </body>
