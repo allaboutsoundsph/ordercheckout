@@ -26,33 +26,33 @@ header{
 background:linear-gradient(90deg,#ee4d2d,#ff784e);
 color:#fff;
 text-align:center;
-padding:14px;
+padding:16px;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
-header h1{font-size:1.2rem;font-weight:700}
-header p{font-size:0.8rem;opacity:0.9}
+header h1{font-size:1.3rem;font-weight:700}
+header p{font-size:0.85rem;opacity:0.9}
 
 .container{max-width:680px;margin:auto;padding:16px}
 
 .card{
-background:rgba(255,255,255,0.9);
-backdrop-filter:blur(10px);
-padding:20px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-margin-bottom:18px;
+background:rgba(255,255,255,0.95);
+backdrop-filter:blur(12px);
+padding:22px;
+border-radius:18px;
+box-shadow:0 12px 35px rgba(0,0,0,0.08);
+margin-bottom:20px;
 }
 
 .product-img{
 width:100%;
-border-radius:16px;
+border-radius:18px;
 margin-bottom:15px;
 }
 
 .badge{
 background:#ffece8;
 color:#ee4d2d;
-padding:6px 12px;
+padding:6px 14px;
 border-radius:30px;
 font-size:0.75rem;
 font-weight:600;
@@ -61,10 +61,10 @@ margin-bottom:10px;
 }
 
 .price{
-font-size:2rem;
+font-size:2.2rem;
 font-weight:800;
 color:#ee4d2d;
-margin:5px 0;
+margin:6px 0;
 }
 
 .old-price{
@@ -76,39 +76,28 @@ margin-left:8px;
 
 .urgent{
 background:#fff1f0;
-padding:10px;
-border-radius:8px;
+padding:12px;
+border-radius:10px;
 margin-top:10px;
 font-weight:600;
 color:#ee4d2d;
 }
 
-.buyers{
-font-size:0.85rem;
-margin-top:6px;
-color:#555;
-}
+.buyers{font-size:0.85rem;margin-top:6px;color:#555}
+.timer{margin-top:6px;font-weight:600}
 
-.timer{
-margin-top:6px;
-font-weight:600;
-}
+form{display:grid;gap:14px;margin-top:10px}
 
-form{
-display:grid;
-gap:12px;
-margin-top:10px;
-}
-
-input,textarea{
+input,textarea,select{
 padding:14px;
 border:1px solid #ddd;
-border-radius:10px;
+border-radius:12px;
 font-size:14px;
 transition:0.2s;
+background:#fff;
 }
 
-input:focus,textarea:focus{
+input:focus,textarea:focus,select:focus{
 border-color:#ee4d2d;
 outline:none;
 box-shadow:0 0 0 3px rgba(238,77,45,0.15);
@@ -119,7 +108,7 @@ background:linear-gradient(90deg,#ee4d2d,#ff784e);
 color:#fff;
 border:none;
 padding:16px;
-border-radius:12px;
+border-radius:14px;
 font-size:1rem;
 font-weight:700;
 cursor:pointer;
@@ -129,20 +118,12 @@ box-shadow:0 6px 18px rgba(238,77,45,0.3);
 
 button:hover{
 transform:translateY(-2px);
-box-shadow:0 8px 22px rgba(238,77,45,0.4);
+box-shadow:0 8px 24px rgba(238,77,45,0.4);
 }
 
-button:disabled{
-opacity:0.7;
-cursor:not-allowed;
-}
+button:disabled{opacity:0.7;cursor:not-allowed}
 
-footer{
-text-align:center;
-padding:20px;
-font-size:0.75rem;
-color:#777;
-}
+footer{text-align:center;padding:20px;font-size:0.75rem;color:#777}
 
 .sticky-order{
 position:fixed;
@@ -152,48 +133,39 @@ width:100%;
 background:linear-gradient(90deg,#ee4d2d,#ff784e);
 color:#fff;
 text-align:center;
-padding:16px;
+padding:18px;
 font-weight:700;
 z-index:999;
 animation:pulse 2s infinite;
 cursor:pointer;
 }
-
 @keyframes pulse{
 0%{transform:scale(1)}
 50%{transform:scale(1.05)}
 100%{transform:scale(1)}
 }
+@media(min-width:768px){.sticky-order{display:none}}
 
-@media(min-width:768px){
-.sticky-order{display:none}
-}
-
-/* POPUP */
 .buyer-popup{
 position:fixed;
 bottom:100px;
 left:15px;
 background:#fff;
 padding:12px 18px;
-border-radius:12px;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
+border-radius:14px;
+box-shadow:0 12px 35px rgba(0,0,0,0.15);
 font-size:13px;
 opacity:0;
 transform:translateY(20px);
 transition:0.4s;
 z-index:9999;
 }
-.buyer-popup.show{
-opacity:1;
-transform:translateY(0);
-}
+.buyer-popup.show{opacity:1;transform:translateY(0)}
 
-/* REVIEW SLIDER */
-.review-slider{position:relative;overflow:hidden;border-radius:16px}
+.review-slider{position:relative;overflow:hidden;border-radius:18px}
 .review-wrapper{display:flex;transition:transform 0.5s ease}
 .review-slide{min-width:100%}
-.review-slide img{width:100%;border-radius:16px}
+.review-slide img{width:100%;border-radius:18px}
 .slide-btn{
 position:absolute;top:50%;transform:translateY(-50%);
 background:rgba(0,0,0,0.5);
@@ -239,7 +211,6 @@ fbq('track','ViewContent');
 <p class="timer">Sale ends in: <span id="timer"></span></p>
 </div>
 
-<!-- REVIEWS -->
 <div class="card">
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Satisfied Customers</h3>
 <div class="review-slider">
@@ -249,27 +220,35 @@ fbq('track','ViewContent');
 <div class="review-slide"><img src="review3.png"></div>
 <div class="review-slide"><img src="review4.png"></div>
 <div class="review-slide"><img src="review5.png"></div>
-<div class="review-slide"><img src="review6.png"></div>
-<div class="review-slide"><img src="review7.png"></div>
-<div class="review-slide"><img src="review8.png"></div>
-<div class="review-slide"><img src="review9.png"></div>
-<div class="review-slide"><img src="review10.png"></div>
-<div class="review-slide"><img src="review11.png"></div>
 </div>
 <button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
 <button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
 </div>
 </div>
 
-<!-- CHECKOUT -->
 <div class="card">
 <h3>Checkout</h3>
 <form id="orderForm">
+
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="tel" name="phone" placeholder="09XXXXXXXXX" required>
-<textarea name="address" placeholder="Complete Address" required></textarea>
+<input type="text" name="street" placeholder="House No. / Street" required>
+
+<select id="province" required>
+<option value="">Select Province</option>
+</select>
+
+<select id="city" required disabled>
+<option value="">Select City / Municipality</option>
+</select>
+
+<select id="barangay" required disabled>
+<option value="">Select Barangay</option>
+</select>
+
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
 <button type="submit">PLACE ORDER</button>
+
 </form>
 </div>
 
@@ -287,7 +266,7 @@ LIMITED STOCK – ORDER NOW (COD)
 
 <script>
 
-/* COUNTDOWN FIXED */
+/* COUNTDOWN */
 function updateCountdown(){
 const now=new Date();
 const midnight=new Date();
@@ -302,7 +281,7 @@ document.getElementById("timer").innerText=`${h}:${m}:${s}`;
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-/* SLOT SYSTEM DAILY */
+/* SLOT SYSTEM */
 const SLOT_KEY="slotsLeft";
 const DATE_KEY="slotDate";
 function initSlots(){
@@ -318,8 +297,11 @@ document.getElementById("slots").innerText=slots;
 }
 function decreaseSlot(){
 let slots=parseInt(localStorage.getItem(SLOT_KEY))||1;
-if(slots>1){slots--;localStorage.setItem(SLOT_KEY,slots);
-document.getElementById("slots").innerText=slots;}
+if(slots>1){
+slots--;
+localStorage.setItem(SLOT_KEY,slots);
+document.getElementById("slots").innerText=slots;
+}
 }
 initSlots();
 
@@ -328,9 +310,9 @@ let buyers=18;
 setInterval(()=>{buyers+=Math.floor(Math.random()*2);
 document.getElementById("buyerCount").innerText=buyers;},5000);
 
-/* POPUP */
-const names=["Mark","Ana","Carlo","John","Maria","Jimmy","Matt","Sami","William","Eric","Aiden","Fritz","Oliver","Andres","Brandon"];
-const cities=["Manila","Quezon City","Cebu","Davao","Aklan","Bulacan","Masbate","Cavite","Bohol","Bataan"];
+/* BUYER POPUP */
+const names=["Mark","Ana","Carlo","John","Maria","Jimmy","Matt","Sami","William"];
+const cities=["Manila","Quezon City","Cebu","Davao","Iloilo","Bulacan"];
 const popup=document.getElementById("buyerPopup");
 const buyerText=document.getElementById("buyerText");
 function showPopup(){
@@ -354,28 +336,84 @@ wrapper.style.transform=`translateX(-${index*100}%)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
+/* PH ADDRESS DATA */
+const phData={
+"Iloilo":{"Iloilo City":["San Jose","Mandurriao","Jaro"],"Oton":["San Nicolas","Trapiche"]},
+"Cebu":{"Cebu City":["Lahug","Talamban"],"Mandaue City":["Centro","Tipolo"]},
+"Metro Manila":{"Quezon City":["Commonwealth","Cubao"],"Manila":["Tondo","Malate"]},
+"Davao del Sur":{"Davao City":["Buhangin","Matina"]}
+};
+
+const provinceSelect=document.getElementById("province");
+const citySelect=document.getElementById("city");
+const barangaySelect=document.getElementById("barangay");
+
+Object.keys(phData).forEach(province=>{
+let option=document.createElement("option");
+option.value=province;
+option.textContent=province;
+provinceSelect.appendChild(option);
+});
+
+provinceSelect.addEventListener("change",function(){
+citySelect.innerHTML='<option value="">Select City / Municipality</option>';
+barangaySelect.innerHTML='<option value="">Select Barangay</option>';
+barangaySelect.disabled=true;
+if(!this.value){citySelect.disabled=true;return;}
+citySelect.disabled=false;
+Object.keys(phData[this.value]).forEach(city=>{
+let option=document.createElement("option");
+option.value=city;
+option.textContent=city;
+citySelect.appendChild(option);
+});
+});
+
+citySelect.addEventListener("change",function(){
+barangaySelect.innerHTML='<option value="">Select Barangay</option>';
+if(!this.value){barangaySelect.disabled=true;return;}
+barangaySelect.disabled=false;
+phData[provinceSelect.value][this.value].forEach(brgy=>{
+let option=document.createElement("option");
+option.value=brgy;
+option.textContent=brgy;
+barangaySelect.appendChild(option);
+});
+});
+
 /* FORM */
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
+
 const btn=this.querySelector("button");
 const name=this.name.value.trim();
 const phone=this.phone.value.trim();
-const address=this.address.value.trim();
+const street=this.street.value.trim();
+const province=provinceSelect.value;
+const city=citySelect.value;
+const barangay=barangaySelect.value;
 const landmark=this.landmark.value.trim();
 
 if(name.length<3)return alert("Enter valid name");
 if(!/^09\d{9}$/.test(phone))return alert("Enter valid PH number");
-if(address.length<10)return alert("Enter full address");
+if(!province||!city||!barangay)return alert("Complete address selection");
 
 btn.disabled=true;
 btn.innerText="Processing Order...";
 decreaseSlot();
 
+const fullAddress=`${street}
+Brgy. ${barangay}
+${city}
+${province}`;
+
 const message=`Hello! I would like to confirm my order.
 
 Name: ${name}
 Phone: ${phone}
-Address: ${address}
+Address:
+${fullAddress}
+
 Landmark: ${landmark}
 
 Product: 500GB External HDD
@@ -388,6 +426,7 @@ fbq('track','Purchase',{value:1500,currency:'PHP'});
 setTimeout(()=>{
 window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(message)}`;
 },800);
+
 });
 </script>
 
