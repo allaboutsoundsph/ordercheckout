@@ -178,6 +178,7 @@ function trackFB(event,data={}){if(typeof fbq==="function"){fbq('track',event,da
 <h2 style="color:#ee4d2d;">🎉 Thank You!</h2>
 <p>Your order has been received successfully.</p>
 <p style="font-size:13px;color:#555;">Redirecting to Messenger to confirm...</p>
+
 </div>
 </div>
 
@@ -354,13 +355,19 @@ window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponen
 alert("Something went wrong. Please try again.");
 btn.disabled=false;
 btn.classList.remove("loading");
-btn.innerHTML="PLACE ORDER";
-}
-});
+btn.innerHTML="PLACE ORDER";}
+  
+<div class="sticky-order">ORDER NOW</div>
+document.querySelector(".sticky-order")?.addEventListener("click",()=>{
+    document.querySelector("#orderForm").scrollIntoView({
+        behavior:"smooth"
+    });
+});;
 </script>
 
 </body>
 </html>
+
 
 
 
