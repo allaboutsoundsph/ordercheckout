@@ -353,21 +353,37 @@ window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponen
 },2000);
 
 }catch(error){
-alert("Something went wrong. Please try again.");
-btn.disabled=false;
-btn.classList.remove("loading");
-btn.innerHTML="PLACE ORDER";}
+    alert("Something went wrong. Please try again.");
+    btn.disabled=false;
+    btn.classList.remove("loading");
+    btn.innerHTML="PLACE ORDER";
+}
 
-/* Sticky Button Scroll */
-document.addEventListener("DOMContentLoaded", function() {
+/* CLOSE submit event listener */
+});
+
+/* ===================================== */
+/* STICKY BUTTON SCROLL (WORKING FINAL) */
+/* ===================================== */
+
+window.addEventListener("load", function() {
 
     const stickyBtn = document.querySelector(".sticky-order");
+    const orderForm = document.getElementById("orderForm");
 
-    stickyBtn.addEventListener("click", function(){
+    if (!stickyBtn || !orderForm) return;
+
+    stickyBtn.addEventListener("click", function() {
+
+        const targetPosition =
+            orderForm.getBoundingClientRect().top +
+            window.pageYOffset - 20;
+
         window.scrollTo({
-            top: document.getElementById("orderForm").offsetTop - 20,
+            top: targetPosition,
             behavior: "smooth"
         });
+
     });
 
 });
@@ -375,6 +391,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
 
 
 
