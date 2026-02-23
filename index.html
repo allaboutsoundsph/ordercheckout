@@ -362,22 +362,20 @@ btn.innerHTML="PLACE ORDER";}
 document.addEventListener("DOMContentLoaded", function() {
 
     const stickyBtn = document.querySelector(".sticky-order");
-    const orderForm = document.getElementById("orderForm");
 
-    if(stickyBtn && orderForm){
-        stickyBtn.addEventListener("click", function(){
-            orderForm.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+    stickyBtn.addEventListener("click", function(){
+        window.scrollTo({
+            top: document.getElementById("orderForm").offsetTop - 20,
+            behavior: "smooth"
         });
-    }
+    });
 
 });
 </script>
 
 </body>
 </html>
+
 
 
 
