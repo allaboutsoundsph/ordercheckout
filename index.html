@@ -198,27 +198,28 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* Countdown */
-const DURATION=900;
-let endTime=localStorage.getItem("promoEndTime");
-if(!endTime){
-endTime=Date.now()+DURATION*1000;
-localStorage.setItem("promoEndTime",endTime);
+/* Daily Reset Countdown (Midnight Reset) */
+function getMidnight(){
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24,0,0,0);
+    return midnight;
 }
+
 function updateCountdown(){
-let remaining=Math.floor((endTime-Date.now())/1000);
-if(remaining<=0){
-localStorage.removeItem("promoEndTime");
-endTime=Date.now()+DURATION*1000;
-localStorage.setItem("promoEndTime",endTime);
-remaining=DURATION;
+    const now = new Date();
+    const midnight = getMidnight();
+    const remaining = Math.floor((midnight - now) / 1000);
+
+    const hours = Math.floor(remaining / 3600);
+    const minutes = Math.floor((remaining % 3600) / 60);
+    const seconds = remaining % 60;
+
+    document.getElementById("countdown").innerText =
+        `🔥 Promo ends in ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
-let m=Math.floor(remaining/60);
-let s=remaining%60;
-document.getElementById("countdown").innerText=
-`🔥 Promo ends in ${m}:${s<10?'0':''}${s}`;
-}
-setInterval(updateCountdown,1000);
+
+setInterval(updateCountdown, 1000);
 updateCountdown();
 
 /* Viewers */
@@ -328,6 +329,7 @@ btn.innerHTML="PLACE ORDER";
 
 </body>
 </html>
+
 
 
 
