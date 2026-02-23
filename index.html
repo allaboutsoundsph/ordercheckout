@@ -21,7 +21,7 @@ header p{font-size:0.8rem;opacity:0.9}
 .container{max-width:680px;margin:auto;padding:16px}
 .card{background:#fff;padding:20px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);margin-bottom:18px;}
 .product-img{width:100%;border-radius:16px;margin-bottom:15px;}
-.price{font-size:2rem;font-weight:800;color:#ee4d2d;margin:5px 0;}
+.price{ font-size:2rem; font-weight:800; color:#ee4d2d; margin:5px 0; animation: pulseGlow 2.5s infinite; }
 .old-price{text-decoration:line-through;color:#888;font-size:1rem;margin-left:8px;}
 form{display:grid;gap:12px;margin-top:10px;}
 input,textarea{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:14px;}
@@ -35,7 +35,8 @@ transform:translateY(-50%);animation:spin 0.7s linear infinite;
 }
 @keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
 @keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
-
+@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(238,77,45,0.6); } 70% { box-shadow: 0 0 0 12px rgba(238,77,45,0); } 100% { box-shadow: 0 0 0 0 rgba(238,77,45,0); } }
+  
 footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
 @media(min-width:768px){.sticky-order{display:none}}
@@ -332,6 +333,7 @@ btn.innerHTML="PLACE ORDER";
 
 </body>
 </html>
+
 
 
 
