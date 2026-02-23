@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ee4d2d">
 <title>500GB External HDD – Official Store</title>
 
 <link rel="preconnect" href="https://connect.facebook.net">
@@ -24,9 +23,8 @@ header p{font-size:0.8rem;opacity:0.9}
 .old-price{text-decoration:line-through;color:#888;font-size:1rem;margin-left:8px;}
 form{display:grid;gap:12px;margin-top:10px;}
 input,textarea{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:14px;}
-button{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;position:relative;transition:0.2s}
+button{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;position:relative;}
 button:disabled{opacity:0.7;cursor:not-allowed;}
-button:active{transform:scale(0.98);}
 button.loading::after{
 content:"";
 width:18px;height:18px;border:3px solid #fff;border-top:3px solid transparent;
@@ -34,9 +32,7 @@ border-radius:50%;position:absolute;right:16px;top:50%;
 transform:translateY(-50%);animation:spin 0.7s linear infinite;
 }
 @keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
-
 footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
-
 .sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
 @media(min-width:768px){.sticky-order{display:none}}
 
@@ -59,21 +55,24 @@ z-index:9999;max-width:280px}
 .viewer-counter,.stock-counter{margin-top:6px;font-size:13px}
 .stock-counter{color:#ee4d2d;font-weight:700}
 
-.progress-bar{height:6px;background:#eee;border-radius:6px;overflow:hidden;margin-top:6px}
-#progressFill{height:100%;width:100%;background:#ee4d2d;transition:width 1s linear}
-
+/* FB Button */
 .fb-check-btn{
-display:block;width:100%;margin-top:15px;padding:14px;text-align:center;
-border-radius:12px;font-weight:600;text-decoration:none;
-background:linear-gradient(90deg,#1877f2,#0d5bd3);color:#fff;transition:0.3s;font-size:0.95rem;
+display:block;
+width:100%;
+margin-top:15px;
+padding:14px;
+text-align:center;
+border-radius:12px;
+font-weight:600;
+text-decoration:none;
+background:linear-gradient(90deg,#1877f2,#0d5bd3);
+color:#fff;
+transition:0.3s ease;
+font-size:0.95rem;
 }
-.fb-check-btn:hover{transform:translateY(-2px);opacity:0.95}
-
-.shake{animation:shake 0.4s}
-@keyframes shake{
-0%,100%{transform:translateX(0)}
-25%{transform:translateX(-5px)}
-75%{transform:translateX(5px)}
+.fb-check-btn:hover{
+transform:translateY(-2px);
+opacity:0.95;
 }
 </style>
 
@@ -88,7 +87,10 @@ s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
 fbq('init','631653776133164');
 fbq('track','PageView');
 fbq('track','ViewContent');
-function trackFB(event,data={}){ if(typeof fbq==="function"){fbq('track',event,data);} }
+
+function trackFB(event,data={}){
+if(typeof fbq==="function"){fbq('track',event,data);}
+}
 </script>
 </head>
 
@@ -102,13 +104,14 @@ function trackFB(event,data={}){ if(typeof fbq==="function"){fbq('track',event,d
 <div class="container">
 
 <div class="card">
-<img class="product-img" src="new feb-Cover.jpg" loading="lazy">
+<img class="product-img" src="new feb-Cover.jpg" loading="lazy" decoding="async">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
-<div class="progress-bar"><div id="progressFill"></div></div>
+
 <div class="viewer-counter">👀 <span id="viewerCount">6</span> people viewing now</div>
 <div class="stock-counter">📦 Only <span id="stockCount">27</span> left in stock</div>
+
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p><b>📍 Iloilo Based Seller</b></p>
 </div>
@@ -117,17 +120,17 @@ function trackFB(event,data={}){ if(typeof fbq==="function"){fbq('track',event,d
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Customer Review 💯</h3>
 <div class="review-slider">
 <div class="review-wrapper" id="reviewWrapper">
-<div class="review-slide"><img src="review1.png" loading="lazy"></div>
-<div class="review-slide"><img src="review2.png" loading="lazy"></div>
-<div class="review-slide"><img src="review3.png" loading="lazy"></div>
-<div class="review-slide"><img src="review4.png" loading="lazy"></div>
-<div class="review-slide"><img src="review5.png" loading="lazy"></div>
-<div class="review-slide"><img src="review6.png" loading="lazy"></div>
-<div class="review-slide"><img src="review7.png" loading="lazy"></div>
-<div class="review-slide"><img src="review8.png" loading="lazy"></div>
-<div class="review-slide"><img src="review9.png" loading="lazy"></div>
-<div class="review-slide"><img src="review10.png" loading="lazy"></div>
-<div class="review-slide"><img src="review11.png" loading="lazy"></div>
+<div class="review-slide"><img src="review1.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review2.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review3.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review4.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review5.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review6.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review7.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review8.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review9.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review10.png" loading="lazy" decoding="async"></div>
+<div class="review-slide"><img src="review11.png" loading="lazy" decoding="async"></div>
 </div>
 <button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
 <button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
@@ -143,7 +146,6 @@ function trackFB(event,data={}){ if(typeof fbq==="function"){fbq('track',event,d
 <div class="address-guide">Include House No., Street, Barangay, City & Province</div>
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
 <input type="text" name="website" style="display:none">
-<input type="hidden" name="formTime" id="formTime">
 <button type="submit">PLACE ORDER</button>
 </form>
 </div>
@@ -156,7 +158,7 @@ class="fb-check-btn">
 
 </div>
 
-<div class="sticky-order" onclick="scrollToCheckout()">
+<div class="sticky-order" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">
 🔥 ORDER NOW – ₱1,500
 </div>
 
@@ -169,12 +171,6 @@ class="fb-check-btn">
 </audio>
 
 <script>
-document.getElementById("formTime").value = Date.now();
-
-function scrollToCheckout(){
-document.getElementById("orderForm")
-.scrollIntoView({behavior:'smooth',block:'start'});
-}
 
 /* Slider */
 let index=0;
@@ -207,8 +203,6 @@ let m=Math.floor(remaining/60);
 let s=remaining%60;
 document.getElementById("countdown").innerText=
 `🔥 Promo ends in ${m}:${s<10?'0':''}${s}`;
-document.getElementById("progressFill").style.width =
-`${(remaining/DURATION)*100}%`;
 }
 setInterval(updateCountdown,1000);
 updateCountdown();
@@ -224,17 +218,17 @@ document.getElementById("viewerCount").innerText=viewers;
 /* Stock */
 let stock=27;
 setInterval(()=>{
-if(Math.random()>0.6 && stock>8){
+if(stock>8){
 stock--;
 document.getElementById("stockCount").innerText=stock;
 }
-},15000);
+},20000);
 
 /* Social Proof */
+/* SOCIAL PROOF */
 const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
 const cities=["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
 const times=["just now","1 minute ago","3 minutes ago"];
-
 function showSocial(){
 const popup=document.getElementById("socialProof");
 const sound=document.getElementById("notifSound");
@@ -248,7 +242,7 @@ setTimeout(()=>popup.classList.remove("show"),4000);
 }
 setTimeout(()=>setInterval(showSocial,15000),5000);
 
-/* Formatters */
+/* Name Formatter */
 function formatFullName(name){
 const particles=["de","del","dela","van","von","da","dos","das","di"];
 function cap(word){
@@ -272,47 +266,29 @@ document.querySelector("input[name='name']")
 document.querySelector("textarea[name='address']")
 .addEventListener("blur",function(){this.value=formatAddress(this.value);});
 
-/* Submission */
+/* Form */
 const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
 
-async function submitOrder(formData){
-try{
-const res=await fetch(SHEET_URL,{method:"POST",body:formData});
-const text=await res.text();
-return text.toLowerCase().includes("success");
-}catch(err){return false;}
-}
-
-document.getElementById("orderForm").addEventListener("submit",async function(e){
+document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
 if(this.website.value!=="")return;
-if(Date.now()-parseInt(this.formTime.value)<3000)return;
 
 let name=formatFullName(this.name.value);
 this.name.value=name;
-let phone=this.phone.value.trim().replace(/\s+/g,"");
+let phone=this.phone.value.trim();
 let address=formatAddress(this.address.value);
 this.address.value=address;
 const landmark=this.landmark.value.trim();
 
-if(name.split(/\s+/).length<2){
-this.name.classList.add("shake");
-setTimeout(()=>this.name.classList.remove("shake"),400);
-return;
-}
+if(name.split(/\s+/).length<2){alert("Enter first and last name");return;}
+if(/(.)\1{3,}|asdf|qwerty|zxcv|1234|test/i.test(name)){alert("Enter real full name");return;}
 
-if(!/^(09|\+639)\d{9}$/.test(phone)){
-this.phone.classList.add("shake");
-setTimeout(()=>this.phone.classList.remove("shake"),400);
-return;
-}
+if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
+alert("Enter valid PH number");return;}
 if(/^09/.test(phone)) phone="+63"+phone.substring(1);
 
-if(address.split(/\s+/).length<4){
-this.address.classList.add("shake");
-setTimeout(()=>this.address.classList.remove("shake"),400);
-return;
-}
+if(address.trim().split(/\s+/).length<4){
+alert("Enter complete address (at least 4 words)");return;}
 
 trackFB('AddToCart',{value:1500,currency:'PHP'});
 
@@ -327,18 +303,9 @@ formData.append("phone",phone);
 formData.append("address",address);
 formData.append("landmark",landmark);
 
-const success=await submitOrder(formData);
-
-if(!success){
-alert("Submission failed. Please try again.");
-btn.disabled=false;
-btn.classList.remove("loading");
-btn.innerHTML="PLACE ORDER";
-return;
-}
+fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:formData});
 
 trackFB('Purchase',{value:1500,currency:'PHP'});
-trackFB('CompleteRegistration');
 
 const msg=`Hello! Confirm order:
 
@@ -353,12 +320,12 @@ Price: ₱1,500 COD`;
 setTimeout(()=>{
 window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(msg)}`;
 },800);
-
 });
 
 document.getElementById("orderForm")
 .addEventListener("focusin",()=>trackFB('InitiateCheckout'),{once:true});
-</script>
 
+</script>
 </body>
 </html>
+
