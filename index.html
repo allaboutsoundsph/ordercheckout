@@ -223,13 +223,18 @@ document.getElementById("viewerCount").innerText=viewers;
 },5000);
 
 /* Stock */
-let stock=27;
-setInterval(()=>{
-if(stock>8 && Math.random()<0.4){
-stock--;
-document.getElementById("stockCount").innerText=stock;
+let stock = parseInt(localStorage.getItem("dynamicStock")) || 27;
+
+function updateStock(){
+    if(stock > 5 && Math.random() < 0.3){
+        stock--;
+        localStorage.setItem("dynamicStock", stock);
+        document.getElementById("stockCount").innerText = stock;
+    }
 }
-},20000);
+
+document.getElementById("stockCount").innerText = stock;
+setInterval(updateStock, 30000);
 
 /* Social Proof */
 const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
@@ -327,6 +332,7 @@ btn.innerHTML="PLACE ORDER";
 
 </body>
 </html>
+
 
 
 
