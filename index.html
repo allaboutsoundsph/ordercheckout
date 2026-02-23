@@ -54,9 +54,28 @@ z-index:9999;max-width:280px}
 
 .viewer-counter,.stock-counter{margin-top:6px;font-size:13px}
 .stock-counter{color:#ee4d2d;font-weight:700}
+
+/* FB Button */
+.fb-check-btn{
+display:block;
+width:100%;
+margin-top:15px;
+padding:14px;
+text-align:center;
+border-radius:12px;
+font-weight:600;
+text-decoration:none;
+background:linear-gradient(90deg,#1877f2,#0d5bd3);
+color:#fff;
+transition:0.3s ease;
+font-size:0.95rem;
+}
+.fb-check-btn:hover{
+transform:translateY(-2px);
+opacity:0.95;
+}
 </style>
 
-<!-- FACEBOOK PIXEL -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -69,10 +88,8 @@ fbq('init','631653776133164');
 fbq('track','PageView');
 fbq('track','ViewContent');
 
-function trackFB(event, data = {}) {
-  if (typeof fbq === "function") {
-    fbq('track', event, data);
-  }
+function trackFB(event,data={}){
+if(typeof fbq==="function"){fbq('track',event,data);}
 }
 </script>
 </head>
@@ -87,7 +104,7 @@ function trackFB(event, data = {}) {
 <div class="container">
 
 <div class="card">
-<img class="product-img" src="new feb-Cover.jpg" loading="lazy" decoding="async" alt="500GB External HDD">
+<img class="product-img" src="new feb-Cover.jpg" loading="lazy" decoding="async">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
@@ -133,6 +150,12 @@ function trackFB(event, data = {}) {
 </form>
 </div>
 
+<a href="https://www.facebook.com/allaboutsoundsphmain"
+target="_blank" rel="noopener"
+class="fb-check-btn">
+🔎 See Real Customer Feedback & Delivery Proof on Our Facebook Page
+</a>
+
 </div>
 
 <div class="sticky-order" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">
@@ -149,7 +172,7 @@ function trackFB(event, data = {}) {
 
 <script>
 
-/* SLIDER */
+/* Slider */
 let index=0;
 const wrapper=document.getElementById("reviewWrapper");
 const total=wrapper.children.length;
@@ -161,7 +184,7 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* PERSISTENT COUNTDOWN */
+/* Countdown */
 const DURATION=900;
 let endTime=localStorage.getItem("promoEndTime");
 if(!endTime){
@@ -184,7 +207,7 @@ document.getElementById("countdown").innerText=
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-/* VIEWERS */
+/* Viewers */
 let viewers=6;
 setInterval(()=>{
 viewers+=Math.floor(Math.random()*3-1);
@@ -192,7 +215,7 @@ viewers=Math.max(3,Math.min(viewers,12));
 document.getElementById("viewerCount").innerText=viewers;
 },5000);
 
-/* STOCK */
+/* Stock */
 let stock=27;
 setInterval(()=>{
 if(stock>8){
@@ -201,11 +224,11 @@ document.getElementById("stockCount").innerText=stock;
 }
 },20000);
 
+/* Social Proof */
 /* SOCIAL PROOF */
 const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
 const cities=["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
 const times=["just now","1 minute ago","3 minutes ago"];
-
 function showSocial(){
 const popup=document.getElementById("socialProof");
 const sound=document.getElementById("notifSound");
@@ -219,9 +242,9 @@ setTimeout(()=>popup.classList.remove("show"),4000);
 }
 setTimeout(()=>setInterval(showSocial,15000),5000);
 
-/* SMART NAME FORMATTER */
+/* Name Formatter */
 function formatFullName(name){
-const particles=["de","del","dela","de la","van","von","da","dos","das","di"];
+const particles=["de","del","dela","van","von","da","dos","das","di"];
 function cap(word){
 if(word.includes("-")) return word.split("-").map(cap).join("-");
 if(word.includes("'")) return word.split("'").map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join("'");
@@ -234,17 +257,16 @@ return name.toLowerCase().trim().replace(/\s+/g," ").split(" ")
 function formatAddress(address){
 return address.toLowerCase().trim().replace(/\s+/g," ")
 .split(" ")
-.map(w=>/\d/.test(w)?w.toUpperCase():w.charAt(0).toUpperCase()+w.slice(1))
+.map(w=>w.charAt(0).toUpperCase()+w.slice(1))
 .join(" ");
 }
 
 document.querySelector("input[name='name']")
 .addEventListener("blur",function(){this.value=formatFullName(this.value);});
-
 document.querySelector("textarea[name='address']")
 .addEventListener("blur",function(){this.value=formatAddress(this.value);});
 
-/* FORM SUBMIT */
+/* Form */
 const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
@@ -253,24 +275,20 @@ if(this.website.value!=="")return;
 
 let name=formatFullName(this.name.value);
 this.name.value=name;
-
 let phone=this.phone.value.trim();
 let address=formatAddress(this.address.value);
 this.address.value=address;
-
 const landmark=this.landmark.value.trim();
 
-/* NAME VALIDATION */
 if(name.split(/\s+/).length<2){alert("Enter first and last name");return;}
 if(/(.)\1{3,}|asdf|qwerty|zxcv|1234|test/i.test(name)){alert("Enter real full name");return;}
 
-/* PHONE */
 if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
 alert("Enter valid PH number");return;}
 if(/^09/.test(phone)) phone="+63"+phone.substring(1);
 
-/* ADDRESS (Simple Rule: 3+ Words Only) */
-if(address.trim().split(/\s+/).length < 4){alert("Enter complete address (at least 4 words)");return;}
+if(address.trim().split(/\s+/).length<4){
+alert("Enter complete address (at least 4 words)");return;}
 
 trackFB('AddToCart',{value:1500,currency:'PHP'});
 
@@ -310,4 +328,3 @@ document.getElementById("orderForm")
 </script>
 </body>
 </html>
-
