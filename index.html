@@ -39,7 +39,7 @@ footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .review-slider{position:relative;overflow:hidden;border-radius:16px}
 .review-wrapper{display:flex;transition:transform 0.5s ease;will-change:transform;}
 .review-slide{min-width:100%}
-.review-slide img{width:100%;border-radius:16px}
+.review-slide img{width:100%;border-radius:16px;height:auto}
 .slide-btn{position:absolute;top:50%;transform:translateY(-50%);
 background:rgba(0,0,0,0.5);color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;}
 .prev-btn{left:10px}.next-btn{right:10px}
@@ -68,6 +68,13 @@ s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
 fbq('init','631653776133164');
 fbq('track','PageView');
 fbq('track','ViewContent');
+
+/* SAFE TRACKING WRAPPER */
+function trackFB(event, data = {}) {
+  if (typeof fbq === "function") {
+    fbq('track', event, data);
+  }
+}
 </script>
 </head>
 
@@ -81,7 +88,7 @@ fbq('track','ViewContent');
 <div class="container">
 
 <div class="card">
-<img class="product-img" src="new feb-Cover.jpg" loading="lazy">
+<img class="product-img" src="new feb-Cover.jpg" loading="lazy" decoding="async" alt="500GB External HDD">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
@@ -97,17 +104,19 @@ fbq('track','ViewContent');
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Satisfied Customers</h3>
 <div class="review-slider">
 <div class="review-wrapper" id="reviewWrapper">
-<div class="review-slide"><img src="review1.png" loading="lazy"></div>
-<div class="review-slide"><img src="review2.png" loading="lazy"></div>
-<div class="review-slide"><img src="review3.png" loading="lazy"></div>
-<div class="review-slide"><img src="review4.png" loading="lazy"></div>
-<div class="review-slide"><img src="review5.png" loading="lazy"></div>
-<div class="review-slide"><img src="review6.png" loading="lazy"></div>
-<div class="review-slide"><img src="review7.png" loading="lazy"></div>
-<div class="review-slide"><img src="review8.png" loading="lazy"></div>
-<div class="review-slide"><img src="review9.png" loading="lazy"></div>
-<div class="review-slide"><img src="review10.png" loading="lazy"></div>
-<div class="review-slide"><img src="review11.png" loading="lazy"></div>
+
+<div class="review-slide"><img src="review1.png" loading="lazy" decoding="async" alt="Customer Review 1"></div>
+<div class="review-slide"><img src="review2.png" loading="lazy" decoding="async" alt="Customer Review 2"></div>
+<div class="review-slide"><img src="review3.png" loading="lazy" decoding="async" alt="Customer Review 3"></div>
+<div class="review-slide"><img src="review4.png" loading="lazy" decoding="async" alt="Customer Review 4"></div>
+<div class="review-slide"><img src="review5.png" loading="lazy" decoding="async" alt="Customer Review 5"></div>
+<div class="review-slide"><img src="review6.png" loading="lazy" decoding="async" alt="Customer Review 6"></div>
+<div class="review-slide"><img src="review7.png" loading="lazy" decoding="async" alt="Customer Review 7"></div>
+<div class="review-slide"><img src="review8.png" loading="lazy" decoding="async" alt="Customer Review 8"></div>
+<div class="review-slide"><img src="review9.png" loading="lazy" decoding="async" alt="Customer Review 9"></div>
+<div class="review-slide"><img src="review10.png" loading="lazy" decoding="async" alt="Customer Review 10"></div>
+<div class="review-slide"><img src="review11.png" loading="lazy" decoding="async" alt="Customer Review 11"></div>
+
 </div>
 <button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
 <button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
@@ -118,7 +127,7 @@ fbq('track','ViewContent');
 <h3>Checkout</h3>
 <form id="orderForm">
 <input type="text" name="name" placeholder="Full Name" required>
-<input type="tel" name="phone" placeholder="09XXXXXXXXX" required>
+<input type="tel" name="phone" placeholder="09XXXXXXXXX or +639XXXXXXXXX" required>
 <textarea name="address" placeholder="Complete Address" required></textarea>
 <div class="address-guide">Include House No., Street, Barangay, City & Province</div>
 <input type="text" name="landmark" placeholder="Nearest Landmark" required>
@@ -134,6 +143,7 @@ fbq('track','ViewContent');
 </div>
 
 <footer>© 2026 All About Sounds PH</footer>
+
 <div class="social-proof" id="socialProof"></div>
 
 <audio id="notifSound" preload="auto">
@@ -154,19 +164,28 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* COUNTDOWN */
-function startCountdown(duration){
-let time=duration;
-setInterval(()=>{
-let m=Math.floor(time/60);
-let s=time%60;
+/* REAL PERSISTENT COUNTDOWN */
+const DURATION=900;
+let endTime=localStorage.getItem("promoEndTime");
+if(!endTime){
+endTime=Date.now()+DURATION*1000;
+localStorage.setItem("promoEndTime",endTime);
+}
+function updateCountdown(){
+let remaining=Math.floor((endTime-Date.now())/1000);
+if(remaining<=0){
+localStorage.removeItem("promoEndTime");
+endTime=Date.now()+DURATION*1000;
+localStorage.setItem("promoEndTime",endTime);
+remaining=DURATION;
+}
+let m=Math.floor(remaining/60);
+let s=remaining%60;
 document.getElementById("countdown").innerText=
 `🔥 Promo ends in ${m}:${s<10?'0':''}${s}`;
-time--;
-if(time<0)time=duration;
-},1000);
 }
-startCountdown(900);
+setInterval(updateCountdown,1000);
+updateCountdown();
 
 /* VIEWERS */
 let viewers=6;
@@ -186,8 +205,8 @@ document.getElementById("stockCount").innerText=stock;
 },20000);
 
 /* SOCIAL PROOF */
-const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P."];
-const cities=["Manila","Cebu","Davao","Iloilo","Bacolod"];
+const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Cristian C."];
+const cities=["Manila","Cebu","Davao","Iloilo","Bacolod","Antique","Samar"];
 const times=["just now","1 minute ago","3 minutes ago"];
 
 function showSocial(){
@@ -203,7 +222,7 @@ setTimeout(()=>popup.classList.remove("show"),4000);
 }
 setTimeout(()=>setInterval(showSocial,15000),5000);
 
-/* GOOGLE SHEETS – FORM DATA FIX */
+/* GOOGLE SHEETS */
 const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
@@ -214,34 +233,41 @@ const btn=this.querySelector("button");
 if(btn.disabled)return;
 
 const name=this.name.value.trim();
-const phone=this.phone.value.trim();
+let phone=this.phone.value.trim();
 const address=this.address.value.trim();
 const landmark=this.landmark.value.trim();
 
-if(name.length<3)return alert("Enter full name");
-if(!/^09\d{9}$/.test(phone))return alert("Invalid PH number");
-if(address.length<10)return alert("Enter full address");
+const regex09=/^09\d{9}$/;
+const regex63=/^\+639\d{9}$/;
 
-fbq('track','AddToCart',{value:1500,currency:'PHP'});
+if(!regex09.test(phone) && !regex63.test(phone)){
+alert("Enter valid PH number (09XXXXXXXXX or +639XXXXXXXXX)");
+return;
+}
+
+if(regex09.test(phone)){
+phone="+63"+phone.substring(1);
+}
+
+trackFB('AddToCart',{value:1500,currency:'PHP'});
 
 btn.disabled=true;
 btn.classList.add("loading");
 btn.innerHTML="Processing...";
 
-/* FORM DATA (NO PREFLIGHT EVER) */
-const formData = new FormData();
-formData.append("name", name);
-formData.append("phone", phone);
-formData.append("address", address);
-formData.append("landmark", landmark);
+const formData=new FormData();
+formData.append("name",name);
+formData.append("phone",phone);
+formData.append("address",address);
+formData.append("landmark",landmark);
 
 fetch(SHEET_URL,{
 method:"POST",
 mode:"no-cors",
-body: formData
+body:formData
 });
 
-fbq('track','Purchase',{value:1500,currency:'PHP'});
+trackFB('Purchase',{value:1500,currency:'PHP'});
 
 const msg=`Hello! Confirm order:
 
@@ -262,8 +288,9 @@ window.location.href=
 
 /* INITIATE CHECKOUT */
 document.getElementById("orderForm")
-.addEventListener("focusin",()=>fbq('track','InitiateCheckout'),{once:true});
+.addEventListener("focusin",()=>trackFB('InitiateCheckout'),{once:true});
 
 </script>
+
 </body>
 </html>
