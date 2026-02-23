@@ -181,7 +181,8 @@ function trackFB(event,data={}){if(typeof fbq==="function"){fbq('track',event,da
 
 </div>
 </div>
-
+<div class="sticky-order">ORDER NOW</div>
+  
 <script>
 /* Slider */
 let index=0;
@@ -356,25 +357,17 @@ alert("Something went wrong. Please try again.");
 btn.disabled=false;
 btn.classList.remove("loading");
 btn.innerHTML="PLACE ORDER";}
+
+/* Sticky Button Scroll */
+document.querySelector(".sticky-order")?.addEventListener("click",()=>{
+    document.querySelector("#orderForm").scrollIntoView({
+        behavior:"smooth"
+    });
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
