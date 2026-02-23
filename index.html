@@ -359,15 +359,26 @@ btn.classList.remove("loading");
 btn.innerHTML="PLACE ORDER";}
 
 /* Sticky Button Scroll */
-document.querySelector(".sticky-order")?.addEventListener("click",()=>{
-    document.querySelector("#orderForm").scrollIntoView({
-        behavior:"smooth"
-    });
+document.addEventListener("DOMContentLoaded", function() {
+
+    const stickyBtn = document.querySelector(".sticky-order");
+    const orderForm = document.getElementById("orderForm");
+
+    if(stickyBtn && orderForm){
+        stickyBtn.addEventListener("click", function(){
+            orderForm.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        });
+    }
+
 });
 </script>
 
 </body>
 </html>
+
 
 
 
