@@ -229,8 +229,8 @@ viewers=Math.max(3,Math.min(viewers,15));
 document.getElementById("viewerCount").innerText=viewers;
 },5000);
 
-/* Stock */
-let stock = parseInt(localStorage.getItem("dynamicStock")) || 27; function updateStock(){ if(stock > 5 && Math.random() < 0.3){ stock--; localStorage.setItem("dynamicStock", stock); document.getElementById("stockCount").innerText = stock; } } document.getElementById("stockCount").innerText = stock; setInterval(updateStock, 30000);
+/* Advanced Stock System */ 
+let stock = parseInt(localStorage.getItem("dynamicStock")) || 20; const stockElement = document.getElementById("stockCount"); const stockContainer = document.querySelector(".stock-counter"); function renderStock(){ stockElement.innerText = stock; if(stock <= 7){ stockContainer.classList.add("low-stock"); stockContainer.innerHTML = `⚠️ Only <span id="stockCount">${stock}</span> left — Selling Fast!`; } else { stockContainer.classList.remove("low-stock"); stockContainer.innerHTML = `📦 Only <span id="stockCount">${stock}</span> left in stock`; } } function updateStock(){ if(stock > 3){ if(Math.random() < 0.4){ stock--; localStorage.setItem("dynamicStock", stock); renderStock(); } } } renderStock(); setInterval(updateStock, 20000);
 
 /* Social Proof */
 const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
@@ -328,6 +328,7 @@ btn.innerHTML="PLACE ORDER";
 
 </body>
 </html>
+
 
 
 
