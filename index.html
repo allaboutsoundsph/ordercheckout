@@ -303,7 +303,7 @@ formData.append("phone",phone);
 formData.append("address",address);
 formData.append("landmark",landmark);
 
-try { await fetch(SHEET_URL, { method: "POST", body: formData }); } catch (err) { console.error("Sheet submission failed:", err); }
+fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:formData});
 
 trackFB('Purchase',{value:1500,currency:'PHP'});
 
@@ -328,6 +328,4 @@ document.getElementById("orderForm")
 </script>
 </body>
 </html>
-
-
 
