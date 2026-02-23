@@ -269,9 +269,8 @@ if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
 alert("Enter valid PH number");return;}
 if(/^09/.test(phone)) phone="+63"+phone.substring(1);
 
-/* ADDRESS */
-if(address.length<10||!/\d/.test(address)){
-alert("Enter complete address with house number");return;}
+/* ADDRESS (Simple Rule: 3+ Words Only) */
+if(address.trim().split(/\s+/).length < 4){alert("Enter complete address (at least 4 words)");return;}
 
 trackFB('AddToCart',{value:1500,currency:'PHP'});
 
@@ -311,3 +310,4 @@ document.getElementById("orderForm")
 </script>
 </body>
 </html>
+
