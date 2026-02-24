@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>500GB External HDD – Official Store</title>
 
 <link rel="preconnect" href="https://connect.facebook.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="new-feb-cover.jpg">
-<img class="product-img" src="new-feb-cover.jpg" loading="eager" fetchpriority="high">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+  
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#fdfbfb,#ebedee);color:#222;}
@@ -21,7 +24,7 @@ header p{font-size:0.8rem;opacity:0.9}
 .container{max-width:680px;margin:auto;padding:16px}
 .card{background:#fff;padding:20px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);margin-bottom:18px;}
 .product-img{width:100%;border-radius:16px;margin-bottom:15px;}
-.price{font-size:2rem;font-weight:800;color:#ee4d2d;margin:5px 0;}
+.price{ font-size:2rem; font-weight:800; color:#ee4d2d; margin:5px 0; animation: pulseGlow 2.5s infinite; }
 .old-price{text-decoration:line-through;color:#888;font-size:1rem;margin-left:8px;}
 form{display:grid;gap:12px;margin-top:10px;}
 input,textarea{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:14px;}
@@ -35,6 +38,9 @@ transform:translateY(-50%);animation:spin 0.7s linear infinite;
 }
 @keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
 @keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
+@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(238,77,45,0.6); } 70% { box-shadow: 0 0 0 12px rgba(238,77,45,0); } 100% { box-shadow: 0 0 0 0 rgba(238,77,45,0); } }
+.low-stock {animation: flashStock 1s infinite;color: #ee4d2d;font-weight: 800;}
+@keyframes flashStock {0% { opacity: 1; }50% { opacity: 0.4; }100% { opacity: 1; }}
 
 footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
 .sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
@@ -99,7 +105,7 @@ function trackFB(event,data={}){if(typeof fbq==="function"){fbq('track',event,da
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
 <div class="viewer-counter">👀 <span id="viewerCount">6</span> people viewing now</div>
-<div class="stock-counter">📦 Only <span id="stockCount">27</span> left in stock</div>
+<div class="stock-counter">📦 Only <span id="stockCount">20</span> left in stock</div>
 <p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p><b>📍 Iloilo Based Seller</b></p>
 </div>
@@ -175,9 +181,11 @@ function trackFB(event,data={}){if(typeof fbq==="function"){fbq('track',event,da
 <h2 style="color:#ee4d2d;">🎉 Thank You!</h2>
 <p>Your order has been received successfully.</p>
 <p style="font-size:13px;color:#555;">Redirecting to Messenger to confirm...</p>
-</div>
-</div>
 
+</div>
+</div>
+<div class="sticky-order">ORDER NOW</div>
+  
 <script>
 /* Slider */
 let index=0;
@@ -191,27 +199,28 @@ wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
 }
 setInterval(()=>moveSlide(1),4000);
 
-/* Countdown */
-const DURATION=900;
-let endTime=localStorage.getItem("promoEndTime");
-if(!endTime){
-endTime=Date.now()+DURATION*1000;
-localStorage.setItem("promoEndTime",endTime);
+/* Daily Reset Countdown (Midnight Reset) */
+function getMidnight(){
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24,0,0,0);
+    return midnight;
 }
+
 function updateCountdown(){
-let remaining=Math.floor((endTime-Date.now())/1000);
-if(remaining<=0){
-localStorage.removeItem("promoEndTime");
-endTime=Date.now()+DURATION*1000;
-localStorage.setItem("promoEndTime",endTime);
-remaining=DURATION;
+    const now = new Date();
+    const midnight = getMidnight();
+    const remaining = Math.floor((midnight - now) / 1000);
+
+    const hours = Math.floor(remaining / 3600);
+    const minutes = Math.floor((remaining % 3600) / 60);
+    const seconds = remaining % 60;
+
+    document.getElementById("countdown").innerText =
+        `🔥 Promo ends in ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
-let m=Math.floor(remaining/60);
-let s=remaining%60;
-document.getElementById("countdown").innerText=
-`🔥 Promo ends in ${m}:${s<10?'0':''}${s}`;
-}
-setInterval(updateCountdown,1000);
+
+setInterval(updateCountdown, 1000);
 updateCountdown();
 
 /* Viewers */
@@ -222,19 +231,44 @@ viewers=Math.max(3,Math.min(viewers,15));
 document.getElementById("viewerCount").innerText=viewers;
 },5000);
 
-/* Stock */
-let stock = parseInt(localStorage.getItem("dynamicStock")) || 27;
+/* Stock System - Start at 20 + Flash at 10 */
 
-function updateStock(){
-    if(stock > 5 && Math.random() < 0.3){
-        stock--;
-        localStorage.setItem("dynamicStock", stock);
-        document.getElementById("stockCount").innerText = stock;
+let stock = parseInt(localStorage.getItem("dynamicStock")) || 20;
+
+// ✅ DAILY RESET (optional but recommended)
+const today = new Date().toDateString();
+const savedDate = localStorage.getItem("stockDate");
+
+if (savedDate !== today) {
+    stock = 20;
+    localStorage.setItem("dynamicStock", stock);
+    localStorage.setItem("stockDate", today);
+}
+
+const stockContainer = document.querySelector(".stock-counter");
+
+function renderStock() {
+    if (stock <= 10) {
+        stockContainer.classList.add("low-stock");
+        stockContainer.innerHTML =
+            `⚠️ Only <span id="stockCount">${stock}</span> left — Selling Fast!`;
+    } else {
+        stockContainer.classList.remove("low-stock");
+        stockContainer.innerHTML =
+            `📦 Only <span id="stockCount">${stock}</span> left in stock`;
     }
 }
 
-document.getElementById("stockCount").innerText = stock;
-setInterval(updateStock, 30000);
+function updateStock() {
+    if (stock > 3) {
+        stock--;
+        localStorage.setItem("dynamicStock", stock);
+        renderStock();
+    }
+}
+
+renderStock();
+setInterval(updateStock, 16000);
 
 /* Social Proof */
 const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
@@ -322,16 +356,49 @@ window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponen
 },2000);
 
 }catch(error){
-alert("Something went wrong. Please try again.");
-btn.disabled=false;
-btn.classList.remove("loading");
-btn.innerHTML="PLACE ORDER";
+    alert("Something went wrong. Please try again.");
+    btn.disabled=false;
+    btn.classList.remove("loading");
+    btn.innerHTML="PLACE ORDER";
 }
+
+/* CLOSE submit event listener */
+});
+
+/* ===================================== */
+/* STICKY BUTTON SCROLL (WORKING FINAL) */
+/* ===================================== */
+
+window.addEventListener("load", function() {
+
+    const stickyBtn = document.querySelector(".sticky-order");
+    const orderForm = document.getElementById("orderForm");
+
+    if (!stickyBtn || !orderForm) return;
+
+    stickyBtn.addEventListener("click", function() {
+
+        const targetPosition =
+            orderForm.getBoundingClientRect().top +
+            window.pageYOffset - 20;
+
+        window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth"
+        });
+
+    });
+
 });
 </script>
 
 </body>
 </html>
+
+
+
+
+
 
 
 
