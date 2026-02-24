@@ -278,7 +278,7 @@ const popup=document.getElementById("socialProof");
 const sound=document.getElementById("notifSound");
 popup.innerHTML=`<strong>${names[Math.floor(Math.random()*names.length)]}</strong>
 from ${cities[Math.floor(Math.random()*cities.length)]}<br>
-purchased 500GB External HDD<br>
+purchased Complete DJ Music Collection<br>
 <small>${times[Math.floor(Math.random()*times.length)]}</small>`;
 popup.classList.add("show");
 sound.play().catch(()=>{});
@@ -335,8 +335,13 @@ formData.append("landmark",landmark);
 
 try{
 await fetch(SHEET_URL,{method:"POST",body:formData});
-trackFB('Purchase',{ value: 1500, currency: 'PHP', content_name: '500GB External HDD', content_ids: ['HDD500GB2026'], content_type: 'product' });
-
+trackFB('Purchase',{ 
+  value: 1500, 
+  currency: 'PHP', 
+  content_name: 'Complete DJ Music Collection', 
+  content_ids: ['DJMUSIC2026'], 
+  content_type: 'product' 
+});
 document.getElementById("thankYouModal").style.display="flex";
 
 const msg=`Hello! Confirm order:
@@ -346,7 +351,7 @@ Phone: ${phone}
 Address: ${address}
 Landmark: ${landmark}
 
-Product: 500GB HDD
+Product: Complete DJ Music Collection
 Price: ₱1,500 COD`;
 
 setTimeout(()=>{
@@ -392,6 +397,7 @@ window.addEventListener("load", function() {
 
 </body>
 </html>
+
 
 
 
