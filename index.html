@@ -301,7 +301,12 @@ if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
 alert("Enter valid PH number");return;}
 if(/^09/.test(phone)) phone="+63"+phone.substring(1);
 
-trackFB('AddToCart',{value:1500,currency:'PHP'});
+trackFB('AddToCart',{
+  content_ids: ['500GB-HDD-DJ'],
+  content_type: 'product',
+  value: 1500,
+  currency: 'PHP'
+});
 
 const btn=this.querySelector("button");
 btn.disabled=true;
@@ -345,6 +350,7 @@ btn.innerHTML="PLACE ORDER";
 
 </body>
 </html>
+
 
 
 
