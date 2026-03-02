@@ -321,7 +321,12 @@ formData.append("landmark",landmark);
 
 try{
 await fetch(SHEET_URL,{method:"POST",body:formData});
-trackFB('Purchase',{value:1500,currency:'PHP'});
+trackFB('Purchase',{
+  content_ids: ['500GB-HDD-DJ'],
+  content_type: 'product',
+  value: 1500,
+  currency: 'PHP'
+});
 
 document.getElementById("thankYouModal").style.display="flex";
 
@@ -350,6 +355,7 @@ btn.innerHTML="PLACE ORDER";
 
 </body>
 </html>
+
 
 
 
