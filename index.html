@@ -76,18 +76,34 @@ transition:0.3s ease;font-size:0.95rem;
 </style>
 
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;
+n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
-s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];
+t=b.createElement(e);t.async=!0;t.src=v;
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s);
+}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
 fbq('init','631653776133164');
-fbq('track','PageView');
-fbq('track','ViewContent');
 
-function trackFB(event,data={}){if(typeof fbq==="function"){fbq('track',event,data);}}
+fbq('track','PageView');
+
+fbq('track','ViewContent',{
+  content_ids: ['500GB-HDD-DJ'],
+  content_type: 'product',
+  value: 1500,
+  currency: 'PHP'
+});
+
+function trackFB(event,data={}){
+  if(typeof fbq==="function"){
+    fbq('track',event,data);
+  }
+}
 </script>
 </head>
 
@@ -329,6 +345,7 @@ btn.innerHTML="PLACE ORDER";
 
 </body>
 </html>
+
 
 
 
