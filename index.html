@@ -52,6 +52,10 @@ h3{font-size:clamp(1.15rem,2.4vw,1.45rem);font-weight:800;line-height:1.3;letter
 #countdown{padding:.6rem .75rem;background:#fff0ed;border:1px solid #f2cfc7;border-radius:.65rem;color:#92283a!important;font-size:.86rem;font-variant-numeric:tabular-nums}
 .viewer-counter,.stock-counter{min-inline-size:0;font-size:.875rem;line-height:1.4;color:var(--muted)}
 .stock-counter{color:#9a3b22;font-weight:700}
+.order-now-btn{display:flex;align-items:center;justify-content:center;inline-size:100%;min-block-size:3.25rem;margin-block:.35rem .1rem;padding:.85rem 1.25rem;border-radius:.75rem;background:linear-gradient(110deg,#4b29ae,#6125a5);color:#fff;font-family:inherit;font-size:1rem;font-weight:700;line-height:1.4;text-align:center;text-decoration:none;cursor:pointer;transition:filter .16s ease,box-shadow .16s ease}
+.order-now-btn:hover{filter:brightness(1.08);box-shadow:0 5px 16px #3323782b}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
 .shipping-line{display:block;border-top:1px solid var(--line);padding-top:1rem;margin-top:.35rem;color:#165b46;font-size:.92rem;font-weight:700}
 .seller-line{color:var(--muted);font-size:.875rem}
 form{display:grid;gap:1rem;margin-top:.75rem}
@@ -148,6 +152,7 @@ function trackFB(event,data={}){
 <p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
 <div class="viewer-counter">👀 <span id="viewerCount">6</span> people viewing now</div>
 <div class="stock-counter">📦 Only <span id="stockCount">27</span> left in stock</div>
+<a class="order-now-btn" href="#order-information">Order Now</a>
 <p class="shipping-line">🚚 FREE SHIPPING | CASH ON DELIVERY</p>
 <p class="seller-line"><b>📍 Iloilo Based Seller</b></p>
 </div>
@@ -195,7 +200,7 @@ function trackFB(event,data={}){
 </div>
 <!-- ✅ END FACEBOOK SECTION -->
 
-<div class="card checkout-card">
+<div class="card checkout-card" id="order-information" tabindex="-1">
 <h3>Checkout</h3>
 <form id="orderForm">
 <label class="field">Full Name<input type="text" name="name" placeholder="Full Name" required></label>
