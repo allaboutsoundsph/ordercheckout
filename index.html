@@ -438,6 +438,93 @@ footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); f
 @media (forced-colors: active) {
   .order-now-btn, form>button, .fb-check-btn, .slide-btn { border: 1px solid ButtonText; }
 }
+
+/* Seller-provided business registration information */
+.registration-panel {
+  margin-block-start: 1rem;
+  padding-block-start: 1.1rem;
+  border-block-start: 1px solid #48566e;
+  text-align: start;
+}
+.registration-kicker {
+  color: var(--primary);
+  font-size: .72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-block-end: .35rem;
+}
+.registration-panel h4 {
+  margin: 0 0 .5rem;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: 800;
+  line-height: 1.28;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.registration-copy {
+  color: var(--muted);
+  font-size: .875rem;
+  line-height: 1.65;
+  margin-block-end: .9rem;
+}
+.registration-documents {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+}
+.registration-document {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  padding: .45rem;
+  gap: .5rem;
+  border: 1px solid #64738c;
+  border-radius: .8rem;
+  background: #101827;
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color .16s ease, background-color .16s ease;
+}
+.registration-document:hover {
+  border-color: var(--primary);
+  background: #1b293b;
+}
+.registration-image-frame {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 4;
+  border-radius: .5rem;
+  overflow: hidden;
+  background: #080b12;
+}
+.registration-image-frame img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+.registration-document-title {
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1.35;
+  padding-inline: .16rem;
+  overflow-wrap: anywhere;
+}
+.registration-document-action {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-block-start: auto;
+  padding-inline: .16rem;
+}
+.registration-note {
+  color: var(--muted);
+  font-size: .78rem;
+  margin-block-start: .75rem;
+  line-height: 1.55;
+}
+
 </style>
 
 <script>
@@ -535,6 +622,25 @@ function trackFB(event,data={}){
   <div style="margin-top:10px;font-size:13px;color:#777;">
     ⭐ ⭐ ⭐ ⭐ ⭐ Trusted Seller Since 2022
   </div>
+  <section class="registration-panel" aria-labelledby="registration-title">
+    <p class="registration-kicker">Business registration</p>
+    <h4 id="registration-title">DTI &amp; BIR Registered</h4>
+    <p class="registration-copy">Shop with added peace of mind. All About Sounds PH is registered with the Department of Trade and Industry (DTI) and the Bureau of Internal Revenue (BIR). We share our registration information so you can review it before placing your order.</p>
+    <div class="registration-documents">
+      <a class="registration-document" href="assets/dti-registration.webp" target="_blank" rel="noopener noreferrer" aria-label="View DTI business name registration certificate at full size (opens in a new tab)">
+        <span class="registration-image-frame"><img src="assets/dti-registration.webp" width="1080" height="1388" loading="lazy" decoding="async" alt="DTI Certificate of Business Name Registration for Allabout Sounds.PH Online Shop"></span>
+        <span class="registration-document-title">DTI Certificate</span>
+        <span class="registration-document-action">View full image</span>
+      </a>
+      <a class="registration-document" href="assets/bir-registration.webp" target="_blank" rel="noopener noreferrer" aria-label="View BIR registration seal graphic at full size (opens in a new tab)">
+        <span class="registration-image-frame"><img src="assets/bir-registration.webp" width="1024" height="1536" loading="lazy" decoding="async" alt="All About Sounds PH BIR registration seal graphic"></span>
+        <span class="registration-document-title">BIR Registration</span>
+        <span class="registration-document-action">View full image</span>
+      </a>
+    </div>
+    <p class="registration-note">Have a question about our shop? Message our official Facebook page before ordering. Thank you for supporting our business.</p>
+  </section>
+
 </div>
 <!-- ✅ END FACEBOOK SECTION -->
 
