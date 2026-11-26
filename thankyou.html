@@ -1,22 +1,54 @@
-<!doctype html>
-<html lang="en-PH">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>Confirm your order | All About Sounds PH</title>
-  <link rel="stylesheet" href="checkout.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Successful</title>
+
+<style>
+body{font-family:Arial;background:#f2f2f2;
+display:flex;justify-content:center;align-items:center;
+height:100vh;margin:0;text-align:center;}
+.card{background:#fff;padding:40px;border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);}
+button{background:#ee4d2d;color:#fff;border:none;
+padding:12px 20px;border-radius:8px;font-size:16px;cursor:pointer;}
+</style>
+
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}
+(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init','631653776133164');
+fbq('track','Purchase',{value:1500,currency:'PHP'});
+</script>
+
 </head>
+
 <body>
-  <header class="site-header"><div class="header-inner"><a class="brand" href="./">All About Sounds PH</a></div></header>
-  <main class="container confirmation-page">
-    <section class="card">
-      <p class="eyebrow">All About Sounds PH</p>
-      <h1>Confirm your order</h1>
-      <p>If you have submitted your delivery details, please message our official Facebook page to confirm your order. This page alone does not confirm that an order has been received.</p>
-      <a class="button" href="https://m.me/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer">Open Messenger ↗</a>
-      <a class="secondary-button" href="./">Return to checkout</a>
-    </section>
-  </main>
+
+<div class="card">
+<h2>🎉 Order Received!</h2>
+<p>Redirecting you to Messenger...</p>
+<button onclick="goMessenger()">Open Messenger Now</button>
+</div>
+
+<script>
+const params=new URLSearchParams(window.location.search);
+const msg=params.get("msg");
+
+function goMessenger(){
+if(msg){
+window.location.href=`https://m.me/allaboutsoundsphmain?text=${msg}`;
+}
+}
+setTimeout(goMessenger,3000);
+</script>
+
 </body>
 </html>
