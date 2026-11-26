@@ -44,6 +44,10 @@ const submitButton = document.getElementById("submitOrder");
 const orderStatus = document.getElementById("orderStatus");
 const confirmation = document.getElementById("confirmation");
 const orderMessage = document.getElementById("orderMessage");
+const messengerLink = document.getElementById("messengerLink");
+const messengerStatus = document.getElementById("messengerStatus");
+const viewConfirmation = document.getElementById("viewConfirmation");
+let redirectTimer;
 let submitting = false;
 let accepted = false;
 
@@ -141,7 +145,7 @@ form.addEventListener("submit", async event => {
 
   if (!accepted) return;
   track("Purchase", PRODUCT);
-  setStatus("Order submitted. Confirm your delivery details on Messenger.", "success");
+  setStatus("Order submitted. Opening Messenger to confirm delivery.", "success");
   orderMessage.value = [
     "Hello! Confirm order:", "",
     "Name: " + details.name,
@@ -152,13 +156,56 @@ form.addEventListener("submit", async event => {
     "Price: ₱1,500 COD",
   ].join("\n");
 
-  if (typeof confirmation.showModal === "function") confirmation.showModal();
-  else confirmation.setAttribute("open", "");
-  // Avoid a second submission even if the confirmation dialog is dismissed.
-  document.getElementById("closeConfirmation").focus();
+  // Restore the store's original Messenger link. Meta may ignore the text
+  // parameter on some clients, so the draft and copy action stay available.
+  messengerLink.href = makeMessengerUrl(orderMessage.value);
+  viewConfirmation.hidden = false;
+  showConfirmation();
+  messengerStatus.textContent = "Opening Messenger automatically…";
+  // Attempt clipboard backup after the order is accepted. Some browsers
+  // require a fresh tap, in which case the explicit Copy button remains.
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+    navigator.clipboard.writeText(orderMessage.value).then(() => {
+      document.getElementById("copyStatus").textContent = "Order details copied as a backup. If Messenger is blank, paste them there.";
+    }).catch(() => { /* The direct copy control remains available. */ });
+  }
+  redirectTimer = setTimeout(openMessenger, 1600);
 });
 
+function makeMessengerUrl(message) {
+  return "https://m.me/allaboutsoundsphmain?text=" + encodeURIComponent(message);
+}
+
+function showConfirmation() {
+  if (typeof confirmation.showModal === "function") {
+    if (!confirmation.open) confirmation.showModal();
+  } else confirmation.setAttribute("open", "");
+  messengerLink.focus();
+}
+
+function cancelRedirect() {
+  clearTimeout(redirectTimer);
+  redirectTimer = undefined;
+}
+
+function openMessenger() {
+  cancelRedirect();
+  track("Contact");
+  messengerStatus.textContent = "If Messenger did not open, tap Open Messenger now.";
+  setStatus("Order submitted. Your Messenger confirmation is ready.", "success");
+  window.location.assign(messengerLink.href);
+}
+
+messengerLink.addEventListener("click", event => {
+  event.preventDefault();
+  openMessenger();
+});
+viewConfirmation.addEventListener("click", showConfirmation);
+confirmation.addEventListener("close", cancelRedirect);
+confirmation.addEventListener("cancel", cancelRedirect);
 document.getElementById("closeConfirmation").addEventListener("click", () => {
+  cancelRedirect();
+  messengerStatus.textContent = "Automatic redirect paused. Tap Open Messenger now when ready.";
   if (typeof confirmation.close === "function") confirmation.close();
   else confirmation.removeAttribute("open");
 });

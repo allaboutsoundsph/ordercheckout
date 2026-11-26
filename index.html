@@ -72,9 +72,10 @@
             <input id="landmark" name="landmark" required placeholder="e.g. Beside the barangay hall">
           </div>
           <div hidden aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
-          <p class="hint">We use the delivery information you provide to process and confirm your order. No online payment is required here.</p>
+          <p class="hint">Your delivery details will be saved to our order system and included in the Messenger confirmation link. We may also copy the confirmation message to your clipboard if supported. No online payment is required.</p>
           <p id="orderStatus" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
           <button class="button submit-button" type="submit" id="submitOrder" disabled>Place order · ₱1,500 COD</button>
+          <button class="secondary-button" type="button" id="viewConfirmation" hidden>View Messenger confirmation</button>
           <p class="help">Need help? <a href="https://m.me/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer" data-contact>Message us on Messenger</a>.</p>
         </form>
       </section>
@@ -111,14 +112,15 @@
     <div class="dialog-content">
       <p class="eyebrow">Next step</p>
       <h2 id="confirmation-title">Thank you for your order!</h2>
-      <p>Your order submission was accepted. Copy your order details and send them to our official Messenger to confirm delivery.</p>
+      <p>Your order submission was accepted. We’ll open Messenger with your order details. Tap Send there to confirm your delivery. If your device does not prefill the message, return here to copy it.</p>
       <div class="field">
         <label for="orderMessage">Your confirmation message</label>
         <textarea id="orderMessage" rows="6" readonly></textarea>
       </div>
       <button class="secondary-button" type="button" id="copyOrder">Copy order details</button>
       <p id="copyStatus" class="hint" role="status" aria-live="polite"></p>
-      <a class="button" href="https://m.me/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer" data-contact>Open Messenger ↗</a>
+      <p id="messengerStatus" class="hint" role="status" aria-live="polite">Opening Messenger automatically…</p>
+      <a class="button" id="messengerLink" href="https://m.me/allaboutsoundsphmain" rel="noreferrer">Open Messenger now</a>
       <button class="text-button" id="closeConfirmation" type="button">Close</button>
     </div>
   </dialog>
