@@ -1,371 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-PH">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Basic Security Meta Headers -->
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-
-<title>500GB External HDD – Official Store</title>
-
-<link rel="preconnect" href="https://connect.facebook.net">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="new-feb-cover.jpg">
-<img class="product-img" src="new-feb-cover.jpg" loading="eager" fetchpriority="high">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#fdfbfb,#ebedee);color:#222;}
-header{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:14px;}
-header h1{font-size:1.2rem;font-weight:700}
-header p{font-size:0.8rem;opacity:0.9}
-.container{max-width:680px;margin:auto;padding:16px}
-.card{background:#fff;padding:20px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);margin-bottom:18px;}
-.product-img{width:100%;border-radius:16px;margin-bottom:15px;}
-.price{ font-size:2rem; font-weight:800; color:#ee4d2d; margin:5px 0; animation: pulseGlow 2.5s infinite; }
-.old-price{text-decoration:line-through;color:#888;font-size:1rem;margin-left:8px;}
-form{display:grid;gap:12px;margin-top:10px;}
-input,textarea{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:14px;}
-button{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;position:relative;}
-button:disabled{opacity:0.7;cursor:not-allowed;}
-button.loading::after{
-content:"";
-width:18px;height:18px;border:3px solid #fff;border-top:3px solid transparent;
-border-radius:50%;position:absolute;right:16px;top:50%;
-transform:translateY(-50%);animation:spin 0.7s linear infinite;
-}
-@keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
-@keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
-@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(238,77,45,0.6); } 70% { box-shadow: 0 0 0 12px rgba(238,77,45,0); } 100% { box-shadow: 0 0 0 0 rgba(238,77,45,0); } }
-  
-footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
-.sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
-@media(min-width:768px){.sticky-order{display:none}}
-
-.review-slider{position:relative;overflow:hidden;border-radius:16px}
-.review-wrapper{display:flex;transition:transform 0.5s ease;will-change:transform;}
-.review-slide{min-width:100%}
-.review-slide img{width:100%;border-radius:16px;height:auto}
-.slide-btn{position:absolute;top:50%;transform:translateY(-50%);
-background:rgba(0,0,0,0.5);color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;}
-.prev-btn{left:10px}.next-btn{right:10px}
-
-.address-guide{background:#fff5f2;border-left:4px solid #ee4d2d;padding:10px;border-radius:8px;font-size:13px;color:#555;margin-top:6px}
-
-.social-proof{position:fixed;bottom:90px;left:15px;background:#fff;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);padding:12px;border-radius:12px;
-font-size:13px;opacity:0;transform:translateY(20px);transition:0.4s;
-z-index:9999;max-width:280px}
-.social-proof.show{opacity:1;transform:translateY(0)}
-
-.viewer-counter,.stock-counter{margin-top:6px;font-size:13px}
-.stock-counter{color:#ee4d2d;font-weight:700}
-
-.fb-check-btn{
-display:block;width:100%;margin-top:15px;padding:14px;text-align:center;
-border-radius:12px;font-weight:600;text-decoration:none;
-background:linear-gradient(90deg,#1877f2,#0d5bd3);color:#fff;
-transition:0.3s ease;font-size:0.95rem;
-}
-.fb-check-btn:hover{transform:translateY(-2px);opacity:0.95}
-</style>
-
-<script>
-!function(f,b,e,v,n,t,s){
-if(f.fbq)return;
-n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];
-t=b.createElement(e);t.async=!0;t.src=v;
-s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s);
-}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init','631653776133164');
-
-fbq('track','PageView');
-
-fbq('track','ViewContent',{
-  content_ids: ['500GB-HDD-DJ'],
-  content_type: 'product',
-  value: 1500,
-  currency: 'PHP'
-});
-
-function trackFB(event,data={}){
-  if(typeof fbq==="function"){
-    fbq('track',event,data);
-  }
-}
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Order the All About Sounds PH 500GB external hard drive for ₱1,500, with free nationwide shipping and cash on delivery.">
+  <meta name="theme-color" content="#ac351c">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>500GB Music Collection | All About Sounds PH</title>
+  <link rel="stylesheet" href="checkout.css">
+  <script src="checkout.js" defer></script>
 </head>
-
 <body>
+  <a class="skip-link" href="#checkout">Skip to checkout</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./">All About Sounds PH</a>
+      <a class="header-link" href="https://www.facebook.com/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer" data-contact>Facebook page ↗</a>
+    </div>
+  </header>
 
-<header>
-<h1>500GB External HDD</h1>
-<p>60,000+ Songs | Plug & Play</p>
-</header>
+  <main class="container">
+    <div class="checkout-layout">
+      <section class="product card" aria-labelledby="product-title">
+        <picture>
+          <source type="image/webp" srcset="assets/cover-720.webp 720w, assets/cover-1080.webp 1080w" sizes="(min-width: 64rem) 510px, (min-width: 48rem) 44vw, calc(100vw - 40px)">
+          <img class="product-image" src="new%20feb-Cover.jpg" width="1080" height="1080" alt="All About Sounds PH 500GB external hard drive product promotion" fetchpriority="high" decoding="async">
+        </picture>
+        <div class="product-content">
+          <p class="eyebrow">Event music collection</p>
+          <h1 id="product-title">500GB External Hard Drive</h1>
+          <p class="muted">Up to 60,000 music tracks · Plug &amp; play</p>
+          <p class="price"><span class="sr-only">Price: </span>₱1,500 <span class="price-note">Cash on delivery</span></p>
+          <ul class="benefits">
+            <li>Organized music files and folders</li>
+            <li>Free nationwide shipping</li>
+            <li>Physical hard drive · Iloilo-based seller</li>
+          </ul>
+          <a class="button product-cta" href="#checkout">Order now <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
 
-<div class="container">
+      <section class="card checkout-card" id="checkout" aria-labelledby="checkout-title">
+        <div class="checkout-heading">
+          <p class="eyebrow">Secure your order</p>
+          <h2 id="checkout-title">Delivery details</h2>
+          <p class="muted">Enter your information for cash-on-delivery shipping. All fields below are required.</p>
+        </div>
+        <div class="summary" aria-label="Order summary">
+          <div><span>500GB external hard drive</span><strong>₱1,500</strong></div>
+          <div><span>Nationwide shipping</span><strong>Free</strong></div>
+          <div class="summary-total"><span>Total on delivery</span><strong>₱1,500</strong></div>
+        </div>
+        <noscript><p class="notice">To place an order, enable JavaScript or <a href="https://m.me/allaboutsoundsphmain">message us on Messenger</a>.</p></noscript>
+        <form id="orderForm" method="post" action="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec">
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="name" autocomplete="name" required placeholder="Juan Dela Cruz">
+          </div>
+          <div class="field">
+            <label for="phone">Mobile number</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="phone-help" required placeholder="09XXXXXXXXX">
+            <p class="hint" id="phone-help">Use an 11-digit Philippine mobile number or +63 format.</p>
+          </div>
+          <div class="field">
+            <label for="address">Complete delivery address</label>
+            <textarea id="address" name="address" autocomplete="street-address" rows="3" aria-describedby="address-help" required placeholder="House no., street, barangay, city, province"></textarea>
+            <p class="hint" id="address-help">Include your house number, street, barangay, city or municipality, and province.</p>
+          </div>
+          <div class="field">
+            <label for="landmark">Nearest landmark</label>
+            <input id="landmark" name="landmark" required placeholder="e.g. Beside the barangay hall">
+          </div>
+          <div hidden aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+          <p class="hint">We use the delivery information you provide to process and confirm your order. No online payment is required here.</p>
+          <p id="orderStatus" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+          <button class="button submit-button" type="submit" id="submitOrder" disabled>Place order · ₱1,500 COD</button>
+          <p class="help">Need help? <a href="https://m.me/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer" data-contact>Message us on Messenger</a>.</p>
+        </form>
+      </section>
+    </div>
 
-<div class="card">
-<img class="product-img" src="new feb-Cover.jpg" loading="lazy" decoding="async">
-<h2>Complete DJ Music Collection</h2>
-<div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
-<p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
-<div class="viewer-counter">👀 <span id="viewerCount">6</span> people viewing now</div>
-<div class="stock-counter">📦 Only <span id="stockCount">27</span> left in stock</div>
-<p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
-<p><b>📍 Iloilo Based Seller</b></p>
-</div>
+    <section class="card review-card" aria-labelledby="reviews-title">
+      <div class="review-intro">
+        <p class="eyebrow">Customer feedback</p>
+        <h2 id="reviews-title">What customers are saying</h2>
+        <p class="muted">Browse customer review screenshots or visit our official Facebook page for more updates.</p>
+        <a class="secondary-button" href="https://www.facebook.com/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer" data-contact>Visit our Facebook page ↗</a>
+      </div>
+      <div class="review-gallery">
+        <button type="button" class="secondary-button" id="loadReviews">View 11 review screenshots</button>
+        <div id="reviews" hidden>
+          <div class="review-frame"><img id="reviewImage" alt="Customer review screenshot 1 of 11" decoding="async"></div>
+          <div class="review-controls">
+            <button class="secondary-button" id="previousReview" type="button" aria-label="Previous review">← Previous</button>
+            <p id="reviewCount" role="status" aria-live="polite">1 of 11</p>
+            <button class="secondary-button" id="nextReview" type="button" aria-label="Next review">Next →</button>
+          </div>
+          <p id="reviewError" class="hint" role="status" hidden>Unable to load this review. Try the next or previous screenshot.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<div class="card">
-<h3 style="text-align:center;margin-bottom:10px;">⭐ Customer Review 💯</h3>
-<div class="review-slider">
-<div class="review-wrapper" id="reviewWrapper">
-<div class="review-slide"><img src="review1.png" loading="lazy"></div>
-<div class="review-slide"><img src="review2.png" loading="lazy"></div>
-<div class="review-slide"><img src="review3.png" loading="lazy"></div>
-<div class="review-slide"><img src="review4.png" loading="lazy"></div>
-<div class="review-slide"><img src="review5.png" loading="lazy"></div>
-<div class="review-slide"><img src="review6.png" loading="lazy"></div>
-<div class="review-slide"><img src="review7.png" loading="lazy"></div>
-<div class="review-slide"><img src="review8.png" loading="lazy"></div>
-<div class="review-slide"><img src="review9.png" loading="lazy"></div>
-<div class="review-slide"><img src="review10.png" loading="lazy"></div>
-<div class="review-slide"><img src="review11.png" loading="lazy"></div>
-</div>
-<button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
-<button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
-</div>
-</div>
+  <footer class="site-footer">
+    <span>© 2026 All About Sounds PH</span>
+    <a href="https://www.facebook.com/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer" data-contact>Official Facebook page</a>
+  </footer>
 
-</div>  <!-- This closes the review card -->
-
-<!-- ✅ PASTE FACEBOOK SECTION HERE -->
-<div class="card" style="text-align:center;">
-  <h3>🔒 Official Facebook Page</h3>
-  <p style="font-size:14px;color:#555;margin-bottom:12px;">
-    Visit our official Facebook page to see real customer reviews and updates.
-  </p>
-
-  <a href="https://www.facebook.com/allaboutsoundsphmain"
-     target="_blank"
-     onclick="trackFB('Contact');"
-     class="fb-check-btn">
-     👍 View Our Facebook Page
-  </a>
-
-  <div style="margin-top:10px;font-size:13px;color:#777;">
-    ⭐ ⭐ ⭐ ⭐ ⭐ Trusted Seller Since 2022
-  </div>
-</div>
-<!-- ✅ END FACEBOOK SECTION -->
-
-<div class="card">
-<h3>Checkout</h3>
-<form id="orderForm">
-<input type="text" name="name" placeholder="Full Name" required>
-<input type="tel" name="phone" placeholder="09XXXXXXXXX or +639XXXXXXXXX" required>
-<textarea name="address" placeholder="Complete Address" required></textarea>
-<div class="address-guide">Include House No., Street, Barangay, City & Province</div>
-<input type="text" name="landmark" placeholder="Nearest Landmark" required>
-<input type="text" name="website" style="display:none">
-<button type="submit">PLACE ORDER</button>
-</form>
-</div>
-
-<audio id="notifSound" preload="auto">
-<source src="https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3">
-</audio>
-
-</div>
-
-<footer>© 2026 All About Sounds PH</footer>
-
-<div class="social-proof" id="socialProof"></div>
-
-<div id="thankYouModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100000;justify-content:center;align-items:center;">
-<div style="background:#fff;padding:30px;border-radius:18px;text-align:center;max-width:380px;width:90%;animation:popIn 0.3s ease;">
-<h2 style="color:#ee4d2d;">🎉 Thank You!</h2>
-<p>Your order has been received successfully.</p>
-<p style="font-size:13px;color:#555;">Redirecting to Messenger to confirm...</p>
-</div>
-</div>
-
-<script>
-/* Slider */
-let index=0;
-const wrapper=document.getElementById("reviewWrapper");
-const total=wrapper.children.length;
-function moveSlide(dir){
-index+=dir;
-if(index<0)index=total-1;
-if(index>=total)index=0;
-wrapper.style.transform=`translate3d(-${index*100}%,0,0)`;
-}
-setInterval(()=>moveSlide(1),4000);
-
-/* Daily Reset Countdown (Midnight Reset) */
-function getMidnight(){
-    const now = new Date();
-    const midnight = new Date();
-    midnight.setHours(24,0,0,0);
-    return midnight;
-}
-
-function updateCountdown(){
-    const now = new Date();
-    const midnight = getMidnight();
-    const remaining = Math.floor((midnight - now) / 1000);
-
-    const hours = Math.floor(remaining / 3600);
-    const minutes = Math.floor((remaining % 3600) / 60);
-    const seconds = remaining % 60;
-
-    document.getElementById("countdown").innerText =
-        `🔥 Promo ends in ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}
-
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
-/* Viewers */
-let viewers=6;
-setInterval(()=>{
-if(Math.random()<0.7)viewers++;else viewers--;
-viewers=Math.max(3,Math.min(viewers,15));
-document.getElementById("viewerCount").innerText=viewers;
-},5000);
-
-/* Stock System - Decrease Every 16 Seconds */ 
-  let stock = parseInt(localStorage.getItem("dynamicStock")) || 20; const stockContainer = document.querySelector(".stock-counter"); function renderStock(){ if(stock <= 7){ stockContainer.classList.add("low-stock"); stockContainer.innerHTML = `⚠️ Only <span id="stockCount">${stock}</span> left — Selling Fast!`; } else { stockContainer.classList.remove("low-stock"); stockContainer.innerHTML = `📦 Only <span id="stockCount">${stock}</span> left in stock`; } } function updateStock(){ if(stock > 3){ stock--; localStorage.setItem("dynamicStock", stock); renderStock(); } } renderStock(); setInterval(updateStock, 16000); // 16 seconds
-
-/* Social Proof */
-const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
-const cities=["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
-const times=["just now","1 minute ago","3 minutes ago"];
-
-function showSocial(){
-const popup=document.getElementById("socialProof");
-const sound=document.getElementById("notifSound");
-popup.innerHTML=`<strong>${names[Math.floor(Math.random()*names.length)]}</strong>
-from ${cities[Math.floor(Math.random()*cities.length)]}<br>
-purchased 500GB External HDD<br>
-<small>${times[Math.floor(Math.random()*times.length)]}</small>`;
-popup.classList.add("show");
-sound.play().catch(()=>{});
-setTimeout(()=>popup.classList.remove("show"),4000);
-}
-setTimeout(()=>setInterval(showSocial,15000),5000);
-
-/* Name Formatter */
-function formatFullName(name){
-return name.toLowerCase().trim().replace(/\s+/g," ")
-.split(" ").map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(" ");
-}
-function formatAddress(address){
-return address.toLowerCase().trim().replace(/\s+/g," ")
-.split(" ").map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(" ");
-}
-
-document.querySelector("input[name='name']")
-.addEventListener("blur",function(){this.value=formatFullName(this.value);});
-document.querySelector("textarea[name='address']")
-.addEventListener("blur",function(){this.value=formatAddress(this.value);});
-
-/* Form */
-const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
-
-document.getElementById("orderForm")
-.addEventListener("focusin",()=>trackFB('InitiateCheckout'),{once:true});
-
-document.getElementById("orderForm").addEventListener("submit",async function(e){
-e.preventDefault();
-if(this.website.value!=="")return;
-
-let name=formatFullName(this.name.value);
-let phone=this.phone.value.trim();
-let address=formatAddress(this.address.value);
-const landmark=this.landmark.value.trim();
-
-if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
-alert("Enter valid PH number");return;}
-if(/^09/.test(phone)) phone="+63"+phone.substring(1);
-
-trackFB('AddToCart',{
-  content_ids: ['500GB-HDD-DJ'],
-  content_type: 'product',
-  value: 1500,
-  currency: 'PHP'
-});
-
-const btn=this.querySelector("button");
-btn.disabled=true;
-btn.classList.add("loading");
-btn.innerHTML="Processing...";
-
-const formData=new FormData();
-formData.append("name",name);
-formData.append("phone",phone);
-formData.append("address",address);
-formData.append("landmark",landmark);
-
-try{
-await fetch(SHEET_URL,{method:"POST",body:formData});
-trackFB('Purchase',{
-  content_ids: ['500GB-HDD-DJ'],
-  content_type: 'product',
-  value: 1500,
-  currency: 'PHP'
-});
-
-document.getElementById("thankYouModal").style.display="flex";
-
-const msg=`Hello! Confirm order:
-
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-Landmark: ${landmark}
-
-Product: 500GB HDD
-Price: ₱1,500 COD`;
-
-setTimeout(()=>{
-window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(msg)}`;
-},2000);
-
-}catch(error){
-alert("Something went wrong. Please try again.");
-btn.disabled=false;
-btn.classList.remove("loading");
-btn.innerHTML="PLACE ORDER";
-}
-});
-</script>
-
+  <dialog id="confirmation" aria-labelledby="confirmation-title">
+    <div class="dialog-content">
+      <p class="eyebrow">Next step</p>
+      <h2 id="confirmation-title">Thank you for your order!</h2>
+      <p>Your order submission was accepted. Copy your order details and send them to our official Messenger to confirm delivery.</p>
+      <div class="field">
+        <label for="orderMessage">Your confirmation message</label>
+        <textarea id="orderMessage" rows="6" readonly></textarea>
+      </div>
+      <button class="secondary-button" type="button" id="copyOrder">Copy order details</button>
+      <p id="copyStatus" class="hint" role="status" aria-live="polite"></p>
+      <a class="button" href="https://m.me/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer" data-contact>Open Messenger ↗</a>
+      <button class="text-button" id="closeConfirmation" type="button">Close</button>
+    </div>
+  </dialog>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
