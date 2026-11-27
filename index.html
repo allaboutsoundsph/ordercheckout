@@ -944,14 +944,8 @@ if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
 alert("Enter valid PH number");return;}
 if(/^09/.test(phone)) phone="+63"+phone.substring(1);
 
-trackFB('AddToCart',{
-  content_ids: ['500GB-HDD-DJ'],
-  content_type: 'product',
-  value: 1500,
-  currency: 'PHP'
-});
-
-const btn=this.querySelector("button");
+const btn=this.querySelector('button[type="submit"]');
+if (btn.disabled) return;
 btn.disabled=true;
 btn.classList.add("loading");
 btn.innerHTML="Processing...";
@@ -963,7 +957,13 @@ formData.append("address",address);
 formData.append("landmark",landmark);
 
 try{
-await fetch(SHEET_URL,{method:"POST",body:formData});
+const response = await fetch(SHEET_URL, {
+  method: "POST",
+  body: new URLSearchParams(formData)
+});
+if (!response.ok) throw new Error("Order submission failed");
+const result = await response.json();
+if (!result || result.success !== true) throw new Error("Order not saved");
 trackFB('Purchase',{
   content_ids: ['500GB-HDD-DJ'],
   content_type: 'product',
