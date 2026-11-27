@@ -9,14 +9,20 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
-<title>All About Sounds PH — Visual Redesign Preview</title>
-<meta name="robots" content="noindex, nofollow">
+<title>500GB External HDD — All About Sounds PH</title>
+<meta name="description" content="Shop the 500GB external HDD music collection for ₱1,500 with free shipping and cash on delivery. Order from All About Sounds PH.">
+<link rel="canonical" href="https://allaboutsoundsph.github.io/ordercheckout/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="500GB External HDD — All About Sounds PH">
+<meta property="og:description" content="Complete DJ Music Collection — ₱1,500. Free shipping and cash on delivery.">
+<meta property="og:url" content="https://allaboutsoundsph.github.io/ordercheckout/">
+<meta property="og:image" content="https://allaboutsoundsph.github.io/ordercheckout/new%20feb-Cover.jpg">
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="new%20feb-Cover.jpg">
+<link rel="preload" as="image" href="new%20feb-Cover.jpg" fetchpriority="high">
 
 <style>
 :root {
@@ -429,9 +435,27 @@ button.loading::after {
 footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); font-size: .875rem; }
 .sticky-order {
   position: fixed; inset: auto 0 0; inline-size: 100%;
-  color: var(--button-ink); background: var(--button-bg);
-  text-align: center; padding: 16px; font-weight: 700; z-index: 999; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  background: #131d2e; color: var(--ink); border-top: 1px solid #597083;
+  padding: .65rem 1rem calc(.65rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -8px 24px #0007; z-index: 999;
 }
+.sticky-order[hidden], .order-attempt[hidden] { display: none !important; }
+.sticky-order span { display: block; font-size: .7rem; color: var(--muted); }
+.sticky-order strong { display: block; color: var(--primary); font-size: 1.35rem; line-height: 1.1; }
+.sticky-order a { flex: 1; max-inline-size: 14rem; min-block-size: 44px; display: grid; place-items: center; border-radius: .75rem; color: var(--button-ink); background: var(--button-bg); font-weight: 800; text-decoration: none; }
+@media (max-width: 47.999rem) {
+  body.has-sticky-order { padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px)); }
+  html { scroll-padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px)); }
+}
+.checkout-disclosure, .order-attempt { grid-column: 1/-1; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+.checkout-disclosure summary { cursor: pointer; color: var(--primary); font-weight: 600; padding: .3rem 0; }
+.checkout-disclosure p { margin-top: .4rem; }
+.order-attempt { padding: .85rem; border: 1px solid #8d795a; background: #252130; border-radius: .75rem; }
+.order-attempt a { color: var(--primary); }
+.order-attempt button, #manualMessenger { display: block; min-height: 44px; border-radius: .7rem; font-weight: 700; cursor: pointer; padding: .65rem 1rem; margin-top: .7rem; border: 1px solid #7c8da9; background: #1d3145; color: var(--primary); }
+#manualMessenger { width: 100%; background: var(--button-bg); color: var(--button-ink); border: 0; }
+.phone-help { font-size: .76rem; font-weight: 400; color: var(--muted); }
 .reviews-card h3 { color: var(--ink); }
 .review-slider {
   position: relative;
@@ -930,17 +954,17 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Customer Review 💯</h3>
 <div class="review-slider">
 <div class="review-wrapper" id="reviewWrapper">
-<div class="review-slide"><img src="review1.png" loading="lazy" alt="Customer review screenshot 1 of 11"></div>
-<div class="review-slide"><img src="review2.png" loading="lazy" alt="Customer review screenshot 2 of 11"></div>
-<div class="review-slide"><img src="review3.png" loading="lazy" alt="Customer review screenshot 3 of 11"></div>
-<div class="review-slide"><img src="review4.png" loading="lazy" alt="Customer review screenshot 4 of 11"></div>
-<div class="review-slide"><img src="review5.png" loading="lazy" alt="Customer review screenshot 5 of 11"></div>
-<div class="review-slide"><img src="review6.png" loading="lazy" alt="Customer review screenshot 6 of 11"></div>
-<div class="review-slide"><img src="review7.png" loading="lazy" alt="Customer review screenshot 7 of 11"></div>
-<div class="review-slide"><img src="review8.png" loading="lazy" alt="Customer review screenshot 8 of 11"></div>
-<div class="review-slide"><img src="review9.png" loading="lazy" alt="Customer review screenshot 9 of 11"></div>
-<div class="review-slide"><img src="review10.png" loading="lazy" alt="Customer review screenshot 10 of 11"></div>
-<div class="review-slide"><img src="review11.png" loading="lazy" alt="Customer review screenshot 11 of 11"></div>
+<div class="review-slide"><img src="review1.png" loading="lazy" decoding="async" alt="Customer review screenshot 1 of 11"></div>
+<div class="review-slide"><img src="review2.png" loading="lazy" decoding="async" alt="Customer review screenshot 2 of 11"></div>
+<div class="review-slide"><img src="review3.png" loading="lazy" decoding="async" alt="Customer review screenshot 3 of 11"></div>
+<div class="review-slide"><img src="review4.png" loading="lazy" decoding="async" alt="Customer review screenshot 4 of 11"></div>
+<div class="review-slide"><img src="review5.png" loading="lazy" decoding="async" alt="Customer review screenshot 5 of 11"></div>
+<div class="review-slide"><img src="review6.png" loading="lazy" decoding="async" alt="Customer review screenshot 6 of 11"></div>
+<div class="review-slide"><img src="review7.png" loading="lazy" decoding="async" alt="Customer review screenshot 7 of 11"></div>
+<div class="review-slide"><img src="review8.png" loading="lazy" decoding="async" alt="Customer review screenshot 8 of 11"></div>
+<div class="review-slide"><img src="review9.png" loading="lazy" decoding="async" alt="Customer review screenshot 9 of 11"></div>
+<div class="review-slide"><img src="review10.png" loading="lazy" decoding="async" alt="Customer review screenshot 10 of 11"></div>
+<div class="review-slide"><img src="review11.png" loading="lazy" decoding="async" alt="Customer review screenshot 11 of 11"></div>
 </div>
 <button class="slide-btn prev-btn" type="button" aria-label="Previous review" onclick="moveSlide(-1)">‹</button>
 <button class="slide-btn next-btn" type="button" aria-label="Next review" onclick="moveSlide(1)">›</button>
@@ -990,8 +1014,8 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <div class="card checkout-card" id="order-information" tabindex="-1">
 <h3>Checkout</h3>
 <form id="orderForm" method="post">
-<label class="field">Full Name<input type="text" name="name" placeholder="Full Name" required></label>
-<label class="field">Mobile Number<input type="tel" name="phone" placeholder="09XXXXXXXXX or +639XXXXXXXXX" required></label>
+<label class="field">Full Name<input type="text" name="name" placeholder="Full Name" autocomplete="name" required></label>
+<label class="field">Mobile Number<input type="tel" name="phone" placeholder="09XXXXXXXXX or +639XXXXXXXXX" inputmode="tel" autocomplete="tel" aria-describedby="phoneHelp" required><span class="phone-help" id="phoneHelp">Use your PH mobile number (09... or +639...). Spaces and dashes are accepted.</span></label>
 <fieldset class="field address address-fields" id="deliveryAddress">
   <legend>Delivery Address</legend>
   <div class="address-dropdown-grid" id="addressDropdowns" hidden>
@@ -1025,6 +1049,16 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <label class="field landmark">Nearest Landmark<input type="text" name="landmark" placeholder="Nearest Landmark" required></label>
 <input type="text" name="website" style="display:none">
 <p class="checkout-privacy-note" data-live-only>After your order is saved, we open our Facebook Messenger conversation with your order details for confirmation.</p>
+<details class="checkout-disclosure">
+  <summary>How we use your order details</summary>
+  <p data-live-only>We use your name, phone number, delivery address and landmark to record your order in Google Sheets, arrange delivery and confirm it via Messenger. Meta Pixel measures browsing and checkout activity; Meta settings may also enable matching of customer information. <a href="https://www.facebook.com/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer">Contact us</a> with privacy or order questions.</p>
+  <p data-preview-only>Preview only: no real order is saved or sent to Meta or Messenger. The live checkout uses your details to record and deliver your order and confirm it through Messenger.</p>
+</details>
+<div class="order-attempt" id="orderAttemptStatus" role="status" tabindex="-1" hidden>
+  <p id="orderAttemptText"></p>
+  <a data-live-only href="https://m.me/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer">Contact us on Messenger</a>
+  <button type="button" id="resetOrderAttempt">Start a new order</button>
+</div>
 <button type="submit" disabled>PLACE ORDER</button>
 </form>
 </div>
@@ -1036,20 +1070,27 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 </div>
 
 <footer>© 2026 All About Sounds PH</footer>
+<aside class="sticky-order" id="stickyOrder" aria-label="Quick order" hidden>
+  <div><span>500GB HDD · COD</span><strong>₱1,500</strong></div>
+  <a href="#order-information">ORDER NOW</a>
+</aside>
 
 <div class="social-proof" data-preview-only id="socialProof" role="status" aria-live="polite"></div>
 
-<div id="thankYouModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100000;justify-content:center;align-items:center;">
+<div id="thankYouModal" role="dialog" aria-modal="true" aria-labelledby="thankYouTitle" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100000;justify-content:center;align-items:center;">
 <div style="background:#fff;padding:30px;border-radius:18px;text-align:center;max-width:380px;width:90%;animation:popIn 0.3s ease;">
-<h2 style="color:#ee4d2d;">🎉 Thank You!</h2>
+<h2 id="thankYouTitle" style="color:#ee4d2d;">🎉 Thank You!</h2>
 <p data-preview-only>Your test order was accepted by the simulated sheet.</p>
 <p data-live-only style="color:#333;">Your order was successfully saved.</p>
 <p data-preview-only style="font-size:13px;color:#555;">Opening the simulated Messenger confirmation...</p>
 <p data-live-only style="font-size:13px;color:#555;">Opening Messenger for order confirmation...</p>
+<p style="font-size:13px;">If it does not open automatically, tap below. Do not submit your order again.</p>
+<button type="button" id="manualMessenger">Open Messenger to Confirm</button>
 </div>
 </div>
 
 <script src="address-dropdown.js"></script>
+<script src="checkout-enhancements.js"></script>
 <script>
 /* Slider */
 let index=0;
@@ -1245,31 +1286,25 @@ e.preventDefault();
 if(this.website.value!=="")return;
 
 let name=formatFullName(this.name.value);
-let phone=this.phone.value.trim();
+const phone=window.checkoutUX.validatePhone();
+if(!phone)return;
 let address=window.checkoutAddress ? window.checkoutAddress.getAddress() : formatAddress(this.address.value);
 if(!address)return;
 const landmark=this.landmark.value.trim();
-
-if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
-alert("Enter valid PH number");return;}
-if(/^09/.test(phone)) phone="+63"+phone.substring(1);
 
 if (!name || !landmark) {
   alert("Please enter your full name and nearest landmark.");
   return;
 }
 
-const btn=this.querySelector('button[type="submit"]');
-if (btn.disabled) return;
-btn.disabled=true;
-btn.classList.add("loading");
-btn.innerHTML="Processing...";
-
-try{
-await checkoutRuntime.submitOrder({name,phone,address,landmark});
+if (!window.checkoutUX.begin()) return;
+try {
+  await checkoutRuntime.submitOrder({name,phone,address,landmark});
+} catch (error) {
+  window.checkoutUX.uncertain();
+  return;
+}
 trackFB('Purchase',checkoutRuntime.product);
-
-document.getElementById("thankYouModal").style.display="flex";
 
 const msg=`Hello! Confirm order:
 
@@ -1281,19 +1316,9 @@ Landmark: ${landmark}
 Product: 500GB HDD
 Price: ₱1,500 COD`;
 
-setTimeout(()=>{
-checkoutRuntime.handoff(msg);
-},2000);
-
-}catch(error){
-alert("We could not confirm that your order was saved. Please contact us before attempting another order.");
-btn.disabled=false;
-btn.classList.remove("loading");
-btn.innerHTML="PLACE ORDER";
-}
+window.checkoutUX.saved(msg);
 });
-// Only enable the checkout once its runtime and submit handler are available.
-document.querySelector('#orderForm button[type="submit"]').disabled = false;
+window.checkoutUX.activate();
 </script>
 
 <script id="audio-sample-playback">
