@@ -9,149 +9,947 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
-<title>500GB External HDD – Official Store</title>
+<title>All About Sounds PH — Visual Redesign Preview</title>
+<meta name="robots" content="noindex, nofollow">
 
-<link rel="preconnect" href="https://connect.facebook.net">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="new-feb-cover.jpg">
-<img class="product-img" src="new-feb-cover.jpg" loading="eager" fetchpriority="high">
+<link rel="preload" as="image" href="new%20feb-Cover.jpg">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#fdfbfb,#ebedee);color:#222;}
-header{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:14px;}
-header h1{font-size:1.2rem;font-weight:700}
-header p{font-size:0.8rem;opacity:0.9}
-.container{max-width:680px;margin:auto;padding:16px}
-.card{background:#fff;padding:20px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);margin-bottom:18px;}
-.product-img{width:100%;border-radius:16px;margin-bottom:15px;}
-.price{ font-size:2rem; font-weight:800; color:#ee4d2d; margin:5px 0; animation: pulseGlow 2.5s infinite; }
-.old-price{text-decoration:line-through;color:#888;font-size:1rem;margin-left:8px;}
-form{display:grid;gap:12px;margin-top:10px;}
-input,textarea{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:14px;}
-button{background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;position:relative;}
-button:disabled{opacity:0.7;cursor:not-allowed;}
-button.loading::after{
-content:"";
-width:18px;height:18px;border:3px solid #fff;border-top:3px solid transparent;
-border-radius:50%;position:absolute;right:16px;top:50%;
-transform:translateY(-50%);animation:spin 0.7s linear infinite;
+:root {
+  color-scheme: dark;
+  --page: #080b12;
+  --surface: #111622;
+  --surface-raised: #191f2d;
+  --ink: #f4f6fc;
+  --muted: #aeb9cd;
+  --line: #303b50;
+  --input-line: #64738c;
+  --primary: #8cf7e8;
+  --primary-dark: #55d5ce;
+  --violet: #c0b1ff;
+  --button-ink: #101824;
+  --button-bg: linear-gradient(112deg, #9bf8e8 0%, #8de6f3 48%, #b6adff 100%);
+  --radius: 1.35rem;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 100%;
+  font-weight: 400;
+  line-height: 1.55;
+  background: var(--page);
+  color: var(--ink);
 }
-@keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
-@keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
-@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(238,77,45,0.6); } 70% { box-shadow: 0 0 0 12px rgba(238,77,45,0); } 100% { box-shadow: 0 0 0 0 rgba(238,77,45,0); } }
-  
-footer{text-align:center;padding:20px;font-size:0.75rem;color:#777;}
-.sticky-order{position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(90deg,#ee4d2d,#ff784e);color:#fff;text-align:center;padding:16px;font-weight:700;z-index:999;cursor:pointer;}
-@media(min-width:768px){.sticky-order{display:none}}
-
-.review-slider{position:relative;overflow:hidden;border-radius:16px}
-.review-wrapper{display:flex;transition:transform 0.5s ease;will-change:transform;}
-.review-slide{min-width:100%}
-.review-slide img{width:100%;border-radius:16px;height:auto}
-.slide-btn{position:absolute;top:50%;transform:translateY(-50%);
-background:rgba(0,0,0,0.5);color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;}
-.prev-btn{left:10px}.next-btn{right:10px}
-
-.address-guide{background:#fff5f2;border-left:4px solid #ee4d2d;padding:10px;border-radius:8px;font-size:13px;color:#555;margin-top:6px}
-
-.social-proof{position:fixed;bottom:90px;left:15px;background:#fff;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);padding:12px;border-radius:12px;
-font-size:13px;opacity:0;transform:translateY(20px);transition:0.4s;
-z-index:9999;max-width:280px}
-.social-proof.show{opacity:1;transform:translateY(0)}
-
-.viewer-counter,.stock-counter{margin-top:6px;font-size:13px}
-.stock-counter{color:#ee4d2d;font-weight:700}
-
-.fb-check-btn{
-display:block;width:100%;margin-top:15px;padding:14px;text-align:center;
-border-radius:12px;font-weight:600;text-decoration:none;
-background:linear-gradient(90deg,#1877f2,#0d5bd3);color:#fff;
-transition:0.3s ease;font-size:0.95rem;
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, p { margin: 0; }
+html { scroll-padding-top: 1rem; }
+body {
+  min-block-size: 100dvh;
+  background: radial-gradient(ellipse at 0% 5%, #18243e 0%, transparent 36rem),
+              radial-gradient(ellipse at 100% 18%, #25203c 0%, transparent 45rem),
+              var(--page);
+  color: var(--ink);
+  overflow-wrap: break-word;
 }
-.fb-check-btn:hover{transform:translateY(-2px);opacity:0.95}
+::selection { background: var(--primary); color: var(--button-ink); }
+header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: center;
+  padding: clamp(1.6rem, 4vw, 3.1rem) 1rem clamp(1.5rem, 3.5vw, 2.65rem);
+  border-bottom: 1px solid #4b5670;
+  background: linear-gradient(150deg, #101c32 0%, #101421 52%, #201732 100%);
+}
+header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    repeating-radial-gradient(circle at 93% 45%, transparent 0 13px, #a8b5f00a 14px 15px, transparent 16px 21px),
+    radial-gradient(ellipse at 12% 20%, #32bdcb19, transparent 42%),
+    radial-gradient(ellipse at 92% 20%, #9d72ff17, transparent 46%);
+  pointer-events: none;
+}
+header::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  block-size: 2px;
+  background: linear-gradient(90deg, transparent, #83e6e4, #bd9df5, transparent);
+}
+.brand-name {
+  display: inline-flex;
+  gap: .65rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: var(--primary);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin-block-end: .75rem;
+}
+.brand-name::before {
+  content: "";
+  inline-size: 29px;
+  block-size: 24px;
+  flex-shrink: 0;
+  background:
+    linear-gradient(var(--primary), var(--primary)) 0 50% / 4px 10px,
+    linear-gradient(#9de3f7, #9de3f7) 6px 50% / 4px 18px,
+    linear-gradient(#aec0ff, #aec0ff) 12px 50% / 4px 24px,
+    linear-gradient(var(--violet), var(--violet)) 18px 50% / 4px 16px,
+    linear-gradient(#d7b8fd, #d7b8fd) 24px 50% / 4px 8px;
+  background-repeat: no-repeat;
+  opacity: .96;
+}
+header h1 {
+  font-size: clamp(1.65rem, 4.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.13;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+header p { margin-block-start: .5rem; color: #c0ccdf; font-size: .92rem; font-weight: 400; }
+.container {
+  max-inline-size: 70rem;
+  margin-inline: auto;
+  padding: clamp(.8rem, 3vw, 1.8rem);
+  display: grid;
+  gap: 1rem;
+}
+.card {
+  position: relative;
+  min-inline-size: 0;
+  padding: clamp(1.05rem, 3.4vw, 1.75rem);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, #171d2b 0%, var(--surface) 65%);
+  box-shadow: 0 14px 36px #0004, inset 0 1px #ffffff08;
+  overflow-wrap: anywhere;
+}
+h2 {
+  font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.17;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+h3 {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.025em;
+  margin-block-end: 1rem;
+}
+.product-card {
+  display: grid;
+  gap: clamp(1.15rem, 3vw, 2.2rem);
+  align-items: center;
+  background: radial-gradient(ellipse at 0% 0%, #262e49 0%, transparent 54%),
+              linear-gradient(130deg, #171e2d, #101420 70%);
+  border-color: #414e6c;
+  box-shadow: 0 20px 55px #0005, inset 0 1px #ffffff10;
+}
+.product-img {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: calc(var(--radius) - .35rem);
+  background: #0b0f19;
+  border: 1px solid #56617b;
+  box-shadow: 0 9px 30px #0005;
+}
+.product-details {
+  display: grid;
+  gap: .8rem;
+  align-content: center;
+  min-inline-size: 0;
+}
+.product-details h2::before {
+  display: block;
+  content: "";
+  inline-size: 3.25rem;
+  block-size: 4px;
+  border-radius: 999px;
+  margin-block-end: .8rem;
+  background: linear-gradient(90deg, var(--primary), var(--violet));
+}
+.price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .5rem .8rem;
+  font-size: clamp(2.2rem, 5vw, 3.65rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -.06em;
+  color: var(--primary);
+  margin-block: .2rem .4rem;
+  font-variant-numeric: tabular-nums;
+}
+.old-price {
+  text-decoration: line-through;
+  color: #a7afc3;
+  font-size: 1rem;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+#countdown {
+  padding: .7rem .85rem;
+  background: #2a1c2b;
+  border: 1px solid #8d536f;
+  border-radius: .7rem;
+  color: #ffbccc !important;
+  font-size: .875rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+}
+.viewer-counter, .stock-counter {
+  min-inline-size: 0;
+  font-size: .925rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.stock-counter {
+  color: #f3c882;
+  font-weight: 700;
+  width: fit-content;
+  max-width: 100%;
+  padding: .5rem .7rem;
+  border: 1px solid transparent;
+  border-radius: .7rem;
+}
+.stock-counter #stockCount { font-variant-numeric: tabular-nums; }
+.stock-counter.low-stock {
+  color: #ffe7ae;
+  background: linear-gradient(115deg, #462518, #291a21 75%);
+  border-color: #ff9559;
+  font-weight: 800;
+  font-size: clamp(.95rem, 1.8vw, 1.07rem);
+  text-shadow: 0 0 9px #ff9a4266;
+  box-shadow: 0 0 16px #ff752f66, inset 0 0 10px #ff8a3c26;
+  animation: stock-urgency-glow 2s ease-in-out infinite;
+}
+.stock-counter.low-stock #stockCount { color: #fff3c2; }
+@keyframes stock-urgency-glow {
+  0%, 100% { border-color: #ff9559; box-shadow: 0 0 10px #ff752f44, inset 0 0 6px #ff8a3c19; }
+  50% { border-color: #ffd18a; box-shadow: 0 0 24px #ff752f88, inset 0 0 14px #ff8a3c40; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stock-counter.low-stock { animation: none; }
+}
+@media (forced-colors: active) {
+  .stock-counter.low-stock { color: CanvasText; border: 2px solid CanvasText; animation: none; }
+}
+.order-now-btn, form>button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  min-block-size: 3.5rem;
+  padding: .9rem 1.25rem;
+  border: 1px solid #d3fffa;
+  border-radius: .85rem;
+  background: var(--button-bg);
+  color: var(--button-ink);
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 5px 21px #68e5dc19;
+  transition: box-shadow .18s ease, filter .18s ease;
+}
+.order-now-btn { margin-block: .3rem .15rem; }
+.order-now-btn:hover, form>button:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 7px 25px #68e5dc33;
+}
+.shipping-line {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+  border-block-start: 1px solid var(--line);
+  padding-block-start: 1rem;
+  margin-block-start: .2rem;
+}
+.shipping-benefit {
+  --benefit-accent: #8cf7e8;
+  --benefit-glow: #8cf7e844;
+  --benefit-delay: 0s;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-block-size: 3.5rem;
+  padding: .65rem .55rem;
+  border: 1px solid #426a69;
+  border-radius: .8rem;
+  background: linear-gradient(145deg, #1b363a, #14242d 65%);
+  color: var(--benefit-accent);
+  font-size: clamp(.81rem, 1.55vw, .9rem);
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: .015em;
+  text-align: start;
+}
+.shipping-benefit--cod {
+  --benefit-accent: #c4b7ff;
+  --benefit-glow: #c4b7ff44;
+  --benefit-delay: -1.8s;
+  border-color: #665b93;
+  background: linear-gradient(145deg, #312a4b, #1e2038 65%);
+}
+.shipping-benefit::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, var(--benefit-glow) 48%, transparent 78%);
+  opacity: 0;
+  transform: translateX(-110%);
+  pointer-events: none;
+}
+.shipping-benefit svg {
+  display: block;
+  flex: 0 0 1.65rem;
+  inline-size: 1.65rem;
+  block-size: 1.65rem;
+  overflow: visible;
+}
+.shipping-benefit-text { min-inline-size: 0; overflow-wrap: normal; }
+/* Runs on page load, independently of pointer, hover and focus. */
+.shipping-benefit {
+  animation: benefit-highlight 3.6s ease-in-out var(--benefit-delay) infinite;
+}
+.shipping-benefit::before {
+  animation: benefit-sweep 3.6s linear var(--benefit-delay) infinite;
+}
+.shipping-benefit--shipping svg {
+  animation: delivery-glide 1.8s ease-in-out infinite;
+}
+.shipping-benefit--cod svg {
+  animation: cash-handoff 1.8s ease-in-out -.9s infinite;
+}
+@keyframes benefit-highlight {
+  0%, 100% { border-color: var(--benefit-accent); box-shadow: 0 0 12px var(--benefit-glow), inset 0 0 6px var(--benefit-glow); transform: translateY(0); }
+  50% { border-color: var(--benefit-accent); box-shadow: 0 0 20px var(--benefit-glow), inset 0 0 16px var(--benefit-glow); transform: translateY(-3px); }
+}
+@keyframes benefit-sweep {
+  0% { transform: translateX(-110%); opacity: .8; }
+  85% { transform: translateX(110%); opacity: 1; }
+  99%, 100% { transform: translateX(110%); opacity: 0; }
+}
+@keyframes delivery-glide {
+  0%, 100% { transform: translateX(-3px) rotate(-3deg); }
+  50% { transform: translateX(4px) rotate(3deg); }
+}
+@keyframes cash-handoff {
+  0%, 100% { transform: translateY(1px) rotate(-5deg); }
+  50% { transform: translateY(-4px) rotate(5deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shipping-benefit, .shipping-benefit::before, .shipping-benefit svg { animation: none; }
+}
+@media (max-width: 24rem) {
+  .shipping-benefit { flex-direction: column; gap: .35rem; text-align: center; padding: .55rem .35rem; }
+  .shipping-benefit svg { flex-basis: auto; }
+}
+@media (forced-colors: active) {
+  .shipping-benefit { color: CanvasText; border: 1px solid CanvasText; animation: none; }
+  .shipping-benefit::before, .shipping-benefit svg { animation: none; }
+}
+.seller-line { color: var(--muted); font-size: .875rem; }
+form { display: grid; gap: 1rem; margin-block-start: .8rem; }
+.field {
+  display: grid;
+  min-inline-size: 0;
+  gap: .45rem;
+  color: #e2e7f3;
+  font-size: .9rem;
+  font-weight: 700;
+}
+input, textarea {
+  inline-size: 100%;
+  min-inline-size: 0;
+  border: 1px solid var(--input-line);
+  border-radius: .75rem;
+  background: #0b101b;
+  padding: .9rem 1rem;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+input { min-block-size: 3.35rem; }
+textarea { min-block-size: 7rem; resize: vertical; }
+input::placeholder, textarea::placeholder { color: #9ca8bf; opacity: 1; }
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+button, .fb-check-btn {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  border-radius: .8rem;
+  position: relative;
+  text-align: center;
+}
+button:disabled { opacity: .7; cursor: not-allowed; }
+button.loading::after {
+  content: "";
+  inline-size: 18px;
+  block-size: 18px;
+  border: 3px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+@keyframes popIn { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); font-size: .875rem; }
+.sticky-order {
+  position: fixed; inset: auto 0 0; inline-size: 100%;
+  color: var(--button-ink); background: var(--button-bg);
+  text-align: center; padding: 16px; font-weight: 700; z-index: 999; cursor: pointer;
+}
+.reviews-card h3 { color: var(--ink); }
+.review-slider {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #3c4860;
+  border-radius: 1rem;
+  background: #0b101a;
+}
+.review-wrapper { display: flex; align-items: center; transition: transform .5s ease; will-change: transform; }
+.review-slide { min-inline-size: 100%; display: grid; place-items: center; }
+.review-slide img {
+  display: block; max-inline-size: 100%; max-block-size: 30rem;
+  inline-size: auto; block-size: auto; object-fit: contain; border-radius: .85rem;
+}
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  min-block-size: 44px;
+  padding: 0;
+  border: 1px solid #a5d7eb;
+  border-radius: 50%;
+  background: #102033ef;
+  color: #f4fcff;
+  font-size: 1.65rem;
+  line-height: 1;
+  box-shadow: 0 3px 12px #0005;
+}
+.prev-btn { left: .55rem; }
+.next-btn { right: .55rem; }
+.fb-card {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, #223453 0%, transparent 65%), var(--surface);
+}
+.fb-card>p, .fb-card>div { color: var(--muted) !important; }
+.fb-card>p { font-size: .9rem !important; line-height: 1.6; }
+.fb-check-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 3.2rem;
+  inline-size: 100%;
+  padding: .85rem 1.1rem;
+  margin-block-start: .35rem;
+  border: 1px solid #729ce2;
+  background: #244f94;
+  color: white;
+  text-decoration: none;
+  transition: filter .16s ease;
+  font-size: .95rem;
+}
+.fb-check-btn:hover, .slide-btn:hover { filter: brightness(1.14); }
+.checkout-card { border-color: #53607d; }
+.checkout-card h3::after {
+  content: "";
+  display: block;
+  inline-size: 3rem;
+  block-size: 3px;
+  margin-block-start: .65rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), var(--violet));
+}
+.address-guide {
+  border-inline-start: 4px solid var(--violet);
+  border-radius: .55rem;
+  padding: .78rem;
+  background: #242039;
+  color: #dfd8f8;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+.address-fields { margin: 0; padding: 0; border: 0; min-inline-size: 0; gap: .7rem; }
+.address-fields legend { padding: 0; margin-block-end: .55rem; font-size: 1rem; font-weight: 800; color: var(--ink); }
+.address-dropdown-grid { display: grid; gap: .8rem; min-inline-size: 0; }
+.address-dropdown-grid .field { min-inline-size: 0; }
+.address-fields [hidden] { display: none !important; }
+.location-picker { display: grid; gap: .45rem; min-inline-size: 0; }
+.location-trigger {
+  display: flex; align-items: center; justify-content: space-between; gap: .65rem;
+  inline-size: 100%; min-block-size: 3.35rem; padding: .8rem .9rem;
+  border: 1px solid var(--input-line); border-radius: .75rem;
+  background: #0b101b; color: var(--ink); font-size: .95rem; font-weight: 500; text-align: start;
+}
+.location-trigger[aria-expanded="true"] { border-color: var(--primary); }
+.location-trigger svg { flex: none; transition: transform .2s ease; }
+.location-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+.location-trigger[data-empty="true"] { color: var(--muted); }
+.location-panel { border: 1px solid #52627d; border-radius: .85rem; background: #141c2b; overflow: hidden; box-shadow: 0 8px 24px #0003; }
+.location-steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .25rem; padding: .45rem; background: #0f1521; }
+.location-step {
+  min-inline-size: 0; min-block-size: 44px; border: 1px solid transparent;
+  padding: .45rem .18rem; background: transparent; color: var(--muted);
+  font: inherit; font-size: .82rem; font-weight: 700; border-radius: .55rem;
+}
+.location-step[aria-pressed="true"] { background: #1e3743; border-color: #598e95; color: var(--primary); }
+.location-step:disabled { opacity: .45; }
+.location-search-wrap { padding: .65rem .65rem .4rem; }
+.location-search-wrap input { min-block-size: 2.85rem; font-size: 1rem; padding: .65rem .8rem; }
+.location-list { max-block-size: min(19rem, 40vh); overflow-y: auto; overscroll-behavior: contain; padding: .15rem .45rem .45rem; scrollbar-color: #63748d #141c2b; }
+.location-option {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem .65rem;
+  inline-size: 100%; min-block-size: 44px; border: 1px solid transparent; border-radius: .55rem;
+  padding: .6rem .7rem; background: transparent; color: var(--ink); font: inherit; font-size: .92rem;
+  font-weight: 500; text-align: start;
+}
+.location-option:hover, .location-option:focus-visible { background: #263449; }
+.location-option[aria-current="true"] { color: var(--primary); border-color: #477c87; background: #1c3440; }
+.location-option small { font-size: .72rem; color: var(--muted); }
+.location-message { padding: .9rem .75rem; font-size: .875rem; color: var(--muted); font-weight: 400; }
+.location-region { color: var(--muted); font-size: .8rem; font-weight: 400; }
+@media (prefers-reduced-motion: reduce) { .location-trigger svg { transition: none; } }
+.address-fields textarea { min-block-size: 5rem; }
+.address-mode-toggle {
+  justify-self: start;
+  color: var(--primary);
+  padding: .55rem .8rem;
+  min-block-size: 2.75rem;
+  background: #19283a;
+  border: 1px solid #4a6c83;
+  font-size: .875rem;
+  font-weight: 600;
+}
+.address-data-status { color: var(--muted); font-size: .875rem; font-weight: 400; }
+.address-data-status:empty { display: none; }
+.address-source { color: var(--muted); font-size: .78rem; font-weight: 400; }
+.social-proof {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background: #1a2436;
+  border: 1px solid #657893;
+  border-radius: .85rem;
+  box-shadow: 0 8px 35px #0007;
+  padding: .85rem 1rem;
+  font-size: .82rem;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity .24s ease, transform .24s ease;
+  z-index: 9999;
+  max-inline-size: min(17.5rem, calc(100% - 2rem));
+}
+.social-proof.show { opacity: 1; transform: translateY(0); }
+#thankYouModal { background: #03060cbb !important; padding: 1rem; }
+#thankYouModal>div {
+  background: #182132 !important;
+  border: 1px solid #6a82a3;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 16px 55px #0008;
+  color: var(--ink);
+}
+#thankYouModal h2 { color: var(--primary) !important; margin-block-end: .75rem; }
+#thankYouModal p+p { margin-block-start: .65rem; color: var(--muted) !important; }
+@media (min-width: 48rem) {
+  .container { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.3rem; }
+  .product-card { grid-column: 1/-1; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); }
+  .product-details { padding-block: .8rem; }
+  .checkout-card { grid-column: 1/-1; }
+  .checkout-card form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .field.address, .field.landmark, .address-guide, form>button { grid-column: 1/-1; }
+  .sticky-order { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (prefers-reduced-motion: reduce) {
+  .review-wrapper, .social-proof, button, .fb-check-btn, .order-now-btn { transition: none; }
+  #thankYouModal>div { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .order-now-btn, form>button, .fb-check-btn, .slide-btn { border: 1px solid ButtonText; }
+}
+.preview-banner{background:#222b3b;color:#dce9f8;border-bottom:1px solid #53647c;text-align:center;padding:.65rem 1rem;font-size:.8rem}
+
+/* Seller-provided business registration information */
+.registration-panel {
+  margin-block-start: 1rem;
+  padding-block-start: 1.1rem;
+  border-block-start: 1px solid #48566e;
+  text-align: start;
+}
+.registration-kicker {
+  color: var(--primary);
+  font-size: .72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-block-end: .35rem;
+}
+.registration-panel h4 {
+  margin: 0 0 .5rem;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: 800;
+  line-height: 1.28;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.registration-copy {
+  color: var(--muted);
+  font-size: .875rem;
+  line-height: 1.65;
+  margin-block-end: .9rem;
+}
+.registration-documents {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+}
+.registration-document {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  padding: .45rem;
+  gap: .5rem;
+  border: 1px solid #64738c;
+  border-radius: .8rem;
+  background: #101827;
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color .16s ease, background-color .16s ease;
+}
+.registration-document:hover {
+  border-color: var(--primary);
+  background: #1b293b;
+}
+.registration-image-frame {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 4;
+  border-radius: .5rem;
+  overflow: hidden;
+  background: #080b12;
+}
+.registration-image-frame img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+.registration-document-title {
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1.35;
+  padding-inline: .16rem;
+  overflow-wrap: anywhere;
+}
+.registration-document-action {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-block-start: auto;
+  padding-inline: .16rem;
+}
+.registration-note {
+  color: var(--muted);
+  font-size: .78rem;
+  margin-block-start: .75rem;
+  line-height: 1.55;
+}
+
+
+/* Audio sample library — native playback controls */
+.audio-samples {
+  background: radial-gradient(ellipse at 100% 0%, #30244c 0%, transparent 50%), linear-gradient(145deg, #171f30, var(--surface) 70%);
+  border-color: #414e6c;
+  display: grid;
+  gap: 1rem;
+}
+.audio-samples-heading { display: grid; gap: .45rem; }
+.audio-eyebrow { color: var(--primary); font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; display: flex; align-items: center; gap: .6rem; }
+.audio-eyebrow::before { content: ""; inline-size: 1.7rem; block-size: 1.1rem; background: linear-gradient(var(--primary),var(--primary)) 0 50% / 3px 40%, linear-gradient(#a6dfef,#a6dfef) 6px 50% / 3px 75%, linear-gradient(var(--violet),var(--violet)) 12px 50% / 3px 100%, linear-gradient(var(--primary),var(--primary)) 18px 50% / 3px 60%, linear-gradient(var(--violet),var(--violet)) 24px 50% / 3px 35%; background-repeat: no-repeat; border-radius: 3px; flex: none; }
+.audio-samples h2 { font-size: clamp(1.65rem, 3.2vw, 2.35rem); }
+.audio-intro { color: var(--muted); font-size: .95rem; line-height: 1.65; max-inline-size: 47rem; }
+.audio-group { min-inline-size: 0; border: 1px solid #414e6c; border-radius: 1rem; background: #0d1420; padding: .2rem .75rem; }
+.audio-group summary { padding: .8rem .2rem; cursor: pointer; color: var(--ink); font-weight: 700; font-size: .95rem; min-block-size: 3rem; }
+.audio-group summary::marker { color: var(--primary); }
+.audio-group summary:hover { color: var(--primary); }
+.audio-group summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: .3rem; }
+.audio-group-count { color: var(--muted); font-size: .85rem; font-weight: 600; margin-inline-start: .45rem; }
+.audio-grid { margin: 0; padding: 0 0 .65rem; list-style: none; display: grid; gap: .55rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); }
+.audio-track { display: grid; min-inline-size: 0; gap: .45rem; padding: .7rem; border: 1px solid #38455d; border-radius: .85rem; background: linear-gradient(145deg, #202b3e, #151d2c 85%); }
+.audio-track[data-playing="true"] { border-color: var(--primary); box-shadow: inset 0 0 0 1px #8cf7e833; }
+.audio-track-heading { display: flex; align-items: center; gap: .6rem; min-inline-size: 0; }
+.audio-track-icon { display: grid; place-items: center; inline-size: 2.25rem; block-size: 2.25rem; border-radius: .6rem; flex: none; color: var(--primary); border: 1px solid #5a6e8e; background: #1b2941; }
+.audio-track-icon svg { inline-size: 1.2rem; block-size: 1.2rem; }
+.audio-track-name { font-size: .925rem; font-weight: 700; flex: 1; color: var(--ink); overflow-wrap: anywhere; min-inline-size: 0; }
+.audio-track-time { font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.audio-track audio { display: block; inline-size: 100%; max-inline-size: 100%; min-inline-size: 0; block-size: 3.3rem; }
+.audio-track audio[hidden] { display: none; }
+.audio-player-controls { display: grid; gap: .45rem; min-width: 0; }
+.audio-player-buttons { display: flex; gap: .4rem; }
+.audio-player-buttons button { flex: 1; min-width: 0; min-height: 44px; padding: .35rem .4rem; border: 1px solid #5a6e8e; border-radius: .55rem; background: #1b2941; color: var(--ink); font: inherit; font-size: .875rem; cursor: pointer; white-space: nowrap; }
+.audio-player-buttons button:first-child { background: var(--primary); color: var(--button-ink); font-weight: 700; }
+.audio-player-controls input[type="range"] { display: block; width: 100%; min-width: 0; margin: 0; height: 32px; min-block-size: 32px; padding: 0; border: 0; background: transparent; accent-color: var(--primary); cursor: pointer; }
+.audio-player-position { display: flex; justify-content: space-between; color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; }
+.audio-player-status { color: var(--muted); font-size: .875rem; }
+.audio-player-status:empty { display: none; }
+.audio-player-controls :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.audio-samples .order-now-btn { margin: .05rem 0 0; }
+.audio-sample-note { color: var(--muted); font-size: .82rem; line-height: 1.6; }
+
+/* Fail closed: preview activity cannot appear in the activated live checkout. */
+html[data-checkout-mode="live"] [data-preview-only] { display: none !important; }
+html:not([data-checkout-mode="live"]) [data-live-only] { display: none !important; }
+.checkout-privacy-note { color: var(--muted); font-size: .8rem; line-height: 1.5; grid-column: 1/-1; }
 </style>
 
-<script>
-!function(f,b,e,v,n,t,s){
-if(f.fbq)return;
-n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];
-t=b.createElement(e);t.async=!0;t.src=v;
-s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s);
-}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init','631653776133164');
-
-fbq('track','PageView');
-
-fbq('track','ViewContent',{
-  content_ids: ['500GB-HDD-DJ'],
-  content_type: 'product',
-  value: 1500,
-  currency: 'PHP'
-});
-
-function trackFB(event,data={}){
-  if(typeof fbq==="function"){
-    fbq('track',event,data);
-  }
-}
-</script>
+<script src="checkout-config.js"></script>
+<script src="checkout-runtime.js"></script>
 </head>
 
 <body>
 
 <header>
+<div class="brand-name">All About Sounds PH</div>
 <h1>500GB External HDD</h1>
 <p>60,000+ Songs | Plug & Play</p>
 </header>
 
 <div class="container">
 
-<div class="card">
-<img class="product-img" src="new feb-Cover.jpg" loading="lazy" decoding="async">
+<div class="card product-card">
+<video class="product-img" controls playsinline preload="none" width="540" height="540" poster="new%20feb-Cover.jpg" aria-label="All About Sounds PH 500GB external hard drive product demonstration">
+<source src="assets/product-demo.mp4" type="video/mp4">
+<p>Your browser does not support embedded video. <a href="assets/product-demo.mp4">Watch the product video</a>.</p>
+</video>
+<div class="product-details">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
-<p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
-<div class="viewer-counter">👀 <span id="viewerCount">6</span> people viewing now</div>
-<div class="stock-counter">📦 Only <span id="stockCount">27</span> left in stock</div>
-<p>🚚 FREE SHIPPING | CASH ON DELIVERY</p>
-<p><b>📍 Iloilo Based Seller</b></p>
+<p data-preview-only id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
+<div class="viewer-counter" data-preview-only>👀 <span id="viewerCount">23</span> people checking out</div>
+<div class="stock-counter low-stock" data-preview-only><span id="stockPrefix">⚠️ Only</span> <span id="stockCount">7</span> <span id="stockStatus">left — Selling Fast!</span></div>
+<a class="order-now-btn" href="#order-information">Order Now</a>
+<div class="shipping-line" role="group" aria-label="Delivery and payment benefits">
+  <div class="shipping-benefit shipping-benefit--shipping">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 5h11v12H3zM14 9h4l3 4v4h-7M18 9v4h3M1 8h4M1 11h4"/>
+      <circle cx="7" cy="18" r="2" fill="#14242d"/><circle cx="18" cy="18" r="2" fill="#14242d"/>
+    </svg>
+    <span class="shipping-benefit-text">FREE SHIPPING</span>
+  </div>
+  <div class="shipping-benefit shipping-benefit--cod">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="12" rx="2"/><path d="M3 8a4 4 0 0 0 4-4M17 4a4 4 0 0 0 4 4M3 12a4 4 0 0 1 4 4M17 16a4 4 0 0 1 4-4M5 20h14"/><circle cx="12" cy="10" r="2"/>
+    </svg>
+    <span class="shipping-benefit-text">CASH ON DELIVERY</span>
+  </div>
+</div>
+<p class="seller-line"><b>📍 Iloilo Based Seller</b></p>
+</div>
 </div>
 
-<div class="card">
+
+<section class="card audio-samples" id="audio-samples" aria-labelledby="audio-samples-title">
+  <div class="audio-samples-heading">
+    <p class="audio-eyebrow">The sound experience</p>
+    <h2 id="audio-samples-title">Listen Before You Buy</h2>
+    <p class="audio-intro">Explore 19 real music samples from All About Sounds PH. Choose a mix and press play to hear a preview of our collection.</p>
+  </div>
+  <details class="audio-group" open>
+    <summary>Event &amp; genre samples <span class="audio-group-count">(8)</span></summary>
+    <ul class="audio-grid">
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-all-events">All Events</span><span class="audio-track-time">7:45</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-all-events" src="assets/audio/all-events.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-background-music">Background Music</span><span class="audio-track-time">2:33</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-background-music" src="assets/audio/background-music.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-disco-hype">Disco &amp; Hype Music</span><span class="audio-track-time">6:18</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-disco-hype" src="assets/audio/disco-hype.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-love-songs">Love Songs</span><span class="audio-track-time">4:54</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-love-songs" src="assets/audio/love-songs.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-oldies">Oldies</span><span class="audio-track-time">3:29</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-oldies" src="assets/audio/oldies.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-soundcheck">Soundcheck</span><span class="audio-track-time">2:54</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-soundcheck" src="assets/audio/soundcheck.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-throwback-disco">Throwback Disco Hits</span><span class="audio-track-time">2:57</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-throwback-disco" src="assets/audio/throwback-disco.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-80s-disco">80s Disco</span><span class="audio-track-time">4:57</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-80s-disco" src="assets/audio/80s-disco.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+    </ul>
+  </details>
+  <details class="audio-group">
+    <summary>More DJ mix previews <span class="audio-group-count">(11)</span></summary>
+    <ul class="audio-grid">
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-01">DJ Mix Preview 1</span><span class="audio-track-time">2:30</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-01" src="assets/audio/dj-preview-01.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-02">DJ Mix Preview 2</span><span class="audio-track-time">3:23</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-02" src="assets/audio/dj-preview-02.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-03">DJ Mix Preview 3</span><span class="audio-track-time">1:53</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-03" src="assets/audio/dj-preview-03.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-04">DJ Mix Preview 4</span><span class="audio-track-time">2:15</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-04" src="assets/audio/dj-preview-04.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-05">DJ Mix Preview 5</span><span class="audio-track-time">1:19</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-05" src="assets/audio/dj-preview-05.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-06">DJ Mix Preview 6</span><span class="audio-track-time">2:26</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-06" src="assets/audio/dj-preview-06.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-07">DJ Mix Preview 7</span><span class="audio-track-time">2:26</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-07" src="assets/audio/dj-preview-07.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-08">DJ Mix Preview 8</span><span class="audio-track-time">2:15</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-08" src="assets/audio/dj-preview-08.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-09">DJ Mix Preview 9</span><span class="audio-track-time">3:07</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-09" src="assets/audio/dj-preview-09.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-10">DJ Mix Preview 10</span><span class="audio-track-time">2:07</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-10" src="assets/audio/dj-preview-10.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+      <li class="audio-track">
+        <div class="audio-track-heading"><span class="audio-track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12v2m4-6v10m5-15v20m5-15v10m4-7v4"/></svg></span><span class="audio-track-name" id="track-dj-preview-11">DJ Mix Preview 11</span><span class="audio-track-time">1:12</span></div>
+        <audio controls preload="none" loading="lazy" aria-labelledby="track-dj-preview-11" src="assets/audio/dj-preview-11.mp3" controlslist="nodownload">
+          Your browser does not support audio playback.
+        </audio>
+      </li>
+    </ul>
+  </details>
+  <p class="audio-sample-note">Drag the progress bar or use the 10-second skip buttons to jump within a sample. Listen at your own pace. Playing a new sample pauses the previous one, so you won't hear two tracks at the same time.</p>
+  <a class="order-now-btn" href="#order-information">Order Now</a>
+</section>
+
+<div class="card reviews-card">
 <h3 style="text-align:center;margin-bottom:10px;">⭐ Customer Review 💯</h3>
 <div class="review-slider">
 <div class="review-wrapper" id="reviewWrapper">
-<div class="review-slide"><img src="review1.png" loading="lazy"></div>
-<div class="review-slide"><img src="review2.png" loading="lazy"></div>
-<div class="review-slide"><img src="review3.png" loading="lazy"></div>
-<div class="review-slide"><img src="review4.png" loading="lazy"></div>
-<div class="review-slide"><img src="review5.png" loading="lazy"></div>
-<div class="review-slide"><img src="review6.png" loading="lazy"></div>
-<div class="review-slide"><img src="review7.png" loading="lazy"></div>
-<div class="review-slide"><img src="review8.png" loading="lazy"></div>
-<div class="review-slide"><img src="review9.png" loading="lazy"></div>
-<div class="review-slide"><img src="review10.png" loading="lazy"></div>
-<div class="review-slide"><img src="review11.png" loading="lazy"></div>
+<div class="review-slide"><img src="review1.png" loading="lazy" alt="Customer review screenshot 1 of 11"></div>
+<div class="review-slide"><img src="review2.png" loading="lazy" alt="Customer review screenshot 2 of 11"></div>
+<div class="review-slide"><img src="review3.png" loading="lazy" alt="Customer review screenshot 3 of 11"></div>
+<div class="review-slide"><img src="review4.png" loading="lazy" alt="Customer review screenshot 4 of 11"></div>
+<div class="review-slide"><img src="review5.png" loading="lazy" alt="Customer review screenshot 5 of 11"></div>
+<div class="review-slide"><img src="review6.png" loading="lazy" alt="Customer review screenshot 6 of 11"></div>
+<div class="review-slide"><img src="review7.png" loading="lazy" alt="Customer review screenshot 7 of 11"></div>
+<div class="review-slide"><img src="review8.png" loading="lazy" alt="Customer review screenshot 8 of 11"></div>
+<div class="review-slide"><img src="review9.png" loading="lazy" alt="Customer review screenshot 9 of 11"></div>
+<div class="review-slide"><img src="review10.png" loading="lazy" alt="Customer review screenshot 10 of 11"></div>
+<div class="review-slide"><img src="review11.png" loading="lazy" alt="Customer review screenshot 11 of 11"></div>
 </div>
-<button class="slide-btn prev-btn" onclick="moveSlide(-1)">‹</button>
-<button class="slide-btn next-btn" onclick="moveSlide(1)">›</button>
+<button class="slide-btn prev-btn" type="button" aria-label="Previous review" onclick="moveSlide(-1)">‹</button>
+<button class="slide-btn next-btn" type="button" aria-label="Next review" onclick="moveSlide(1)">›</button>
 </div>
 </div>
 
-</div>  <!-- This closes the review card -->
 
 <!-- ✅ PASTE FACEBOOK SECTION HERE -->
-<div class="card" style="text-align:center;">
+<div class="card fb-card" style="text-align:center;">
   <h3>🔒 Official Facebook Page</h3>
   <p style="font-size:14px;color:#555;margin-bottom:12px;">
     Visit our official Facebook page to see real customer reviews and updates.
@@ -167,23 +965,71 @@ function trackFB(event,data={}){
   <div style="margin-top:10px;font-size:13px;color:#777;">
     ⭐ ⭐ ⭐ ⭐ ⭐ Trusted Seller Since 2022
   </div>
+  <section class="registration-panel" aria-labelledby="registration-title">
+    <p class="registration-kicker">Business registration</p>
+    <h4 id="registration-title">DTI &amp; BIR Registered</h4>
+    <p class="registration-copy">Shop with added peace of mind. All About Sounds PH is registered with the Department of Trade and Industry (DTI) and the Bureau of Internal Revenue (BIR). We share our registration information so you can review it before placing your order.</p>
+    <div class="registration-documents">
+      <a class="registration-document" href="assets/dti-registration.webp" target="_blank" rel="noopener noreferrer" aria-label="View DTI business name registration certificate at full size (opens in a new tab)">
+        <span class="registration-image-frame"><img src="assets/dti-registration.webp" width="1080" height="1388" loading="lazy" decoding="async" alt="DTI Certificate of Business Name Registration for Allabout Sounds.PH Online Shop"></span>
+        <span class="registration-document-title">DTI Certificate</span>
+        <span class="registration-document-action">View full image</span>
+      </a>
+      <a class="registration-document" href="assets/bir-registration.webp" target="_blank" rel="noopener noreferrer" aria-label="View BIR registration seal graphic at full size (opens in a new tab)">
+        <span class="registration-image-frame"><img src="assets/bir-registration.webp" width="1024" height="1536" loading="lazy" decoding="async" alt="All About Sounds PH BIR registration seal graphic"></span>
+        <span class="registration-document-title">BIR Registration</span>
+        <span class="registration-document-action">View full image</span>
+      </a>
+    </div>
+    <p class="registration-note">Have a question about our shop? Message our official Facebook page before ordering. Thank you for supporting our business.</p>
+  </section>
+
 </div>
 <!-- ✅ END FACEBOOK SECTION -->
 
-<div class="card">
+<div class="card checkout-card" id="order-information" tabindex="-1">
 <h3>Checkout</h3>
-<form id="orderForm">
-<input type="text" name="name" placeholder="Full Name" required>
-<input type="tel" name="phone" placeholder="09XXXXXXXXX or +639XXXXXXXXX" required>
-<textarea name="address" placeholder="Complete Address" required></textarea>
-<div class="address-guide">Include House No., Street, Barangay, City & Province</div>
-<input type="text" name="landmark" placeholder="Nearest Landmark" required>
+<form id="orderForm" method="post">
+<label class="field">Full Name<input type="text" name="name" placeholder="Full Name" required></label>
+<label class="field">Mobile Number<input type="tel" name="phone" placeholder="09XXXXXXXXX or +639XXXXXXXXX" required></label>
+<fieldset class="field address address-fields" id="deliveryAddress">
+  <legend>Delivery Address</legend>
+  <div class="address-dropdown-grid" id="addressDropdowns" hidden>
+    <div class="location-picker field" id="locationPicker">
+      <span id="locationLabel">Province / City / Barangay</span>
+      <button type="button" class="location-trigger" id="locationTrigger" aria-labelledby="locationLabel locationSummary" aria-expanded="false" aria-controls="locationPanel" data-empty="true" disabled>
+        <span id="locationSummary">Select delivery location</span>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="location-panel" id="locationPanel" hidden>
+        <div class="location-steps" role="group" aria-label="Delivery location steps">
+          <button class="location-step" id="locationProvinceStep" type="button" aria-pressed="true">1. Province</button>
+          <button class="location-step" id="locationCityStep" type="button" aria-pressed="false" disabled>2. City</button>
+          <button class="location-step" id="locationBarangayStep" type="button" aria-pressed="false" disabled>3. Barangay</button>
+        </div>
+        <div class="location-search-wrap"><input type="search" id="locationSearch" autocomplete="off" placeholder="Search province…" aria-label="Search province"></div>
+        <div class="location-list" id="locationList" role="group" aria-label="Available locations"></div>
+      </div>
+      <p class="location-region" id="locationRegion" hidden></p>
+    </div>
+    <label class="field address-street">House No., Street, Purok / Sitio <textarea id="addressStreet" name="streetDetails" placeholder="House no., street, subdivision or purok" autocomplete="address-line1" rows="2" required disabled></textarea></label>
+  </div>
+  <div id="manualAddressPanel">
+    <label class="field">Complete Address <textarea id="manualAddress" name="address" placeholder="Complete address including barangay, city and province" autocomplete="street-address" required></textarea></label>
+  </div>
+  <p class="address-data-status" id="addressDataStatus" role="status">Loading address lists…</p>
+  <button type="button" class="address-mode-toggle" id="addressModeToggle" hidden>Enter address manually</button>
+  <p class="address-source">Location data: Philippine Statistics Authority (PSGC), September 2026.</p>
+</fieldset>
+<div class="address-guide">Select your location, then enter your house number, street, subdivision or purok. Include any details your delivery rider needs.</div>
+<label class="field landmark">Nearest Landmark<input type="text" name="landmark" placeholder="Nearest Landmark" required></label>
 <input type="text" name="website" style="display:none">
-<button type="submit">PLACE ORDER</button>
+<p class="checkout-privacy-note" data-live-only>After your order is saved, we open our Facebook Messenger conversation with your order details for confirmation.</p>
+<button type="submit" disabled>PLACE ORDER</button>
 </form>
 </div>
 
-<audio id="notifSound" preload="auto">
+<audio id="notifSound" data-preview-only preload="none">
 <source src="https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3">
 </audio>
 
@@ -191,16 +1037,19 @@ function trackFB(event,data={}){
 
 <footer>© 2026 All About Sounds PH</footer>
 
-<div class="social-proof" id="socialProof"></div>
+<div class="social-proof" data-preview-only id="socialProof" role="status" aria-live="polite"></div>
 
 <div id="thankYouModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100000;justify-content:center;align-items:center;">
 <div style="background:#fff;padding:30px;border-radius:18px;text-align:center;max-width:380px;width:90%;animation:popIn 0.3s ease;">
 <h2 style="color:#ee4d2d;">🎉 Thank You!</h2>
-<p>Your order has been received successfully.</p>
-<p style="font-size:13px;color:#555;">Redirecting to Messenger to confirm...</p>
+<p data-preview-only>Your test order was accepted by the simulated sheet.</p>
+<p data-live-only style="color:#333;">Your order was successfully saved.</p>
+<p data-preview-only style="font-size:13px;color:#555;">Opening the simulated Messenger confirmation...</p>
+<p data-live-only style="font-size:13px;color:#555;">Opening Messenger for order confirmation...</p>
 </div>
 </div>
 
+<script src="address-dropdown.js"></script>
 <script>
 /* Slider */
 let index=0;
@@ -235,37 +1084,140 @@ function updateCountdown(){
         `🔥 Promo ends in ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+if (!window.checkoutRuntime.isLive) {
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+}
 
 /* Viewers */
-let viewers=6;
+if (!window.checkoutRuntime.isLive) {
+let viewers=23;
 setInterval(()=>{
 if(Math.random()<0.7)viewers++;else viewers--;
-viewers=Math.max(3,Math.min(viewers,15));
+viewers=Math.max(3,Math.min(viewers,23));
 document.getElementById("viewerCount").innerText=viewers;
 },5000);
-
-/* Stock System - Decrease Every 16 Seconds */ 
-  let stock = parseInt(localStorage.getItem("dynamicStock")) || 20; const stockContainer = document.querySelector(".stock-counter"); function renderStock(){ if(stock <= 7){ stockContainer.classList.add("low-stock"); stockContainer.innerHTML = `⚠️ Only <span id="stockCount">${stock}</span> left — Selling Fast!`; } else { stockContainer.classList.remove("low-stock"); stockContainer.innerHTML = `📦 Only <span id="stockCount">${stock}</span> left in stock`; } } function updateStock(){ if(stock > 3){ stock--; localStorage.setItem("dynamicStock", stock); renderStock(); } } renderStock(); setInterval(updateStock, 16000); // 16 seconds
-
-/* Social Proof */
-const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
-const cities=["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
-const times=["just now","1 minute ago","3 minutes ago"];
-
-function showSocial(){
-const popup=document.getElementById("socialProof");
-const sound=document.getElementById("notifSound");
-popup.innerHTML=`<strong>${names[Math.floor(Math.random()*names.length)]}</strong>
-from ${cities[Math.floor(Math.random()*cities.length)]}<br>
-purchased 500GB External HDD<br>
-<small>${times[Math.floor(Math.random()*times.length)]}</small>`;
-popup.classList.add("show");
-sound.play().catch(()=>{});
-setTimeout(()=>popup.classList.remove("show"),4000);
 }
-setTimeout(()=>setInterval(showSocial,15000),5000);
+
+/* Private preview only — one purchase event drives both the stock and the notification. */
+(() => {
+  if (window.checkoutRuntime?.isLive) return;
+  const START_STOCK = 7;
+  const MIN_STOCK = 3;
+  const PURCHASE_INTERVAL = 15000;
+  const POPUP_DURATION = 4000;
+  const STORAGE_KEY = "demoPurchaseStateV2";
+  const maxPurchases = START_STOCK - MIN_STOCK;
+  const names = ["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
+  const cities = ["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
+  const stockContainer = document.querySelector(".stock-counter");
+  const stockPrefix = document.getElementById("stockPrefix");
+  const stockCount = document.getElementById("stockCount");
+  const stockStatus = document.getElementById("stockStatus");
+  const popup = document.getElementById("socialProof");
+  const sound = document.getElementById("notifSound");
+  let timer;
+  let popupTimer;
+  let inFlight = false;
+
+  function readState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (saved && Number.isInteger(saved.sequence) && saved.sequence >= 0 &&
+          saved.sequence <= maxPurchases && Number.isFinite(saved.nextAt) &&
+          Number.isFinite(saved.lastPurchaseAt)) return saved;
+    } catch {}
+    return null;
+  }
+  function saveState(value) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(value)); } catch {}
+  }
+  let state = readState();
+  if (!state) {
+    state = {sequence: 0, lastPurchaseAt: 0, nextAt: Date.now() + PURCHASE_INTERVAL};
+    saveState(state);
+  }
+
+  function renderStock() {
+    const stock = START_STOCK - state.sequence;
+    stockCount.textContent = String(stock);
+    const low = stock <= 7;
+    stockContainer.classList.toggle("low-stock", low);
+    stockPrefix.textContent = low ? "⚠️ Only" : "📦 Only";
+    stockStatus.textContent = low ? "left — Selling Fast!" : "left in stock";
+  }
+  function showPurchase(event) {
+    // These are fictional example buyers, clearly marked as simulation data.
+    const index = event.sequence - 1;
+    const name = names[index % names.length];
+    const city = cities[(index * 5) % cities.length];
+    popup.innerHTML = `<strong>Simulated purchase</strong><br>
+      Demo buyer: ${name} · ${city}<br>
+      500GB External HDD · 1 unit<br>
+      <small>Stock: ${START_STOCK - event.sequence} remaining · Just now</small>`;
+    popup.classList.add("show");
+    try { sound.play().catch(() => {}); } catch {}
+    clearTimeout(popupTimer);
+    popupTimer = setTimeout(() => popup.classList.remove("show"), POPUP_DURATION);
+  }
+  function applyState(next, notify) {
+    if (next.sequence < state.sequence) return;
+    const newPurchase = next.sequence > state.sequence;
+    state = next;
+    renderStock();
+    if (newPurchase && notify && document.visibilityState !== "hidden" &&
+        Date.now() - next.lastPurchaseAt < POPUP_DURATION) showPurchase(next);
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (state.sequence >= maxPurchases || document.visibilityState === "hidden") return;
+    timer = setTimeout(tick, Math.max(0, state.nextAt - Date.now()));
+  }
+  function commitPurchase() {
+    // Re-read immediately before updating to avoid two tabs consuming separate units.
+    const saved = readState();
+    if (saved && saved.sequence >= state.sequence) applyState(saved, true);
+    const now = Date.now();
+    if (document.visibilityState === "hidden" || state.sequence >= maxPurchases || now < state.nextAt) return;
+    const next = {sequence: state.sequence + 1, lastPurchaseAt: now, nextAt: now + PURCHASE_INTERVAL};
+    saveState(next);
+    applyState(next, true);
+  }
+  async function tick() {
+    if (inFlight) return;
+    inFlight = true;
+    try {
+      // Where available, serialize simultaneous timers across same-origin tabs.
+      if (navigator.locks && typeof navigator.locks.request === "function") {
+        try { await navigator.locks.request(STORAGE_KEY, commitPurchase); }
+        catch { commitPurchase(); }
+      } else {
+        commitPurchase();
+      }
+    } finally {
+      inFlight = false;
+      schedule();
+    }
+  }
+  window.addEventListener("storage", event => {
+    if (event.key !== STORAGE_KEY) return;
+    const saved = readState();
+    if (saved) applyState(saved, true);
+    schedule();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      clearTimeout(timer);
+      popup.classList.remove("show");
+      return;
+    }
+    const saved = readState();
+    if (saved) applyState(saved, true);
+    schedule();
+  });
+  renderStock();
+  schedule();
+})();
 
 /* Name Formatter */
 function formatFullName(name){
@@ -283,10 +1235,10 @@ document.querySelector("textarea[name='address']")
 .addEventListener("blur",function(){this.value=formatAddress(this.value);});
 
 /* Form */
-const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
+const checkoutRuntime = window.checkoutRuntime;
 
 document.getElementById("orderForm")
-.addEventListener("focusin",()=>trackFB('InitiateCheckout'),{once:true});
+.addEventListener("focusin",()=>trackFB('InitiateCheckout',checkoutRuntime.product),{once:true});
 
 document.getElementById("orderForm").addEventListener("submit",async function(e){
 e.preventDefault();
@@ -294,12 +1246,18 @@ if(this.website.value!=="")return;
 
 let name=formatFullName(this.name.value);
 let phone=this.phone.value.trim();
-let address=formatAddress(this.address.value);
+let address=window.checkoutAddress ? window.checkoutAddress.getAddress() : formatAddress(this.address.value);
+if(!address)return;
 const landmark=this.landmark.value.trim();
 
 if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
 alert("Enter valid PH number");return;}
 if(/^09/.test(phone)) phone="+63"+phone.substring(1);
+
+if (!name || !landmark) {
+  alert("Please enter your full name and nearest landmark.");
+  return;
+}
 
 const btn=this.querySelector('button[type="submit"]');
 if (btn.disabled) return;
@@ -307,26 +1265,9 @@ btn.disabled=true;
 btn.classList.add("loading");
 btn.innerHTML="Processing...";
 
-const formData=new FormData();
-formData.append("name",name);
-formData.append("phone",phone);
-formData.append("address",address);
-formData.append("landmark",landmark);
-
 try{
-const response = await fetch(SHEET_URL, {
-  method: "POST",
-  body: new URLSearchParams(formData)
-});
-if (!response.ok) throw new Error("Order submission failed");
-const result = await response.json();
-if (!result || result.success !== true) throw new Error("Order not saved");
-trackFB('Purchase',{
-  content_ids: ['500GB-HDD-DJ'],
-  content_type: 'product',
-  value: 1500,
-  currency: 'PHP'
-});
+await checkoutRuntime.submitOrder({name,phone,address,landmark});
+trackFB('Purchase',checkoutRuntime.product);
 
 document.getElementById("thankYouModal").style.display="flex";
 
@@ -341,20 +1282,181 @@ Product: 500GB HDD
 Price: ₱1,500 COD`;
 
 setTimeout(()=>{
-window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(msg)}`;
+checkoutRuntime.handoff(msg);
 },2000);
 
 }catch(error){
-alert("Something went wrong. Please try again.");
+alert("We could not confirm that your order was saved. Please contact us before attempting another order.");
 btn.disabled=false;
 btn.classList.remove("loading");
 btn.innerHTML="PLACE ORDER";
 }
 });
+// Only enable the checkout once its runtime and submit handler are available.
+document.querySelector('#orderForm button[type="submit"]').disabled = false;
+</script>
+
+<script id="audio-sample-playback">
+(() => {
+  const players = Array.from(document.querySelectorAll("video.product-img, #audio-samples audio"));
+  for (const player of players) {
+    const card = player.closest(".audio-track");
+    player.addEventListener("play", () => {
+      for (const other of players) {
+        if (other !== player && !other.paused) other.pause();
+      }
+      if (card) card.dataset.playing = "true";
+    });
+    function clearPlaying() { if (card) delete card.dataset.playing; }
+    player.addEventListener("pause", clearPlaying);
+    player.addEventListener("ended", clearPlaying);
+    player.addEventListener("error", clearPlaying);
+  }
+  // Use explicit seek controls, with an on-demand full-file fallback when
+  // the hosting/browser combination cannot seek a remote MP3 by byte range.
+  const formatTime = seconds => {
+    const whole = Math.max(0, Math.floor(seconds || 0));
+    return Math.floor(whole / 60) + ":" + String(whole % 60).padStart(2, "0");
+  };
+  const samples = players.filter(player => player.tagName === "AUDIO");
+  let active = null;
+  const seekJobs = new Map();
+  function select(player) {
+    if (active === player) return;
+    active = player;
+    for (const other of players) if (other !== player && !other.paused) other.pause();
+    for (const [other, job] of seekJobs) {
+      if (other !== player) job.abort();
+    }
+  }
+  for (const player of samples) {
+    const card = player.closest(".audio-track");
+    const name = card.querySelector(".audio-track-name").textContent;
+    const [minutes, seconds] = card.querySelector(".audio-track-time").textContent.split(":").map(Number);
+    const advertisedDuration = minutes * 60 + seconds;
+    const original = player.src;
+    let blobURL = null;
+    let pending = null;
+    let dragging = false;
+    let busy = false;
+    const duration = () => Number.isFinite(player.duration) && player.duration > 0 ? player.duration : advertisedDuration;
+    const ui = document.createElement("div");
+    ui.className = "audio-player-controls";
+    ui.innerHTML = '<div class="audio-player-buttons"><button type="button">Play</button><button type="button">−10s</button><button type="button">+10s</button></div><input type="range" min="0" step="0.1" value="0"><div class="audio-player-position"><span>0:00</span><span></span></div><p class="audio-player-status" role="status"></p>';
+    const [play, back, forward] = ui.querySelectorAll("button");
+    const slider = ui.querySelector("input");
+    const [elapsed, total] = ui.querySelectorAll(".audio-player-position span");
+    const status = ui.querySelector(".audio-player-status");
+    back.setAttribute("aria-label", "Skip back 10 seconds: " + name);
+    forward.setAttribute("aria-label", "Skip forward 10 seconds: " + name);
+    slider.setAttribute("aria-label", "Seek within " + name);
+    player.after(ui);
+    player.removeAttribute("controls");
+    player.removeAttribute("loading");
+    player.hidden = true;
+    function sync() {
+      slider.max = duration();
+      if (!dragging) slider.value = pending ?? player.currentTime ?? 0;
+      elapsed.textContent = formatTime(Number(slider.value));
+      total.textContent = formatTime(duration());
+      slider.setAttribute("aria-valuetext", elapsed.textContent + " of " + total.textContent);
+      play.textContent = player.paused ? "Play" : "Pause";
+      play.setAttribute("aria-label", (player.paused ? "Play " : "Pause ") + name);
+    }
+    function seekableAt(target) {
+      for (let i = 0; i < player.seekable.length; i++) {
+        if (target >= player.seekable.start(i) && target <= player.seekable.end(i)) return true;
+      }
+      return false;
+    }
+    const playAudio = () => player.play().catch(() => { status.textContent = "Tap Play to resume."; });
+    function waitForMetadata(signal) {
+      if (player.readyState >= 1) return Promise.resolve();
+      return new Promise((resolve, reject) => {
+        const cleanup = () => {
+          player.removeEventListener("loadedmetadata", ready);
+          player.removeEventListener("error", failed);
+          signal.removeEventListener("abort", failed);
+        };
+        const ready = () => { cleanup(); resolve(); };
+        const failed = () => { cleanup(); reject(new Error("Audio could not load")); };
+        player.addEventListener("loadedmetadata", ready, {once: true});
+        player.addEventListener("error", failed, {once: true});
+        signal.addEventListener("abort", failed, {once: true});
+        if (signal.aborted) failed();
+      });
+    }
+    async function seek(target) {
+      select(player);
+      pending = Math.max(0, Math.min(duration(), target));
+      sync();
+      if (busy) return;
+      if (seekableAt(pending) || (blobURL && player.readyState >= 1)) {
+        player.currentTime = pending;
+        pending = null;
+        sync();
+        return;
+      }
+      busy = true;
+      const job = new AbortController();
+      seekJobs.set(player, job);
+      status.textContent = "Preparing audio for skipping…";
+      const shouldResume = !player.paused;
+      try {
+        if (!blobURL) {
+          const response = await fetch(original, {signal: job.signal});
+          if (!response.ok) throw new Error("Audio request failed");
+          const file = await response.blob();
+          if (!file.size || file.type.includes("text/html")) throw new Error("Invalid audio");
+          if (job.signal.aborted) return;
+          blobURL = URL.createObjectURL(file.slice(0, file.size, "audio/mpeg"));
+          player.src = blobURL;
+          player.load();
+        }
+        await waitForMetadata(job.signal);
+        if (job.signal.aborted || active !== player) return;
+        player.currentTime = Math.max(0, Math.min(duration(), pending ?? 0));
+        status.textContent = "";
+        if (shouldResume) await playAudio();
+      } catch (error) {
+        if (!job.signal.aborted) status.textContent = "Couldn't skip yet. Try again after the audio loads.";
+        else status.textContent = "";
+      } finally {
+        busy = false;
+        pending = null;
+        seekJobs.delete(player);
+        sync();
+      }
+    }
+    play.addEventListener("click", () => {
+      select(player);
+      if (busy) return;
+      status.textContent = "";
+      if (player.paused) playAudio();
+      else player.pause();
+    });
+    back.addEventListener("click", () => seek((pending ?? player.currentTime) - 10));
+    forward.addEventListener("click", () => seek((pending ?? player.currentTime) + 10));
+    slider.addEventListener("input", () => {
+      dragging = true;
+      elapsed.textContent = formatTime(Number(slider.value));
+      slider.setAttribute("aria-valuetext", elapsed.textContent + " of " + total.textContent);
+    });
+    slider.addEventListener("change", () => {
+      dragging = false;
+      seek(Number(slider.value));
+    });
+    player.addEventListener("play", () => select(player));
+    for (const event of ["loadedmetadata", "durationchange", "timeupdate", "play", "pause", "ended", "seeked"]) player.addEventListener(event, sync);
+    player.addEventListener("error", () => { if (!busy) status.textContent = "Audio couldn't load. Tap Play to retry."; });
+    sync();
+  }
+})();
 </script>
 
 </body>
 </html>
+
 
 
 
