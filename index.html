@@ -455,6 +455,11 @@ footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); f
 .order-attempt a { color: var(--primary); }
 .order-attempt button, #manualMessenger { display: block; min-height: 44px; border-radius: .7rem; font-weight: 700; cursor: pointer; padding: .65rem 1rem; margin-top: .7rem; border: 1px solid #7c8da9; background: #1d3145; color: var(--primary); }
 #manualMessenger { width: 100%; background: var(--button-bg); color: var(--button-ink); border: 0; }
+#thankYouModal>div { max-height: calc(100dvh - 2rem); overflow-y: auto; }
+#confirmationDetails { display: block; width: 100%; min-height: 9rem; resize: vertical; margin-block: .65rem; padding: .65rem; border-radius: .65rem; border: 1px solid #64748b; background: #0f172a; color: var(--ink); font: inherit; font-size: .78rem; line-height: 1.5; text-align: left; }
+#confirmationCopyStatus { min-height: 2rem; color: var(--primary); font-size: .8rem; line-height: 1.5; }
+.confirmation-actions { display: flex; gap: .65rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: .55rem; }
+.confirmation-actions button { min-height: 44px; padding: .5rem .7rem; border-radius: .6rem; border: 1px solid #64748b; background: transparent; color: var(--ink); font-size: .78rem; font-weight: 600; cursor: pointer; }
 .phone-help { font-size: .76rem; font-weight: 400; color: var(--muted); }
 .reviews-card h3 { color: var(--ink); }
 .review-slider {
@@ -1048,7 +1053,7 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <div class="address-guide">Select your location, then enter your house number, street, subdivision or purok. Include any details your delivery rider needs.</div>
 <label class="field landmark">Nearest Landmark<input type="text" name="landmark" placeholder="Nearest Landmark" required></label>
 <input type="text" name="website" style="display:none">
-<p class="checkout-privacy-note" data-live-only>After your order is saved, we open our Facebook Messenger conversation with your order details for confirmation.</p>
+<p class="checkout-privacy-note" data-live-only>After your order is saved, we prepare your confirmation message and try to copy it for you to paste in Messenger. If Messenger does not prefill it, use Paste and Send.</p>
 <details class="checkout-disclosure">
   <summary>How we use your order details</summary>
   <p data-live-only>We use your name, phone number, delivery address and landmark to record your order in Google Sheets, arrange delivery and confirm it via Messenger. Meta Pixel measures browsing and checkout activity; Meta settings may also enable matching of customer information. <a href="https://www.facebook.com/allaboutsoundsphmain" target="_blank" rel="noopener noreferrer">Contact us</a> with privacy or order questions.</p>
@@ -1082,10 +1087,16 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <h2 id="thankYouTitle" style="color:#ee4d2d;">🎉 Thank You!</h2>
 <p data-preview-only>Your test order was accepted by the simulated sheet.</p>
 <p data-live-only style="color:#333;">Your order was successfully saved.</p>
-<p data-preview-only style="font-size:13px;color:#555;">Opening the simulated Messenger confirmation...</p>
-<p data-live-only style="font-size:13px;color:#555;">Opening Messenger for order confirmation...</p>
-<p style="font-size:13px;">If it does not open automatically, tap below. Do not submit your order again.</p>
-<button type="button" id="manualMessenger">Open Messenger to Confirm</button>
+<p style="font-size:13px;">Confirm via Messenger. If the message does not appear automatically, press and hold the chat box, choose Paste, then Send.</p>
+<label for="confirmationDetails" class="phone-help">Your ready-to-send order message</label>
+<textarea id="confirmationDetails" readonly rows="7" spellcheck="false" aria-describedby="confirmationCopyStatus"></textarea>
+<p id="confirmationCopyStatus" role="status" aria-live="polite"></p>
+<button type="button" id="manualMessenger">Copy Details &amp; Open Messenger</button>
+<div class="confirmation-actions">
+  <button type="button" id="openMessengerOnly">Open Messenger</button>
+  <button type="button" id="closeConfirmation">Close</button>
+</div>
+<p style="font-size:12px;">Your order is already saved. Do not place it again.</p>
 </div>
 </div>
 
