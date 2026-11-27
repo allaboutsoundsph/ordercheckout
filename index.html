@@ -9,9 +9,10 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
-<title>500GB External HDD – Official Store</title>
+<title>All About Sounds PH — Visual Redesign Preview</title>
+<meta name="robots" content="noindex, nofollow">
 
-<link rel="preconnect" href="https://connect.facebook.net">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -218,7 +219,37 @@ h3 {
   line-height: 1.5;
   color: var(--muted);
 }
-.stock-counter { color: #f3c882; font-weight: 700; }
+.stock-counter {
+  color: #f3c882;
+  font-weight: 700;
+  width: fit-content;
+  max-width: 100%;
+  padding: .5rem .7rem;
+  border: 1px solid transparent;
+  border-radius: .7rem;
+}
+.stock-counter #stockCount { font-variant-numeric: tabular-nums; }
+.stock-counter.low-stock {
+  color: #ffe7ae;
+  background: linear-gradient(115deg, #462518, #291a21 75%);
+  border-color: #ff9559;
+  font-weight: 800;
+  font-size: clamp(.95rem, 1.8vw, 1.07rem);
+  text-shadow: 0 0 9px #ff9a4266;
+  box-shadow: 0 0 16px #ff752f66, inset 0 0 10px #ff8a3c26;
+  animation: stock-urgency-glow 2s ease-in-out infinite;
+}
+.stock-counter.low-stock #stockCount { color: #fff3c2; }
+@keyframes stock-urgency-glow {
+  0%, 100% { border-color: #ff9559; box-shadow: 0 0 10px #ff752f44, inset 0 0 6px #ff8a3c19; }
+  50% { border-color: #ffd18a; box-shadow: 0 0 24px #ff752f88, inset 0 0 14px #ff8a3c40; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stock-counter.low-stock { animation: none; }
+}
+@media (forced-colors: active) {
+  .stock-counter.low-stock { color: CanvasText; border: 2px solid CanvasText; animation: none; }
+}
 .order-now-btn, form>button {
   display: flex;
   align-items: center;
@@ -246,13 +277,101 @@ h3 {
   box-shadow: 0 7px 25px #68e5dc33;
 }
 .shipping-line {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
   border-block-start: 1px solid var(--line);
   padding-block-start: 1rem;
   margin-block-start: .2rem;
-  color: #a4f0d5;
-  font-size: .925rem;
-  font-weight: 700;
+}
+.shipping-benefit {
+  --benefit-accent: #8cf7e8;
+  --benefit-glow: #8cf7e844;
+  --benefit-delay: 0s;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-block-size: 3.5rem;
+  padding: .65rem .55rem;
+  border: 1px solid #426a69;
+  border-radius: .8rem;
+  background: linear-gradient(145deg, #1b363a, #14242d 65%);
+  color: var(--benefit-accent);
+  font-size: clamp(.81rem, 1.55vw, .9rem);
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: .015em;
+  text-align: start;
+}
+.shipping-benefit--cod {
+  --benefit-accent: #c4b7ff;
+  --benefit-glow: #c4b7ff44;
+  --benefit-delay: -1.8s;
+  border-color: #665b93;
+  background: linear-gradient(145deg, #312a4b, #1e2038 65%);
+}
+.shipping-benefit::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, var(--benefit-glow) 48%, transparent 78%);
+  opacity: 0;
+  transform: translateX(-110%);
+  pointer-events: none;
+}
+.shipping-benefit svg {
+  display: block;
+  flex: 0 0 1.65rem;
+  inline-size: 1.65rem;
+  block-size: 1.65rem;
+  overflow: visible;
+}
+.shipping-benefit-text { min-inline-size: 0; overflow-wrap: normal; }
+/* Runs on page load, independently of pointer, hover and focus. */
+.shipping-benefit {
+  animation: benefit-highlight 3.6s ease-in-out var(--benefit-delay) infinite;
+}
+.shipping-benefit::before {
+  animation: benefit-sweep 3.6s linear var(--benefit-delay) infinite;
+}
+.shipping-benefit--shipping svg {
+  animation: delivery-glide 1.8s ease-in-out infinite;
+}
+.shipping-benefit--cod svg {
+  animation: cash-handoff 1.8s ease-in-out -.9s infinite;
+}
+@keyframes benefit-highlight {
+  0%, 100% { border-color: var(--benefit-accent); box-shadow: 0 0 12px var(--benefit-glow), inset 0 0 6px var(--benefit-glow); transform: translateY(0); }
+  50% { border-color: var(--benefit-accent); box-shadow: 0 0 20px var(--benefit-glow), inset 0 0 16px var(--benefit-glow); transform: translateY(-3px); }
+}
+@keyframes benefit-sweep {
+  0% { transform: translateX(-110%); opacity: .8; }
+  85% { transform: translateX(110%); opacity: 1; }
+  99%, 100% { transform: translateX(110%); opacity: 0; }
+}
+@keyframes delivery-glide {
+  0%, 100% { transform: translateX(-3px) rotate(-3deg); }
+  50% { transform: translateX(4px) rotate(3deg); }
+}
+@keyframes cash-handoff {
+  0%, 100% { transform: translateY(1px) rotate(-5deg); }
+  50% { transform: translateY(-4px) rotate(5deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shipping-benefit, .shipping-benefit::before, .shipping-benefit svg { animation: none; }
+}
+@media (max-width: 24rem) {
+  .shipping-benefit { flex-direction: column; gap: .35rem; text-align: center; padding: .55rem .35rem; }
+  .shipping-benefit svg { flex-basis: auto; }
+}
+@media (forced-colors: active) {
+  .shipping-benefit { color: CanvasText; border: 1px solid CanvasText; animation: none; }
+  .shipping-benefit::before, .shipping-benefit svg { animation: none; }
 }
 .seller-line { color: var(--muted); font-size: .875rem; }
 form { display: grid; gap: 1rem; margin-block-start: .8rem; }
@@ -392,6 +511,60 @@ footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); f
   font-size: .875rem;
   line-height: 1.5;
 }
+.address-fields { margin: 0; padding: 0; border: 0; min-inline-size: 0; gap: .7rem; }
+.address-fields legend { padding: 0; margin-block-end: .55rem; font-size: 1rem; font-weight: 800; color: var(--ink); }
+.address-dropdown-grid { display: grid; gap: .8rem; min-inline-size: 0; }
+.address-dropdown-grid .field { min-inline-size: 0; }
+.address-fields [hidden] { display: none !important; }
+.location-picker { display: grid; gap: .45rem; min-inline-size: 0; }
+.location-trigger {
+  display: flex; align-items: center; justify-content: space-between; gap: .65rem;
+  inline-size: 100%; min-block-size: 3.35rem; padding: .8rem .9rem;
+  border: 1px solid var(--input-line); border-radius: .75rem;
+  background: #0b101b; color: var(--ink); font-size: .95rem; font-weight: 500; text-align: start;
+}
+.location-trigger[aria-expanded="true"] { border-color: var(--primary); }
+.location-trigger svg { flex: none; transition: transform .2s ease; }
+.location-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+.location-trigger[data-empty="true"] { color: var(--muted); }
+.location-panel { border: 1px solid #52627d; border-radius: .85rem; background: #141c2b; overflow: hidden; box-shadow: 0 8px 24px #0003; }
+.location-steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .25rem; padding: .45rem; background: #0f1521; }
+.location-step {
+  min-inline-size: 0; min-block-size: 44px; border: 1px solid transparent;
+  padding: .45rem .18rem; background: transparent; color: var(--muted);
+  font: inherit; font-size: .82rem; font-weight: 700; border-radius: .55rem;
+}
+.location-step[aria-pressed="true"] { background: #1e3743; border-color: #598e95; color: var(--primary); }
+.location-step:disabled { opacity: .45; }
+.location-search-wrap { padding: .65rem .65rem .4rem; }
+.location-search-wrap input { min-block-size: 2.85rem; font-size: 1rem; padding: .65rem .8rem; }
+.location-list { max-block-size: min(19rem, 40vh); overflow-y: auto; overscroll-behavior: contain; padding: .15rem .45rem .45rem; scrollbar-color: #63748d #141c2b; }
+.location-option {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem .65rem;
+  inline-size: 100%; min-block-size: 44px; border: 1px solid transparent; border-radius: .55rem;
+  padding: .6rem .7rem; background: transparent; color: var(--ink); font: inherit; font-size: .92rem;
+  font-weight: 500; text-align: start;
+}
+.location-option:hover, .location-option:focus-visible { background: #263449; }
+.location-option[aria-current="true"] { color: var(--primary); border-color: #477c87; background: #1c3440; }
+.location-option small { font-size: .72rem; color: var(--muted); }
+.location-message { padding: .9rem .75rem; font-size: .875rem; color: var(--muted); font-weight: 400; }
+.location-region { color: var(--muted); font-size: .8rem; font-weight: 400; }
+@media (prefers-reduced-motion: reduce) { .location-trigger svg { transition: none; } }
+.address-fields textarea { min-block-size: 5rem; }
+.address-mode-toggle {
+  justify-self: start;
+  color: var(--primary);
+  padding: .55rem .8rem;
+  min-block-size: 2.75rem;
+  background: #19283a;
+  border: 1px solid #4a6c83;
+  font-size: .875rem;
+  font-weight: 600;
+}
+.address-data-status { color: var(--muted); font-size: .875rem; font-weight: 400; }
+.address-data-status:empty { display: none; }
+.address-source { color: var(--muted); font-size: .78rem; font-weight: 400; }
 .social-proof {
   position: fixed;
   bottom: 1rem;
@@ -438,6 +611,7 @@ footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); f
 @media (forced-colors: active) {
   .order-now-btn, form>button, .fb-check-btn, .slide-btn { border: 1px solid ButtonText; }
 }
+.preview-banner{background:#222b3b;color:#dce9f8;border-bottom:1px solid #53647c;text-align:center;padding:.65rem 1rem;font-size:.8rem}
 
 /* Seller-provided business registration information */
 .registration-panel {
@@ -553,41 +727,27 @@ footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); f
 .audio-track-name { font-size: .925rem; font-weight: 700; flex: 1; color: var(--ink); overflow-wrap: anywhere; min-inline-size: 0; }
 .audio-track-time { font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .audio-track audio { display: block; inline-size: 100%; max-inline-size: 100%; min-inline-size: 0; block-size: 3.3rem; }
+.audio-track audio[hidden] { display: none; }
+.audio-player-controls { display: grid; gap: .45rem; min-width: 0; }
+.audio-player-buttons { display: flex; gap: .4rem; }
+.audio-player-buttons button { flex: 1; min-width: 0; min-height: 44px; padding: .35rem .4rem; border: 1px solid #5a6e8e; border-radius: .55rem; background: #1b2941; color: var(--ink); font: inherit; font-size: .875rem; cursor: pointer; white-space: nowrap; }
+.audio-player-buttons button:first-child { background: var(--primary); color: var(--button-ink); font-weight: 700; }
+.audio-player-controls input[type="range"] { display: block; width: 100%; min-width: 0; margin: 0; height: 32px; min-block-size: 32px; padding: 0; border: 0; background: transparent; accent-color: var(--primary); cursor: pointer; }
+.audio-player-position { display: flex; justify-content: space-between; color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; }
+.audio-player-status { color: var(--muted); font-size: .875rem; }
+.audio-player-status:empty { display: none; }
+.audio-player-controls :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 .audio-samples .order-now-btn { margin: .05rem 0 0; }
 .audio-sample-note { color: var(--muted); font-size: .82rem; line-height: 1.6; }
 
+/* Fail closed: preview activity cannot appear in the activated live checkout. */
+html[data-checkout-mode="live"] [data-preview-only] { display: none !important; }
+html:not([data-checkout-mode="live"]) [data-live-only] { display: none !important; }
+.checkout-privacy-note { color: var(--muted); font-size: .8rem; line-height: 1.5; grid-column: 1/-1; }
 </style>
 
-<script>
-!function(f,b,e,v,n,t,s){
-if(f.fbq)return;
-n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];
-t=b.createElement(e);t.async=!0;t.src=v;
-s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s);
-}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init','631653776133164');
-
-fbq('track','PageView');
-
-fbq('track','ViewContent',{
-  content_ids: ['500GB-HDD-DJ'],
-  content_type: 'product',
-  value: 1500,
-  currency: 'PHP'
-});
-
-function trackFB(event,data={}){
-  if(typeof fbq==="function"){
-    fbq('track',event,data);
-  }
-}
-</script>
+<script src="checkout-config.js"></script>
+<script src="checkout-runtime.js"></script>
 </head>
 
 <body>
@@ -608,11 +768,25 @@ function trackFB(event,data={}){
 <div class="product-details">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
-<p id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
-<div class="viewer-counter">👀 <span id="viewerCount">6</span> people viewing now</div>
-<div class="stock-counter">📦 Only <span id="stockCount">27</span> left in stock</div>
+<p data-preview-only id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
+<div class="viewer-counter" data-preview-only>👀 <span id="viewerCount">23</span> people checking out</div>
+<div class="stock-counter low-stock" data-preview-only><span id="stockPrefix">⚠️ Only</span> <span id="stockCount">7</span> <span id="stockStatus">left — Selling Fast!</span></div>
 <a class="order-now-btn" href="#order-information">Order Now</a>
-<p class="shipping-line">🚚 FREE SHIPPING | CASH ON DELIVERY</p>
+<div class="shipping-line" role="group" aria-label="Delivery and payment benefits">
+  <div class="shipping-benefit shipping-benefit--shipping">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 5h11v12H3zM14 9h4l3 4v4h-7M18 9v4h3M1 8h4M1 11h4"/>
+      <circle cx="7" cy="18" r="2" fill="#14242d"/><circle cx="18" cy="18" r="2" fill="#14242d"/>
+    </svg>
+    <span class="shipping-benefit-text">FREE SHIPPING</span>
+  </div>
+  <div class="shipping-benefit shipping-benefit--cod">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="12" rx="2"/><path d="M3 8a4 4 0 0 0 4-4M17 4a4 4 0 0 0 4 4M3 12a4 4 0 0 1 4 4M17 16a4 4 0 0 1 4-4M5 20h14"/><circle cx="12" cy="10" r="2"/>
+    </svg>
+    <span class="shipping-benefit-text">CASH ON DELIVERY</span>
+  </div>
+</div>
 <p class="seller-line"><b>📍 Iloilo Based Seller</b></p>
 </div>
 </div>
@@ -748,7 +922,7 @@ function trackFB(event,data={}){
       </li>
     </ul>
   </details>
-  <p class="audio-sample-note">Listen at your own pace. Playing a new sample pauses the previous one, so you won't hear two tracks at the same time.</p>
+  <p class="audio-sample-note">Drag the progress bar or use the 10-second skip buttons to jump within a sample. Listen at your own pace. Playing a new sample pauses the previous one, so you won't hear two tracks at the same time.</p>
   <a class="order-now-btn" href="#order-information">Order Now</a>
 </section>
 
@@ -815,18 +989,47 @@ function trackFB(event,data={}){
 
 <div class="card checkout-card" id="order-information" tabindex="-1">
 <h3>Checkout</h3>
-<form id="orderForm">
+<form id="orderForm" method="post">
 <label class="field">Full Name<input type="text" name="name" placeholder="Full Name" required></label>
 <label class="field">Mobile Number<input type="tel" name="phone" placeholder="09XXXXXXXXX or +639XXXXXXXXX" required></label>
-<label class="field address">Complete Address<textarea name="address" placeholder="Complete Address" required></textarea></label>
-<div class="address-guide">Include House No., Street, Barangay, City & Province</div>
+<fieldset class="field address address-fields" id="deliveryAddress">
+  <legend>Delivery Address</legend>
+  <div class="address-dropdown-grid" id="addressDropdowns" hidden>
+    <div class="location-picker field" id="locationPicker">
+      <span id="locationLabel">Province / City / Barangay</span>
+      <button type="button" class="location-trigger" id="locationTrigger" aria-labelledby="locationLabel locationSummary" aria-expanded="false" aria-controls="locationPanel" data-empty="true" disabled>
+        <span id="locationSummary">Select delivery location</span>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="location-panel" id="locationPanel" hidden>
+        <div class="location-steps" role="group" aria-label="Delivery location steps">
+          <button class="location-step" id="locationProvinceStep" type="button" aria-pressed="true">1. Province</button>
+          <button class="location-step" id="locationCityStep" type="button" aria-pressed="false" disabled>2. City</button>
+          <button class="location-step" id="locationBarangayStep" type="button" aria-pressed="false" disabled>3. Barangay</button>
+        </div>
+        <div class="location-search-wrap"><input type="search" id="locationSearch" autocomplete="off" placeholder="Search province…" aria-label="Search province"></div>
+        <div class="location-list" id="locationList" role="group" aria-label="Available locations"></div>
+      </div>
+      <p class="location-region" id="locationRegion" hidden></p>
+    </div>
+    <label class="field address-street">House No., Street, Purok / Sitio <textarea id="addressStreet" name="streetDetails" placeholder="House no., street, subdivision or purok" autocomplete="address-line1" rows="2" required disabled></textarea></label>
+  </div>
+  <div id="manualAddressPanel">
+    <label class="field">Complete Address <textarea id="manualAddress" name="address" placeholder="Complete address including barangay, city and province" autocomplete="street-address" required></textarea></label>
+  </div>
+  <p class="address-data-status" id="addressDataStatus" role="status">Loading address lists…</p>
+  <button type="button" class="address-mode-toggle" id="addressModeToggle" hidden>Enter address manually</button>
+  <p class="address-source">Location data: Philippine Statistics Authority (PSGC), September 2026.</p>
+</fieldset>
+<div class="address-guide">Select your location, then enter your house number, street, subdivision or purok. Include any details your delivery rider needs.</div>
 <label class="field landmark">Nearest Landmark<input type="text" name="landmark" placeholder="Nearest Landmark" required></label>
 <input type="text" name="website" style="display:none">
-<button type="submit">PLACE ORDER</button>
+<p class="checkout-privacy-note" data-live-only>After your order is saved, we open our Facebook Messenger conversation with your order details for confirmation.</p>
+<button type="submit" disabled>PLACE ORDER</button>
 </form>
 </div>
 
-<audio id="notifSound" preload="auto">
+<audio id="notifSound" data-preview-only preload="none">
 <source src="https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3">
 </audio>
 
@@ -834,16 +1037,19 @@ function trackFB(event,data={}){
 
 <footer>© 2026 All About Sounds PH</footer>
 
-<div class="social-proof" id="socialProof"></div>
+<div class="social-proof" data-preview-only id="socialProof" role="status" aria-live="polite"></div>
 
 <div id="thankYouModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100000;justify-content:center;align-items:center;">
 <div style="background:#fff;padding:30px;border-radius:18px;text-align:center;max-width:380px;width:90%;animation:popIn 0.3s ease;">
 <h2 style="color:#ee4d2d;">🎉 Thank You!</h2>
-<p>Your order has been received successfully.</p>
-<p style="font-size:13px;color:#555;">Redirecting to Messenger to confirm...</p>
+<p data-preview-only>Your test order was accepted by the simulated sheet.</p>
+<p data-live-only style="color:#333;">Your order was successfully saved.</p>
+<p data-preview-only style="font-size:13px;color:#555;">Opening the simulated Messenger confirmation...</p>
+<p data-live-only style="font-size:13px;color:#555;">Opening Messenger for order confirmation...</p>
 </div>
 </div>
 
+<script src="address-dropdown.js"></script>
 <script>
 /* Slider */
 let index=0;
@@ -878,37 +1084,140 @@ function updateCountdown(){
         `🔥 Promo ends in ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+if (!window.checkoutRuntime.isLive) {
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+}
 
 /* Viewers */
-let viewers=6;
+if (!window.checkoutRuntime.isLive) {
+let viewers=23;
 setInterval(()=>{
 if(Math.random()<0.7)viewers++;else viewers--;
-viewers=Math.max(3,Math.min(viewers,15));
+viewers=Math.max(3,Math.min(viewers,23));
 document.getElementById("viewerCount").innerText=viewers;
 },5000);
-
-/* Stock System - Decrease Every 16 Seconds */ 
-  let stock = parseInt(localStorage.getItem("dynamicStock")) || 20; const stockContainer = document.querySelector(".stock-counter"); function renderStock(){ if(stock <= 7){ stockContainer.classList.add("low-stock"); stockContainer.innerHTML = `⚠️ Only <span id="stockCount">${stock}</span> left — Selling Fast!`; } else { stockContainer.classList.remove("low-stock"); stockContainer.innerHTML = `📦 Only <span id="stockCount">${stock}</span> left in stock`; } } function updateStock(){ if(stock > 3){ stock--; localStorage.setItem("dynamicStock", stock); renderStock(); } } renderStock(); setInterval(updateStock, 16000); // 16 seconds
-
-/* Social Proof */
-const names=["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
-const cities=["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
-const times=["just now","1 minute ago","3 minutes ago"];
-
-function showSocial(){
-const popup=document.getElementById("socialProof");
-const sound=document.getElementById("notifSound");
-popup.innerHTML=`<strong>${names[Math.floor(Math.random()*names.length)]}</strong>
-from ${cities[Math.floor(Math.random()*cities.length)]}<br>
-purchased 500GB External HDD<br>
-<small>${times[Math.floor(Math.random()*times.length)]}</small>`;
-popup.classList.add("show");
-sound.play().catch(()=>{});
-setTimeout(()=>popup.classList.remove("show"),4000);
 }
-setTimeout(()=>setInterval(showSocial,15000),5000);
+
+/* Private preview only — one purchase event drives both the stock and the notification. */
+(() => {
+  if (window.checkoutRuntime?.isLive) return;
+  const START_STOCK = 7;
+  const MIN_STOCK = 3;
+  const PURCHASE_INTERVAL = 15000;
+  const POPUP_DURATION = 4000;
+  const STORAGE_KEY = "demoPurchaseStateV2";
+  const maxPurchases = START_STOCK - MIN_STOCK;
+  const names = ["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
+  const cities = ["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
+  const stockContainer = document.querySelector(".stock-counter");
+  const stockPrefix = document.getElementById("stockPrefix");
+  const stockCount = document.getElementById("stockCount");
+  const stockStatus = document.getElementById("stockStatus");
+  const popup = document.getElementById("socialProof");
+  const sound = document.getElementById("notifSound");
+  let timer;
+  let popupTimer;
+  let inFlight = false;
+
+  function readState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (saved && Number.isInteger(saved.sequence) && saved.sequence >= 0 &&
+          saved.sequence <= maxPurchases && Number.isFinite(saved.nextAt) &&
+          Number.isFinite(saved.lastPurchaseAt)) return saved;
+    } catch {}
+    return null;
+  }
+  function saveState(value) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(value)); } catch {}
+  }
+  let state = readState();
+  if (!state) {
+    state = {sequence: 0, lastPurchaseAt: 0, nextAt: Date.now() + PURCHASE_INTERVAL};
+    saveState(state);
+  }
+
+  function renderStock() {
+    const stock = START_STOCK - state.sequence;
+    stockCount.textContent = String(stock);
+    const low = stock <= 7;
+    stockContainer.classList.toggle("low-stock", low);
+    stockPrefix.textContent = low ? "⚠️ Only" : "📦 Only";
+    stockStatus.textContent = low ? "left — Selling Fast!" : "left in stock";
+  }
+  function showPurchase(event) {
+    // These are fictional example buyers, clearly marked as simulation data.
+    const index = event.sequence - 1;
+    const name = names[index % names.length];
+    const city = cities[(index * 5) % cities.length];
+    popup.innerHTML = `<strong>Simulated purchase</strong><br>
+      Demo buyer: ${name} · ${city}<br>
+      500GB External HDD · 1 unit<br>
+      <small>Stock: ${START_STOCK - event.sequence} remaining · Just now</small>`;
+    popup.classList.add("show");
+    try { sound.play().catch(() => {}); } catch {}
+    clearTimeout(popupTimer);
+    popupTimer = setTimeout(() => popup.classList.remove("show"), POPUP_DURATION);
+  }
+  function applyState(next, notify) {
+    if (next.sequence < state.sequence) return;
+    const newPurchase = next.sequence > state.sequence;
+    state = next;
+    renderStock();
+    if (newPurchase && notify && document.visibilityState !== "hidden" &&
+        Date.now() - next.lastPurchaseAt < POPUP_DURATION) showPurchase(next);
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (state.sequence >= maxPurchases || document.visibilityState === "hidden") return;
+    timer = setTimeout(tick, Math.max(0, state.nextAt - Date.now()));
+  }
+  function commitPurchase() {
+    // Re-read immediately before updating to avoid two tabs consuming separate units.
+    const saved = readState();
+    if (saved && saved.sequence >= state.sequence) applyState(saved, true);
+    const now = Date.now();
+    if (document.visibilityState === "hidden" || state.sequence >= maxPurchases || now < state.nextAt) return;
+    const next = {sequence: state.sequence + 1, lastPurchaseAt: now, nextAt: now + PURCHASE_INTERVAL};
+    saveState(next);
+    applyState(next, true);
+  }
+  async function tick() {
+    if (inFlight) return;
+    inFlight = true;
+    try {
+      // Where available, serialize simultaneous timers across same-origin tabs.
+      if (navigator.locks && typeof navigator.locks.request === "function") {
+        try { await navigator.locks.request(STORAGE_KEY, commitPurchase); }
+        catch { commitPurchase(); }
+      } else {
+        commitPurchase();
+      }
+    } finally {
+      inFlight = false;
+      schedule();
+    }
+  }
+  window.addEventListener("storage", event => {
+    if (event.key !== STORAGE_KEY) return;
+    const saved = readState();
+    if (saved) applyState(saved, true);
+    schedule();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      clearTimeout(timer);
+      popup.classList.remove("show");
+      return;
+    }
+    const saved = readState();
+    if (saved) applyState(saved, true);
+    schedule();
+  });
+  renderStock();
+  schedule();
+})();
 
 /* Name Formatter */
 function formatFullName(name){
@@ -926,10 +1235,10 @@ document.querySelector("textarea[name='address']")
 .addEventListener("blur",function(){this.value=formatAddress(this.value);});
 
 /* Form */
-const SHEET_URL="https://script.google.com/macros/s/AKfycbyqm2u2o1Pr1faScUT5P0-d5pK9xO_CBhj2mGZc9GcJoXIjbpbFTiO3exaPufYn0rOS/exec";
+const checkoutRuntime = window.checkoutRuntime;
 
 document.getElementById("orderForm")
-.addEventListener("focusin",()=>trackFB('InitiateCheckout'),{once:true});
+.addEventListener("focusin",()=>trackFB('InitiateCheckout',checkoutRuntime.product),{once:true});
 
 document.getElementById("orderForm").addEventListener("submit",async function(e){
 e.preventDefault();
@@ -937,12 +1246,18 @@ if(this.website.value!=="")return;
 
 let name=formatFullName(this.name.value);
 let phone=this.phone.value.trim();
-let address=formatAddress(this.address.value);
+let address=window.checkoutAddress ? window.checkoutAddress.getAddress() : formatAddress(this.address.value);
+if(!address)return;
 const landmark=this.landmark.value.trim();
 
 if(!/^09\d{9}$/.test(phone)&&!/^\+639\d{9}$/.test(phone)){
 alert("Enter valid PH number");return;}
 if(/^09/.test(phone)) phone="+63"+phone.substring(1);
+
+if (!name || !landmark) {
+  alert("Please enter your full name and nearest landmark.");
+  return;
+}
 
 const btn=this.querySelector('button[type="submit"]');
 if (btn.disabled) return;
@@ -950,26 +1265,9 @@ btn.disabled=true;
 btn.classList.add("loading");
 btn.innerHTML="Processing...";
 
-const formData=new FormData();
-formData.append("name",name);
-formData.append("phone",phone);
-formData.append("address",address);
-formData.append("landmark",landmark);
-
 try{
-const response = await fetch(SHEET_URL, {
-  method: "POST",
-  body: new URLSearchParams(formData)
-});
-if (!response.ok) throw new Error("Order submission failed");
-const result = await response.json();
-if (!result || result.success !== true) throw new Error("Order not saved");
-trackFB('Purchase',{
-  content_ids: ['500GB-HDD-DJ'],
-  content_type: 'product',
-  value: 1500,
-  currency: 'PHP'
-});
+await checkoutRuntime.submitOrder({name,phone,address,landmark});
+trackFB('Purchase',checkoutRuntime.product);
 
 document.getElementById("thankYouModal").style.display="flex";
 
@@ -984,16 +1282,18 @@ Product: 500GB HDD
 Price: ₱1,500 COD`;
 
 setTimeout(()=>{
-window.location.href=`https://m.me/allaboutsoundsphmain?text=${encodeURIComponent(msg)}`;
+checkoutRuntime.handoff(msg);
 },2000);
 
 }catch(error){
-alert("Something went wrong. Please try again.");
+alert("We could not confirm that your order was saved. Please contact us before attempting another order.");
 btn.disabled=false;
 btn.classList.remove("loading");
 btn.innerHTML="PLACE ORDER";
 }
 });
+// Only enable the checkout once its runtime and submit handler are available.
+document.querySelector('#orderForm button[type="submit"]').disabled = false;
 </script>
 
 <script id="audio-sample-playback">
@@ -1011,6 +1311,145 @@ btn.innerHTML="PLACE ORDER";
     player.addEventListener("pause", clearPlaying);
     player.addEventListener("ended", clearPlaying);
     player.addEventListener("error", clearPlaying);
+  }
+  // Use explicit seek controls, with an on-demand full-file fallback when
+  // the hosting/browser combination cannot seek a remote MP3 by byte range.
+  const formatTime = seconds => {
+    const whole = Math.max(0, Math.floor(seconds || 0));
+    return Math.floor(whole / 60) + ":" + String(whole % 60).padStart(2, "0");
+  };
+  const samples = players.filter(player => player.tagName === "AUDIO");
+  let active = null;
+  const seekJobs = new Map();
+  function select(player) {
+    if (active === player) return;
+    active = player;
+    for (const other of players) if (other !== player && !other.paused) other.pause();
+    for (const [other, job] of seekJobs) {
+      if (other !== player) job.abort();
+    }
+  }
+  for (const player of samples) {
+    const card = player.closest(".audio-track");
+    const name = card.querySelector(".audio-track-name").textContent;
+    const [minutes, seconds] = card.querySelector(".audio-track-time").textContent.split(":").map(Number);
+    const advertisedDuration = minutes * 60 + seconds;
+    const original = player.src;
+    let blobURL = null;
+    let pending = null;
+    let dragging = false;
+    let busy = false;
+    const duration = () => Number.isFinite(player.duration) && player.duration > 0 ? player.duration : advertisedDuration;
+    const ui = document.createElement("div");
+    ui.className = "audio-player-controls";
+    ui.innerHTML = '<div class="audio-player-buttons"><button type="button">Play</button><button type="button">−10s</button><button type="button">+10s</button></div><input type="range" min="0" step="0.1" value="0"><div class="audio-player-position"><span>0:00</span><span></span></div><p class="audio-player-status" role="status"></p>';
+    const [play, back, forward] = ui.querySelectorAll("button");
+    const slider = ui.querySelector("input");
+    const [elapsed, total] = ui.querySelectorAll(".audio-player-position span");
+    const status = ui.querySelector(".audio-player-status");
+    back.setAttribute("aria-label", "Skip back 10 seconds: " + name);
+    forward.setAttribute("aria-label", "Skip forward 10 seconds: " + name);
+    slider.setAttribute("aria-label", "Seek within " + name);
+    player.after(ui);
+    player.removeAttribute("controls");
+    player.removeAttribute("loading");
+    player.hidden = true;
+    function sync() {
+      slider.max = duration();
+      if (!dragging) slider.value = pending ?? player.currentTime ?? 0;
+      elapsed.textContent = formatTime(Number(slider.value));
+      total.textContent = formatTime(duration());
+      slider.setAttribute("aria-valuetext", elapsed.textContent + " of " + total.textContent);
+      play.textContent = player.paused ? "Play" : "Pause";
+      play.setAttribute("aria-label", (player.paused ? "Play " : "Pause ") + name);
+    }
+    function seekableAt(target) {
+      for (let i = 0; i < player.seekable.length; i++) {
+        if (target >= player.seekable.start(i) && target <= player.seekable.end(i)) return true;
+      }
+      return false;
+    }
+    const playAudio = () => player.play().catch(() => { status.textContent = "Tap Play to resume."; });
+    function waitForMetadata(signal) {
+      if (player.readyState >= 1) return Promise.resolve();
+      return new Promise((resolve, reject) => {
+        const cleanup = () => {
+          player.removeEventListener("loadedmetadata", ready);
+          player.removeEventListener("error", failed);
+          signal.removeEventListener("abort", failed);
+        };
+        const ready = () => { cleanup(); resolve(); };
+        const failed = () => { cleanup(); reject(new Error("Audio could not load")); };
+        player.addEventListener("loadedmetadata", ready, {once: true});
+        player.addEventListener("error", failed, {once: true});
+        signal.addEventListener("abort", failed, {once: true});
+        if (signal.aborted) failed();
+      });
+    }
+    async function seek(target) {
+      select(player);
+      pending = Math.max(0, Math.min(duration(), target));
+      sync();
+      if (busy) return;
+      if (seekableAt(pending) || (blobURL && player.readyState >= 1)) {
+        player.currentTime = pending;
+        pending = null;
+        sync();
+        return;
+      }
+      busy = true;
+      const job = new AbortController();
+      seekJobs.set(player, job);
+      status.textContent = "Preparing audio for skipping…";
+      const shouldResume = !player.paused;
+      try {
+        if (!blobURL) {
+          const response = await fetch(original, {signal: job.signal});
+          if (!response.ok) throw new Error("Audio request failed");
+          const file = await response.blob();
+          if (!file.size || file.type.includes("text/html")) throw new Error("Invalid audio");
+          if (job.signal.aborted) return;
+          blobURL = URL.createObjectURL(file.slice(0, file.size, "audio/mpeg"));
+          player.src = blobURL;
+          player.load();
+        }
+        await waitForMetadata(job.signal);
+        if (job.signal.aborted || active !== player) return;
+        player.currentTime = Math.max(0, Math.min(duration(), pending ?? 0));
+        status.textContent = "";
+        if (shouldResume) await playAudio();
+      } catch (error) {
+        if (!job.signal.aborted) status.textContent = "Couldn't skip yet. Try again after the audio loads.";
+        else status.textContent = "";
+      } finally {
+        busy = false;
+        pending = null;
+        seekJobs.delete(player);
+        sync();
+      }
+    }
+    play.addEventListener("click", () => {
+      select(player);
+      if (busy) return;
+      status.textContent = "";
+      if (player.paused) playAudio();
+      else player.pause();
+    });
+    back.addEventListener("click", () => seek((pending ?? player.currentTime) - 10));
+    forward.addEventListener("click", () => seek((pending ?? player.currentTime) + 10));
+    slider.addEventListener("input", () => {
+      dragging = true;
+      elapsed.textContent = formatTime(Number(slider.value));
+      slider.setAttribute("aria-valuetext", elapsed.textContent + " of " + total.textContent);
+    });
+    slider.addEventListener("change", () => {
+      dragging = false;
+      seek(Number(slider.value));
+    });
+    player.addEventListener("play", () => select(player));
+    for (const event of ["loadedmetadata", "durationchange", "timeupdate", "play", "pause", "ended", "seeked"]) player.addEventListener(event, sync);
+    player.addEventListener("error", () => { if (!busy) status.textContent = "Audio couldn't load. Tap Play to retry."; });
+    sync();
   }
 })();
 </script>
