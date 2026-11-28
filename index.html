@@ -782,7 +782,7 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <p class="activity-demo-note" role="note">Activity simulation — timer, viewers and stock are examples, not real-time customer activity or inventory.</p>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;">🔥 Promo Time:</p>
 <div class="viewer-counter">👀 Viewers: <span id="viewerCount">23</span></div>
-<div class="stock-counter low-stock"><span id="stockPrefix">📦 Stock:</span> <span id="stockCount">7</span> <span id="stockStatus">units</span></div>
+<div class="stock-counter low-stock"><span id="stockPrefix">📦 Stock:</span> <span id="stockCount">7</span> <span id="stockStatus">remaining</span></div>
 <a class="order-now-btn" href="#order-information">Order Now</a>
 <div class="shipping-line" role="group" aria-label="Delivery and payment benefits">
   <div class="shipping-benefit shipping-benefit--shipping">
@@ -1163,7 +1163,7 @@ document.getElementById("viewerCount").innerText=viewers;
     const low = stock <= 7;
     stockContainer.classList.toggle("low-stock", low);
     stockPrefix.textContent = "📦 Stock:";
-    stockStatus.textContent = "units";
+    stockStatus.textContent = "remaining";
   }
   function applyState(next) {
     if (next.sequence < state.sequence) return;
