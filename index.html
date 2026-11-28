@@ -594,27 +594,7 @@ footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); f
 .address-data-status { color: var(--muted); font-size: .875rem; font-weight: 400; }
 .address-data-status:empty { display: none; }
 .address-source { color: var(--muted); font-size: .78rem; font-weight: 400; }
-.social-proof {
-  position: fixed;
-  bottom: 1rem;
-  left: 1rem;
-  background: #1a2436;
-  border: 1px solid #657893;
-  border-radius: .85rem;
-  box-shadow: 0 8px 35px #0007;
-  padding: .85rem 1rem;
-  font-size: .82rem;
-  color: var(--ink);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(12px);
-  transition: opacity .24s ease, transform .24s ease;
-  z-index: 9999;
-  max-inline-size: min(17.5rem, calc(100% - 2rem));
-}
-.social-proof.show { opacity: 1; transform: translateY(0); }
 .activity-demo-note { font-size: .8rem; font-weight: 600; color: var(--muted); line-height: 1.5; }
-body.has-sticky-order .social-proof { bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)); }
 #thankYouModal { background: #03060cbb !important; padding: 1rem; }
 #thankYouModal>div {
   background: #182132 !important;
@@ -636,7 +616,7 @@ body.has-sticky-order .social-proof { bottom: calc(5.25rem + env(safe-area-inset
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 @media (prefers-reduced-motion: reduce) {
-  .review-wrapper, .social-proof, button, .fb-check-btn, .order-now-btn { transition: none; }
+  .review-wrapper, button, .fb-check-btn, .order-now-btn { transition: none; }
   #thankYouModal>div { animation: none !important; }
 }
 @media (forced-colors: active) {
@@ -799,7 +779,7 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <div class="product-details">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
-<p class="activity-demo-note" role="note">Activity simulation — timer, viewers, stock and purchases are examples, not real customer activity or inventory.</p>
+<p class="activity-demo-note" role="note">Activity simulation — timer, viewers and stock are examples, not real-time customer activity or inventory.</p>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;">🔥 Demo promo timer</p>
 <div class="viewer-counter">👀 Simulated viewers: <span id="viewerCount">23</span></div>
 <div class="stock-counter low-stock"><span id="stockPrefix">📦 Demo stock:</span> <span id="stockCount">7</span> <span id="stockStatus">remaining</span></div>
@@ -1071,10 +1051,6 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 </form>
 </div>
 
-<audio id="notifSound" data-preview-only preload="none">
-<source src="https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3">
-</audio>
-
 </div>
 
 <footer>© 2026 All About Sounds PH</footer>
@@ -1082,8 +1058,6 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
   <div><span>500GB HDD · COD</span><strong>₱1,500</strong></div>
   <a href="#order-information">ORDER NOW</a>
 </aside>
-
-<div class="social-proof" id="socialProof" role="status" aria-live="polite"></div>
 
 <div id="thankYouModal" role="dialog" aria-modal="true" aria-labelledby="thankYouTitle" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100000;justify-content:center;align-items:center;">
 <div style="background:#fff;padding:30px;border-radius:18px;text-align:center;max-width:380px;width:90%;animation:popIn 0.3s ease;">
@@ -1152,32 +1126,25 @@ document.getElementById("viewerCount").innerText=viewers;
 },5000);
 }
 
-/* Clearly labeled simulation only — never submits orders or affects inventory. */
+/* Demo stock display — never submits orders or affects inventory. */
 (() => {
   const START_STOCK = 7;
   const MIN_STOCK = 3;
-  const purchaseInterval = () => 10000 + Math.floor(Math.random() * 15001);
-  const POPUP_DURATION = 4000;
+  const stockInterval = () => 10000 + Math.floor(Math.random() * 15001);
   const STORAGE_KEY = "demoPurchaseStateV3-" + (window.checkoutRuntime?.isLive ? "live" : "preview");
-  const maxPurchases = START_STOCK - MIN_STOCK;
-  const names = ["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
-  const cities = ["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
+  const maxDecrements = START_STOCK - MIN_STOCK;
   const stockContainer = document.querySelector(".stock-counter");
   const stockPrefix = document.getElementById("stockPrefix");
   const stockCount = document.getElementById("stockCount");
   const stockStatus = document.getElementById("stockStatus");
-  const popup = document.getElementById("socialProof");
-  const sound = document.getElementById("notifSound");
   let timer;
-  let popupTimer;
   let inFlight = false;
 
   function readState() {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
       if (saved && Number.isInteger(saved.sequence) && saved.sequence >= 0 &&
-          saved.sequence <= maxPurchases && Number.isFinite(saved.nextAt) &&
-          Number.isFinite(saved.lastPurchaseAt)) return saved;
+          saved.sequence <= maxDecrements && Number.isFinite(saved.nextAt)) return saved;
     } catch {}
     return null;
   }
@@ -1186,7 +1153,7 @@ document.getElementById("viewerCount").innerText=viewers;
   }
   let state = readState();
   if (!state) {
-    state = {sequence: 0, lastPurchaseAt: 0, nextAt: Date.now() + purchaseInterval()};
+    state = {sequence: 0, nextAt: Date.now() + stockInterval()};
     saveState(state);
   }
 
@@ -1198,44 +1165,25 @@ document.getElementById("viewerCount").innerText=viewers;
     stockPrefix.textContent = "📦 Demo stock:";
     stockStatus.textContent = "remaining";
   }
-  function showPurchase(event) {
-    // These are fictional example buyers, clearly marked as simulation data.
-    const index = event.sequence - 1;
-    const name = names[index % names.length];
-    const city = cities[(index * 5) % cities.length];
-    popup.innerHTML = `<strong>Simulated purchase — not a real order</strong><br>
-      Demo buyer: ${name} · ${city}<br>
-      500GB External HDD · 1 unit<br>
-      <small>Demo stock: ${START_STOCK - event.sequence} remaining · Just now</small>`;
-    popup.classList.add("show");
-    if (!window.checkoutRuntime?.isLive) {
-      try { sound.play().catch(() => {}); } catch {}
-    }
-    clearTimeout(popupTimer);
-    popupTimer = setTimeout(() => { popup.classList.remove("show"); popup.textContent = ""; }, POPUP_DURATION);
-  }
-  function applyState(next, notify) {
+  function applyState(next) {
     if (next.sequence < state.sequence) return;
-    const newPurchase = next.sequence > state.sequence;
     state = next;
     renderStock();
-    if (newPurchase && notify && document.visibilityState !== "hidden" &&
-        Date.now() - next.lastPurchaseAt < POPUP_DURATION) showPurchase(next);
   }
   function schedule() {
     clearTimeout(timer);
-    if (state.sequence >= maxPurchases || document.visibilityState === "hidden") return;
+    if (state.sequence >= maxDecrements || document.visibilityState === "hidden") return;
     timer = setTimeout(tick, Math.max(0, state.nextAt - Date.now()));
   }
-  function commitPurchase() {
+  function advanceDemoStock() {
     // Re-read immediately before updating to avoid two tabs consuming separate units.
     const saved = readState();
-    if (saved && saved.sequence >= state.sequence) applyState(saved, true);
+    if (saved && saved.sequence >= state.sequence) applyState(saved);
     const now = Date.now();
-    if (document.visibilityState === "hidden" || state.sequence >= maxPurchases || now < state.nextAt) return;
-    const next = {sequence: state.sequence + 1, lastPurchaseAt: now, nextAt: now + purchaseInterval()};
+    if (document.visibilityState === "hidden" || state.sequence >= maxDecrements || now < state.nextAt) return;
+    const next = {sequence: state.sequence + 1, nextAt: now + stockInterval()};
     saveState(next);
-    applyState(next, true);
+    applyState(next);
   }
   async function tick() {
     if (inFlight) return;
@@ -1243,10 +1191,10 @@ document.getElementById("viewerCount").innerText=viewers;
     try {
       // Where available, serialize simultaneous timers across same-origin tabs.
       if (navigator.locks && typeof navigator.locks.request === "function") {
-        try { await navigator.locks.request(STORAGE_KEY, commitPurchase); }
-        catch { commitPurchase(); }
+        try { await navigator.locks.request(STORAGE_KEY, advanceDemoStock); }
+        catch { advanceDemoStock(); }
       } else {
-        commitPurchase();
+        advanceDemoStock();
       }
     } finally {
       inFlight = false;
@@ -1256,19 +1204,16 @@ document.getElementById("viewerCount").innerText=viewers;
   window.addEventListener("storage", event => {
     if (event.key !== STORAGE_KEY) return;
     const saved = readState();
-    if (saved) applyState(saved, true);
+    if (saved) applyState(saved);
     schedule();
   });
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
       clearTimeout(timer);
-      clearTimeout(popupTimer);
-      popup.classList.remove("show");
-      popup.textContent = "";
       return;
     }
     const saved = readState();
-    if (saved) applyState(saved, true);
+    if (saved) applyState(saved);
     schedule();
   });
   renderStock();
