@@ -781,8 +781,8 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p class="activity-demo-note" role="note">Activity simulation — timer, viewers and stock are examples, not real-time customer activity or inventory.</p>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;">🔥 Demo promo timer</p>
-<div class="viewer-counter">👀 Simulated viewers: <span id="viewerCount">23</span></div>
-<div class="stock-counter low-stock"><span id="stockPrefix">📦 Demo stock:</span> <span id="stockCount">7</span> <span id="stockStatus">remaining</span></div>
+<div class="viewer-counter">👀 Viewers checking out: <span id="viewerCount">23</span></div>
+<div class="stock-counter low-stock"><span id="stockPrefix">📦 Stock remaining:</span> <span id="stockCount">7</span> <span id="stockStatus">units</span></div>
 <a class="order-now-btn" href="#order-information">Order Now</a>
 <div class="shipping-line" role="group" aria-label="Delivery and payment benefits">
   <div class="shipping-benefit shipping-benefit--shipping">
@@ -1162,8 +1162,8 @@ document.getElementById("viewerCount").innerText=viewers;
     stockCount.textContent = String(stock);
     const low = stock <= 7;
     stockContainer.classList.toggle("low-stock", low);
-    stockPrefix.textContent = "📦 Demo stock:";
-    stockStatus.textContent = "remaining";
+    stockPrefix.textContent = "📦 Stock remaining:";
+    stockStatus.textContent = "units";
   }
   function applyState(next) {
     if (next.sequence < state.sequence) return;
