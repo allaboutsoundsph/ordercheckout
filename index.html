@@ -613,6 +613,8 @@ footer { text-align: center; padding: 1.4rem 1rem 2.2rem; color: var(--muted); f
   max-inline-size: min(17.5rem, calc(100% - 2rem));
 }
 .social-proof.show { opacity: 1; transform: translateY(0); }
+.activity-demo-note { font-size: .8rem; font-weight: 600; color: var(--muted); line-height: 1.5; }
+body.has-sticky-order .social-proof { bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)); }
 #thankYouModal { background: #03060cbb !important; padding: 1rem; }
 #thankYouModal>div {
   background: #182132 !important;
@@ -797,9 +799,10 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <div class="product-details">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
-<p data-preview-only id="countdown" style="color:#ee4d2d;font-weight:700;"></p>
-<div class="viewer-counter" data-preview-only>👀 <span id="viewerCount">23</span> people checking out</div>
-<div class="stock-counter low-stock" data-preview-only><span id="stockPrefix">⚠️ Only</span> <span id="stockCount">7</span> <span id="stockStatus">left — Selling Fast!</span></div>
+<p class="activity-demo-note" role="note">Activity simulation — timer, viewers, stock and purchases are examples, not real customer activity or inventory.</p>
+<p id="countdown" style="color:#ee4d2d;font-weight:700;">🔥 Demo promo timer</p>
+<div class="viewer-counter">👀 Simulated viewers: <span id="viewerCount">23</span></div>
+<div class="stock-counter low-stock"><span id="stockPrefix">📦 Demo stock:</span> <span id="stockCount">7</span> <span id="stockStatus">remaining</span></div>
 <a class="order-now-btn" href="#order-information">Order Now</a>
 <div class="shipping-line" role="group" aria-label="Delivery and payment benefits">
   <div class="shipping-benefit shipping-benefit--shipping">
@@ -1080,7 +1083,7 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
   <a href="#order-information">ORDER NOW</a>
 </aside>
 
-<div class="social-proof" data-preview-only id="socialProof" role="status" aria-live="polite"></div>
+<div class="social-proof" id="socialProof" role="status" aria-live="polite"></div>
 
 <div id="thankYouModal" role="dialog" aria-modal="true" aria-labelledby="thankYouTitle" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100000;justify-content:center;align-items:center;">
 <div style="background:#fff;padding:30px;border-radius:18px;text-align:center;max-width:380px;width:90%;animation:popIn 0.3s ease;">
@@ -1133,16 +1136,14 @@ function updateCountdown(){
     const seconds = remaining % 60;
 
     document.getElementById("countdown").innerText =
-        `🔥 Promo ends in ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        `🔥 Demo promo timer: ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-if (!window.checkoutRuntime.isLive) {
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-}
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
-/* Viewers */
-if (!window.checkoutRuntime.isLive) {
+/* Simulated viewer display — never counts or tracks real visitors. */
+{
 let viewers=23;
 setInterval(()=>{
 if(Math.random()<0.7)viewers++;else viewers--;
@@ -1151,14 +1152,13 @@ document.getElementById("viewerCount").innerText=viewers;
 },5000);
 }
 
-/* Private preview only — one purchase event drives both the stock and the notification. */
+/* Clearly labeled simulation only — never submits orders or affects inventory. */
 (() => {
-  if (window.checkoutRuntime?.isLive) return;
   const START_STOCK = 7;
   const MIN_STOCK = 3;
-  const PURCHASE_INTERVAL = 15000;
+  const purchaseInterval = () => 10000 + Math.floor(Math.random() * 15001);
   const POPUP_DURATION = 4000;
-  const STORAGE_KEY = "demoPurchaseStateV2";
+  const STORAGE_KEY = "demoPurchaseStateV3-" + (window.checkoutRuntime?.isLive ? "live" : "preview");
   const maxPurchases = START_STOCK - MIN_STOCK;
   const names = ["John D.","Maria S.","Kevin L.","Angela C.","Ryan P.","Michael S.","Richard T.","Anthony M.","Robert D."];
   const cities = ["Manila","Cebu","Davao","Iloilo","Bacolod","Pasay","Caloocan","Baguio","Lipa","Dumaguete","Naga","Zamboanga City","Cagayan de Oro"];
@@ -1186,7 +1186,7 @@ document.getElementById("viewerCount").innerText=viewers;
   }
   let state = readState();
   if (!state) {
-    state = {sequence: 0, lastPurchaseAt: 0, nextAt: Date.now() + PURCHASE_INTERVAL};
+    state = {sequence: 0, lastPurchaseAt: 0, nextAt: Date.now() + purchaseInterval()};
     saveState(state);
   }
 
@@ -1195,22 +1195,24 @@ document.getElementById("viewerCount").innerText=viewers;
     stockCount.textContent = String(stock);
     const low = stock <= 7;
     stockContainer.classList.toggle("low-stock", low);
-    stockPrefix.textContent = low ? "⚠️ Only" : "📦 Only";
-    stockStatus.textContent = low ? "left — Selling Fast!" : "left in stock";
+    stockPrefix.textContent = "📦 Demo stock:";
+    stockStatus.textContent = "remaining";
   }
   function showPurchase(event) {
     // These are fictional example buyers, clearly marked as simulation data.
     const index = event.sequence - 1;
     const name = names[index % names.length];
     const city = cities[(index * 5) % cities.length];
-    popup.innerHTML = `<strong>Simulated purchase</strong><br>
+    popup.innerHTML = `<strong>Simulated purchase — not a real order</strong><br>
       Demo buyer: ${name} · ${city}<br>
       500GB External HDD · 1 unit<br>
-      <small>Stock: ${START_STOCK - event.sequence} remaining · Just now</small>`;
+      <small>Demo stock: ${START_STOCK - event.sequence} remaining · Just now</small>`;
     popup.classList.add("show");
-    try { sound.play().catch(() => {}); } catch {}
+    if (!window.checkoutRuntime?.isLive) {
+      try { sound.play().catch(() => {}); } catch {}
+    }
     clearTimeout(popupTimer);
-    popupTimer = setTimeout(() => popup.classList.remove("show"), POPUP_DURATION);
+    popupTimer = setTimeout(() => { popup.classList.remove("show"); popup.textContent = ""; }, POPUP_DURATION);
   }
   function applyState(next, notify) {
     if (next.sequence < state.sequence) return;
@@ -1231,7 +1233,7 @@ document.getElementById("viewerCount").innerText=viewers;
     if (saved && saved.sequence >= state.sequence) applyState(saved, true);
     const now = Date.now();
     if (document.visibilityState === "hidden" || state.sequence >= maxPurchases || now < state.nextAt) return;
-    const next = {sequence: state.sequence + 1, lastPurchaseAt: now, nextAt: now + PURCHASE_INTERVAL};
+    const next = {sequence: state.sequence + 1, lastPurchaseAt: now, nextAt: now + purchaseInterval()};
     saveState(next);
     applyState(next, true);
   }
@@ -1260,7 +1262,9 @@ document.getElementById("viewerCount").innerText=viewers;
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
       clearTimeout(timer);
+      clearTimeout(popupTimer);
       popup.classList.remove("show");
+      popup.textContent = "";
       return;
     }
     const saved = readState();
