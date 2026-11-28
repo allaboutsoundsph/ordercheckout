@@ -246,6 +246,27 @@ h3 {
   animation: stock-urgency-glow 2s ease-in-out infinite;
 }
 .stock-counter.low-stock #stockCount { color: #fff3c2; }
+.stock-update-popup {
+  width: fit-content;
+  max-width: 100%;
+  padding: .6rem .8rem;
+  color: #ffe7ae;
+  background: #291e25;
+  border: 1px solid #b47855;
+  border-radius: .7rem;
+  font-size: .875rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px #0005;
+}
+.stock-update-popup:empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
 @keyframes stock-urgency-glow {
   0%, 100% { border-color: #ff9559; box-shadow: 0 0 10px #ff752f44, inset 0 0 6px #ff8a3c19; }
   50% { border-color: #ffd18a; box-shadow: 0 0 24px #ff752f88, inset 0 0 14px #ff8a3c40; }
@@ -779,10 +800,11 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <div class="product-details">
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
-<p class="activity-demo-note" role="note">Activity simulation — timer, viewers and stock are examples, not real-time customer activity or inventory.</p>
+<p id="activityDemoNote" class="activity-demo-note" role="note">Activity simulation — timer, viewers and stock are examples, not real-time customer activity or inventory.</p>
 <p id="countdown" style="color:#ee4d2d;font-weight:700;">🔥 Promo Time:</p>
 <div class="viewer-counter">👀 Viewers: <span id="viewerCount">23</span></div>
 <div class="stock-counter low-stock"><span id="stockPrefix">📦 Stock:</span> <span id="stockCount">7</span> <span id="stockStatus">remaining</span></div>
+<div id="stockUpdatePopup" class="stock-update-popup" role="status" aria-atomic="true" aria-describedby="activityDemoNote"></div>
 <a class="order-now-btn" href="#order-information">Order Now</a>
 <div class="shipping-line" role="group" aria-label="Delivery and payment benefits">
   <div class="shipping-benefit shipping-benefit--shipping">
@@ -1137,6 +1159,8 @@ document.getElementById("viewerCount").innerText=viewers;
   const stockPrefix = document.getElementById("stockPrefix");
   const stockCount = document.getElementById("stockCount");
   const stockStatus = document.getElementById("stockStatus");
+  const stockUpdatePopup = document.getElementById("stockUpdatePopup");
+  let popupTimer;
   let timer;
   let inFlight = false;
 
@@ -1167,8 +1191,14 @@ document.getElementById("viewerCount").innerText=viewers;
   }
   function applyState(next) {
     if (next.sequence < state.sequence) return;
+    const decreased = next.sequence > state.sequence;
     state = next;
     renderStock();
+    if (decreased && document.visibilityState !== "hidden") {
+      stockUpdatePopup.textContent = `📦 Stock update: ${START_STOCK - state.sequence} remaining`;
+      clearTimeout(popupTimer);
+      popupTimer = setTimeout(() => { stockUpdatePopup.textContent = ""; }, 4500);
+    }
   }
   function schedule() {
     clearTimeout(timer);
@@ -1210,6 +1240,8 @@ document.getElementById("viewerCount").innerText=viewers;
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
       clearTimeout(timer);
+      clearTimeout(popupTimer);
+      stockUpdatePopup.textContent = "";
       return;
     }
     const saved = readState();
