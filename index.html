@@ -780,9 +780,9 @@ html:not([data-checkout-mode="live"]) [data-live-only] { display: none !importan
 <h2>Complete DJ Music Collection</h2>
 <div class="price">₱1,500 <span class="old-price">₱3,500</span></div>
 <p class="activity-demo-note" role="note">Activity simulation — timer, viewers and stock are examples, not real-time customer activity or inventory.</p>
-<p id="countdown" style="color:#ee4d2d;font-weight:700;">🔥 Demo promo timer</p>
-<div class="viewer-counter">👀 Viewers checking out: <span id="viewerCount">23</span></div>
-<div class="stock-counter low-stock"><span id="stockPrefix">📦 Stock remaining:</span> <span id="stockCount">7</span> <span id="stockStatus">units</span></div>
+<p id="countdown" style="color:#ee4d2d;font-weight:700;">🔥 Promo Time:</p>
+<div class="viewer-counter">👀 Viewers: <span id="viewerCount">23</span></div>
+<div class="stock-counter low-stock"><span id="stockPrefix">📦 Stock:</span> <span id="stockCount">7</span> <span id="stockStatus">units</span></div>
 <a class="order-now-btn" href="#order-information">Order Now</a>
 <div class="shipping-line" role="group" aria-label="Delivery and payment benefits">
   <div class="shipping-benefit shipping-benefit--shipping">
@@ -1110,7 +1110,7 @@ function updateCountdown(){
     const seconds = remaining % 60;
 
     document.getElementById("countdown").innerText =
-        `🔥 Demo promo timer: ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        `🔥 Promo Time: ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
 setInterval(updateCountdown, 1000);
@@ -1162,7 +1162,7 @@ document.getElementById("viewerCount").innerText=viewers;
     stockCount.textContent = String(stock);
     const low = stock <= 7;
     stockContainer.classList.toggle("low-stock", low);
-    stockPrefix.textContent = "📦 Stock remaining:";
+    stockPrefix.textContent = "📦 Stock:";
     stockStatus.textContent = "units";
   }
   function applyState(next) {
